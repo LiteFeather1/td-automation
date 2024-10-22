@@ -8,7 +8,9 @@ public class CameraManager : Singleton<CameraManager>
     [SerializeField] private Vector2 _zRange = new(-10f, -20f);
     [SerializeField] private float _zSpeed;
 
-    [Header("Borders")]
+    [Header("Move")]
+    [SerializeField] private float _keyboardSpeed = 5f;
+    [SerializeField] private float _mouseSpeed = 2f;
     [SerializeField] private Vector2 _min;
     [SerializeField] private Vector2 _max;
 
@@ -16,6 +18,20 @@ public class CameraManager : Singleton<CameraManager>
     {
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.ScrollWheel.performed += ZoomPerformed;
+    }
+
+    private void Update()
+    {
+        var inputs = InputManager.Instance.InputSystem.Player;
+
+        if (inputs.Drag.IsPressed())
+        {
+            var pos = transform.position;
+            var delta = _mouseSpeed * Time.deltaTime * inputs.Look.ReadValue<Vector2>();
+            pos.x = Mathf.Clamp(pos.x - delta.x, _min.x, _max.x);
+            pos.y = Mathf.Clamp(pos.y - delta.y, _min.y, _max.y);
+            transform.position = pos;
+        }
     }
 
     private void OnDisable()

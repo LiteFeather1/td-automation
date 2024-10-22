@@ -316,6 +316,8 @@ MonoBehaviour:
   _defaultZ: -15
   _zRange: {x: -20, y: -10}
   _zSpeed: 0.33
+  _keyboardSpeed: 0.5
+  _mouseSpeed: 10
   _min: {x: -32, y: -32}
   _max: {x: 32, y: 32}
 --- !u!1 &410087039
