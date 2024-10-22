@@ -23,13 +23,24 @@ public class CameraManager : Singleton<CameraManager>
     private void Update()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
+        var deltaTime = Time.deltaTime;
 
         if (inputs.Drag.IsPressed())
         {
+            MoveCamera(_mouseSpeed * deltaTime * -inputs.Look.ReadValue<Vector2>());
+        }
+
+        var wasdMoveDelta = inputs.Move.ReadValue<Vector2>();
+        if (wasdMoveDelta != Vector2.zero)
+        {
+            MoveCamera(_keyboardSpeed * deltaTime * wasdMoveDelta);
+        }
+
+        void MoveCamera(Vector2 delta)
+        {
             var pos = transform.position;
-            var delta = _mouseSpeed * Time.deltaTime * inputs.Look.ReadValue<Vector2>();
-            pos.x = Mathf.Clamp(pos.x - delta.x, _min.x, _max.x);
-            pos.y = Mathf.Clamp(pos.y - delta.y, _min.y, _max.y);
+            pos.x = Mathf.Clamp(pos.x + delta.x, _min.x, _max.x);
+            pos.y = Mathf.Clamp(pos.y + delta.y, _min.y, _max.y);
             transform.position = pos;
         }
     }
