@@ -72,7 +72,7 @@ public class CameraManager : Singleton<CameraManager>
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.blue;
 
         var topLeft = new Vector3(_min.x, _max.y);
         var bottomRight = new Vector3(_max.x, _min.y);
