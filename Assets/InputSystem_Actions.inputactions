@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DefaultZoom",
+                    "type": "Button",
+                    "id": "9815fb8f-6290-460e-ae37-52754c24d046",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -510,6 +519,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Drag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb6f1e1b-51de-41bb-894d-e5f198deb8e6",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "DefaultZoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

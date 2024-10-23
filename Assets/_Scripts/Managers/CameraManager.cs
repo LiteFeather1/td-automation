@@ -18,6 +18,7 @@ public class CameraManager : Singleton<CameraManager>
     {
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.ScrollWheel.performed += ZoomPerformed;
+        inputs.DefaultZoom.performed += DefaultZoom;
     }
 
     private void Update()
@@ -49,6 +50,7 @@ public class CameraManager : Singleton<CameraManager>
     {
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.ScrollWheel.performed -= ZoomPerformed;
+        inputs.DefaultZoom.performed -= DefaultZoom;
     }
 
     private void ZoomPerformed(InputAction.CallbackContext ctx)
@@ -57,6 +59,13 @@ public class CameraManager : Singleton<CameraManager>
         pos.z = Mathf.Clamp(
             pos.z + ctx.ReadValue<Vector2>().y * _zSpeed, _zRange.x, _zRange.y
         );
+        transform.position = pos;
+    }
+
+    private void DefaultZoom(InputAction.CallbackContext ctx)
+    {
+        var pos = transform.position;
+        pos.z = _defaultZ;
         transform.position = pos;
     }
 
