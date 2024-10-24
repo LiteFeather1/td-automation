@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -8,6 +9,9 @@ public class EnemyManager : MonoBehaviour
     private int _enemyCount;
 
     private float _elapsedTime;
+
+    public Action OnStageEnded { get; set; }
+    public Action OnAllStagesEnded { get; set; }
 
     private void Update()
     {
@@ -51,5 +55,13 @@ public class EnemyManager : MonoBehaviour
         }
 
         Debug.Log("Stage ended");
+        _currentStage++;
+        OnStageEnded?.Invoke();
+        if (_currentStage == _lullStageDurations.Length)
+        {
+            Debug.Log("All Stages Completed");
+            enabled = false;
+            OnAllStagesEnded?.Invoke();
+        }
     }
 }
