@@ -28,6 +28,8 @@ public class EnemyManager : MonoBehaviour
                     enemy, portal.transform.position, Quaternion.identity
                 );
 
+                newEnemy.PathFollow.SetPath(portal.Path);
+
                 newEnemy.OnDied += RemoveEnemy;
                 newEnemy.OnPathReached += RemoveEnemy;
             }

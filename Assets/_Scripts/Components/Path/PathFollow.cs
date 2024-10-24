@@ -8,6 +8,8 @@ public class PathFollow : MonoBehaviour
 
     public System.Action OnPathFinished { get; set; } 
 
+    public void SetPath(Path path) => _path = path;
+
     private void Update()
     {
         transform.position = Vector2.MoveTowards(

@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+    [SerializeField] private Path _path;
     [SerializeField] private Stage[] _stages;
     private int _currentEnemyGroup;
+
+    public Path Path => _path;
 
     public bool AllGroupsSpawned(int currentStage)
     {

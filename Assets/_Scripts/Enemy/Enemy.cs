@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
 
     public float Damage => _damage;
 
+    public PathFollow PathFollow => _pathFollow;
+
     public Action<Enemy> OnDied { get; set; }
     public Action<Enemy> OnPathReached { get; set; }
 
