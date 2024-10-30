@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
 
     public float Damage => _damage;
 
+    public Health Health => _health;
     public PathFollow PathFollow => _pathFollow;
 
     public Action<Enemy> OnDied { get; set; }

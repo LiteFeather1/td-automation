@@ -1,17 +1,20 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private float[] _lullStageDurations;
     [SerializeField] private Portal[] _portals;
     private int _currentStage;
-    private int _enemyCount;
+    private readonly List<Enemy> _enemies = new();
 
     private float _elapsedTime;
 
     public Action OnStageEnded { get; set; }
     public Action OnAllStagesEnded { get; set; }
+
+    public List<Enemy> Enemies => _enemies;
 
     private void Update()
     {
@@ -27,10 +30,10 @@ public class EnemyManager : MonoBehaviour
 
             foreach (var enemy in portal.GetEnemies(_currentStage))
             {
-                _enemyCount++;
                 var newEnemy = Instantiate(
                     enemy, portal.transform.position, Quaternion.identity
                 );
+                _enemies.Add(newEnemy);
 
                 newEnemy.PathFollow.SetPath(portal.Path);
 
@@ -42,10 +45,10 @@ public class EnemyManager : MonoBehaviour
 
     private void RemoveEnemy(Enemy enemy)
     {
-        _enemyCount--;
+        _enemies.Remove(enemy);
         Destroy(enemy.gameObject);
 
-        if (_enemyCount != 0)
+        if (_enemies.Count == 0)
             return;
 
         foreach (var portal in _portals)
