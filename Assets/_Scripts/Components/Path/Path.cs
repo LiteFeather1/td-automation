@@ -7,7 +7,7 @@ public class Path : MonoBehaviour
     public Transform[] Points => _points;
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (_points.Length == 0)
             return;

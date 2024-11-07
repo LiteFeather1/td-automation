@@ -18,6 +18,9 @@ public class Tower : MonoBehaviour
         foreach (var enemy in EnemyManager.Instance.Enemies)
         {
             var distance = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distance > _range)
+                continue;
+
             if (distance < closestDistance)
             {
                 closestDistance = distance;
@@ -29,12 +32,7 @@ public class Tower : MonoBehaviour
             return;
 
         print("Damaged Enemy");
+        _elapsedTime = 0f;
         closestEnemy.Health.TakeDamage(_damage);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _range);
     }
 }
