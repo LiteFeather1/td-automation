@@ -1,17 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[System.Serializable]
-public class Path : IPath
+public class PathBehaviour : MonoBehaviour, IPath
 {
-    [SerializeField] private List<Segment> _segments;
+    [SerializeField] private SegmentBehaviour[] _segments;
 
     public bool ReachedSegmentEnd(int segmentIndex, int pointIndex)
         => pointIndex == _segments[segmentIndex].Points.Count;
 
     public bool ReachedPathEnd(int segmentIndex, int pointIndex)
-    => _segments.Count == segmentIndex 
-        && ReachedSegmentEnd(segmentIndex, pointIndex);
+        => segmentIndex == pointIndex && ReachedSegmentEnd(segmentIndex, pointIndex);
 
     public Vector2 GetPoint(int segmentIndex, int pointIndex) 
         => _segments[segmentIndex].Points[pointIndex];

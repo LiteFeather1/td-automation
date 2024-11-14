@@ -7,7 +7,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private float _damageRate = 1f;
     private float _elapsedTime;
 
-    private void Update()
+    public void Update()
     {
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime < _damageRate)

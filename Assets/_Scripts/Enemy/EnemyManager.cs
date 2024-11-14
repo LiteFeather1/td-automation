@@ -16,7 +16,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public List<Enemy> Enemies => _enemies;
 
-    private void Update()
+    public void Update()
     {
         _elapsedTime += Time.deltaTime;
         var currentLullDuration = _lullStageDurations[_currentStage];

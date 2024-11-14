@@ -2,33 +2,35 @@
 
 public class PathFollow : MonoBehaviour
 {
-    [SerializeField] private Path _path;
+    private IPath _path;
     [SerializeField] private float _speed;
+    private int _currentSegmentIndex = 0;
     private int _currentPointIndex = 0;
 
     public System.Action OnPathFinished { get; set; } 
 
-    public void SetPath(Path path) => _path = path;
+    public void SetPath(IPath path) => _path = path;
 
-    private void Update()
+    public void Update()
     {
+        var currentPoint = _path.GetPoint(_currentSegmentIndex, _currentPointIndex);
         transform.position = Vector2.MoveTowards(
-            transform.position,
-            _path.Points[_currentPointIndex].position,
-            _speed * Time.deltaTime
+            transform.position, currentPoint, _speed * Time.deltaTime
         );
 
-        if (float.Epsilon < Vector2.Distance(
-            transform.position, _path.Points[_currentPointIndex].position
-        ))
+        if (float.Epsilon < Vector2.Distance(transform.position, currentPoint))
             return;
 
         _currentPointIndex++;
 
-        if (_currentPointIndex == _path.Points.Length)
-        {
-            enabled = false;
-            OnPathFinished?.Invoke();
-        }
+        if (!_path.ReachedSegmentEnd(_currentSegmentIndex, _currentPointIndex))
+            return;
+
+        _currentSegmentIndex++;
+        _currentPointIndex = 0;
+        if (!_path.ReachedPathEnd(_currentSegmentIndex, _currentPointIndex))
+
+        enabled = false;
+        OnPathFinished?.Invoke();
     }
 }
