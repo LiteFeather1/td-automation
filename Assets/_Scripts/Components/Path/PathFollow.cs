@@ -28,9 +28,9 @@ public class PathFollow : MonoBehaviour
 
         _currentSegmentIndex++;
         _currentPointIndex = 0;
-        if (!_path.ReachedPathEnd(_currentSegmentIndex, _currentPointIndex))
+        if (!_path.ReachedPathEnd(_currentSegmentIndex))
+            return;
 
-        enabled = false;
         OnPathFinished?.Invoke();
     }
 }

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private Path _path;
+    [SerializeField] private Path<SegmentBehaviour> _path;
     [SerializeField] private Stage[] _stages;
     private int _currentEnemyGroup;
 
-    public Path Path => _path;
+    public IPath Path => _path;
 
     public bool AllGroupsSpawned(int currentStage)
     {
@@ -35,6 +35,17 @@ public class Portal : MonoBehaviour
     public void StageEnded()
     {
         _currentEnemyGroup = 0;
+    }
+
+    public void OnDrawGizmosSelected()
+    {
+        foreach (var segment in _path.Segments)
+        {
+            if (segment == null) 
+                continue;
+
+            segment.OnDrawGizmosSelected();
+        }
     }
 
     [Serializable]
