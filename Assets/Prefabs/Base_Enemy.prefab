@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHP: 5
-  _defence: 25
+  _defence: 0
 --- !u!114 &250494689945465921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d5acb771ed01649a885e6037a4f1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _path: {fileID: 0}
   _speed: 5
 --- !u!1 &8010355723377097984
 GameObject:

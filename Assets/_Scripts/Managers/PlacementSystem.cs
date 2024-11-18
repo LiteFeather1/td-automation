@@ -5,9 +5,9 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Transform _tileHighlight;
 
-    private void Update()
+    public void Update()
     {
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        var ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit))
         {
             var x = Mathf.Round(hit.point.x);
