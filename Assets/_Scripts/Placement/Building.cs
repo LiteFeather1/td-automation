@@ -6,6 +6,8 @@ public abstract class Building : MonoBehaviour, IPlaceable
     [SerializeField] protected Direction _inDirection = Direction.None;
     [SerializeField] protected Direction _outDirection = Direction.None;
 
+    public Vector2 Position { get; set; }
+
     public abstract bool CanBeRotated { get; }
 
     public abstract Sprite GetSprite(PlacementSystem ps);

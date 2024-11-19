@@ -2,6 +2,8 @@ using UnityEngine;
 
 public interface IPlaceable
 {
+    public Vector2 Position { get; set; }
+
     public Direction InDirection { get; }
     public Direction OutDirection { get; }
 

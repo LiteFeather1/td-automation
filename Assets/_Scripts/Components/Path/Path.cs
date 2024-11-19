@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Path<T> : IPath where T : ISegment
 {
-    [SerializeField] private List<T> _segments;
+    [SerializeField] private List<T> _segments = new();
 
     public List<T> Segments => _segments;
 
