@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Belt : Building, IPlaceable
+public class BeltPath : Building, IPlaceable
 {
     public override bool CanBeRotated { get; } = true;
 
