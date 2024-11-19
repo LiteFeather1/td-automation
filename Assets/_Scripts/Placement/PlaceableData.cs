@@ -14,4 +14,6 @@ public class PlaceableData : ScriptableObject
     public string Name => _name;
     public string Description => _description;
     public Sprite Icon => _icon;
+
+    public Building BuildingPrefab => _buildingPrefab;
 }
