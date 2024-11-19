@@ -1345,10 +1345,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8758687806397941580}
     m_Modifications:
+    - target: {fileID: 3047055457836074915, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596742827990384233, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596742827990384233, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a1e28edd38fb1af4db64b2288864f41a, type: 3}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
       value: UI_Building_Button_Belt_Path
       objectReference: {fileID: 0}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _placeableData
+      value: 
+      objectReference: {fileID: 11400000, guid: 81c1efa4ddb11424d92f58e9f13dc550, type: 2}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

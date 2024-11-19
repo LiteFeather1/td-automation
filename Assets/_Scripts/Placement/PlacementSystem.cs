@@ -10,9 +10,17 @@ public class PlacementSystem : MonoBehaviour
     [Header("Tile Hightlight")]
     [SerializeField] private SpriteRenderer _tileHighlight;
     [SerializeField] private Color _colourNotPlaceble = Color.red;
-    private bool _canPlaceBuilding;
+    private Sprite _defaultTileHighlight;
 
-    public IPlaceable _placeable;
+    private Vector3Int _mousePos;
+
+    private bool _canPlaceBuilding;
+    private Building _building;
+
+    public void Awake()
+    {
+        _defaultTileHighlight = _tileHighlight.sprite;
+    }
 
     public void Update()
     {
@@ -21,17 +29,35 @@ public class PlacementSystem : MonoBehaviour
         {
             var x = Mathf.RoundToInt(hit.point.x);
             var y = Mathf.RoundToInt(hit.point.y);
-            var position = new Vector3Int(x, y, 0);
+            _mousePos = new Vector3Int(x, y, 0);
 
-            _canPlaceBuilding = _pathTilemap.HasTile(position) || !_groundTilemap.HasTile(position);
-            _tileHighlight.color = _canPlaceBuilding? _colourNotPlaceble : Color.white;
+            _canPlaceBuilding = !_pathTilemap.HasTile(_mousePos) || _groundTilemap.HasTile(_mousePos);
+            _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
 
-            _tileHighlight.transform.localPosition = position;
+            _tileHighlight.transform.localPosition = _mousePos;
         }
     }
 
-    public void SetPlaceable(IPlaceable placeable)
+    public void SetPlaceable(PlaceableData placeableData)
     {
-        _placeable = placeable;
+        _tileHighlight.sprite = placeableData.Icon;
+
+        _building = placeableData.BuildingPrefab;
+    }
+
+    public void PlaceBuilding()
+    {
+        if (!_canPlaceBuilding || _building == null)
+            return;
+
+        var newBuilding = Instantiate(
+            _building, _mousePos, _tileHighlight.transform.rotation
+        );
+    }
+
+    public void CancelBuilding()
+    {
+        _building = null;
+        _tileHighlight.sprite = _defaultTileHighlight;
     }
 }

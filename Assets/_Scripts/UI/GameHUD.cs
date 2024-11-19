@@ -19,4 +19,6 @@ public class GameHUD : MonoBehaviour
 
     [Header("Building Buttons")]
     [SerializeField] private UIBuildingButton[] _uiBuildingButtons;
+
+    public UIBuildingButton[] UIBuildingButtons => _uiBuildingButtons;
 }
