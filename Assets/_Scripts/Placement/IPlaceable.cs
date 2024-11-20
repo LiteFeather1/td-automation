@@ -2,9 +2,8 @@ using UnityEngine;
 
 public interface IPlaceable
 {
-    public Vector2 Position { get; set; }
+    public Vector2Int Position { get; set; }
 
-    public Direction InDirection { get; }
     public Direction OutDirection { get; }
 
     public bool CanBeRotated { get; }
@@ -13,5 +12,5 @@ public interface IPlaceable
 
     public Sprite GetSprite(PlacementSystem ps);
 
-    public void SetRotations(Direction inDirection, Direction outDirection);
+    public void SetRotation(Direction outDirection);
 }

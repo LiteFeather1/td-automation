@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,8 +17,9 @@ public class PlacementSystem : MonoBehaviour
 
     private bool _canPlaceBuilding;
     private Building _building;
-    private Direction _buildingInDirection;
     private Direction _buildingOutDirection;
+
+    public Action<Building> OnBuildingPlaced { get; set; }
 
     public void Awake()
     {
@@ -45,7 +47,6 @@ public class PlacementSystem : MonoBehaviour
         _tileHighlight.sprite = placeableData.Icon;
 
         _building = placeableData.BuildingPrefab;
-        _buildingInDirection = _building.InDirection;
         _buildingOutDirection = _building.OutDirection;
     }
 
@@ -57,8 +58,10 @@ public class PlacementSystem : MonoBehaviour
         var newBuilding = Instantiate(
             _building, _mousePos, _tileHighlight.transform.rotation
         );
+        newBuilding.SetRotation(_buildingOutDirection);
+        newBuilding.Position = (Vector2Int)_mousePos;
 
-        newBuilding.SetRotations(_buildingInDirection, _buildingOutDirection);
+        OnBuildingPlaced?.Invoke(newBuilding);
     }
 
     public void CancelBuilding()
@@ -74,16 +77,13 @@ public class PlacementSystem : MonoBehaviour
             0f, 0f, _tileHighlight.transform.eulerAngles.z - 90f
         );
 
-        RotateDirection(ref _buildingInDirection);
-        RotateDirection(ref _buildingOutDirection);
-
-        static Direction RotateDirection(ref Direction direction) => direction = direction switch
+        _buildingOutDirection = _buildingOutDirection switch
         {
             Direction.Left => Direction.Up,
             Direction.Right => Direction.Down,
             Direction.Up => Direction.Right,
             Direction.Down => Direction.Left,
-            _ => direction,
+            _ => _buildingOutDirection,
         };
     }
 }

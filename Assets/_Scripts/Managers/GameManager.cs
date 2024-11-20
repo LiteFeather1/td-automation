@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 public class GameManager : Singleton<GameManager>
 {
     [Header("Systems")]
-    [SerializeField] private GameHUD _gameHUD;
     [SerializeField] private PlacementSystem _placementSystem;
     [SerializeField] private BeltPathSystem _beltPathSystem;
+    [SerializeField] private GameHUD _gameHUD;
 
     public void OnEnable()
     {
@@ -15,6 +15,8 @@ public class GameManager : Singleton<GameManager>
         inputs.LMB.performed += PlaceBuilding;
         inputs.RMB.performed += CancelBuilding;
         inputs.Rotate.performed += RotateBuilding;
+
+        _placementSystem.OnBuildingPlaced += BuildingPlaced;
 
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
@@ -25,9 +27,11 @@ public class GameManager : Singleton<GameManager>
     public void OnDisable()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
-        inputs.LMB.performed += PlaceBuilding;
-        inputs.RMB.performed += CancelBuilding;
+        inputs.LMB.performed -= PlaceBuilding;
+        inputs.RMB.performed -= CancelBuilding;
         inputs.Rotate.performed -= RotateBuilding;
+
+        _placementSystem.OnBuildingPlaced -= BuildingPlaced;
 
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
@@ -48,5 +52,13 @@ public class GameManager : Singleton<GameManager>
     private void RotateBuilding(InputAction.CallbackContext _)
     {
         _placementSystem.RotateBuilding();
+    }
+
+    public void BuildingPlaced(Building building)
+    {
+        if (building is BeltPath beltPath)
+        {
+            _beltPathSystem.AddPoint(beltPath);
+        }
     }
 }
