@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -18,6 +19,7 @@ public class PlacementSystem : MonoBehaviour
     private bool _canPlaceBuilding;
     private Building _building;
     private Direction _buildingOutDirection;
+    private readonly HashSet<Vector2Int> r_buildingPositions = new();
 
     public Action<Building> OnBuildingPlaced { get; set; }
 
@@ -33,9 +35,12 @@ public class PlacementSystem : MonoBehaviour
         {
             var x = Mathf.RoundToInt(hit.point.x);
             var y = Mathf.RoundToInt(hit.point.y);
-            _mousePos = new Vector3Int(x, y, 0);
+            _mousePos = new(x, y, 0);
 
-            _canPlaceBuilding = !_pathTilemap.HasTile(_mousePos) || _groundTilemap.HasTile(_mousePos);
+            _canPlaceBuilding = (
+                (!_pathTilemap.HasTile(_mousePos) || _groundTilemap.HasTile(_mousePos))
+                && !r_buildingPositions.Contains(new(x, y))
+            );
             _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
 
             _tileHighlight.transform.localPosition = _mousePos;
@@ -60,6 +65,7 @@ public class PlacementSystem : MonoBehaviour
         );
         newBuilding.SetRotation(_buildingOutDirection);
         newBuilding.Position = (Vector2Int)_mousePos;
+        r_buildingPositions.Add(newBuilding.Position);
 
         OnBuildingPlaced?.Invoke(newBuilding);
     }
