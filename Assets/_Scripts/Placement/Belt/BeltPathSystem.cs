@@ -17,7 +17,7 @@ public class BeltPathSystem : MonoBehaviour
 
     private readonly Dictionary<Vector2Int, BeltPath> r_positionToBelt = new();
 
-    public void AddPoint(BeltPath newBelt)
+    public void AddBelt(BeltPath newBelt)
     {
         if (r_positionToBelt.Count == 0)
         {
@@ -31,7 +31,9 @@ public class BeltPathSystem : MonoBehaviour
                 continue;
 
             if (newBelt.Position == belt.Position + sr_directionToVector[belt.OutDirection])
+            {
                 belt.OutBelt = newBelt;
+            }
         }
 
         r_positionToBelt.Add(newBelt.Position, newBelt);
