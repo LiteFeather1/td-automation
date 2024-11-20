@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b32fb75d0e46484993b580cbafa94bc, type: 3}
-  m_Name: Belt_Data
+  m_Name: PlacebleData_T
   m_EditorClassIdentifier: 
-  _name: Belt
+  _name: T
   _description: 
-  _icon: {fileID: 21300000, guid: a1e28edd38fb1af4db64b2288864f41a, type: 3}
-  _buildingPrefab: {fileID: 462642255236131671, guid: e2bcf686e10899043976690c948496c3, type: 3}
+  _icon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  _buildingPrefab: {fileID: 2599581948675358023, guid: 3eab726f2fa012447959a1281fa21e2b, type: 3}

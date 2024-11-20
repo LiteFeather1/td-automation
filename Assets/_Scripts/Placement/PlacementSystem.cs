@@ -18,7 +18,8 @@ public class PlacementSystem : MonoBehaviour
 
     private bool _canPlaceBuilding;
     private Building _building;
-    private Direction _buildingOutDirection;
+    private Direction _inDirection;
+    private Direction _outDirection;
     private readonly HashSet<Vector2Int> r_buildingPositions = new();
 
     public Action<Building> OnBuildingPlaced { get; set; }
@@ -50,9 +51,20 @@ public class PlacementSystem : MonoBehaviour
     public void SetPlaceable(PlaceableData placeableData)
     {
         _tileHighlight.sprite = placeableData.Icon;
+        _tileHighlight.transform.eulerAngles = new(0f, 0f, 0f);
 
         _building = placeableData.BuildingPrefab;
-        _buildingOutDirection = _building.OutDirection;
+
+        if (_building is IOutPut outPut)
+        {
+            _inDirection = Direction.None;
+            _outDirection = outPut.OutDirection;
+        }
+        else
+        {
+            _inDirection = Direction.None;
+            _outDirection = Direction.None;
+        }
     }
 
     public void PlaceBuilding()
@@ -63,9 +75,14 @@ public class PlacementSystem : MonoBehaviour
         var newBuilding = Instantiate(
             _building, _mousePos, _tileHighlight.transform.rotation
         );
-        newBuilding.SetRotation(_buildingOutDirection);
         newBuilding.Position = (Vector2Int)_mousePos;
         r_buildingPositions.Add(newBuilding.Position);
+
+        if (newBuilding is IOutPut outPut)
+        {
+            outPut.OutDirection = _outDirection;
+            print(_outDirection);
+        }
 
         OnBuildingPlaced?.Invoke(newBuilding);
     }
@@ -79,20 +96,23 @@ public class PlacementSystem : MonoBehaviour
 
     public void RotateBuilding()
     {
-        if (!_building.CanBeRotated)
+        if (_building != null && !_building.CanBeRotated)
             return;
 
         _tileHighlight.transform.eulerAngles = new(
             0f, 0f, _tileHighlight.transform.eulerAngles.z - 90f
         );
 
-        _buildingOutDirection = _buildingOutDirection switch
+        _inDirection = RotateDirection(_inDirection);
+        _outDirection = RotateDirection(_outDirection);
+
+        static Direction RotateDirection(Direction dir) => dir switch
         {
             Direction.Left => Direction.Up,
             Direction.Right => Direction.Down,
             Direction.Up => Direction.Right,
             Direction.Down => Direction.Left,
-            _ => _buildingOutDirection,
+            _ => dir,
         };
     }
 }

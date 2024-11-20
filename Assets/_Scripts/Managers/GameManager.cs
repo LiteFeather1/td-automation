@@ -58,7 +58,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (building is BeltPath beltPath)
         {
-            _beltPathSystem.AddPoint(beltPath);
+            _beltPathSystem.AddBelt(beltPath);
+        }
+        else if (building is ResourceCollector collector)
+        {
+            _beltPathSystem.AddCollector(collector);
         }
     }
 }

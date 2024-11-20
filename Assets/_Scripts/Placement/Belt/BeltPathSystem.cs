@@ -16,26 +16,50 @@ public class BeltPathSystem : MonoBehaviour
     };
 
     private readonly Dictionary<Vector2Int, BeltPath> r_positionToBelt = new();
+    private readonly Dictionary<Vector2Int, ResourceCollector> r_positionToCollectors = new();
 
     public void AddBelt(BeltPath newBelt)
     {
+        r_positionToBelt.Add(newBelt.Position, newBelt);
+
         if (r_positionToBelt.Count == 0)
-        {
-            r_positionToBelt.Add(newBelt.Position, newBelt);
             return;
+
+        if (r_positionToBelt.TryGetValue(
+            newBelt.Position + sr_directionToVector[newBelt.OutDirection], out var outBelt
+        ))
+        {
+            newBelt.OutBelt = outBelt;
         }
 
         foreach (var direction in sr_directions)
         {
-            if (!r_positionToBelt.TryGetValue(newBelt.Position + direction, out var belt))
-                continue;
-
-            if (newBelt.Position == belt.Position + sr_directionToVector[belt.OutDirection])
+            if (r_positionToBelt.TryGetValue(newBelt.Position + direction, out var belt))
             {
-                belt.OutBelt = newBelt;
+                if (newBelt.Position == belt.Position + sr_directionToVector[belt.OutDirection])
+                {
+                    belt.OutBelt = newBelt;
+                }
+            }
+            else if (r_positionToCollectors.TryGetValue(newBelt.Position + direction, out var collector))
+            {
+                if (newBelt.Position == collector.Position + sr_directionToVector[collector.OutDirection])
+                {
+                    collector.OutBelt = newBelt;
+                }
             }
         }
+    }
 
-        r_positionToBelt.Add(newBelt.Position, newBelt);
+    public void AddCollector(ResourceCollector newCollector)
+    {
+        r_positionToCollectors.Add(newCollector.Position, newCollector);
+
+        if (r_positionToBelt.TryGetValue(
+            newCollector.Position + sr_directionToVector[newCollector.OutDirection], out var belt
+        ))
+        {
+            newCollector.OutBelt = belt;
+        }
     }
 }
