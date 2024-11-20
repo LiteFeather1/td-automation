@@ -3,7 +3,7 @@ using UnityEngine;
 public class ResourceCollector : Building, IOutPut
 {
     [SerializeField] private float _timeToCollect = 1f;
-    [SerializeField] private Transform _giveObject;
+    [SerializeField] private ResourceBehaviour _giveObject;
     private Direction _outDirection = Direction.Right;
     private float _elapsedTime = 0f;
 
@@ -21,8 +21,9 @@ public class ResourceCollector : Building, IOutPut
         if (_elapsedTime > _timeToCollect)
         {
             _elapsedTime %= _timeToCollect;
-            var newObject = Instantiate(_giveObject, (Vector3Int)OutBelt.Position, Quaternion.identity);
-            OutBelt.CurrentObject = newObject;
+            OutBelt.CurrentObject = Instantiate(
+                _giveObject, new(OutBelt.Position.x, OutBelt.Position.y), Quaternion.identity
+            );
         }
     }
 }

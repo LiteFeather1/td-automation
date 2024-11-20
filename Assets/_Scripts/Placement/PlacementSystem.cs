@@ -81,7 +81,6 @@ public class PlacementSystem : MonoBehaviour
         if (newBuilding is IOutPut outPut)
         {
             outPut.OutDirection = _outDirection;
-            print(_outDirection);
         }
 
         OnBuildingPlaced?.Invoke(newBuilding);

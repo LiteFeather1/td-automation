@@ -5,7 +5,7 @@ public class BeltPath : Building, IOutPut
     [SerializeField] private float _speed = 5f;
     private Direction _outDirection = Direction.Right;
 
-	public Transform CurrentObject { get; set; }
+	public ResourceBehaviour CurrentObject { get; set; }
 
     public BeltPath OutBelt { get; set; }
 
@@ -18,11 +18,11 @@ public class BeltPath : Building, IOutPut
         if (OutBelt == null || CurrentObject == null || OutBelt.CurrentObject != null)
             return;
 
-        CurrentObject.position = Vector2.MoveTowards(
-            CurrentObject.position, OutBelt.Position, _speed * Time.deltaTime
+        CurrentObject.transform.position = Vector2.MoveTowards(
+            CurrentObject.transform.position, OutBelt.Position, _speed * Time.deltaTime
         );
 
-        if (Vector2.Distance(CurrentObject.position, OutBelt.Position) < float.Epsilon)
+        if (Vector2.Distance(CurrentObject.transform.position, OutBelt.Position) < float.Epsilon)
         {
             OutBelt.CurrentObject = CurrentObject;
             CurrentObject = null;
