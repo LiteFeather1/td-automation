@@ -79,6 +79,9 @@ public class PlacementSystem : MonoBehaviour
 
     public void RotateBuilding()
     {
+        if (!_building.CanBeRotated)
+            return;
+
         _tileHighlight.transform.eulerAngles = new(
             0f, 0f, _tileHighlight.transform.eulerAngles.z - 90f
         );
