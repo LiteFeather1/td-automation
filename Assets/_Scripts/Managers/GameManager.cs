@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.LMB.performed += PlaceBuilding;
         inputs.RMB.performed += CancelBuilding;
+        inputs.Rotate.performed += RotateBuilding;
 
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
@@ -26,6 +27,7 @@ public class GameManager : Singleton<GameManager>
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.LMB.performed += PlaceBuilding;
         inputs.RMB.performed += CancelBuilding;
+        inputs.Rotate.performed -= RotateBuilding;
 
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
@@ -41,5 +43,10 @@ public class GameManager : Singleton<GameManager>
     private void CancelBuilding(InputAction.CallbackContext _)
     {
         _placementSystem.CancelBuilding();
+    }
+
+    private void RotateBuilding(InputAction.CallbackContext _)
+    {
+        _placementSystem.RotateBuilding();
     }
 }

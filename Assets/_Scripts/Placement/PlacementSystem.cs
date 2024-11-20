@@ -16,6 +16,8 @@ public class PlacementSystem : MonoBehaviour
 
     private bool _canPlaceBuilding;
     private Building _building;
+    private Direction _buildingInDirection;
+    private Direction _buildingOutDirection;
 
     public void Awake()
     {
@@ -43,6 +45,8 @@ public class PlacementSystem : MonoBehaviour
         _tileHighlight.sprite = placeableData.Icon;
 
         _building = placeableData.BuildingPrefab;
+        _buildingInDirection = _building.InDirection;
+        _buildingOutDirection = _building.OutDirection;
     }
 
     public void PlaceBuilding()
@@ -53,11 +57,33 @@ public class PlacementSystem : MonoBehaviour
         var newBuilding = Instantiate(
             _building, _mousePos, _tileHighlight.transform.rotation
         );
+
+        newBuilding.SetRotations(_buildingInDirection, _buildingOutDirection);
     }
 
     public void CancelBuilding()
     {
         _building = null;
         _tileHighlight.sprite = _defaultTileHighlight;
+        _tileHighlight.transform.eulerAngles = Vector3.zero;
+    }
+
+    public void RotateBuilding()
+    {
+        _tileHighlight.transform.eulerAngles = new(
+            0f, 0f, _tileHighlight.transform.eulerAngles.z - 90f
+        );
+
+        RotateDirection(ref _buildingInDirection);
+        RotateDirection(ref _buildingOutDirection);
+
+        static Direction RotateDirection(ref Direction direction) => direction = direction switch
+        {
+            Direction.Left => Direction.Up,
+            Direction.Right => Direction.Down,
+            Direction.Up => Direction.Right,
+            Direction.Down => Direction.Left,
+            _ => direction,
+        };
     }
 }

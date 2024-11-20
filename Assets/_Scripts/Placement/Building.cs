@@ -10,10 +10,16 @@ public abstract class Building : MonoBehaviour, IPlaceable
 
     public abstract bool CanBeRotated { get; }
 
-    public abstract Sprite GetSprite(PlacementSystem ps);
-
     public SpriteRenderer SpriteRenderer => _spriteRenderer;
 
     public Direction InDirection => _inDirection;
     public Direction OutDirection => _outDirection;
+
+    public abstract Sprite GetSprite(PlacementSystem ps);
+
+    public void SetRotations(Direction inDirection, Direction outDirection)
+    {
+        _inDirection = inDirection;
+        _outDirection = outDirection;
+    }
 }

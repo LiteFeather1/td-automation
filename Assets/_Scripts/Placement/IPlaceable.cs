@@ -12,4 +12,6 @@ public interface IPlaceable
     public SpriteRenderer SpriteRenderer { get; }
 
     public Sprite GetSprite(PlacementSystem ps);
+
+    public void SetRotations(Direction inDirection, Direction outDirection);
 }
