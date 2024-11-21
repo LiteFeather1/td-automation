@@ -7,7 +7,7 @@ public class BeltPathSystem : MonoBehaviour
     {
         new(-1, 0), new(1, 0), new (0, 1), new(0, -1)
     };
-    private static readonly Dictionary<Direction, Vector2Int> sr_directionToVector = new()
+    private static readonly Dictionary<Direction, Vector2Int> sr_direction = new()
     {
         { Direction.Left, sr_directions[0] },
         { Direction.Right, sr_directions[1] },
@@ -15,51 +15,55 @@ public class BeltPathSystem : MonoBehaviour
         { Direction.Down, sr_directions[3] },
     };
 
-    private readonly Dictionary<Vector2Int, BeltPath> r_positionToBelt = new();
-    private readonly Dictionary<Vector2Int, ResourceCollector> r_positionToCollectors = new();
+    private readonly Dictionary<Vector2Int, IInPort> r_inPorts = new();
+    private readonly Dictionary<Vector2Int, IOutPort> r_positionToOutPort = new();
 
-    public void AddBelt(BeltPath newBelt)
+    public void AddIInPort(IInPort newInPort)
     {
-        r_positionToBelt.Add(newBelt.Position, newBelt);
+        r_inPorts.Add(newInPort.Position, newInPort);
 
-        if (r_positionToBelt.Count == 0)
+        if (r_inPorts.Count == 1)
             return;
 
-        if (r_positionToBelt.TryGetValue(
-            newBelt.Position + sr_directionToVector[newBelt.OutDirection], out var outBelt
-        ))
+        if (newInPort is IOutPort newOutPort)
         {
-            newBelt.Input = outBelt;
+            if (r_inPorts.TryGetValue(
+                newInPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
+            ))
+            {
+                newOutPort.Port = inPort;
+            }
         }
 
         foreach (var direction in sr_directions)
         {
-            if (r_positionToBelt.TryGetValue(newBelt.Position + direction, out var belt))
+            if (r_inPorts.TryGetValue(newInPort.Position + direction, out var inPort))
             {
-                if (newBelt.Position == belt.Position + sr_directionToVector[belt.OutDirection])
+                if (inPort is IOutPort outPort
+                    && newInPort.Position == inPort.Position + sr_direction[outPort.OutDirection])
                 {
-                    belt.Input = newBelt;
+                    outPort.Port = newInPort;
                 }
             }
-            else if (r_positionToCollectors.TryGetValue(newBelt.Position + direction, out var collector))
+            else if (r_positionToOutPort.TryGetValue(newInPort.Position + direction, out var outPort))
             {
-                if (newBelt.Position == collector.Position + sr_directionToVector[collector.OutDirection])
+                if (newInPort.Position == outPort.Position + sr_direction[outPort.OutDirection])
                 {
-                    collector.Input = newBelt;
+                    outPort.Port = newInPort;
                 }
             }
         }
     }
 
-    public void AddCollector(ResourceCollector newCollector)
+    public void AddOutPort(IOutPort newOutPort)
     {
-        r_positionToCollectors.Add(newCollector.Position, newCollector);
+        r_positionToOutPort.Add(newOutPort.Position, newOutPort);
 
-        if (r_positionToBelt.TryGetValue(
-            newCollector.Position + sr_directionToVector[newCollector.OutDirection], out var belt
+        if (r_inPorts.TryGetValue(
+            newOutPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
         ))
         {
-            newCollector.Input = belt;
+            newOutPort.Port = inPort;
         }
     }
 }

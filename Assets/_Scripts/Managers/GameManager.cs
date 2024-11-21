@@ -66,13 +66,14 @@ public class GameManager : Singleton<GameManager>
 
     public void BuildingPlaced(Building building)
     {
-        if (building is BeltPath beltPath)
+        if (building is IInPort inPort)
         {
-            _beltPathSystem.AddBelt(beltPath);
+            _beltPathSystem.AddIInPort(inPort);
         }
-        else if (building is ResourceCollector collector)
+
+        if (building is IOutPort outPort)
         {
-            _beltPathSystem.AddCollector(collector);
+            _beltPathSystem.AddOutPort(outPort);
         }
     }
 }
