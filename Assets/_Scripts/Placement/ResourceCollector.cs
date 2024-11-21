@@ -3,7 +3,7 @@ using UnityEngine;
 public class ResourceCollector : Building, IOutPort
 {
     [SerializeField] private float _timeToCollect = 1f;
-    [SerializeField] private ResourceBehaviour _giveObject;
+    [SerializeField] private ResourceBehaviour _resourceToGive;
     private Direction _outDirection = Direction.Right;
     private float _elapsedTime = 0f;
 
@@ -11,6 +11,7 @@ public class ResourceCollector : Building, IOutPort
     public Direction OutDirection { get => _outDirection; set => _outDirection = value; }
 
     public override bool CanBeRotated => true;
+    public override bool CanBeDestroyed => true;
 
     public void Update()
     {
@@ -22,7 +23,7 @@ public class ResourceCollector : Building, IOutPort
         {
             _elapsedTime %= _timeToCollect;
             Port.GiveResource(Instantiate(
-                _giveObject, new(Port.Position.x, Port.Position.y), Quaternion.identity
+                _resourceToGive, new(Port.Position.x, Port.Position.y), Quaternion.identity
             ));
         }
     }

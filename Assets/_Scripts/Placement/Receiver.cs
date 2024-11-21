@@ -3,15 +3,14 @@ using UnityEngine;
 
 public class Receiver : Building, IInPort
 {
-    [SerializeField] private Direction _direction = Direction.Any;
+    public Direction InDirection { get; set; } = Direction.Any;
 
-    public Direction InDirection { get => _direction; set => _direction = value; }
+    public Action<ResourceBehaviour> OnResourceGot { get; set; }
 
     public bool CanReceiveResource => true;
 
     public override bool CanBeRotated => true;
-
-    public Action<ResourceBehaviour> OnResourceGot { get; set; }
+    public override bool CanBeDestroyed => false;
 
     public void Awake()
     {

@@ -15,6 +15,7 @@ public class BeltPath : Building, IOutPort, IInPort
     public bool CanReceiveResource => _resource == null;
 
     public override bool CanBeRotated => true;
+    public override bool CanBeDestroyed => true;
 
     public void Update()
     {

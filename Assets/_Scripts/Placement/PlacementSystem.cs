@@ -102,7 +102,7 @@ public class PlacementSystem : MonoBehaviour
             _tileHighlight.sprite = _defaultTileHighlight;
             _tileHighlight.transform.eulerAngles = Vector3.zero;
         }
-        else if (r_buildings.TryGetValue(_mousePos, out var building))
+        else if (r_buildings.TryGetValue(_mousePos, out var building) && building.CanBeDestroyed)
         {
             r_buildings.Remove(_mousePos);
             building.Destroy();

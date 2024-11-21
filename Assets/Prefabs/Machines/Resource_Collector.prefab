@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToCollect: 1
-  _giveObject: {fileID: 143309904664887199, guid: 3418c8c033c0a1b4c8e24eed7d555af4, type: 3}
+  _resourceToGive: {fileID: 143309904664887199, guid: 3418c8c033c0a1b4c8e24eed7d555af4, type: 3}
 --- !u!212 &6812179435623572066
 SpriteRenderer:
   m_ObjectHideFlags: 0
