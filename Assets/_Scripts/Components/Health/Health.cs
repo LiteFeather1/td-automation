@@ -11,11 +11,11 @@ public class Health : MonoBehaviour, IDamageable
     public float MaxHP => _maxHP;
     public float Defence => _defence;
 
-    public Action<float> OnDamageTaken { get; set;}
-    public Action<float> OnHealed { get; set;}
+    public Action<float, IDamageable> OnDamageTaken { get; set;}
+    public Action<float, IDamageable> OnHealed { get; set;}
     public Action OnDied { get; set; }
 
-    private void Start()
+    public void Awake()
     {
         _hp = _maxHP;
     }
@@ -25,7 +25,7 @@ public class Health : MonoBehaviour, IDamageable
         damage *= 100f / (100f + _defence);
         _hp -= damage;
 
-        OnDamageTaken?.Invoke(damage);
+        OnDamageTaken?.Invoke(damage, this);
         if (_hp < 0f)
         {
             OnDied?.Invoke();
@@ -38,6 +38,6 @@ public class Health : MonoBehaviour, IDamageable
             heal = _maxHP - _hp;
 
         _hp += heal;
-        OnHealed?.Invoke(heal);
+        OnHealed?.Invoke(heal, this);
     }
 }

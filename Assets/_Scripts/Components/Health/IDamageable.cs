@@ -6,8 +6,8 @@ public interface IDamageable
     public float MaxHP { get; }
     public float Defence { get; }
 
-    public Action<float> OnDamageTaken { get; set; }
-    public Action<float> OnHealed { get; set; }
+    public Action<float, IDamageable> OnDamageTaken { get; set; }
+    public Action<float, IDamageable> OnHealed { get; set; }
 
     public Action OnDied { get; set; }
 

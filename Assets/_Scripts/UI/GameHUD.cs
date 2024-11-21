@@ -23,4 +23,9 @@ public class GameHUD : MonoBehaviour
     {
         _uiResources[resourceType].SetAmount(amount);
     }
+
+    public void UpdatePlayerHealth(float _, IDamageable damageable)
+    {
+        i_playerHealth.fillAmount = damageable.HP / damageable.MaxHP;
+    }
 }
