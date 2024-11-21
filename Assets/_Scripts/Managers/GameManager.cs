@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Update()
     {
-        if (!_enemyManager.WaveInProgress)
+        if (!_enemyManager.AllStagesCompleted && !_enemyManager.WaveInProgress)
             _gameHUD.SetTimeToWave(_enemyManager.TimeToWave);
     }
 

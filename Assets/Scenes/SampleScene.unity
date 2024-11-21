@@ -30640,8 +30640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lullStageDurations:
-  - 60
-  - 60
+  - 1
   _portals:
   - {fileID: 1741471820}
   - {fileID: 740015674}

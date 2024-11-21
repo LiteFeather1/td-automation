@@ -23,6 +23,7 @@ public class EnemyManager : Singleton<EnemyManager>
     public bool WaveInProgress => _waveInProgress;
 
     public float TimeToWave => _lullStageDurations[_currentStage] - _elapsedTime;
+    public bool AllStagesCompleted => _currentStage == _lullStageDurations.Length;
 
     public void Update()
     {
