@@ -17,6 +17,8 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public List<Enemy> Enemies => _enemies;
 
+    public float TimeToWave => _lullStageDurations[_currentStage] - _elapsedTime;
+
     public void Update()
     {
         _elapsedTime += Time.deltaTime;

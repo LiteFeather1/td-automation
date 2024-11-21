@@ -42,6 +42,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void Update()
+    {
+        _gameHUD.SetTimeToWave(_enemyManager.TimeToWave);
+    }
+
     public void OnDisable()
     {
         var inputs = InputManager.Instance.InputSystem.Player;

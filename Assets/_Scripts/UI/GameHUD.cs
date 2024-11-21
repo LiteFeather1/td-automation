@@ -28,4 +28,9 @@ public class GameHUD : MonoBehaviour
     {
         i_playerHealth.fillAmount = damageable.HP / damageable.MaxHP;
     }
+
+    public void SetTimeToWave(float time)
+    {
+        t_timeToWave.text = $"{Mathf.FloorToInt(time / 60f):00}:{Mathf.FloorToInt(time % 60):00}";
+    }
 }
