@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b32fb75d0e46484993b580cbafa94bc, type: 3}
-  m_Name: PlacebleData_Collector_Metal
+  m_Name: PlacebleData_Giver_Wood
   m_EditorClassIdentifier: 
   _name: T
   _description: 
   _icon: {fileID: 21300000, guid: 000c8df9cbea2d44781340465fd0dcd8, type: 3}
-  _buildingPrefab: {fileID: 8048112178887326767, guid: 1d1f6ede4ddc1924a86159294f069c41, type: 3}
+  _buildingPrefab: {fileID: 2599581948675358023, guid: 3eab726f2fa012447959a1281fa21e2b, type: 3}

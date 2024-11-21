@@ -1,14 +1,25 @@
 using System;
 using UnityEngine;
 
-public class ResourceNode : MonoBehaviour
+public class ResourceNode : MonoBehaviour, IPlaceable
 {
     [SerializeField] private ResourceBehaviour _resourceToGive;
     [SerializeField] private int _timesThatCanCollect = 256;
 
-    public ResourceType ResourceType => _resourceToGive.Type;
+    public ResourceType Type => _resourceToGive.Type;
 
     public Action<ResourceNode> OnDepleted { get; set; }
+
+    public Vector2Int Position { get; set; }
+
+    public bool CanBeRotated => throw new NotImplementedException();
+
+    public bool CanBeDestroyed => throw new NotImplementedException();
+
+    public void Awake()
+    {
+        Position = Vector2Int.RoundToInt(transform.position);
+    }
 
     public ResourceBehaviour CollectResource()
     {
