@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 143309904664887199}
   - component: {fileID: 523709810410667934}
   m_Layer: 0
-  m_Name: Resource_Behaviour
+  m_Name: Resource_Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.21181916, g: 0.5283019, b: 0.28802848, a: 1}
+  m_Color: {r: 0.6117647, g: 0.40392157, b: 0.15294118, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
