@@ -13,12 +13,13 @@ public class EnemyManager : Singleton<EnemyManager>
     private float _elapsedTime;
 
     public Action OnWaveStarted { get; set; }
-    public Action OnStageEnded { get; set; }
+    public Action<int> OnStageEnded { get; set; }
     public Action OnAllStagesEnded { get; set; }
     public Action<float> OnEnemyReachedPathEnd { get; set; }
 
     public List<Enemy> Enemies => _enemies;
 
+    public int CurrentStage => _currentStage;
     public bool WaveInProgress => _waveInProgress;
 
     public float TimeToWave => _lullStageDurations[_currentStage] - _elapsedTime;
@@ -82,7 +83,7 @@ public class EnemyManager : Singleton<EnemyManager>
         Debug.Log("Stage ended");
         _currentStage++;
         _waveInProgress = false;
-        OnStageEnded?.Invoke();
+        OnStageEnded?.Invoke(_currentStage);
         if (_currentStage == _lullStageDurations.Length)
         {
             Debug.Log("All Stages Completed");

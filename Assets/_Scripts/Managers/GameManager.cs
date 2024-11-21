@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
         _enemyManager.OnWaveStarted += WaveStarted;
+        _enemyManager.OnStageEnded += _gameHUD.SetWave;
 
         _factoryTower.OnResourceModified += _gameHUD.UpdateUIResource;
         _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
@@ -35,12 +36,17 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void Start()
+    protected override void Awake()
     {
         foreach (var receiver in _factoryTower.Receivers)
         {
             _placementSystem.AddBuilding(receiver);
         }
+    }
+
+    public void Start()
+    {
+        _gameHUD.SetWave(_enemyManager.CurrentStage);
     }
 
     public void Update()
@@ -61,6 +67,7 @@ public class GameManager : Singleton<GameManager>
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
         _enemyManager.OnWaveStarted -= WaveStarted;
+        _enemyManager.OnStageEnded -= _gameHUD.SetWave;
 
         _factoryTower.OnResourceModified -= _gameHUD.UpdateUIResource;
         _factoryTower.Health.OnDamageTaken -= _gameHUD.UpdatePlayerHealth;
