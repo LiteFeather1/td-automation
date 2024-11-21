@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ResourceNode : MonoBehaviour, IPlaceable
 {
+    [SerializeField] private Vector2Int _position;
     [SerializeField] private ResourceBehaviour _resourceToGive;
     [SerializeField] private int _timesThatCanCollect = 256;
 
@@ -10,16 +11,11 @@ public class ResourceNode : MonoBehaviour, IPlaceable
 
     public Action<ResourceNode> OnDepleted { get; set; }
 
-    public Vector2Int Position { get; set; }
+    public Vector2Int Position { get => _position; set => _position = value; }
 
-    public bool CanBeRotated => throw new NotImplementedException();
+    public bool CanBeRotated => false;
 
-    public bool CanBeDestroyed => throw new NotImplementedException();
-
-    public void Awake()
-    {
-        Position = Vector2Int.RoundToInt(transform.position);
-    }
+    public bool CanBeDestroyed => false;
 
     public ResourceBehaviour CollectResource()
     {

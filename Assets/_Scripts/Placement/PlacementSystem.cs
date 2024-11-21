@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using LTF.SerializedDictionary;
 
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private Tilemap _groundTilemap;
     [SerializeField] private Tilemap _pathTilemap;
+    [SerializeField] private SerializedDictionary<Vector2Int, ResourceNode> _resourceNodes = new();
 
     [Header("Tile Hightlight")]
     [SerializeField] private SpriteRenderer _tileHighlight;
@@ -30,6 +32,14 @@ public class PlacementSystem : MonoBehaviour
         _defaultTileHighlight = _tileHighlight.sprite;
     }
 
+    internal void Start()
+    {
+        foreach (var node in _resourceNodes.Values)
+        {
+            node.OnDepleted += ResourceDepleted;
+        }
+    }
+
     public void FixedUpdate()
     {
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
@@ -41,13 +51,22 @@ public class PlacementSystem : MonoBehaviour
 
             var worldPos = new Vector3Int(x, y, 0);
             _canPlaceBuilding = (
-                !_pathTilemap.HasTile(worldPos)
+                !r_buildings.ContainsKey(_mousePos)
+                && !_resourceNodes.ContainsKey(_mousePos)
+                && !_pathTilemap.HasTile(worldPos)
                 && _groundTilemap.HasTile(worldPos)
-                && !r_buildings.ContainsKey(_mousePos)
             );
             _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
 
             _tileHighlight.transform.localPosition = worldPos;
+        }
+    }
+
+    internal void OnDisable()
+    {
+        foreach (var node in _resourceNodes.Values)
+        {
+            node.OnDepleted -= ResourceDepleted;
         }
     }
 
@@ -128,4 +147,23 @@ public class PlacementSystem : MonoBehaviour
             _ => dir,
         };
     }
+
+    private void ResourceDepleted(ResourceNode node)
+    {
+        node.OnDepleted -= ResourceDepleted;
+        _resourceNodes.Remove(node.Position);
+    }
+
+#if UNITY_EDITOR
+    [ContextMenu("Get Resource Nodes")]
+    internal void GetResourceNodes()
+    {
+        foreach (var node in GetComponentsInChildren<ResourceNode>())
+        {
+            node.Position = Vector2Int.RoundToInt(node.transform.position);
+            _resourceNodes.Add(node.Position, node);
+        }
+        UnityEditor.EditorUtility.SetDirty(this);
+    }
+#endif
 }
