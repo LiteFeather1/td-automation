@@ -16,7 +16,7 @@ public class BeltPathSystem : MonoBehaviour
     };
 
     private readonly Dictionary<Vector2Int, IInPort> r_inPorts = new();
-    private readonly Dictionary<Vector2Int, IOutPort> r_positionToOutPort = new();
+    private readonly Dictionary<Vector2Int, IOutPort> r_outPort = new();
 
     public void AddIInPort(IInPort newInPort)
     {
@@ -45,7 +45,7 @@ public class BeltPathSystem : MonoBehaviour
                     outPort.Port = newInPort;
                 }
             }
-            else if (r_positionToOutPort.TryGetValue(newInPort.Position + direction, out var outPort))
+            else if (r_outPort.TryGetValue(newInPort.Position + direction, out var outPort))
             {
                 if (newInPort.Position == outPort.Position + sr_direction[outPort.OutDirection])
                 {
@@ -57,7 +57,7 @@ public class BeltPathSystem : MonoBehaviour
 
     public void AddOutPort(IOutPort newOutPort)
     {
-        r_positionToOutPort.Add(newOutPort.Position, newOutPort);
+        r_outPort.Add(newOutPort.Position, newOutPort);
 
         if (r_inPorts.TryGetValue(
             newOutPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
@@ -65,5 +65,13 @@ public class BeltPathSystem : MonoBehaviour
         {
             newOutPort.Port = inPort;
         }
+    }
+
+    public void TryRemovePosition(Vector2Int position)
+    {
+        if (r_inPorts.ContainsKey(position))
+            r_inPorts.Remove(position);
+        else if (r_outPort.ContainsKey(position))
+            r_outPort.Remove(position);
     }
 }

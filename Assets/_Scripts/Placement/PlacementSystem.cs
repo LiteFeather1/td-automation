@@ -14,15 +14,16 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Color _colourNotPlaceble = Color.red;
     private Sprite _defaultTileHighlight;
 
-    private Vector3Int _mousePos;
+    private Vector2Int _mousePos;
 
     private bool _canPlaceBuilding;
     private Building _building;
     private Direction _inDirection;
     private Direction _outDirection;
-    private readonly HashSet<Vector2Int> r_buildingPositions = new();
+    private readonly Dictionary<Vector2Int, Building> r_buildings = new();
 
     public Action<Building> OnBuildingPlaced { get; set; }
+    public Action<Vector2Int> OnBuildingRemoved { get; set; }
 
     public void Awake()
     {
@@ -36,16 +37,17 @@ public class PlacementSystem : MonoBehaviour
         {
             var x = Mathf.RoundToInt(hit.point.x);
             var y = Mathf.RoundToInt(hit.point.y);
-            _mousePos = new(x, y, 0);
+            _mousePos = new(x, y);
 
+            var worldPos = new Vector3Int(x, y, 0);
             _canPlaceBuilding = (
-                !_pathTilemap.HasTile(_mousePos)
-                && _groundTilemap.HasTile(_mousePos)
-                && !r_buildingPositions.Contains(new(x, y))
+                !_pathTilemap.HasTile(worldPos)
+                && _groundTilemap.HasTile(worldPos)
+                && !r_buildings.ContainsKey(_mousePos)
             );
             _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
 
-            _tileHighlight.transform.localPosition = _mousePos;
+            _tileHighlight.transform.localPosition = worldPos;
         }
     }
 
@@ -70,19 +72,19 @@ public class PlacementSystem : MonoBehaviour
 
     public void AddBuilding(Building building)
     {
-        r_buildingPositions.Add(building.Position);
+        r_buildings.Add(building.Position, building);
         OnBuildingPlaced?.Invoke(building);
     }
 
-    public void PlaceBuilding()
+    public void TryPlaceBuilding()
     {
         if (!_canPlaceBuilding || _building == null)
             return;
 
         var newBuilding = Instantiate(
-            _building, _mousePos, _tileHighlight.transform.rotation
+            _building, new(_mousePos.x, _mousePos.y), _tileHighlight.transform.rotation
         );
-        newBuilding.Position = (Vector2Int)_mousePos;
+        newBuilding.Position = _mousePos;
 
         if (newBuilding is IOutPort outPut)
         {
@@ -92,11 +94,20 @@ public class PlacementSystem : MonoBehaviour
         AddBuilding(newBuilding);
     }
 
-    public void CancelBuilding()
+    public void TryCancelOrDesconstructBuilding()
     {
-        _building = null;
-        _tileHighlight.sprite = _defaultTileHighlight;
-        _tileHighlight.transform.eulerAngles = Vector3.zero;
+        if (_building != null)
+        {
+            _building = null;
+            _tileHighlight.sprite = _defaultTileHighlight;
+            _tileHighlight.transform.eulerAngles = Vector3.zero;
+        }
+        else if (r_buildings.TryGetValue(_mousePos, out var building))
+        {
+            r_buildings.Remove(_mousePos);
+            building.Destroy();
+            OnBuildingRemoved?.Invoke(_mousePos);
+        }
     }
 
     public void RotateBuilding()

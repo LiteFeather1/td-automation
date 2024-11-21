@@ -20,12 +20,14 @@ public class GameManager : Singleton<GameManager>
         inputs.Rotate.performed += RotateBuilding;
 
         _placementSystem.OnBuildingPlaced += BuildingPlaced;
+        _placementSystem.OnBuildingRemoved += _beltPathSystem.TryRemovePosition;
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
 
         _factoryTower.OnResourceModified += _gameHUD.UpdateUIResource;
         _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed -= _gameHUD.UpdatePlayerHealth;
+
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed += _placementSystem.SetPlaceable;
@@ -48,6 +50,7 @@ public class GameManager : Singleton<GameManager>
         inputs.Rotate.performed -= RotateBuilding;
 
         _placementSystem.OnBuildingPlaced -= BuildingPlaced;
+        _placementSystem.OnBuildingRemoved -= _beltPathSystem.TryRemovePosition;
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
 
@@ -63,12 +66,12 @@ public class GameManager : Singleton<GameManager>
     private void PlaceBuilding(InputAction.CallbackContext _)
     {
         if (!UIMouseBlocker.MouseBlocked)
-            _placementSystem.PlaceBuilding();
+            _placementSystem.TryPlaceBuilding();
     }
 
     private void CancelBuilding(InputAction.CallbackContext _)
     {
-        _placementSystem.CancelBuilding();
+        _placementSystem.TryCancelOrDesconstructBuilding();
     }
 
     private void RotateBuilding(InputAction.CallbackContext _)
