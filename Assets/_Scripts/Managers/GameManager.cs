@@ -36,16 +36,13 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    protected override void Awake()
+    public void Start()
     {
         foreach (var receiver in _factoryTower.Receivers)
         {
             _placementSystem.AddBuilding(receiver);
         }
-    }
 
-    public void Start()
-    {
         _gameHUD.SetWave(_enemyManager.CurrentStage);
     }
 

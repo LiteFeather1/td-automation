@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Tower : Building
 {
-    [SerializeField] private float _range;
+    [SerializeField] private float _range = 1f;
     [SerializeField] private float _damage = 1f;
     [SerializeField] private float _damageRate = 1f;
     private float _elapsedTime;
 
+    public override bool CanBeRotated => false;
+    public override bool CanBeDestroyed => true;
+
     public void Update()
     {
         _elapsedTime += Time.deltaTime;
-        if (_elapsedTime < _damageRate)
+        if (!EnemyManager.Instance.HasEnemies || _elapsedTime < _damageRate)
             return;
 
         var closestDistance = float.MaxValue;
@@ -31,7 +34,6 @@ public class Tower : MonoBehaviour
         if (closestEnemy == null)
             return;
 
-        print("Damaged Enemy");
         _elapsedTime = 0f;
         closestEnemy.Health.TakeDamage(_damage);
     }

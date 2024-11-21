@@ -104,13 +104,13 @@ namespace LTF.SerializedDictionary.Editor
                     var keyProp = _entriesProperty.GetArrayElementAtIndex(index).FindPropertyRelative("Key");
                     const float LeftOffset = 100f;
                     var sizeKey = new Vector2(halfSizeX - LeftOffset, rect.size.y);
-                    EditorGUI.PropertyField(new(rect.position, sizeKey), keyProp, GUIContent(keyProp.type), true);
+                    EditorGUI.PropertyField(new(rect.position, sizeKey), keyProp, GUIContent(""/*keyProp.type*/), true);
 
                     var valueProp = _entriesProperty.GetArrayElementAtIndex(index).FindPropertyRelative("Value");
                     const float RightOffset = 58f;
                     var sizeValue = new Vector2(halfSizeX + RightOffset, rect.size.y);
                     var positionValue = rect.position + new Vector2(sizeKey.x + 25f, 0f);
-                    EditorGUI.PropertyField(new(positionValue, sizeValue), valueProp, GUIContent(valueProp.type), true);
+                    EditorGUI.PropertyField(new(positionValue, sizeValue), valueProp, GUIContent(""/*valueProp.type*/), true);
 
                     // After DrawProperies
                     GUI.enabled = wasEnabled;

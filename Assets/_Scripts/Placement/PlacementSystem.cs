@@ -30,7 +30,7 @@ public class PlacementSystem : MonoBehaviour
         _defaultTileHighlight = _tileHighlight.sprite;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit))
@@ -58,16 +58,8 @@ public class PlacementSystem : MonoBehaviour
 
         _building = placeableData.BuildingPrefab;
 
-        if (_building is IOutPort outPut)
-        {
-            _inDirection = Direction.None;
-            _outDirection = outPut.OutDirection;
-        }
-        else
-        {
-            _inDirection = Direction.None;
-            _outDirection = Direction.None;
-        }
+        _inDirection = _building is IInPort inPort ? inPort.InDirection : Direction.None;
+        _outDirection = _building is IOutPort outPort ? outPort.OutDirection : Direction.None;
     }
 
     public void AddBuilding(Building building)
@@ -86,9 +78,14 @@ public class PlacementSystem : MonoBehaviour
         );
         newBuilding.Position = _mousePos;
 
-        if (newBuilding is IOutPort outPut)
+        if (newBuilding is IInPort inPort)
         {
-            outPut.OutDirection = _outDirection;
+            inPort.InDirection = _outDirection;
+        }
+
+        if (newBuilding is IOutPort outPort)
+        {
+            outPort.OutDirection = _outDirection;
         }
 
         AddBuilding(newBuilding);
