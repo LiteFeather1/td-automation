@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.OnBuildingRemoved += _beltPathSystem.TryRemovePosition;
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
+        _enemyManager.OnWaveStarted += WaveStarted;
 
         _factoryTower.OnResourceModified += _gameHUD.UpdateUIResource;
         _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
@@ -44,7 +45,8 @@ public class GameManager : Singleton<GameManager>
 
     public void Update()
     {
-        _gameHUD.SetTimeToWave(_enemyManager.TimeToWave);
+        if (!_enemyManager.WaveInProgress)
+            _gameHUD.SetTimeToWave(_enemyManager.TimeToWave);
     }
 
     public void OnDisable()
@@ -58,6 +60,7 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.OnBuildingRemoved -= _beltPathSystem.TryRemovePosition;
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
+        _enemyManager.OnWaveStarted -= WaveStarted;
 
         _factoryTower.OnResourceModified -= _gameHUD.UpdateUIResource;
         _factoryTower.Health.OnDamageTaken -= _gameHUD.UpdatePlayerHealth;
@@ -95,5 +98,10 @@ public class GameManager : Singleton<GameManager>
         {
             _beltPathSystem.AddOutPort(outPort);
         }
+    }
+
+    public void WaveStarted()
+    {
+        _gameHUD.SetTimeToWave("Attacking");
     }
 }

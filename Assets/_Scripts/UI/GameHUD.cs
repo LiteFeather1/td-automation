@@ -33,4 +33,9 @@ public class GameHUD : MonoBehaviour
     {
         t_timeToWave.text = $"{Mathf.FloorToInt(time / 60f):00}:{Mathf.FloorToInt(time % 60):00}";
     }
+
+    public void SetTimeToWave(string text)
+    {
+        t_timeToWave.text = text;
+    }
 }

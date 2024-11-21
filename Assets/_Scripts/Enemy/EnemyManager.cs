@@ -7,15 +7,19 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private float[] _lullStageDurations;
     [SerializeField] private Portal[] _portals;
     private int _currentStage;
+    private bool _waveInProgress;
     private readonly List<Enemy> _enemies = new();
 
     private float _elapsedTime;
 
+    public Action OnWaveStarted { get; set; }
     public Action OnStageEnded { get; set; }
     public Action OnAllStagesEnded { get; set; }
     public Action<float> OnEnemyReachedPathEnd { get; set; }
 
     public List<Enemy> Enemies => _enemies;
+
+    public bool WaveInProgress => _waveInProgress;
 
     public float TimeToWave => _lullStageDurations[_currentStage] - _elapsedTime;
 
@@ -25,6 +29,12 @@ public class EnemyManager : Singleton<EnemyManager>
         var currentLullDuration = _lullStageDurations[_currentStage];
         if (_elapsedTime < currentLullDuration)
             return;
+
+        if (!_waveInProgress)
+        {
+            _waveInProgress = true;
+            OnWaveStarted?.Invoke();
+        }
 
         foreach (var portal in _portals)
         {
@@ -71,6 +81,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
         Debug.Log("Stage ended");
         _currentStage++;
+        _waveInProgress = false;
         OnStageEnded?.Invoke();
         if (_currentStage == _lullStageDurations.Length)
         {
