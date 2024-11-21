@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Systems")]
     [SerializeField] private PlacementSystem _placementSystem;
     [SerializeField] private BeltPathSystem _beltPathSystem;
+    [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameHUD _gameHUD;
 
     public void OnEnable()
@@ -19,6 +20,8 @@ public class GameManager : Singleton<GameManager>
         inputs.Rotate.performed += RotateBuilding;
 
         _placementSystem.OnBuildingPlaced += BuildingPlaced;
+
+        _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
 
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
@@ -42,6 +45,8 @@ public class GameManager : Singleton<GameManager>
         inputs.Rotate.performed -= RotateBuilding;
 
         _placementSystem.OnBuildingPlaced -= BuildingPlaced;
+
+        _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
 
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {

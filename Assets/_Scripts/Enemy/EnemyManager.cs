@@ -13,6 +13,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public Action OnStageEnded { get; set; }
     public Action OnAllStagesEnded { get; set; }
+    public Action<float> OnEnemyReachedPathEnd { get; set; }
 
     public List<Enemy> Enemies => _enemies;
 
@@ -38,8 +39,17 @@ public class EnemyManager : Singleton<EnemyManager>
                 newEnemy.PathFollow.SetPath(portal.Path);
 
                 newEnemy.OnDied += RemoveEnemy;
-                newEnemy.OnPathReached += RemoveEnemy;
+                newEnemy.OnPathReached += EnemyReachedPathEnd;
             }
+        }
+    }
+
+    public void OnDisable()
+    {
+        foreach (var enemy in _enemies)
+        {
+            enemy.OnDied -= RemoveEnemy;
+            enemy.OnPathReached -= EnemyReachedPathEnd;
         }
     }
 
@@ -48,7 +58,7 @@ public class EnemyManager : Singleton<EnemyManager>
         _enemies.Remove(enemy);
         Destroy(enemy.gameObject);
 
-        if (_enemies.Count == 0)
+        if (_enemies.Count != 0)
             return;
 
         foreach (var portal in _portals)
@@ -66,5 +76,11 @@ public class EnemyManager : Singleton<EnemyManager>
             enabled = false;
             OnAllStagesEnded?.Invoke();
         }
+    }
+
+    private void EnemyReachedPathEnd(Enemy enemy)
+    {
+        OnEnemyReachedPathEnd?.Invoke(enemy.Damage);
+        RemoveEnemy(enemy);
     }
 }
