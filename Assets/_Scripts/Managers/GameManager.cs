@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] private FactoryTower _factoryTower;
+
     [Header("Systems")]
     [SerializeField] private PlacementSystem _placementSystem;
     [SerializeField] private BeltPathSystem _beltPathSystem;
@@ -21,6 +23,14 @@ public class GameManager : Singleton<GameManager>
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed += _placementSystem.SetPlaceable;
+        }
+    }
+
+    public void Start()
+    {
+        foreach (var receiver in _factoryTower.Receivers)
+        {
+            _placementSystem.AddBuilding(receiver);
         }
     }
 

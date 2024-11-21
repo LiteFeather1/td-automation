@@ -55,7 +55,7 @@ public class PlacementSystem : MonoBehaviour
 
         _building = placeableData.BuildingPrefab;
 
-        if (_building is IOutPut outPut)
+        if (_building is IOutput outPut)
         {
             _inDirection = Direction.None;
             _outDirection = outPut.OutDirection;
@@ -67,6 +67,12 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
+    public void AddBuilding(Building building)
+    {
+        r_buildingPositions.Add(building.Position);
+        OnBuildingPlaced?.Invoke(building);
+    }
+
     public void PlaceBuilding()
     {
         if (!_canPlaceBuilding || _building == null)
@@ -76,14 +82,13 @@ public class PlacementSystem : MonoBehaviour
             _building, _mousePos, _tileHighlight.transform.rotation
         );
         newBuilding.Position = (Vector2Int)_mousePos;
-        r_buildingPositions.Add(newBuilding.Position);
 
-        if (newBuilding is IOutPut outPut)
+        if (newBuilding is IOutput outPut)
         {
             outPut.OutDirection = _outDirection;
         }
 
-        OnBuildingPlaced?.Invoke(newBuilding);
+        AddBuilding(newBuilding);
     }
 
     public void CancelBuilding()

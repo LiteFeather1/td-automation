@@ -29,7 +29,7 @@ public class BeltPathSystem : MonoBehaviour
             newBelt.Position + sr_directionToVector[newBelt.OutDirection], out var outBelt
         ))
         {
-            newBelt.OutBelt = outBelt;
+            newBelt.Input = outBelt;
         }
 
         foreach (var direction in sr_directions)
@@ -38,14 +38,14 @@ public class BeltPathSystem : MonoBehaviour
             {
                 if (newBelt.Position == belt.Position + sr_directionToVector[belt.OutDirection])
                 {
-                    belt.OutBelt = newBelt;
+                    belt.Input = newBelt;
                 }
             }
             else if (r_positionToCollectors.TryGetValue(newBelt.Position + direction, out var collector))
             {
                 if (newBelt.Position == collector.Position + sr_directionToVector[collector.OutDirection])
                 {
-                    collector.OutBelt = newBelt;
+                    collector.Input = newBelt;
                 }
             }
         }
@@ -59,7 +59,7 @@ public class BeltPathSystem : MonoBehaviour
             newCollector.Position + sr_directionToVector[newCollector.OutDirection], out var belt
         ))
         {
-            newCollector.OutBelt = belt;
+            newCollector.Input = belt;
         }
     }
 }
