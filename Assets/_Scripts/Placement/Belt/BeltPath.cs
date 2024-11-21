@@ -36,4 +36,12 @@ public class BeltPath : Building, IOutPort, IInPort
     {
         _resource = resource;
     }
+
+    public override void Destroy()
+    {
+        if (_resource != null)
+            Destroy(_resource.gameObject);
+
+        base.Destroy();
+    }
 }

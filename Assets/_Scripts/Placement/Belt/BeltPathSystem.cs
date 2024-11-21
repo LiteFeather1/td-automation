@@ -71,7 +71,8 @@ public class BeltPathSystem : MonoBehaviour
     {
         if (r_inPorts.ContainsKey(position))
             r_inPorts.Remove(position);
-        else if (r_outPort.ContainsKey(position))
+
+        if (r_outPort.ContainsKey(position))
             r_outPort.Remove(position);
     }
 }
