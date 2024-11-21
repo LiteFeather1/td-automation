@@ -1,16 +1,6 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public struct ResourceCost
-{
-    [SerializeField] private ResourceType _type;
-    [SerializeField] private int _cost;
-
-    public readonly ResourceType Type => _type;
-    public readonly int Cost => _cost;
-}
-
 public class ResourceNode : MonoBehaviour, IPlaceable
 {
     [SerializeField] private Vector2Int _position;

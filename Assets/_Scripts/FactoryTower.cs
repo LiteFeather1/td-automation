@@ -12,6 +12,8 @@ public class FactoryTower : MonoBehaviour
     public delegate void ResourceAdded(ResourceType type, int totalAmount);
     public ResourceAdded OnResourceModified { get; set; }
 
+    public Action<Dictionary<ResourceType, int>> OnResourcesModified { get; set; }
+
     public Health Health => _health;
 
     public Receiver[] Receivers => _receivers;
@@ -43,10 +45,20 @@ public class FactoryTower : MonoBehaviour
         ModifyResource(type, 1);
     }
 
-    private void ModifyResource(ResourceType type, int amount)
+    public void ModifyResource(ResourceType type, int amount)
     {
         r_resources[type] += amount;
         OnResourceModified?.Invoke(type, r_resources[type]);
+    }
+
+    public void ModifyResources(Dictionary<ResourceType, int> resourceCosts)
+    {
+        foreach (var resourceCost in resourceCosts)
+        {
+            r_resources[resourceCost.Key] += resourceCost.Value;
+        }
+
+        OnResourcesModified?.Invoke(r_resources);
     }
 
     private void OnResourceGot(ResourceBehaviour resource)

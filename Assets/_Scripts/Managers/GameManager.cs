@@ -28,8 +28,9 @@ public class GameManager : Singleton<GameManager>
         _enemyManager.OnStageEnded += _gameHUD.SetWave;
 
         _factoryTower.OnResourceModified += _gameHUD.UpdateUIResource;
+        _factoryTower.OnResourcesModified += _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
-        _factoryTower.Health.OnHealed -= _gameHUD.UpdatePlayerHealth;
+        _factoryTower.Health.OnHealed += _gameHUD.UpdatePlayerHealth;
 
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
@@ -69,6 +70,7 @@ public class GameManager : Singleton<GameManager>
         _enemyManager.OnStageEnded -= _gameHUD.SetWave;
 
         _factoryTower.OnResourceModified -= _gameHUD.UpdateUIResource;
+        _factoryTower.OnResourcesModified -= _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.Health.OnDamageTaken -= _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed -= _gameHUD.UpdatePlayerHealth;
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
@@ -104,6 +106,8 @@ public class GameManager : Singleton<GameManager>
         {
             _beltPathSystem.AddOutPort(outPort);
         }
+
+        _factoryTower.ModifyResources(building.ResourceCost);
     }
 
     public void WaveStarted()

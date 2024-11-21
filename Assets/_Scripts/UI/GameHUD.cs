@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -22,6 +23,7 @@ public class GameHUD : MonoBehaviour
     public void UpdateUIResource(ResourceType resourceType, int amount)
     {
         _uiResources[resourceType].SetAmount(amount);
+        UpdateBuildingButtons(resourceType, amount);
     }
 
     public void UpdatePlayerHealth(float _, IDamageable damageable)
@@ -42,5 +44,34 @@ public class GameHUD : MonoBehaviour
     public void SetTimeToWave(string text)
     {
         t_timeToWave.text = text;
+    }
+
+    public void UpdateAmountsAndBuildingButtons(Dictionary<ResourceType, int> resources)
+    {
+        foreach (var resource in resources)
+        {
+            UpdateUIResource(resource.Key, resource.Value);
+            UpdateBuildingButtons(resource.Key, resource.Value);
+        }
+    }
+
+    private void UpdateBuildingButtons(ResourceType type, int cost)
+    {
+        foreach (var button in _uiBuildingButtons)
+        {
+            if (button.PlaceableData == null
+                || button.ResourceCost.Count == 0
+                || !button.ResourceCost.ContainsKey(type))
+                continue;
+
+            var count = 0;
+            foreach (var resourceCost in button.ResourceCost.Values)
+            {
+                if (-resourceCost <= cost)
+                    count++;
+            }
+
+            button.SetButtonInteractable(count == button.ResourceCost.Count);
+        }
     }
 }

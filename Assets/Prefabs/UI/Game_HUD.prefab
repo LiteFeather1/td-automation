@@ -1508,7 +1508,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3047055457836074915, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7596742827990384233, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Type
@@ -1637,7 +1637,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3047055457836074915, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
@@ -1871,7 +1871,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3047055457836074915, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
@@ -1992,7 +1992,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3047055457836074915, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7596742827990384233, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_RaycastTarget
@@ -2456,7 +2456,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3047055457836074915, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
@@ -3029,7 +3029,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3047055457836074915, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name

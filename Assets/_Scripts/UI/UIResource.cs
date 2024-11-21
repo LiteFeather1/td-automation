@@ -15,8 +15,10 @@ public class UIResource : MonoBehaviour
         {
             i_icon.color = _fadedColor;
             t_count.text = "";
+            return;
         }
-        else if (i_icon.color.a != 1f)
+
+        if (i_icon.color.a != 1f)
             i_icon.color = _normalColour;
 
         t_count.text = count.ToString();
