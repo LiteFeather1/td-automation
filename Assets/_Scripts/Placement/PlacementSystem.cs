@@ -39,7 +39,8 @@ public class PlacementSystem : MonoBehaviour
             _mousePos = new(x, y, 0);
 
             _canPlaceBuilding = (
-                (!_pathTilemap.HasTile(_mousePos) || _groundTilemap.HasTile(_mousePos))
+                !_pathTilemap.HasTile(_mousePos)
+                && _groundTilemap.HasTile(_mousePos)
                 && !r_buildingPositions.Contains(new(x, y))
             );
             _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;

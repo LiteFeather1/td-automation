@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using LTF.SerializedDictionary;
 
 public class GameHUD : MonoBehaviour
 {
@@ -11,14 +12,15 @@ public class GameHUD : MonoBehaviour
 
     [Header("Resources")]
     [SerializeField] private TextMeshProUGUI t_towerCount;
-    [SerializeField] private UIResource _woodResource;
-    [SerializeField] private UIResource _metalResource;
-    [SerializeField] private UIResource _woodPlankResource;
-    [SerializeField] private UIResource _metalPlateResource;
-    [SerializeField] private UIResource _essenceResource;
+    [SerializeField] private SerializedDictionary<ResourceType, UIResource> _uiResources;
 
     [Header("Building Buttons")]
     [SerializeField] private UIBuildingButton[] _uiBuildingButtons;
 
     public UIBuildingButton[] UIBuildingButtons => _uiBuildingButtons;
+
+    public void UpdateUIResource(ResourceType resourceType, int amount)
+    {
+        _uiResources[resourceType].SetAmount(amount);
+    }
 }

@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
 
+        _factoryTower.OnResourceModified += _gameHUD.UpdateUIResource;
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed += _placementSystem.SetPlaceable;
@@ -48,6 +49,7 @@ public class GameManager : Singleton<GameManager>
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
 
+        _factoryTower.OnResourceModified -= _gameHUD.UpdateUIResource;
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed -= _placementSystem.SetPlaceable;

@@ -533,6 +533,18 @@ MonoBehaviour:
   t_timeToWave: {fileID: 8774365429940453512}
   i_playerHealth: {fileID: 4528158744711521055}
   t_towerCount: {fileID: 8193922550875819277}
+  _uiResources:
+    _entries:
+    - Key: 100
+      Value: {fileID: 5895151825268782596}
+    - Key: 200
+      Value: {fileID: 2351135041008437830}
+    - Key: 300
+      Value: {fileID: 4299844748589137539}
+    - Key: 400
+      Value: {fileID: 6190354630202867937}
+    - Key: 500
+      Value: {fileID: 4303803463377200380}
   _woodResource: {fileID: 5895151825268782596}
   _metalResource: {fileID: 2351135041008437830}
   _woodPlankResource: {fileID: 4299844748589137539}
