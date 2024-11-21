@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class BeltPath : Building, IOutput, IInPut
+public class BeltPath : Building, IOutPort, IInPort
 {
     [SerializeField] private float _speed = 5f;
 
     private ResourceBehaviour _resource;
 
-    public IInPut Input { get; set; }
+    public IInPort NextPort { get; set; }
 
     public Direction InDirection { get; set; } = Direction.Any;
 
@@ -18,16 +18,16 @@ public class BeltPath : Building, IOutput, IInPut
 
     public void Update()
     {
-        if (Input == null || _resource == null || !Input.CanReceiveResource)
+        if (NextPort == null || _resource == null || !NextPort.CanReceiveResource)
             return;
 
         _resource.transform.position = Vector2.MoveTowards(
-            _resource.transform.position, Input.Position, _speed * Time.deltaTime
+            _resource.transform.position, NextPort.Position, _speed * Time.deltaTime
         );
 
-        if (Vector2.Distance(_resource.transform.position, Input.Position) < float.Epsilon)
+        if (Vector2.Distance(_resource.transform.position, NextPort.Position) < float.Epsilon)
         {
-            Input.GiveResource(_resource);
+            NextPort.GiveResource(_resource);
             _resource = null;
         }
     }

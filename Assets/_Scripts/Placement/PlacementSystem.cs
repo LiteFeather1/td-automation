@@ -55,7 +55,7 @@ public class PlacementSystem : MonoBehaviour
 
         _building = placeableData.BuildingPrefab;
 
-        if (_building is IOutput outPut)
+        if (_building is IOutPort outPut)
         {
             _inDirection = Direction.None;
             _outDirection = outPut.OutDirection;
@@ -83,7 +83,7 @@ public class PlacementSystem : MonoBehaviour
         );
         newBuilding.Position = (Vector2Int)_mousePos;
 
-        if (newBuilding is IOutput outPut)
+        if (newBuilding is IOutPort outPut)
         {
             outPut.OutDirection = _outDirection;
         }

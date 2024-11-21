@@ -1,7 +1,6 @@
 
-public interface IInPut : IPlaceable
+public interface IInPort : IPlaceable
 {
-
 	public Direction InDirection { get; set; }
 
 	public bool CanReceiveResource { get; }

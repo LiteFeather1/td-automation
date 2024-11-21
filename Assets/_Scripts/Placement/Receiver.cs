@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Receiver : Building, IInPut
+public class Receiver : Building, IInPort
 {
     [SerializeField] private Direction _direction = Direction.Any;
 
