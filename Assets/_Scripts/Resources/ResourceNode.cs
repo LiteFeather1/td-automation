@@ -14,18 +14,27 @@ public class ResourceNode : MonoBehaviour, IPlaceable
     public Vector2Int Position { get => _position; set => _position = value; }
 
     public bool CanBeRotated => false;
-
     public bool CanBeDestroyed => false;
+
+    public ResourceType GetResource()
+    {
+        RemoveTime();
+        return _resourceToGive.Type;
+    }
 
     public ResourceBehaviour CollectResource()
     {
-        _timesThatCanCollect--;
-        if (_timesThatCanCollect == 0)
+        RemoveTime();
+        return _resourceToGive;
+    }
+
+    private void RemoveTime()
+    {
+        _timesThatCanBeCollect--;
+        if (_timesThatCanBeCollect == 0)
         {
             OnDepleted?.Invoke(this);
             Destroy(gameObject);
         }
-
-        return _resourceToGive;
     }
 }

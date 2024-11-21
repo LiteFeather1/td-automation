@@ -27,6 +27,8 @@ public class PlacementSystem : MonoBehaviour
     public Action<Building> OnBuildingPlaced { get; set; }
     public Action<Vector2Int> OnBuildingRemoved { get; set; }
 
+    public Action<ResourceType> OnResourceCollected { get; set; }
+
     public void Awake()
     {
         _defaultTileHighlight = _tileHighlight.sprite;
@@ -87,9 +89,17 @@ public class PlacementSystem : MonoBehaviour
         OnBuildingPlaced?.Invoke(building);
     }
 
-    public void TryPlaceBuilding()
+    public void LeftClick()
     {
-        if (!_canPlaceBuilding || _building == null)
+        if (_building == null)
+        {
+            if (_resourceNodes.TryGetValue(_mousePos, out var node))
+                OnResourceCollected?.Invoke(node.GetResource());
+
+            return;
+        }
+
+        if (!_canPlaceBuilding)
             return;
 
         var newBuilding = Instantiate(
@@ -158,10 +168,12 @@ public class PlacementSystem : MonoBehaviour
     [ContextMenu("Get Resource Nodes")]
     internal void GetResourceNodes()
     {
+        _resourceNodes = new();
         foreach (var node in GetComponentsInChildren<ResourceNode>())
         {
             node.Position = Vector2Int.RoundToInt(node.transform.position);
             _resourceNodes.Add(node.Position, node);
+            UnityEditor.EditorUtility.SetDirty(node);
         }
         UnityEditor.EditorUtility.SetDirty(this);
     }

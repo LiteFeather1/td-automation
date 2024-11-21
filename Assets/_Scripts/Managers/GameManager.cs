@@ -21,6 +21,7 @@ public class GameManager : Singleton<GameManager>
 
         _placementSystem.OnBuildingPlaced += BuildingPlaced;
         _placementSystem.OnBuildingRemoved += _beltPathSystem.TryRemovePosition;
+        _placementSystem.OnResourceCollected += _factoryTower.AddResource;
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
         _enemyManager.OnWaveStarted += WaveStarted;
@@ -61,6 +62,7 @@ public class GameManager : Singleton<GameManager>
 
         _placementSystem.OnBuildingPlaced -= BuildingPlaced;
         _placementSystem.OnBuildingRemoved -= _beltPathSystem.TryRemovePosition;
+        _placementSystem.OnResourceCollected -= _factoryTower.AddResource;
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
         _enemyManager.OnWaveStarted -= WaveStarted;
@@ -78,7 +80,7 @@ public class GameManager : Singleton<GameManager>
     private void PlaceBuilding(InputAction.CallbackContext _)
     {
         if (!UIMouseBlocker.MouseBlocked)
-            _placementSystem.TryPlaceBuilding();
+            _placementSystem.LeftClick();
     }
 
     private void CancelBuilding(InputAction.CallbackContext _)

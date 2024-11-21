@@ -42,17 +42,18 @@ public class ResourceCollector : Building, IOutPort
         }
     }
 
-    public void SetResources(List<ResourceNode> resourceNodes)
+    public void TryAddNode(ResourceNode node)
     {
-        foreach (var node in resourceNodes)
-        {
-            if (node.Type == _type && Vector2Int.Distance(Position, node.Position) < _range)
-            {
-                r_resourceNodes.Add(node);
-                node.OnDepleted += OnNodeDepleted;
-            }
-        }
+        if (node.Type != _type || Vector2Int.Distance(Position, node.Position) > _range)
+            return;
 
+        r_resourceNodes.Add(node);
+        node.OnDepleted += OnNodeDepleted;
+        print("added");
+    }
+
+    public void TryEnable()
+    {
         enabled = r_resourceNodes.Count > 0;
     }
 

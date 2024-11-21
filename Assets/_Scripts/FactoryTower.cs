@@ -38,6 +38,11 @@ public class FactoryTower : MonoBehaviour
         }
     }
 
+    public void AddResource(ResourceType type)
+    {
+        ModifyResource(type, 1);
+    }
+
     private void ModifyResource(ResourceType type, int amount)
     {
         r_resources[type] += amount;

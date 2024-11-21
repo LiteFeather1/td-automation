@@ -18,7 +18,7 @@ public class UIResource : MonoBehaviour
         }
         else if (i_icon.color.a != 1f)
             i_icon.color = _normalColour;
-        else
-            t_count.text = count.ToString();
+
+        t_count.text = count.ToString();
     }
 }
