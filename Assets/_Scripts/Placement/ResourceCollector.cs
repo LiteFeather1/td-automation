@@ -7,6 +7,10 @@ public class ResourceCollector : Building, IOutPort
     [SerializeField] private float _range = 5f;
     [SerializeField] private float _timeToCollect = 5f;
     [SerializeField] private float _speedPerNode = 2f;
+
+    [Header("References")]
+    [SerializeField] private SpriteRenderer _sr;
+
     private float _elapsedTime = 0f;
 
     private readonly List<ResourceNode> r_resourceNodes = new();
@@ -49,18 +53,33 @@ public class ResourceCollector : Building, IOutPort
 
         r_resourceNodes.Add(node);
         node.OnDepleted += OnNodeDepleted;
-        print("added");
     }
 
     public void TryEnable()
     {
-        enabled = r_resourceNodes.Count > 0;
+        if (r_resourceNodes.Count > 0)
+        {
+            enabled = true;
+            ChangeAlpha(1f);
+        }
     }
 
     private void OnNodeDepleted(ResourceNode node)
     {
         r_resourceNodes.Remove(node);
         node.OnDepleted -= OnNodeDepleted;
+
+        if (r_resourceNodes.Count == 0)
+        {
+            ChangeAlpha(.5f);
+        }
+    }
+
+    private void ChangeAlpha(float alpha)
+    {
+        var colour = _sr.color;
+        colour.a = alpha;
+        _sr.color = colour;
     }
 
     public void OnDrawGizmos()

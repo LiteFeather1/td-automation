@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 2599581948675358023}
   - component: {fileID: 6812179435623572066}
   m_Layer: 0
-  m_Name: Collector_Metal
+  m_Name: Giver_Metal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

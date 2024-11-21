@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80c17b188e07934c95ff9cf2f79e0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0}
   _resourceToGive: {fileID: 0}
-  _timesThatCanCollect: 256
+  _timesThatCanBeCollect: 256
 --- !u!212 &3186483705533466903
 SpriteRenderer:
   m_ObjectHideFlags: 0

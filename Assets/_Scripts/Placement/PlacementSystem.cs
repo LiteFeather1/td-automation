@@ -117,6 +117,16 @@ public class PlacementSystem : MonoBehaviour
             outPort.OutDirection = _outDirection;
         }
 
+        if (newBuilding is ResourceCollector collector)
+        {
+            foreach (var node in _resourceNodes.Values)
+            {
+                collector.TryAddNode(node);
+            }
+            
+            collector.TryEnable();
+        }
+
         AddBuilding(newBuilding);
     }
 
