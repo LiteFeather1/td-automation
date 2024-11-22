@@ -14,12 +14,12 @@ public class PlacementSystem : MonoBehaviour
     [Header("Tile Hightlight")]
     [SerializeField] private SpriteRenderer _tileHighlight;
     [SerializeField] private Color _colourNotPlaceble = Color.red;
-    private Sprite _defaultTileHighlight;
 
     private Vector2Int _mousePos;
 
     private bool _canPlaceBuilding;
-    private Building _building;
+    private Building _buildingPrefab;
+    private Building _buildingToPlace;
     private Direction _inDirection;
     private Direction _outDirection;
     private readonly Dictionary<Vector2Int, Building> r_buildings = new();
@@ -28,11 +28,6 @@ public class PlacementSystem : MonoBehaviour
     public Action<Vector2Int> OnBuildingRemoved { get; set; }
 
     public Action<ResourceType> OnResourceCollected { get; set; }
-
-    public void Awake()
-    {
-        _defaultTileHighlight = _tileHighlight.sprite;
-    }
 
     internal void Start()
     {
@@ -57,6 +52,10 @@ public class PlacementSystem : MonoBehaviour
         _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
 
         _tileHighlight.transform.localPosition = mousePos;
+        if (_buildingToPlace != null)
+        {
+            _buildingToPlace.transform.localPosition = mousePos;
+        }
     }
 
     internal void OnDisable()
@@ -69,13 +68,17 @@ public class PlacementSystem : MonoBehaviour
 
     public void SetPlaceable(PlaceableData placeableData)
     {
-        _tileHighlight.sprite = placeableData.Icon;
+        _tileHighlight.enabled = false;
         _tileHighlight.transform.eulerAngles = new(0f, 0f, 0f);
 
-        _building = placeableData.BuildingPrefab;
+        _buildingPrefab = placeableData.BuildingPrefab;
 
-        _inDirection = _building is IInPort inPort ? inPort.InDirection : Direction.None;
-        _outDirection = _building is IOutPort outPort ? outPort.OutDirection : Direction.None;
+        _buildingToPlace = Instantiate(
+            _buildingPrefab, _tileHighlight.transform.position, Quaternion.identity
+        );
+
+        _inDirection = _buildingToPlace is IInPort inPort ? inPort.InDirection : Direction.None;
+        _outDirection = _buildingToPlace is IOutPort outPort ? outPort.OutDirection : Direction.None;
     }
 
     public void AddBuilding(Building building)
@@ -86,7 +89,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void LeftClick()
     {
-        if (_building == null)
+        if (_buildingToPlace == null)
         {
             if (_resourceNodes.TryGetValue(_mousePos, out var node))
                 OnResourceCollected?.Invoke(node.GetResource());
@@ -97,40 +100,42 @@ public class PlacementSystem : MonoBehaviour
         if (!_canPlaceBuilding)
             return;
 
-        var newBuilding = Instantiate(
-            _building, new(_mousePos.x, _mousePos.y), _tileHighlight.transform.rotation
-        );
-        newBuilding.Position = _mousePos;
+        _buildingToPlace.Position = _mousePos;
 
-        if (newBuilding is IInPort inPort)
+        if (_buildingToPlace is IInPort inPort)
         {
             inPort.InDirection = _outDirection;
         }
 
-        if (newBuilding is IOutPort outPort)
+        if (_buildingToPlace is IOutPort outPort)
         {
             outPort.OutDirection = _outDirection;
         }
 
-        if (newBuilding is ResourceCollector collector)
+        if (_buildingToPlace is ResourceCollector collector)
         {
             foreach (var node in _resourceNodes.Values)
             {
                 collector.TryAddNode(node);
             }
-            
+
             collector.TryEnable();
         }
 
-        AddBuilding(newBuilding);
+        AddBuilding(_buildingToPlace);
+        _buildingToPlace = Instantiate(
+            _buildingPrefab, _tileHighlight.transform.position, _buildingToPlace.transform.rotation
+        );
     }
 
     public void TryCancelOrDesconstructBuilding()
     {
-        if (_building != null)
+        if (_buildingToPlace != null)
         {
-            _building = null;
-            _tileHighlight.sprite = _defaultTileHighlight;
+            Destroy(_buildingToPlace.gameObject);
+            _buildingPrefab = null;
+
+            _tileHighlight.enabled = true;
             _tileHighlight.transform.eulerAngles = Vector3.zero;
         }
         else if (r_buildings.TryGetValue(_mousePos, out var building) && building.CanBeDestroyed)
@@ -143,11 +148,11 @@ public class PlacementSystem : MonoBehaviour
 
     public void RotateBuilding()
     {
-        if (_building != null && !_building.CanBeRotated)
+        if (_buildingToPlace != null && !_buildingToPlace.CanBeRotated)
             return;
 
-        _tileHighlight.transform.eulerAngles = new(
-            0f, 0f, _tileHighlight.transform.eulerAngles.z - 90f
+        _buildingToPlace.transform.eulerAngles = new(
+            0f, 0f, _buildingToPlace.transform.eulerAngles.z - 90f
         );
 
         _inDirection = RotateDirection(_inDirection);
