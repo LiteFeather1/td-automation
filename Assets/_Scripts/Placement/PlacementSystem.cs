@@ -44,24 +44,19 @@ public class PlacementSystem : MonoBehaviour
 
     public void FixedUpdate()
     {
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit))
-        {
-            var x = Mathf.RoundToInt(hit.point.x);
-            var y = Mathf.RoundToInt(hit.point.y);
-            _mousePos = new(x, y);
+        var mousePos = Vector3Int.RoundToInt(_camera.ScreenToWorldPoint(Input.mousePosition));
+        mousePos.z = 0;
+        _mousePos = (Vector2Int)mousePos;
 
-            var worldPos = new Vector3Int(x, y, 0);
-            _canPlaceBuilding = (
-                !r_buildings.ContainsKey(_mousePos)
-                && !_resourceNodes.ContainsKey(_mousePos)
-                && !_pathTilemap.HasTile(worldPos)
-                && _groundTilemap.HasTile(worldPos)
-            );
-            _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
+        _canPlaceBuilding = (
+            !r_buildings.ContainsKey(_mousePos)
+            && !_resourceNodes.ContainsKey(_mousePos)
+            && !_pathTilemap.HasTile(mousePos)
+            && _groundTilemap.HasTile(mousePos)
+        );
+        _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
 
-            _tileHighlight.transform.localPosition = worldPos;
-        }
+        _tileHighlight.transform.localPosition = mousePos;
     }
 
     internal void OnDisable()
