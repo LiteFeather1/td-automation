@@ -3,6 +3,7 @@ using LTF.SerializedDictionary;
 
 public abstract class Building : MonoBehaviour, IPlaceable
 {
+    [Header("Building")]
     [SerializeField] private SerializedDictionary<ResourceType, int> _resourcesCost;
 
     public Vector2Int Position { get; set; }

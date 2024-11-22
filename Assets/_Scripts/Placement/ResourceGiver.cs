@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ResourceGiver : Building, IOutPort
 {
+    [Header("Resource Giver")]
     [SerializeField] private float _timeToCollect = 1f;
     [SerializeField] private ResourceBehaviour _resourceToGive;
     private Direction _outDirection = Direction.Right;

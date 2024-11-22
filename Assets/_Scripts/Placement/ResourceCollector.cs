@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ResourceCollector : Building, IOutPort
 {
+    [Header("Resource Collector")]
     [SerializeField] private ResourceType _type;
     [SerializeField] private float _range = 5f;
     [SerializeField] private float _timeToCollect = 5f;

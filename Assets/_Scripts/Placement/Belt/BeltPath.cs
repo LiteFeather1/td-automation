@@ -2,7 +2,8 @@
 
 public class BeltPath : Building, IOutPort, IInPort
 {
-    [SerializeField] private float _speed = 5f;
+    [Header("Belt Path")]
+    [SerializeField] private float _itemMoveSpeed = 2f;
 
     private ResourceBehaviour _resource;
 
@@ -23,7 +24,7 @@ public class BeltPath : Building, IOutPort, IInPort
             return;
 
         _resource.transform.position = Vector2.MoveTowards(
-            _resource.transform.position, Port.Position, _speed * Time.deltaTime
+            _resource.transform.position, Port.Position, _itemMoveSpeed * Time.deltaTime
         );
 
         if (Vector2.Distance(_resource.transform.position, Port.Position) < float.Epsilon)
