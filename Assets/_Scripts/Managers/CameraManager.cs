@@ -3,9 +3,11 @@ using UnityEngine.InputSystem;
 
 public class CameraManager : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
+
     [Header("Z")]
-    [SerializeField] private float _defaultZ = -15f;
-    [SerializeField] private Vector2 _zRange = new(-10f, -20f);
+    [SerializeField] private float _defaultZ = 10f;
+    [SerializeField] private Vector2 _zRange = new(5f, 15f);
     [SerializeField] private float _zSpeed;
 
     [Header("Move")]
@@ -14,14 +16,14 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Vector2 _min;
     [SerializeField] private Vector2 _max;
 
-    private void OnEnable()
+    internal void OnEnable()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.ScrollWheel.performed += ZoomPerformed;
         inputs.DefaultZoom.performed += DefaultZoom;
     }
 
-    private void Update()
+    internal void Update()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
         var deltaTime = Time.deltaTime;
@@ -31,22 +33,24 @@ public class CameraManager : MonoBehaviour
             MoveCamera(_mouseSpeed * deltaTime * -inputs.Look.ReadValue<Vector2>());
         }
 
-        var wasdMoveDelta = inputs.Move.ReadValue<Vector2>();
-        if (wasdMoveDelta != Vector2.zero)
+        var wasdMove = inputs.Move.ReadValue<Vector2>();
+        if (wasdMove != Vector2.zero)
         {
-            MoveCamera(_keyboardSpeed * deltaTime * wasdMoveDelta);
+            MoveCamera(_keyboardSpeed * deltaTime * wasdMove);
         }
 
         void MoveCamera(Vector2 delta)
         {
+            var camSizeY = _camera.orthographicSize;
+            var camSizeX = camSizeY * 16f / 9f;
             var pos = transform.position;
-            pos.x = Mathf.Clamp(pos.x + delta.x, _min.x, _max.x);
-            pos.y = Mathf.Clamp(pos.y + delta.y, _min.y, _max.y);
+            pos.x = Mathf.Clamp(pos.x + delta.x, _min.x + camSizeX, _max.x - camSizeX);
+            pos.y = Mathf.Clamp(pos.y + delta.y, _min.y + camSizeY, _max.y - camSizeY);
             transform.position = pos;
         }
     }
 
-    private void OnDisable()
+    internal void OnDisable()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.ScrollWheel.performed -= ZoomPerformed;
@@ -55,22 +59,18 @@ public class CameraManager : MonoBehaviour
 
     private void ZoomPerformed(InputAction.CallbackContext ctx)
     {
-        var pos = transform.position;
-        pos.z = Mathf.Clamp(
-            pos.z + ctx.ReadValue<Vector2>().y * _zSpeed, _zRange.x, _zRange.y
+        _camera.orthographicSize = Mathf.Clamp(
+            _camera.orthographicSize - ctx.ReadValue<Vector2>().y * _zSpeed, _zRange.x, _zRange.y
         );
-        transform.position = pos;
     }
 
     private void DefaultZoom(InputAction.CallbackContext ctx)
     {
-        var pos = transform.position;
-        pos.z = _defaultZ;
-        transform.position = pos;
+        _camera.orthographicSize = _defaultZ;
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    internal void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
 
