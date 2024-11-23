@@ -31,7 +31,7 @@ public class ResourceCollector : Building, IOutPort
         if (_elapsedTime > _timeToCollect)
         {
             _elapsedTime %= _timeToCollect;
-            Port.GiveResource(Instantiate(
+            Port.ReceiveResource(Instantiate(
                 r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource(),
                 new(Port.Position.x, Port.Position.y),
                 Quaternion.identity

@@ -17,7 +17,7 @@ public class Receiver : Building, IInPort
         Position = Vector2Int.RoundToInt(transform.position);
     }
 
-    public void GiveResource(ResourceBehaviour resource)
+    public void ReceiveResource(ResourceBehaviour resource)
     {
         OnResourceGot?.Invoke(resource);
     }

@@ -5,5 +5,5 @@ public interface IInPort : IPlaceable
 
 	public bool CanReceiveResource { get; }
 
-	public void GiveResource(ResourceBehaviour resource);
+	public void ReceiveResource(ResourceBehaviour resource);
 }

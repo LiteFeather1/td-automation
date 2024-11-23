@@ -29,12 +29,12 @@ public class BeltPath : Building, IOutPort, IInPort
 
         if (Vector2.Distance(_resource.transform.position, Port.Position) < float.Epsilon)
         {
-            Port.GiveResource(_resource);
+            Port.ReceiveResource(_resource);
             _resource = null;
         }
     }
 
-    public void GiveResource(ResourceBehaviour resource)
+    public void ReceiveResource(ResourceBehaviour resource)
     {
         _resource = resource;
     }

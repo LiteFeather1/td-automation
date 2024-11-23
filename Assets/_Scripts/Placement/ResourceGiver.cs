@@ -23,7 +23,7 @@ public class ResourceGiver : Building, IOutPort
         if (_elapsedTime > _timeToCollect)
         {
             _elapsedTime %= _timeToCollect;
-            Port.GiveResource(Instantiate(
+            Port.ReceiveResource(Instantiate(
                 _resourceToGive, new(Port.Position.x, Port.Position.y), Quaternion.identity
             ));
         }
