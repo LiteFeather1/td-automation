@@ -13,14 +13,12 @@ public class BeltPath : Building, IOutPort, IInPort
 
     public Direction OutDirection { get; set; } = Direction.Right;
 
-    public bool CanReceiveResource => _resource == null;
-
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
     public void Update()
     {
-        if (Port == null || _resource == null || !Port.CanReceiveResource)
+        if (Port == null || _resource == null || !Port.CanReceiveResource(_resource.Type))
             return;
 
         _resource.transform.position = Vector2.MoveTowards(
@@ -33,6 +31,8 @@ public class BeltPath : Building, IOutPort, IInPort
             _resource = null;
         }
     }
+
+    public bool CanReceiveResource(ResourceType _) => _resource == null;
 
     public void ReceiveResource(ResourceBehaviour resource)
     {

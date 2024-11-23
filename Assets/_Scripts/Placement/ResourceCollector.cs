@@ -24,7 +24,7 @@ public class ResourceCollector : Building, IOutPort
 
     public void Update()
     {
-        if (Port == null || !Port.CanReceiveResource)
+        if (Port == null || !Port.CanReceiveResource(_type))
             return;
 
         _elapsedTime += Time.deltaTime * _speedPerNode * r_resourceNodes.Count;

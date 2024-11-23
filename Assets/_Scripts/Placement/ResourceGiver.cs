@@ -16,7 +16,7 @@ public class ResourceGiver : Building, IOutPort
 
     public void Update()
     {
-        if (Port == null || !Port.CanReceiveResource)
+        if (Port == null || !Port.CanReceiveResource(_resourceToGive.Type))
             return;
 
         _elapsedTime += Time.deltaTime;

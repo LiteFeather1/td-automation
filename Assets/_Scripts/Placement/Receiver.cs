@@ -7,7 +7,6 @@ public class Receiver : Building, IInPort
 
     public Action<ResourceBehaviour> OnResourceGot { get; set; }
 
-    public bool CanReceiveResource => true;
 
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => false;
@@ -16,6 +15,8 @@ public class Receiver : Building, IInPort
     {
         Position = Vector2Int.RoundToInt(transform.position);
     }
+
+    public bool CanReceiveResource(ResourceType _) => true;
 
     public void ReceiveResource(ResourceBehaviour resource)
     {
