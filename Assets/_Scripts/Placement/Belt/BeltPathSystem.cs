@@ -69,8 +69,28 @@ public class BeltPathSystem : MonoBehaviour
 
     public void TryRemovePosition(Vector2Int position)
     {
-        if (r_inPorts.ContainsKey(position))
+        if (r_inPorts.TryGetValue(position, out var inPort))
+        {
+            if (inPort.InDirection == Direction.Any)
+            {
+                foreach (var direction in sr_directions)
+                {
+                    if (r_outPort.TryGetValue(position + direction, out var outPort))
+                    {
+                        outPort.Port = null;
+                    }
+                }
+            }
+            else
+            {
+                if (r_outPort.TryGetValue(position - sr_direction[inPort.InDirection], out var outPort))
+                {
+                    outPort.Port = null;
+                }
+            }
+
             r_inPorts.Remove(position);
+        }
 
         if (r_outPort.ContainsKey(position))
             r_outPort.Remove(position);

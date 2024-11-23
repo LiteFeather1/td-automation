@@ -9,7 +9,7 @@ public class BeltPath : Building, IOutPort, IInPort
 
     public IInPort Port { get; set; }
 
-    public Direction InDirection { get; set; } = Direction.Any;
+    public Direction InDirection { get; set; } = Direction.Left;
 
     public Direction OutDirection { get; set; } = Direction.Right;
 
