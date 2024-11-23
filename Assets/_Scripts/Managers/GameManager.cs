@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
         inputs.Rotate.performed += RotateBuilding;
 
         _placementSystem.OnBuildingPlaced += BuildingPlaced;
-        _placementSystem.OnBuildingRemoved += _beltPathSystem.TryRemovePosition;
+        _placementSystem.OnBuildingRemoved += BuildingRemoved;
         _placementSystem.OnResourceCollected += _factoryTower.AddResource;
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
@@ -62,7 +62,7 @@ public class GameManager : Singleton<GameManager>
         inputs.Rotate.performed -= RotateBuilding;
 
         _placementSystem.OnBuildingPlaced -= BuildingPlaced;
-        _placementSystem.OnBuildingRemoved -= _beltPathSystem.TryRemovePosition;
+        _placementSystem.OnBuildingRemoved -= BuildingRemoved;
         _placementSystem.OnResourceCollected -= _factoryTower.AddResource;
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
@@ -108,6 +108,13 @@ public class GameManager : Singleton<GameManager>
         }
 
         _factoryTower.ModifyResources(building.ResourceCost);
+    }
+
+    public void BuildingRemoved(Building building)
+    {
+        _beltPathSystem.TryRemovePosition(building.Position);
+
+        _factoryTower.DeconstructResources(building.ResourceCost);
     }
 
     public void WaveStarted()

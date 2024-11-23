@@ -25,7 +25,7 @@ public class PlacementSystem : MonoBehaviour
     private readonly Dictionary<Vector2Int, Building> r_buildings = new();
 
     public Action<Building> OnBuildingPlaced { get; set; }
-    public Action<Vector2Int> OnBuildingRemoved { get; set; }
+    public Action<Building> OnBuildingRemoved { get; set; }
 
     public Action<ResourceType> OnResourceCollected { get; set; }
 
@@ -142,7 +142,7 @@ public class PlacementSystem : MonoBehaviour
         {
             r_buildings.Remove(_mousePos);
             building.Destroy();
-            OnBuildingRemoved?.Invoke(_mousePos);
+            OnBuildingRemoved?.Invoke(building);
         }
     }
 

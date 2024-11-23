@@ -51,11 +51,21 @@ public class FactoryTower : MonoBehaviour
         OnResourceModified?.Invoke(type, r_resources[type]);
     }
 
-    public void ModifyResources(Dictionary<ResourceType, int> resourceCosts)
+    public void ModifyResources(Dictionary<ResourceType, int> resources)
     {
-        foreach (var resourceCost in resourceCosts)
+        foreach (var resource in resources)
         {
-            r_resources[resourceCost.Key] += resourceCost.Value;
+            r_resources[resource.Key] += resource.Value;
+        }
+
+        OnResourcesModified?.Invoke(r_resources);
+    }
+
+    public void DeconstructResources(Dictionary<ResourceType, int> resources)
+    {
+        foreach (var resource in resources)
+        {
+            r_resources[resource.Key] -= Mathf.FloorToInt(resource.Value * .5f);
         }
 
         OnResourcesModified?.Invoke(r_resources);
