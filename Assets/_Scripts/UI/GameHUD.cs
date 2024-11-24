@@ -132,10 +132,22 @@ public class GameHUD : MonoBehaviour
     private void BuildingButtonHovered(UIBuildingButton buildingButton)
     {
         var buildingRect = (RectTransform)buildingButton.transform;
-        var pivot = buildingRect.position.x > rt_canvas.rect.width * .5f ? 1f : -1f;
+        float pivot;
+        float paddingDir;
+        if (buildingRect.position.x > rt_canvas.rect.width * .5f)
+        {
+            pivot = 1f;
+            paddingDir = -1f;
+        }
+        else
+        {
+            pivot = 0;
+            paddingDir = 1f;
+        }
         _hoverBuildingButtonInfo.pivot = new(pivot, .5f);
         _hoverBuildingButtonInfo.position = new(
-            buildingRect.position.x - buildingRect.rect.width, buildingRect.position.y
+            buildingRect.position.x + ((buildingRect.rect.width + _hoverBuildingButtonPadding) * paddingDir),
+            buildingRect.position.y
         );
 
         t_hoverBuildingInfoName.text = buildingButton.PlaceableData.Name;
@@ -166,7 +178,7 @@ public class GameHUD : MonoBehaviour
         _hoverBuildingButtonInfo.gameObject.SetActive(true);
 
          // Idk unity resize problem
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_hoverBuildingInfo);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_hoverBuildingButtonInfo);
     }
 
     private void BuildingButtonUnhovered()
