@@ -5829,7 +5829,8 @@ MonoBehaviour:
     - Key: {x: 16, y: 3}
       Value: {fileID: 1567463645}
   _tileHighlight: {fileID: 165485787}
-  _colourNotPlaceble: {r: 1, g: 0, b: 0, a: 1}
+  _notPlaceableHighlight: {r: 0.9245283, g: 0.18752226, b: 0.18752226, a: 1}
+  _nodeHighlight: {r: 0.1254902, g: 0.54901963, b: 0.81568635, a: 1}
 --- !u!1001 &901026533
 PrefabInstance:
   m_ObjectHideFlags: 0

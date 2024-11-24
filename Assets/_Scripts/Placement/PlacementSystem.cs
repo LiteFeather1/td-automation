@@ -13,7 +13,8 @@ public class PlacementSystem : MonoBehaviour
 
     [Header("Tile Hightlight")]
     [SerializeField] private SpriteRenderer _tileHighlight;
-    [SerializeField] private Color _colourNotPlaceble = Color.red;
+    [SerializeField] private Color _notPlaceableHighlight = Color.red;
+    [SerializeField] private Color _nodeHighlight = Color.red;
 
     private Vector2Int _mousePos;
 
@@ -54,26 +55,29 @@ public class PlacementSystem : MonoBehaviour
 
         _mousePos = mousePos;
         _canPlaceBuilding = (
-            !r_buildings.ContainsKey(_mousePos)
-            && !_resourceNodes.ContainsKey(_mousePos)
+            !r_buildings.ContainsKey(mousePos)
             && !_pathTilemap.HasTile(worldPos)
             && _groundTilemap.HasTile(worldPos)
         );
 
-        var colour = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
+
         if (_buildingToPlace != null)
         {
             _buildingToPlace.transform.localPosition = worldPos;
-            _buildingToPlace.SetColour(colour);
+            _buildingToPlace.SetColour(_canPlaceBuilding && !_resourceNodes.ContainsKey(mousePos)
+                ? Color.white : _notPlaceableHighlight);
             return;
         }
         else
         {
-            _tileHighlight.color = colour;
+            if (_resourceNodes.ContainsKey(mousePos))
+                _tileHighlight.color = _nodeHighlight;
+            else
+                _tileHighlight.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
             _tileHighlight.transform.localPosition = worldPos;
         }
 
-        if (r_hoverables.TryGetValue(_mousePos, out var hoverable))
+        if (r_hoverables.TryGetValue(mousePos, out var hoverable))
         {
             OnHoverableHovered?.Invoke(hoverable);
             _currentHoverable?.Unhover();
