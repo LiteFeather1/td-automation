@@ -53,6 +53,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9122423759337509587, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: _name
+      value: Sawmill
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122423759337509587, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
       propertyPath: _resourceType
       value: 100
       objectReference: {fileID: 0}

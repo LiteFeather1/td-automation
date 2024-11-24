@@ -45,8 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b021d7fdc868ca34f8c7d640fa99bb6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: Peashooter
+  _resourcesCost:
+    _entries:
+    - Key: 100
+      Value: -1
   _range: 10
-  _damage: 100
+  _damage: 5
   _damageRate: 2
 --- !u!1 &6260445749087328299
 GameObject:

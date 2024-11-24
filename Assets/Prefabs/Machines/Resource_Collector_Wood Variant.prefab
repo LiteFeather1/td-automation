@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: _name
+      value: Tree Cutter
+      objectReference: {fileID: 0}
+    - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: _type
       value: 100
       objectReference: {fileID: 0}

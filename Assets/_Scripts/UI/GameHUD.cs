@@ -163,7 +163,7 @@ public class GameHUD : MonoBehaviour
                 continue;
 
             hoverInfoCost.CountText.text = $"{-cost:00}";
-            if (GameManager.Instance.TowerFactory.GetResourceAmount(resourceType.Key) > -cost)
+            if (GameManager.Instance.TowerFactory.GetResourceAmount(resourceType.Key) >= -cost)
             {
                 hoverInfoCost.CountText.color = _hasEnoughResourceColour;
                 hoverInfoCost.Image.color = Color.white;
