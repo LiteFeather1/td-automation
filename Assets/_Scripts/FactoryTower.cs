@@ -6,6 +6,7 @@ public class FactoryTower : MonoBehaviour
 {
     [SerializeField] private Health _health;
     [SerializeField] private Receiver[] _receivers;
+    [SerializeField] private Tower[] _starterTowers;
 
     private readonly Dictionary<ResourceType, int> r_resources = new();
 
@@ -17,11 +18,16 @@ public class FactoryTower : MonoBehaviour
     public Health Health => _health;
 
     public Receiver[] Receivers => _receivers;
+    public Tower[] StarterTowers => _starterTowers;
 
     public void Awake()
     {
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
             r_resources.Add(type, 0);
+
+        foreach (var tower in _starterTowers)
+            foreach (var cost in tower.ResourceCost)
+                r_resources[cost.Key] -= cost.Value;
     }
 
     public void OnEnable()

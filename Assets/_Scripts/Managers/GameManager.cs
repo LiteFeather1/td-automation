@@ -43,12 +43,19 @@ public class GameManager : Singleton<GameManager>
 
     public void Start()
     {
-        foreach (var receiver in _factoryTower.Receivers)
-        {
-            _placementSystem.AddBuilding(receiver);
-        }
+        AddBuildings(_factoryTower.Receivers);
+        AddBuildings(_factoryTower.StarterTowers);
 
         _gameHUD.SetWave(_enemyManager.CurrentStage);
+
+        void AddBuildings(Building[] buildings)
+        {
+            foreach (var building in buildings)
+            {
+                building.Position = Vector2Int.FloorToInt(building.transform.position);
+                _placementSystem.AddBuilding(building);
+            }
+        }
     }
 
     public void Update()

@@ -11,11 +11,6 @@ public class Receiver : Building, IInPort
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => false;
 
-    public void Awake()
-    {
-        Position = Vector2Int.RoundToInt(transform.position);
-    }
-
     public bool CanReceiveResource(ResourceType _) => true;
 
     public void ReceiveResource(ResourceBehaviour resource)

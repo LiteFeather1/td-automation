@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Tower : Building
 {
+    [Header("Tower")]
     [SerializeField] private float _range = 1f;
     [SerializeField] private float _damage = 1f;
     [SerializeField] private float _damageRate = 1f;
