@@ -28,15 +28,15 @@ public class ResourceCollector : Building, IOutPort
             return;
 
         _elapsedTime += Time.deltaTime * _speedPerNode * r_resourceNodes.Count;
-        if (_elapsedTime > _timeToCollect)
-        {
-            _elapsedTime %= _timeToCollect;
-            Port.ReceiveResource(Instantiate(
-                r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource(),
-                new(Port.Position.x, Port.Position.y),
-                Quaternion.identity
-            ));
-        }
+        if (_elapsedTime < _timeToCollect)
+            return;
+
+        _elapsedTime %= _timeToCollect;
+        Port.ReceiveResource(Instantiate(
+            r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource(),
+            new(Port.Position.x, Port.Position.y),
+            Quaternion.identity
+        ));
     }
 
     public void OnDisable()

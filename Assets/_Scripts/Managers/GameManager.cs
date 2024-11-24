@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +10,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private BeltPathSystem _beltPathSystem;
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameHUD _gameHUD;
+
+    public FactoryTower TowerFactory => _factoryTower;
 
     public void OnEnable()
     {

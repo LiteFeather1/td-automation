@@ -50584,6 +50584,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game_HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 3054132232926513934, guid: 29087eaf1f1792a4dbbcd464f4d8385f, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
