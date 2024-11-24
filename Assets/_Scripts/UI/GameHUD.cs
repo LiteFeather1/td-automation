@@ -20,13 +20,19 @@ public class GameHUD : MonoBehaviour
     [Header("Building Buttons")]
     [SerializeField] private UIBuildingButton[] _uiBuildingButtons;
 
-    [Header("Hover Building Info")]
-    [SerializeField] private RectTransform _hoverBuildingInfo;
+    [Header("Hover Building Button Info")]
+    [SerializeField] private RectTransform _hoverBuildingButtonInfo;
     [SerializeField] private TextMeshProUGUI t_hoverBuildingInfoName;
-    [SerializeField] private float _padding = 32f;
+    [SerializeField] private float _hoverBuildingButtonPadding = 32f;
     [SerializeField] private Color _hasEnoughResourceColour;
     [SerializeField] private Color _notEnoughResourceColour;
     [SerializeField] private SerializedDictionary<ResourceType, HoverBuildingCost> _hoverInfoCost;
+
+
+    [Header("Hover Building")]
+    [SerializeField] private RectTransform _hoverBuildingInfo;
+    [SerializeField] private Vector3 _hoverBuildingPadding = new(16f, 16f);
+    [SerializeField] private TextMeshProUGUI t_hoverBuilding;
 
     public UIBuildingButton[] UIBuildingButtons => _uiBuildingButtons;
 
@@ -36,6 +42,14 @@ public class GameHUD : MonoBehaviour
         {
             buildingButton.OnButtonHovered += BuildingButtonHovered;
             buildingButton.OnButtonUnhovered += BuildingButtonUnhovered;
+        }
+    }
+
+    internal void Update()
+    {
+        if (_hoverBuildingInfo.gameObject.activeSelf)
+        {
+            _hoverBuildingInfo.position = Input.mousePosition + _hoverBuildingPadding;
         }
     }
 
@@ -103,12 +117,24 @@ public class GameHUD : MonoBehaviour
         }
     }
 
+    public void SetHoverBuilding(IHoverable hoverable)
+    {
+        t_hoverBuilding.text = hoverable.GetText();
+        _hoverBuildingInfo.gameObject.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_hoverBuildingInfo);
+    }
+
+    public void UnhoverBuilding()
+    {
+        _hoverBuildingInfo.gameObject.SetActive(false);
+    }
+
     private void BuildingButtonHovered(UIBuildingButton buildingButton)
     {
         var buildingRect = (RectTransform)buildingButton.transform;
         var pivot = buildingRect.position.x > rt_canvas.rect.width * .5f ? 1f : -1f;
-        _hoverBuildingInfo.pivot = new(pivot, .5f);
-        _hoverBuildingInfo.position = new(
+        _hoverBuildingButtonInfo.pivot = new(pivot, .5f);
+        _hoverBuildingButtonInfo.position = new(
             buildingRect.position.x - buildingRect.rect.width, buildingRect.position.y
         );
 
@@ -137,7 +163,7 @@ public class GameHUD : MonoBehaviour
             }
         }
 
-        _hoverBuildingInfo.gameObject.SetActive(true);
+        _hoverBuildingButtonInfo.gameObject.SetActive(true);
 
          // Idk unity resize problem
         LayoutRebuilder.ForceRebuildLayoutImmediate(_hoverBuildingInfo);
@@ -145,7 +171,7 @@ public class GameHUD : MonoBehaviour
 
     private void BuildingButtonUnhovered()
     {
-        _hoverBuildingInfo.gameObject.SetActive(false);
+        _hoverBuildingButtonInfo.gameObject.SetActive(false);
     }
 
     [System.Serializable]

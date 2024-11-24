@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-public class ResourceNode : MonoBehaviour, IPlaceable
+public class ResourceNode : MonoBehaviour, IPlaceable, IHoverable
 {
+    [SerializeField] private string _name;
     [SerializeField] private Vector2Int _position;
     [SerializeField] private ResourceBehaviour _resourceToGive;
     [SerializeField] private int _timesThatCanBeCollect = 256;
@@ -36,5 +37,10 @@ public class ResourceNode : MonoBehaviour, IPlaceable
             OnDepleted?.Invoke(this);
             Destroy(gameObject);
         }
+    }
+
+    public string GetText()
+    {
+        return $"{_name}\n{_timesThatCanBeCollect:000}";
     }
 }

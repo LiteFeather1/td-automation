@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1581077136699122721, guid: 585395a95e1795a4fa3976b0a07c6791, type: 3}
+      propertyPath: _name
+      value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581077136699122721, guid: 585395a95e1795a4fa3976b0a07c6791, type: 3}
       propertyPath: _resourceToGive
       value: 
       objectReference: {fileID: 143309904664887199, guid: 7c966538779186843abbb5dfc93c1c1d, type: 3}
