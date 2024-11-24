@@ -43,4 +43,14 @@ public class ResourceNode : MonoBehaviour, IPlaceable, IHoverable
     {
         return $"{_name}\n{_timesThatCanBeCollect:000}";
     }
+
+    public void Hover()
+    {
+
+    }
+
+    public void Unhover()
+    {
+        
+    }
 }
