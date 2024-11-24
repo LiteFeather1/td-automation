@@ -168,6 +168,7 @@ public class PlacementSystem : MonoBehaviour
             r_buildings.Remove(_mousePos);
             building.Destroy();
             OnBuildingRemoved?.Invoke(building);
+            OnHoverableUnhovered?.Invoke();
         }
     }
 
