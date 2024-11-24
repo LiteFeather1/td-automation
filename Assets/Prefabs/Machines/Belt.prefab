@@ -50,6 +50,7 @@ MonoBehaviour:
     _entries:
     - Key: 100
       Value: -1
+  _sr: {fileID: 7122688018477215906}
   _itemMoveSpeed: 2
 --- !u!212 &7122688018477215906
 SpriteRenderer:

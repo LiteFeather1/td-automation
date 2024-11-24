@@ -9,9 +9,6 @@ public class ResourceCollector : Building, IOutPort
     [SerializeField] private float _timeToCollect = 5f;
     [SerializeField] private float _speedPerNode = 2f;
 
-    [Header("References")]
-    [SerializeField] private SpriteRenderer _sr;
-
     private float _elapsedTime = 0f;
 
     private readonly List<ResourceNode> r_resourceNodes = new();

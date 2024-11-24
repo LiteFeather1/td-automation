@@ -6,6 +6,7 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
     [Header("Building")]
     [SerializeField] private string _name;
     [SerializeField] private SerializedDictionary<ResourceType, int> _resourcesCost;
+    [SerializeField] protected SpriteRenderer _sr;
 
     public Vector2Int Position { get; set; }
     public abstract bool CanBeRotated { get; }
@@ -13,6 +14,8 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
 
     public string Name => _name;
     public SerializedDictionary<ResourceType, int> ResourceCost => _resourcesCost;
+
+    public void SetColour(Color colour) => _sr.color = colour;
 
     public virtual void Destroy()
     {

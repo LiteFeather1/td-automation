@@ -50,6 +50,7 @@ MonoBehaviour:
     _entries:
     - Key: 100
       Value: -1
+  _sr: {fileID: 828324963780454766}
   _range: 15
   _damage: 20
   _damageRate: 2

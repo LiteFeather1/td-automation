@@ -221,11 +221,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72e693d25725524186397decf4919f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
   _resourcesCost:
     _entries:
     - Key: 100
       Value: -1
-  _resourceBehaviour: {fileID: 0}
+  _sr: {fileID: 1071597396686366608}
+  _resourceType: 0
+  _processedBehaviourPrefab: {fileID: 0}
   _timeToProcessResource: 1
 --- !u!212 &1071597396686366608
 SpriteRenderer:

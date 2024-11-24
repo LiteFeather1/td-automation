@@ -59,14 +59,21 @@ public class PlacementSystem : MonoBehaviour
             && !_pathTilemap.HasTile(worldPos)
             && _groundTilemap.HasTile(worldPos)
         );
-        _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
 
-        _tileHighlight.transform.localPosition = worldPos;
+        var colour = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
         if (_buildingToPlace != null)
         {
             _buildingToPlace.transform.localPosition = worldPos;
+            _buildingToPlace.SetColour(colour);
+            return;
         }
-        else if (r_hoverables.TryGetValue(_mousePos, out var hoverable))
+        else
+        {
+            _tileHighlight.color = colour;
+            _tileHighlight.transform.localPosition = worldPos;
+        }
+
+        if (r_hoverables.TryGetValue(_mousePos, out var hoverable))
         {
             OnHoverableHovered?.Invoke(hoverable);
             _currentHoverable?.Unhover();
