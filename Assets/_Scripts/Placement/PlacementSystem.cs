@@ -46,26 +46,30 @@ public class PlacementSystem : MonoBehaviour
 
     public void FixedUpdate()
     {
-        var mousePos = Vector3Int.RoundToInt(_camera.ScreenToWorldPoint(Input.mousePosition));
-        mousePos.z = 0;
-        _mousePos = (Vector2Int)mousePos;
+        var worldPos = Vector3Int.RoundToInt(_camera.ScreenToWorldPoint(Input.mousePosition));
+        worldPos.z = 0;
+        var mousePos = (Vector2Int)worldPos;
+        if (mousePos == _mousePos)
+            return;
 
+        _mousePos = mousePos;
         _canPlaceBuilding = (
             !r_buildings.ContainsKey(_mousePos)
             && !_resourceNodes.ContainsKey(_mousePos)
-            && !_pathTilemap.HasTile(mousePos)
-            && _groundTilemap.HasTile(mousePos)
+            && !_pathTilemap.HasTile(worldPos)
+            && _groundTilemap.HasTile(worldPos)
         );
         _tileHighlight.color = _canPlaceBuilding ? Color.white : _colourNotPlaceble;
 
-        _tileHighlight.transform.localPosition = mousePos;
+        _tileHighlight.transform.localPosition = worldPos;
         if (_buildingToPlace != null)
         {
-            _buildingToPlace.transform.localPosition = mousePos;
+            _buildingToPlace.transform.localPosition = worldPos;
         }
         else if (r_hoverables.TryGetValue(_mousePos, out var hoverable))
         {
             OnHoverableHovered?.Invoke(hoverable);
+            print("here");
             _isHoveringHoverable = true;
         }
         else if (_isHoveringHoverable)
