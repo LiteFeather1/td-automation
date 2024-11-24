@@ -25,7 +25,7 @@ public class PlacementSystem : MonoBehaviour
     private readonly Dictionary<Vector2Int, Building> r_buildings = new();
 
     private readonly Dictionary<Vector2Int, IHoverable> r_hoverables = new();
-    private bool _isHoveringHoverable;
+    private IHoverable _currentHoverable;
 
     public Action<Building> OnBuildingPlaced { get; set; }
     public Action<Building> OnBuildingRemoved { get; set; }
@@ -69,13 +69,14 @@ public class PlacementSystem : MonoBehaviour
         else if (r_hoverables.TryGetValue(_mousePos, out var hoverable))
         {
             OnHoverableHovered?.Invoke(hoverable);
-            print("here");
-            _isHoveringHoverable = true;
+            _currentHoverable?.Unhover();
+            hoverable.Hover();
+            _currentHoverable = hoverable;
         }
-        else if (_isHoveringHoverable)
+        else if (_currentHoverable != null)
         {
             OnHoverableUnhovered?.Invoke();
-            _isHoveringHoverable = false;
+            _currentHoverable = null;
         }
     }
 
@@ -113,7 +114,10 @@ public class PlacementSystem : MonoBehaviour
         if (_buildingToPlace == null)
         {
             if (_resourceNodes.TryGetValue(_mousePos, out var node))
+            {
                 OnResourceCollected?.Invoke(node.GetResource());
+                OnHoverableHovered?.Invoke(_currentHoverable);
+            }
 
             return;
         }
