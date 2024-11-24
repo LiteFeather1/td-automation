@@ -113,6 +113,7 @@ public class PlacementSystem : MonoBehaviour
     public void AddBuilding(Building building)
     {
         r_buildings.Add(building.Position, building);
+        r_hoverables.Add(building.Position, building);
         OnBuildingPlaced?.Invoke(building);
     }
 
@@ -173,6 +174,7 @@ public class PlacementSystem : MonoBehaviour
         else if (r_buildings.TryGetValue(_mousePos, out var building) && building.CanBeDestroyed)
         {
             r_buildings.Remove(_mousePos);
+            r_hoverables.Remove(_mousePos);
             building.Destroy();
             OnBuildingRemoved?.Invoke(building);
             OnHoverableUnhovered?.Invoke();
