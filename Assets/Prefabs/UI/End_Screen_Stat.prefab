@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4404638751997361637}
+  - component: {fileID: 8211483609539426176}
   m_Layer: 0
   m_Name: End_Screen_Stat
   m_TagString: Untagged
@@ -37,6 +38,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8211483609539426176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420137153666279039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12e256f488765648947848526425b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t_stat: {fileID: 5422963066758799697}
 --- !u!1 &1209361400316400817
 GameObject:
   m_ObjectHideFlags: 0
