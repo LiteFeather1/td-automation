@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using LTF.SerializedDictionary;
+
+public class UIEndScreen : MonoBehaviour
+{
+    [SerializeField] private TextMeshProUGUI t_result;
+    [SerializeField] private UIEndScreenStat _elapsedTime;
+    [SerializeField] private UIEndScreenStat _enemies;
+    [SerializeField] private SerializedDictionary<ResourceType, UIEndScreenStat> _resourceStats;
+
+    private int _enemiesKilledCount;
+    private readonly Dictionary<ResourceType, int> r_resourceCount = new();
+
+    public void Init()
+    {
+        foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
+            r_resourceCount.Add(type, 0);
+    }
+
+    public void Enable(bool victory, float time)
+    {
+        t_result.text = victory ? "Victory!" : "Defeat!";
+
+        _elapsedTime.SetStat($"{Mathf.FloorToInt(time / 60f):00}:{Mathf.FloorToInt(time % 60f):00}");
+        _enemies.SetStat($"{_enemiesKilledCount}");
+
+        foreach (var resource in r_resourceCount)
+            _resourceStats[resource.Key].SetStat($"{resource.Value}");
+
+        gameObject.SetActive(true);
+    }
+
+    public void AddEnemyKilled() => _enemiesKilledCount++;
+
+    public void AddResource(ResourceType type, int amount) => r_resourceCount[type] += amount;
+
+    public void AddResources(IDictionary<ResourceType, int> resouces)
+    {
+        foreach (var resource in resouces)
+            AddResource(resource.Key, -resource.Value);
+    }
+}

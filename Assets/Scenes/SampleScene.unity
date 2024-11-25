@@ -557,6 +557,7 @@ MonoBehaviour:
   _beltPathSystem: {fileID: 695680645}
   _enemyManager: {fileID: 2102129621}
   _gameHUD: {fileID: 1571453347}
+  _endScreen: {fileID: 8423220882976336530}
 --- !u!1001 &141900373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50319,7 +50320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lullStageDurations:
-  - 180
+  - 1
   _portals:
   - {fileID: 1741471820}
   - {fileID: 740015674}
@@ -50701,6 +50702,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ef5ca2d66bef004085be77f5e8cda0b, type: 3}
+--- !u!114 &8423220882976336530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 391964634709474597, guid: 7ef5ca2d66bef004085be77f5e8cda0b, type: 3}
+  m_PrefabInstance: {fileID: 8423220882976336529}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1422dc98ebf05634e93648dc82bfbaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9131842930642965707
 PrefabInstance:
   m_ObjectHideFlags: 0
