@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using LTF.SerializedDictionary;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private float[] _lullStageDurations;
     [SerializeField] private Portal[] _portals;
-    [SerializeField] private SOObjectPoolEnemy[] _enemiesObjectPools;
+    [SerializeField] private SerializedDictionary<int, SOObjectPoolEnemy> _enemiesObjectPools;
     private int _currentStage;
     private bool _waveInProgress;
     private readonly List<Enemy> _enemies = new();
@@ -31,10 +32,12 @@ public class EnemyManager : Singleton<EnemyManager>
 
     internal void OnEnable()
     {
-        foreach (var so in _enemiesObjectPools)
+        foreach (var pool in _enemiesObjectPools)
         {
-            so.ObjectPool.ObjectCreated += EnemyCreated;
-            so.ObjectPool.InitPool();
+            var objectPool = pool.Value.ObjectPool;
+            objectPool.Object.ID = pool.Key;
+            objectPool.ObjectCreated += EnemyCreated;
+            objectPool.InitPool();
         }
     }
 
@@ -54,7 +57,7 @@ public class EnemyManager : Singleton<EnemyManager>
         foreach (var portal in _portals)
         {
             if (!portal.CanSpawn(_currentStage, _elapsedTime - currentLullDuration))
-                return;
+                continue;
 
             var newEnemy = portal.GetEnemy(_currentStage);
             newEnemy.transform.position = portal.transform.position;
@@ -68,16 +71,17 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void OnDisable()
     {
-        foreach (var pool in _enemiesObjectPools)
+        foreach (var pool in _enemiesObjectPools.Values)
         {
             pool.ObjectPool.ObjectCreated -= EnemyCreated;
-            pool.ObjectPool.Dispose();
 
             foreach (var enemy in pool.ObjectPool.Objects)
             {
                 enemy.OnDied -= EnemyDied;
                 enemy.OnPathReached -= EnemyReachedPathEnd;
             }
+
+            pool.ObjectPool.Dispose();
         }
     }
 
@@ -91,6 +95,7 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         _enemies.Remove(enemy);
         enemy.gameObject.SetActive(false);
+        _enemiesObjectPools[enemy.ID].ObjectPool.ReturnObject(enemy);
 
         if (_enemies.Count != 0)
             return;

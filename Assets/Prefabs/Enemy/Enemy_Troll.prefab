@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: _damage
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      propertyPath: <ID>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6312194505275650042, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5

@@ -558,6 +558,8 @@ MonoBehaviour:
   _enemyManager: {fileID: 2102129621}
   _gameHUD: {fileID: 1571453347}
   _endScreen: {fileID: 8423220882976336530}
+  _poolResources:
+    _entries: []
 --- !u!1001 &141900373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6170,6 +6172,8 @@ MonoBehaviour:
     - _spawnTime: 2
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
     - _spawnTime: 4
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 5
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
   - _enemySpawns:
     - _spawnTime: 1
@@ -50339,9 +50343,13 @@ MonoBehaviour:
   - {fileID: 2114138639}
   - {fileID: 1013822757}
   _enemiesObjectPools:
-  - {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-  - {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
-  - {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    _entries:
+    - Key: 1
+      Value: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - Key: 2
+      Value: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
+    - Key: 3
+      Value: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1 &2114138637
 GameObject:
   m_ObjectHideFlags: 0
