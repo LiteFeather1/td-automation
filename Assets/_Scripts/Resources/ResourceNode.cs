@@ -5,10 +5,10 @@ public class ResourceNode : MonoBehaviour, IPlaceable, IHoverable
 {
     [SerializeField] private string _name;
     [SerializeField] private Vector2Int _position;
-    [SerializeField] private ResourceBehaviour _resourceToGive;
+    [SerializeField] private SOObjectPoolResourceBehaviour _resourceToGivePool;
     [SerializeField] private int _timesThatCanBeCollect = 256;
 
-    public ResourceType Type => _resourceToGive.Type;
+    public ResourceType Type => _resourceToGivePool.ObjectPool.Object.Type;
 
     public Action<ResourceNode> OnDepleted { get; set; }
 
@@ -20,18 +20,19 @@ public class ResourceNode : MonoBehaviour, IPlaceable, IHoverable
     public ResourceType GetResource()
     {
         RemoveTime();
-        return _resourceToGive.Type;
+        return Type;
     }
 
     public ResourceBehaviour CollectResource()
     {
         RemoveTime();
-        return _resourceToGive;
+        return _resourceToGivePool.ObjectPool.GetObject();
     }
 
     private void RemoveTime()
     {
         _timesThatCanBeCollect--;
+
         if (_timesThatCanBeCollect == 0)
         {
             OnDepleted?.Invoke(this);
@@ -51,6 +52,6 @@ public class ResourceNode : MonoBehaviour, IPlaceable, IHoverable
 
     public void Unhover()
     {
-        
+
     }
 }

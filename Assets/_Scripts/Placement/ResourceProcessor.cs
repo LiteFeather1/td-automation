@@ -4,7 +4,7 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 {
     [Header("Resource Processor")]
     [SerializeField] private ResourceType _resourceType;
-    [SerializeField] private ResourceBehaviour _processedBehaviourPrefab;
+    [SerializeField] private SOObjectPoolResourceBehaviour _processedBehaviourPool;
     [SerializeField] private float _timeToProcessResource = 1f;
     private float _elapsedTime;
 
@@ -39,10 +39,10 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 
         _elapsedTime %= _timeToProcessResource;
 
-        Destroy(_processingResource.gameObject);
-        _processedResource = Instantiate(
-            _processedBehaviourPrefab, transform.position, Quaternion.identity
-        );
+        _processingResource.Deactive();
+        _processedResource = _processedBehaviourPool.ObjectPool.GetObject();
+        _processedResource.transform.position = transform.position;
+        _processedResource.gameObject.SetActive(true);
     }
 
     public bool CanReceiveResource(ResourceType type)
@@ -53,10 +53,7 @@ public class ResourceProcessor : Building, IInPort, IOutPort
     public override void Destroy()
     {
         base.Destroy();
-        if (_processedResource != null)
-            Destroy(_processedResource.gameObject);
-
-        if (_processingResource != null)
-            Destroy(_processingResource.gameObject);
+        _processedResource?.Deactive();
+        _processingResource?.Deactive();
     }
 }

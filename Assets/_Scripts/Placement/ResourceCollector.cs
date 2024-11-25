@@ -31,11 +31,10 @@ public class ResourceCollector : Building, IOutPort
             return;
 
         _elapsedTime %= _timeToCollect;
-        Port.ReceiveResource(Instantiate(
-            r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource(),
-            new(Port.Position.x, Port.Position.y),
-            Quaternion.identity
-        ));
+
+        var resource = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource();
+        resource.gameObject.SetActive(true);
+        resource.transform.position = (Vector2)Port.Position;
     }
 
     internal void OnDisable()

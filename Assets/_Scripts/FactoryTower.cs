@@ -87,6 +87,6 @@ public class FactoryTower : MonoBehaviour
     {
         ModifyResource(resource.Type, 1);
         OnResourceAdded?.Invoke(resource.Type, 1);
-        Destroy(resource.gameObject);
+        resource.Deactive();
     }
 }
