@@ -86,9 +86,7 @@ public class PlacementSystem : MonoBehaviour
         }
         else if (_currentHoverable != null)
         {
-            OnHoverableUnhovered?.Invoke();
-            _currentHoverable.Unhover();
-            _currentHoverable = null;
+            UnhoverResource();
         }
     }
 
@@ -181,7 +179,10 @@ public class PlacementSystem : MonoBehaviour
         {
             r_buildings.Remove(_mousePos);
             r_hoverables.Remove(_mousePos);
+
             building.Destroy();
+            UnhoverResource();
+
             OnBuildingRemoved?.Invoke(building);
             OnHoverableUnhovered?.Invoke();
         }
@@ -213,6 +214,13 @@ public class PlacementSystem : MonoBehaviour
     {
         node.OnDepleted -= ResourceDepleted;
         _resourceNodes.Remove(node.Position);
+    }
+
+    private void UnhoverResource()
+    {
+        OnHoverableUnhovered?.Invoke();
+        _currentHoverable.Unhover();
+        _currentHoverable = null;
     }
 
 #if UNITY_EDITOR
