@@ -15,18 +15,20 @@ public class Health : MonoBehaviour, IDamageable
     public Action<float, IDamageable> OnHealed { get; set;}
     public Action OnDied { get; set; }
 
-    public void Awake()
-    {
-        _hp = _maxHP;
-    }
+    public void Awake() => ResetHealth();
+
+    public void ResetHealth() => _hp = _maxHP;
 
     public void TakeDamage(float damage)
     {
+        if (_hp <= 0f)
+            return;
+
         damage *= 100f / (100f + _defence);
         _hp -= damage;
 
         OnDamageTaken?.Invoke(damage, this);
-        if (_hp < 0f)
+        if (_hp <= 0f)
         {
             OnDied?.Invoke();
         }

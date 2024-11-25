@@ -7,9 +7,15 @@ public class PathFollow : MonoBehaviour
     private int _currentSegmentIndex = 0;
     private int _currentPointIndex = 0;
 
-    public System.Action OnPathFinished { get; set; } 
+    public System.Action OnPathFinished { get; set; }
 
     public void SetPath(IPath path) => _path = path;
+
+    public void ResetIt()
+    {
+        _currentPointIndex = 0;
+        _currentPointIndex = 0;
+    }
 
     public void Update()
     {

@@ -17,16 +17,22 @@ public class Enemy : MonoBehaviour
     public Action<Enemy> OnDied { get; set; }
     public Action<Enemy> OnPathReached { get; set; }
 
-    public void OnEnable()
+    public void Awake()
     {
         _health.OnDied += Died;
         _pathFollow.OnPathFinished += PathFinished;
     }
 
-    public void OnDisable()
+    public void Destroy()
     {
         _health.OnDied -= Died;
         _pathFollow.OnPathFinished -= PathFinished;
+    }
+
+    public void ResetIt()
+    {
+        _health.ResetHealth();
+        _pathFollow.ResetIt();
     }
 
     private void Died()
