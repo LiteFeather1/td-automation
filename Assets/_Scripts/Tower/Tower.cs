@@ -6,6 +6,7 @@ public abstract class Tower : Building
     [SerializeField] private Transform _range;
     [SerializeField] protected float _damage = 1f;
     [SerializeField] protected float _damageRate = 1f;
+    [SerializeField] protected Transform _head;
     protected float _elapsedTime;
 
     public override bool CanBeRotated => false;
@@ -38,6 +39,10 @@ public abstract class Tower : Building
             return;
 
         _elapsedTime = 0f;
+        Vector2 direction = (closestEnemy.transform.position - transform.position).normalized;
+        _head.transform.eulerAngles = new(
+            0f, 0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg
+        );
         DamageEnemy(closestEnemy);
     }
 
