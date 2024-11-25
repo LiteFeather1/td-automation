@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b32fb75d0e46484993b580cbafa94bc, type: 3}
+  m_Name: PlacebleData_Tower_Flamethrower
+  m_EditorClassIdentifier: 
+  _description: 
+  _icon: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  _buildingPrefab: {fileID: 5585873380078601622, guid: b0fc129ffd90d18408306a5f767e7a84, type: 3}
