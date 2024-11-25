@@ -16,6 +16,7 @@ public class EnemyManager : Singleton<EnemyManager>
     public Action<int> OnStageEnded { get; set; }
     public Action OnAllStagesEnded { get; set; }
     public Action<float> OnEnemyReachedPathEnd { get; set; }
+    public Action OnEnemyKilled { get; set; }
 
     public List<Enemy> Enemies => _enemies;
 
@@ -54,7 +55,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
                 newEnemy.PathFollow.SetPath(portal.Path);
 
-                newEnemy.OnDied += RemoveEnemy;
+                newEnemy.OnDied += EnemyDied;
                 newEnemy.OnPathReached += EnemyReachedPathEnd;
             }
         }
@@ -64,7 +65,7 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         foreach (var enemy in _enemies)
         {
-            enemy.OnDied -= RemoveEnemy;
+            enemy.OnDied -= EnemyDied;
             enemy.OnPathReached -= EnemyReachedPathEnd;
         }
     }
@@ -84,6 +85,7 @@ public class EnemyManager : Singleton<EnemyManager>
         }
 
         Debug.Log("Stage ended");
+        _elapsedTime = 0f;
         _currentStage++;
         _waveInProgress = false;
         OnStageEnded?.Invoke(_currentStage);
@@ -93,6 +95,12 @@ public class EnemyManager : Singleton<EnemyManager>
             enabled = false;
             OnAllStagesEnded?.Invoke();
         }
+    }
+
+    private void EnemyDied(Enemy enemy)
+    {
+        OnEnemyKilled?.Invoke();
+        RemoveEnemy(enemy);
     }
 
     private void EnemyReachedPathEnd(Enemy enemy)
