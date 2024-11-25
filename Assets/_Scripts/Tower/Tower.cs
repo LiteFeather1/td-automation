@@ -6,14 +6,14 @@ public abstract class Tower : Building
     [SerializeField] private Transform _range;
     [SerializeField] protected float _damage = 1f;
     [SerializeField] protected float _damageRate = 1f;
-    private float _elapsedTime;
+    protected float _elapsedTime;
 
     public override bool CanBeRotated => false;
     public override bool CanBeDestroyed => true;
 
-    private float Range => _range.localScale.x * .5f;
+    protected float Range => _range.localScale.x * .5f;
 
-    public void Update()
+    protected virtual void Update()
     {
         _elapsedTime += Time.deltaTime;
         if (!EnemyManager.Instance.HasEnemies || _elapsedTime < _damageRate)
