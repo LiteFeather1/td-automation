@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 977162742652903837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b021d7fdc868ca34f8c7d640fa99bb6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9eb8e7bd957ea6f4f9d07970dc324963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Ballista
@@ -55,6 +55,7 @@ MonoBehaviour:
   _range: {fileID: 0}
   _damage: 20
   _damageRate: 2
+  _projectile: {fileID: 0}
 --- !u!1 &1208690256005585575
 GameObject:
   m_ObjectHideFlags: 0

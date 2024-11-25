@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Tower : Building
+public abstract class Tower : Building
 {
     [Header("Tower")]
     [SerializeField] private Transform _range;
-    [SerializeField] private float _damage = 1f;
-    [SerializeField] private float _damageRate = 1f;
+    [SerializeField] protected float _damage = 1f;
+    [SerializeField] protected float _damageRate = 1f;
     private float _elapsedTime;
 
     public override bool CanBeRotated => false;
@@ -38,7 +38,7 @@ public class Tower : Building
             return;
 
         _elapsedTime = 0f;
-        closestEnemy.Health.TakeDamage(_damage);
+        DamageEnemy(closestEnemy);
     }
 
     public override void Place()
@@ -55,4 +55,6 @@ public class Tower : Building
     {
         _range.gameObject.SetActive(false);
     }
+
+    protected abstract void DamageEnemy(Enemy enemy);
 }
