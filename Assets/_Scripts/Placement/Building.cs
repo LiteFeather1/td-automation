@@ -16,6 +16,7 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
     public SerializedDictionary<ResourceType, int> ResourceCost => _resourcesCost;
 
     public void SetColour(Color colour) => _sr.color = colour;
+    public void SetSortingOrder(int order) => _sr.sortingOrder = order;
 
     public virtual void Place() {}
 
