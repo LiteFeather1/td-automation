@@ -54,8 +54,8 @@ MonoBehaviour:
       Value: -1
   _sr: {fileID: 828324963780454766}
   _range: {fileID: 0}
-  _damage: 20
-  _damageRate: 2
+  _damage: 6
+  _damageRate: 1.5
   _head: {fileID: 661284030296353025}
   _projectile: {fileID: 0}
 --- !u!1 &1208690256005585575

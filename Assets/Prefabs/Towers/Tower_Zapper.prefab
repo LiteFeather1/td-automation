@@ -114,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 16, y: 16, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7814636754408498331}
@@ -347,7 +347,7 @@ MonoBehaviour:
       Value: -1
   _sr: {fileID: 7138210802647603289}
   _range: {fileID: 7013843987129502161}
-  _damage: 5
-  _damageRate: 2
+  _damage: 10
+  _damageRate: 5
   _head: {fileID: 4763425209474587197}
   _multiplierPerEnemyInRange: 0.25

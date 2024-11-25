@@ -174,7 +174,7 @@ MonoBehaviour:
   _sr: {fileID: 1071184834035600572}
   _range: {fileID: 6604266370505615649}
   _damage: 1
-  _damageRate: 0.5
+  _damageRate: 0.125
   _head: {fileID: 3304314266657821397}
   _fireDamageRadius: 4
   _fireDamagePercetage: 0.33
@@ -205,7 +205,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4257962542953389932}
