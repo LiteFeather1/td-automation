@@ -41,7 +41,7 @@ public abstract class Tower : Building
         _elapsedTime = 0f;
         Vector2 direction = (closestEnemy.transform.position - transform.position).normalized;
         _head.transform.eulerAngles = new(
-            0f, 0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg
+            0f, 0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f
         );
         DamageEnemy(closestEnemy);
     }
