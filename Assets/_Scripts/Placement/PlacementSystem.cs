@@ -87,6 +87,7 @@ public class PlacementSystem : MonoBehaviour
         else if (_currentHoverable != null)
         {
             OnHoverableUnhovered?.Invoke();
+            _currentHoverable.Unhover();
             _currentHoverable = null;
         }
     }
@@ -162,7 +163,7 @@ public class PlacementSystem : MonoBehaviour
 
         AddBuilding(_buildingToPlace);
         _buildingToPlace = Instantiate(
-            _buildingPrefab, _tileHighlight.transform.position, _buildingToPlace.transform.rotation
+            _buildingPrefab, _buildingToPlace.transform.position, _buildingToPlace.transform.rotation
         );
     }
 

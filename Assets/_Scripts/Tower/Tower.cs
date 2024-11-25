@@ -3,13 +3,15 @@ using UnityEngine;
 public class Tower : Building
 {
     [Header("Tower")]
-    [SerializeField] private float _range = 1f;
+    [SerializeField] private Transform _range;
     [SerializeField] private float _damage = 1f;
     [SerializeField] private float _damageRate = 1f;
     private float _elapsedTime;
 
     public override bool CanBeRotated => false;
     public override bool CanBeDestroyed => true;
+
+    private float Range => _range.localScale.x * .5f;
 
     public void Update()
     {
@@ -22,7 +24,7 @@ public class Tower : Building
         foreach (var enemy in EnemyManager.Instance.Enemies)
         {
             var distance = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distance > _range)
+            if (distance > Range)
                 continue;
 
             if (distance < closestDistance)
@@ -37,5 +39,20 @@ public class Tower : Building
 
         _elapsedTime = 0f;
         closestEnemy.Health.TakeDamage(_damage);
+    }
+
+    public override void Place()
+    {
+        _range.gameObject.SetActive(false);
+    }
+
+    public override void Hover()
+    {
+        _range.gameObject.SetActive(true);
+    }
+
+    public override void Unhover()
+    {
+        _range.gameObject.SetActive(false);
     }
 }
