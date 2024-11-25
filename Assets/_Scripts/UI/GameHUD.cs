@@ -101,9 +101,7 @@ public class GameHUD : MonoBehaviour
     {
         foreach (var button in _uiBuildingButtons)
         {
-            if (button.PlaceableData == null
-                || button.ResourceCost.Count == 0
-                || !button.ResourceCost.ContainsKey(type))
+            if (button.ResourceCost.Count == 0 || !button.ResourceCost.ContainsKey(type))
                 continue;
 
             var count = 0;

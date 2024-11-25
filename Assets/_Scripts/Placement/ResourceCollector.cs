@@ -72,11 +72,7 @@ public class ResourceCollector : Building, IOutPort
 
     public void TryEnable()
     {
-        if (r_resourceNodes.Count > 0)
-        {
-            enabled = true;
-            ChangeAlpha(1f);
-        }
+        ChangeAlpha((enabled = r_resourceNodes.Count > 0) ? 1f : .5f);
     }
 
     private void OnNodeDepleted(ResourceNode node)
