@@ -17,6 +17,8 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
 
     public void SetColour(Color colour) => _sr.color = colour;
 
+    public virtual void Place() {}
+
     public virtual void Destroy()
     {
         Destroy(gameObject);
@@ -26,5 +28,5 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
 
     public virtual void Hover() { }
 
-    public void Unhover() {}
+    public virtual void Unhover() {}
 }

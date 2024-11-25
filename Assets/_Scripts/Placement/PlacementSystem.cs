@@ -116,6 +116,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void AddBuilding(Building building)
     {
+        building.Place();
         r_buildings.Add(building.Position, building);
         r_hoverables.Add(building.Position, building);
         OnBuildingPlaced?.Invoke(building);
