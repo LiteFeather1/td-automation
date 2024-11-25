@@ -63,7 +63,12 @@ public class ResourceCollector : Building, IOutPort
 
     public void TryAddNode(ResourceNode node)
     {
-        if (node.Type != _type || Vector2Int.Distance(Position, node.Position) > Range)
+        var dir = Position - node.Position;
+        var mag = (int)dir.magnitude;
+        dir = new(dir.x / mag, dir.y / mag);
+        if (node.Type != _type
+            || Vector2Int.Distance(Position - dir, node.Position) > Range
+        )
             return;
 
         r_resourceNodes.Add(node);
