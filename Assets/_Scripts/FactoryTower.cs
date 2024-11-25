@@ -14,6 +14,8 @@ public class FactoryTower : MonoBehaviour
     public ResourceAdded OnResourceModified { get; set; }
 
     public Action<Dictionary<ResourceType, int>> OnResourcesModified { get; set; }
+    public ResourceAdded OnResourceAdded { get; set; }
+    public Action<Dictionary<ResourceType, int>> OnResourcesAdded { get; set; }
 
     public Health Health => _health;
 
@@ -51,6 +53,7 @@ public class FactoryTower : MonoBehaviour
     public void AddResource(ResourceType type)
     {
         ModifyResource(type, 1);
+        OnResourceAdded?.Invoke(type, 1);
     }
 
     public void ModifyResource(ResourceType type, int amount)
@@ -59,7 +62,7 @@ public class FactoryTower : MonoBehaviour
         OnResourceModified?.Invoke(type, r_resources[type]);
     }
 
-    public void ModifyResources(Dictionary<ResourceType, int> resources)
+    public void RemoveResources(Dictionary<ResourceType, int> resources)
     {
         foreach (var resource in resources)
         {
@@ -69,7 +72,7 @@ public class FactoryTower : MonoBehaviour
         OnResourcesModified?.Invoke(r_resources);
     }
 
-    public void DeconstructResources(Dictionary<ResourceType, int> resources)
+    public void AddResources(Dictionary<ResourceType, int> resources)
     {
         foreach (var resource in resources)
         {
@@ -77,11 +80,13 @@ public class FactoryTower : MonoBehaviour
         }
 
         OnResourcesModified?.Invoke(r_resources);
+        OnResourcesAdded?.Invoke(r_resources);
     }
 
     private void OnResourceGot(ResourceBehaviour resource)
     {
         ModifyResource(resource.Type, 1);
+        OnResourceAdded?.Invoke(resource.Type, 1);
         Destroy(resource.gameObject);
     }
 }
