@@ -10,6 +10,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private BeltPathSystem _beltPathSystem;
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameHUD _gameHUD;
+    [SerializeField] private UIEndScreen _endScreen;
+
+    private float _elapsedTime;
 
     public FactoryTower TowerFactory => _factoryTower;
 
@@ -27,11 +30,15 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.OnHoverableUnhovered += _gameHUD.UnhoverBuilding;
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
+        _enemyManager.OnEnemyKilled += _endScreen.AddEnemyKilled;
         _enemyManager.OnWaveStarted += WaveStarted;
         _enemyManager.OnStageEnded += _gameHUD.SetWave;
+        _enemyManager.OnAllStagesEnded += AllStagesEnded;
 
         _factoryTower.OnResourceModified += _gameHUD.UpdateUIResource;
         _factoryTower.OnResourcesModified += _gameHUD.UpdateAmountsAndBuildingButtons;
+        _factoryTower.OnResourceAdded += _endScreen.AddResource;
+        _factoryTower.OnResourcesAdded += _endScreen.AddResources;
         _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed += _gameHUD.UpdatePlayerHealth;
 
@@ -56,10 +63,14 @@ public class GameManager : Singleton<GameManager>
                 _placementSystem.AddBuilding(building);
             }
         }
+
+        _endScreen.Init();
     }
 
     public void Update()
     {
+        _elapsedTime += Time.deltaTime;
+
         if (!_enemyManager.AllStagesCompleted && !_enemyManager.WaveInProgress)
             _gameHUD.SetTimeToWave(_enemyManager.TimeToWave);
     }
@@ -78,13 +89,18 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.OnHoverableUnhovered -= _gameHUD.UnhoverBuilding;
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
+        _enemyManager.OnEnemyKilled -= _endScreen.AddEnemyKilled;
         _enemyManager.OnWaveStarted -= WaveStarted;
         _enemyManager.OnStageEnded -= _gameHUD.SetWave;
+        _enemyManager.OnAllStagesEnded -= AllStagesEnded;
 
         _factoryTower.OnResourceModified -= _gameHUD.UpdateUIResource;
         _factoryTower.OnResourcesModified -= _gameHUD.UpdateAmountsAndBuildingButtons;
+        _factoryTower.OnResourceAdded -= _endScreen.AddResource;
+        _factoryTower.OnResourcesAdded -= _endScreen.AddResources;
         _factoryTower.Health.OnDamageTaken -= _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed -= _gameHUD.UpdatePlayerHealth;
+
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed -= _placementSystem.SetPlaceable;
@@ -119,18 +135,24 @@ public class GameManager : Singleton<GameManager>
             _beltPathSystem.AddOutPort(outPort);
         }
 
-        _factoryTower.ModifyResources(building.ResourceCost);
+        _factoryTower.RemoveResources(building.ResourceCost);
     }
 
     public void BuildingRemoved(Building building)
     {
         _beltPathSystem.TryRemovePosition(building.Position);
 
-        _factoryTower.DeconstructResources(building.ResourceCost);
+        _factoryTower.AddResources(building.ResourceCost);
     }
 
-    public void WaveStarted()
+    private void WaveStarted()
     {
         _gameHUD.SetTimeToWave("Attacking");
+    }
+
+    private void AllStagesEnded()
+    {
+        _endScreen.Enable(_factoryTower.Health.HP > 0, _elapsedTime);
+        Time.timeScale = 0f;
     }
 }
