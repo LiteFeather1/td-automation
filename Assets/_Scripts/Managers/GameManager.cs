@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using LTF.SerializedDictionary;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -11,6 +12,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameHUD _gameHUD;
     [SerializeField] private UIEndScreen _endScreen;
+
+    [Header("Misc")]
+    [SerializeField] private SerializedDictionary<ResourceType, SOObjectPoolResourceBehaviour> _poolResources;
 
     private float _elapsedTime;
 
@@ -45,6 +49,12 @@ public class GameManager : Singleton<GameManager>
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed += _placementSystem.SetPlaceable;
+        }
+
+        foreach (var pool in _poolResources.Values)
+        {
+            pool.ObjectPool.ObjectCreated += ResourceCreated;
+            pool.ObjectPool.InitPool();
         }
     }
 
@@ -105,6 +115,16 @@ public class GameManager : Singleton<GameManager>
         {
             buildingButton.OnButtonPressed -= _placementSystem.SetPlaceable;
         }
+
+        foreach (var pool in _poolResources.Values)
+        {
+            pool.ObjectPool.ObjectCreated -= ResourceCreated;
+            foreach (var resource in pool.ObjectPool.Objects)
+            {
+                resource.OnReturnToPool -= pool.ObjectPool.ReturnObject;
+            }
+            pool.ObjectPool.Dispose();
+        }
     }
 
     private void PlaceBuilding(InputAction.CallbackContext _)
@@ -154,5 +174,10 @@ public class GameManager : Singleton<GameManager>
     {
         _endScreen.Enable(_factoryTower.Health.HP > 0, _elapsedTime);
         Time.timeScale = 0f;
+    }
+
+    private void ResourceCreated(ResourceBehaviour resource)
+    {
+        resource.OnReturnToPool += _poolResources[resource.Type].ObjectPool.ReturnObject;
     }
 }

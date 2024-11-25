@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: _resourceToGive
       value: 
       objectReference: {fileID: 143309904664887199, guid: 3418c8c033c0a1b4c8e24eed7d555af4, type: 3}
+    - target: {fileID: 1581077136699122721, guid: 585395a95e1795a4fa3976b0a07c6791, type: 3}
+      propertyPath: _resourceToGivePool
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e6c68457b6d528478c23dab86a16435, type: 2}
     - target: {fileID: 3186483705533466903, guid: 585395a95e1795a4fa3976b0a07c6791, type: 3}
       propertyPath: m_Color.b
       value: 0.0102794655

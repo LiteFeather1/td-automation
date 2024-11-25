@@ -41,7 +41,7 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 
         _processingResource.Deactive();
         _processedResource = _processedBehaviourPool.ObjectPool.GetObject();
-        _processedResource.transform.position = transform.position;
+        _processedResource.transform.position = (Vector2)Port.Position;
         _processedResource.gameObject.SetActive(true);
     }
 

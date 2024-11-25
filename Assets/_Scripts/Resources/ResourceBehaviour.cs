@@ -6,7 +6,7 @@ public class ResourceBehaviour : MonoBehaviour
     [SerializeField] private SpriteRenderer _sr;
     [SerializeField] private ResourceType _resourceType;
 
-    public Action<ResourceBehaviour> ReturnToPool { get; set; }
+    public Action<ResourceBehaviour> OnReturnToPool { get; set; }
 
     public ResourceType Type => _resourceType;
 
@@ -16,7 +16,7 @@ public class ResourceBehaviour : MonoBehaviour
 
     public void Deactive()
     {
-        ReturnToPool?.Invoke(this);
+        OnReturnToPool?.Invoke(this);
         gameObject.SetActive(false);
     }
 }

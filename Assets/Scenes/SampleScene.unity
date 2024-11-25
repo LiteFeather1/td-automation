@@ -559,7 +559,15 @@ MonoBehaviour:
   _gameHUD: {fileID: 1571453347}
   _endScreen: {fileID: 8423220882976336530}
   _poolResources:
-    _entries: []
+    _entries:
+    - Key: 100
+      Value: {fileID: 11400000, guid: 0e6c68457b6d528478c23dab86a16435, type: 2}
+    - Key: 200
+      Value: {fileID: 11400000, guid: a9dcfb6459f6da541bc0d10132e78293, type: 2}
+    - Key: 300
+      Value: {fileID: 11400000, guid: 13fd370cdce05d74f8ef35d20011e230, type: 2}
+    - Key: 400
+      Value: {fileID: 11400000, guid: 13fd370cdce05d74f8ef35d20011e230, type: 2}
 --- !u!1001 &141900373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6173,7 +6181,7 @@ MonoBehaviour:
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
     - _spawnTime: 4
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-    - _spawnTime: 5
+    - _spawnTime: 10
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
   - _enemySpawns:
     - _spawnTime: 1
@@ -50336,7 +50344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lullStageDurations:
-  - 1
+  - 60
   _portals:
   - {fileID: 1741471820}
   - {fileID: 740015674}

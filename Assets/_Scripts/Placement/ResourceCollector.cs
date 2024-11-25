@@ -33,8 +33,9 @@ public class ResourceCollector : Building, IOutPort
         _elapsedTime %= _timeToCollect;
 
         var resource = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource();
-        resource.gameObject.SetActive(true);
         resource.transform.position = (Vector2)Port.Position;
+        Port.ReceiveResource(resource);
+        resource.gameObject.SetActive(true);
     }
 
     internal void OnDisable()
