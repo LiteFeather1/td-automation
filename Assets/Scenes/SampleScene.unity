@@ -50332,12 +50332,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lullStageDurations:
-  - 180
+  - 1
   _portals:
   - {fileID: 1741471820}
   - {fileID: 740015674}
   - {fileID: 2114138639}
   - {fileID: 1013822757}
+  _enemiesObjectPools:
+  - {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+  - {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
+  - {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1 &2114138637
 GameObject:
   m_ObjectHideFlags: 0

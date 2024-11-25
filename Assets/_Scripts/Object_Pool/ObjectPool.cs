@@ -10,7 +10,7 @@ public class ObjectPool<T> : IDisposable where T : Component
     private Transform _poolParent;
     private readonly Queue<T> _inactiveObjects = new();
 
-    public HashSet<T> Objects { get; private set; } = new();
+    public List<T> Objects { get; private set; } = new();
 
     public Action<T> ObjectCreated { get; set; }
 
@@ -43,10 +43,8 @@ public class ObjectPool<T> : IDisposable where T : Component
 
         _poolParent = new GameObject($"Pool_{name}").transform;
 
-        _object = UnityEngine.Object.Instantiate(_object);
         _object.gameObject.SetActive(spawnActive);
         _object.name = name;
-        _object.gameObject.hideFlags = HideFlags.HideAndDontSave;
 
         for (int i = 0; i < size; i++)
             _inactiveObjects.Enqueue(Instantiate());
@@ -70,7 +68,6 @@ public class ObjectPool<T> : IDisposable where T : Component
     public void Dispose()
     {
         Objects.Clear();
-        UnityEngine.Object.Destroy(_poolParent.gameObject);
     }
 
     private T Instantiate()

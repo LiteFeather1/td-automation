@@ -6,6 +6,7 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private float[] _lullStageDurations;
     [SerializeField] private Portal[] _portals;
+    [SerializeField] private SOObjectPoolEnemy[] _enemiesObjectPools;
     private int _currentStage;
     private bool _waveInProgress;
     private readonly List<Enemy> _enemies = new();
@@ -28,6 +29,15 @@ public class EnemyManager : Singleton<EnemyManager>
     public float TimeToWave => _lullStageDurations[_currentStage] - _elapsedTime;
     public bool AllStagesCompleted => _currentStage == _lullStageDurations.Length;
 
+    internal void OnEnable()
+    {
+        foreach (var so in _enemiesObjectPools)
+        {
+            so.ObjectPool.ObjectCreated += EnemyCreated;
+            so.ObjectPool.InitPool();
+        }
+    }
+
     public void Update()
     {
         _elapsedTime += Time.deltaTime;
@@ -46,34 +56,41 @@ public class EnemyManager : Singleton<EnemyManager>
             if (!portal.CanSpawn(_currentStage, _elapsedTime - currentLullDuration))
                 return;
 
-            foreach (var enemy in portal.GetEnemies(_currentStage))
-            {
-                var newEnemy = Instantiate(
-                    enemy, portal.transform.position, Quaternion.identity
-                );
-                _enemies.Add(newEnemy);
+            var newEnemy = portal.GetEnemy(_currentStage);
+            newEnemy.transform.position = portal.transform.position;
+            newEnemy.ResetIt();
+            newEnemy.PathFollow.SetPath(portal.Path);
+            newEnemy.gameObject.SetActive(true);
 
-                newEnemy.PathFollow.SetPath(portal.Path);
-
-                newEnemy.OnDied += EnemyDied;
-                newEnemy.OnPathReached += EnemyReachedPathEnd;
-            }
+            _enemies.Add(newEnemy);
         }
     }
 
     public void OnDisable()
     {
-        foreach (var enemy in _enemies)
+        foreach (var pool in _enemiesObjectPools)
         {
-            enemy.OnDied -= EnemyDied;
-            enemy.OnPathReached -= EnemyReachedPathEnd;
+            pool.ObjectPool.ObjectCreated -= EnemyCreated;
+            pool.ObjectPool.Dispose();
+
+            foreach (var enemy in pool.ObjectPool.Objects)
+            {
+                enemy.OnDied -= EnemyDied;
+                enemy.OnPathReached -= EnemyReachedPathEnd;
+            }
         }
+    }
+
+    private void EnemyCreated(Enemy enemy)
+    {
+        enemy.OnDied += EnemyDied;
+        enemy.OnPathReached += EnemyReachedPathEnd;
     }
 
     private void RemoveEnemy(Enemy enemy)
     {
         _enemies.Remove(enemy);
-        Destroy(enemy.gameObject);
+        enemy.gameObject.SetActive(false);
 
         if (_enemies.Count != 0)
             return;
@@ -83,6 +100,9 @@ public class EnemyManager : Singleton<EnemyManager>
             if (!portal.AllGroupsSpawned(_currentStage))
                 return;
         }
+
+        foreach (var portal in _portals)
+            portal.StageEnded();
 
         Debug.Log("Stage ended");
         _elapsedTime = 0f;

@@ -12,9 +12,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 25645953643645541, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 250494689945465921, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: _speed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: _damage
@@ -67,6 +71,10 @@ PrefabInstance:
     - target: {fileID: 6312194505275650042, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119826878547449110, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      propertyPath: _maxHP
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

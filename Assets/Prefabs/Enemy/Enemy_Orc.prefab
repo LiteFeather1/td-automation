@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 25645953643645541, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_Name
-      value: Enemy_Troll
+      value: Enemy_Orc
+      objectReference: {fileID: 0}
+    - target: {fileID: 250494689945465921, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      propertyPath: _speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6312194505275650042, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalPosition.x
