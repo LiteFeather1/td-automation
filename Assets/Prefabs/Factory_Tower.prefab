@@ -144,8 +144,8 @@ MonoBehaviour:
   - {fileID: 2852253494418253493}
   - {fileID: 7757665323666236840}
   _starterTowers:
-  - {fileID: 2105097679800237734}
-  - {fileID: 2452374895070854462}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &80722398481535603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 977162742652903837, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
       propertyPath: m_Name
-      value: Base_Tower
+      value: Tower_Peashooter
       objectReference: {fileID: 0}
     - target: {fileID: 1034453377515651720, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -436,17 +436,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
---- !u!114 &2105097679800237734 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5105425056373330437, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
-  m_PrefabInstance: {fileID: 6623900211490008227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b021d7fdc868ca34f8c7d640fa99bb6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6176634078204866091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1034453377515651720, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
@@ -462,7 +451,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 977162742652903837, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
       propertyPath: m_Name
-      value: Base_Tower_1
+      value: Tower_Peashooter_1
       objectReference: {fileID: 0}
     - target: {fileID: 1034453377515651720, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -509,17 +498,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
---- !u!114 &2452374895070854462 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5105425056373330437, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
-  m_PrefabInstance: {fileID: 7265019727440408379}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b021d7fdc868ca34f8c7d640fa99bb6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7676831068855233971 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1034453377515651720, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
