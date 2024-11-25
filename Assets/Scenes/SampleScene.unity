@@ -5422,13 +5422,16 @@ MonoBehaviour:
     - {fileID: 932215714}
     - {fileID: 1471481709}
   _stages:
-  - _enemyGroups:
+  - _enemySpawns:
     - _spawnTime: 0
-      _enemies:
-      - {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
-    - _spawnTime: 5
-      _enemies:
-      - {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 2
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 4
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+  - _enemySpawns:
+    - _spawnTime: 1
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1001 &747855483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6161,10 +6164,16 @@ MonoBehaviour:
     - {fileID: 932215714}
     - {fileID: 1471481709}
   _stages:
-  - _enemyGroups:
+  - _enemySpawns:
     - _spawnTime: 0
-      _enemies:
-      - {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 2
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 4
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+  - _enemySpawns:
+    - _spawnTime: 1
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!114 &1070978075 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5841122198267309487, guid: 83ce6942affc43c4eb007a9f5b341c58, type: 3}
@@ -49794,13 +49803,16 @@ MonoBehaviour:
     - {fileID: 26762346}
     - {fileID: 1471481709}
   _stages:
-  - _enemyGroups:
+  - _enemySpawns:
     - _spawnTime: 0
-      _enemies:
-      - {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
-    - _spawnTime: 5
-      _enemies:
-      - {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 2
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 4
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+  - _enemySpawns:
+    - _spawnTime: 1
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1 &1832796646
 GameObject:
   m_ObjectHideFlags: 0
@@ -50377,13 +50389,16 @@ MonoBehaviour:
     - {fileID: 932215714}
     - {fileID: 1471481709}
   _stages:
-  - _enemyGroups:
+  - _enemySpawns:
     - _spawnTime: 0
-      _enemies:
-      - {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
-    - _spawnTime: 5
-      _enemies:
-      - {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 2
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 4
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+  - _enemySpawns:
+    - _spawnTime: 1
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1001 &6260903094316174325
 PrefabInstance:
   m_ObjectHideFlags: 0

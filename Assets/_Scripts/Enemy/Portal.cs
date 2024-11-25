@@ -11,7 +11,7 @@ public class Portal : MonoBehaviour
 
     public bool AllGroupsSpawned(int currentStage)
     {
-        return GetStage(currentStage).EnemyGroups.Length == _currentEnemyGroup;
+        return GetStage(currentStage).EnemySpawns.Length == _currentEnemyGroup;
     }
 
     public bool CanSpawn(int currentStage, float elapsedTime)
@@ -19,12 +19,12 @@ public class Portal : MonoBehaviour
         if (AllGroupsSpawned(currentStage))
             return false;
 
-        return GetStage(currentStage).EnemyGroups[_currentEnemyGroup].CanSpawn(elapsedTime);
+        return GetStage(currentStage).EnemySpawns[_currentEnemyGroup].CanSpawn(elapsedTime);
     }
 
-    public Enemy[] GetEnemies(int currentStage)
+    public Enemy GetEnemy(int currentStage)
     {
-        return GetStage(currentStage).EnemyGroups[_currentEnemyGroup++].Enemies;
+        return GetStage(currentStage).EnemySpawns[_currentEnemyGroup++].Enemy;
     }
 
     private Stage GetStage(int currentStage)
@@ -41,7 +41,7 @@ public class Portal : MonoBehaviour
     {
         foreach (var segment in _path.Segments)
         {
-            if (segment == null) 
+            if (segment == null)
                 continue;
 
             segment.OnDrawGizmosSelected();
@@ -51,18 +51,18 @@ public class Portal : MonoBehaviour
     [Serializable]
     public class Stage
     {
-        [SerializeField] private EnemyGroup[] _enemyGroups;
+        [SerializeField] private EnemySpawn[] _enemySpawns;
 
-        public EnemyGroup[] EnemyGroups => _enemyGroups;
+        public EnemySpawn[] EnemySpawns => _enemySpawns;
     }
 
     [Serializable]
-    public class EnemyGroup
+    public class EnemySpawn
     {
         [SerializeField] private float _spawnTime;
-        [SerializeField] private Enemy[] _enemies;
+        [SerializeField] private SOObjectPoolEnemy _enemyPool;
 
-        public Enemy[] Enemies => _enemies;
+        public Enemy Enemy => _enemyPool.ObjectPool.GetObject();
 
         public bool CanSpawn(float elapsedTime) => elapsedTime > _spawnTime;
     }
