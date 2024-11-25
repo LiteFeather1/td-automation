@@ -54,26 +54,18 @@ public class PlacementSystem : MonoBehaviour
             return;
 
         _mousePos = mousePos;
-        _canPlaceBuilding = (
-            !r_buildings.ContainsKey(mousePos)
-            && !_pathTilemap.HasTile(worldPos)
-            && _groundTilemap.HasTile(worldPos)
-        );
-
+        SetCanPlaceBuilding(worldPos);
 
         if (_buildingToPlace != null)
         {
-            _buildingToPlace.transform.localPosition = worldPos;
             _buildingToPlace.SetColour(_canPlaceBuilding && !_resourceNodes.ContainsKey(mousePos)
                 ? Color.white : _notPlaceableHighlight);
+            _buildingToPlace.transform.localPosition = worldPos;
             return;
         }
         else
         {
-            if (_resourceNodes.ContainsKey(mousePos))
-                _tileHighlight.color = _nodeHighlight;
-            else
-                _tileHighlight.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
+            SetHighlightColour();
             _tileHighlight.transform.localPosition = worldPos;
         }
 
@@ -163,17 +155,20 @@ public class PlacementSystem : MonoBehaviour
         _buildingToPlace = Instantiate(
             _buildingPrefab, _buildingToPlace.transform.position, _buildingToPlace.transform.rotation
         );
+        _buildingToPlace.SetColour(_notPlaceableHighlight);
     }
 
     public void TryCancelOrDesconstructBuilding()
     {
         if (_buildingToPlace != null)
         {
+            _tileHighlight.enabled = true;
+            _tileHighlight.transform.position = _buildingToPlace.transform.position;
+            SetCanPlaceBuilding((Vector3Int)_mousePos);
+            SetHighlightColour();
+
             Destroy(_buildingToPlace.gameObject);
             _buildingPrefab = null;
-
-            _tileHighlight.enabled = true;
-            _tileHighlight.transform.eulerAngles = Vector3.zero;
         }
         else if (r_buildings.TryGetValue(_mousePos, out var building) && building.CanBeDestroyed)
         {
@@ -219,8 +214,25 @@ public class PlacementSystem : MonoBehaviour
     private void UnhoverResource()
     {
         OnHoverableUnhovered?.Invoke();
-        _currentHoverable.Unhover();
+        _currentHoverable?.Unhover();
         _currentHoverable = null;
+    }
+
+    private void SetCanPlaceBuilding(Vector3Int worldPos)
+    {
+        _canPlaceBuilding = (
+            !r_buildings.ContainsKey(_mousePos)
+            && !_pathTilemap.HasTile(worldPos)
+            && _groundTilemap.HasTile(worldPos)
+        );
+    }
+
+    private void SetHighlightColour()
+    {
+        if (_resourceNodes.ContainsKey(_mousePos))
+            _tileHighlight.color = _nodeHighlight;
+        else
+            _tileHighlight.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
     }
 
 #if UNITY_EDITOR
