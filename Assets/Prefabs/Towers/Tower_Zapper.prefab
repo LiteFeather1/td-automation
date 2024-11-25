@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07bf5830fe85b84fa8979698ace609f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Peashooter
+  _name: Zapper
   _resourcesCost:
     _entries:
     - Key: 100
