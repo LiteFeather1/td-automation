@@ -5,7 +5,7 @@ public class ResourceCollector : Building, IOutPort
 {
     [Header("Resource Collector")]
     [SerializeField] private ResourceType _type;
-    [SerializeField] private float _range = 5f;
+    [SerializeField] private Transform _range;
     [SerializeField] private float _timeToCollect = 5f;
     [SerializeField] private float _speedPerNode = 2f;
 
@@ -16,10 +16,12 @@ public class ResourceCollector : Building, IOutPort
     public IInPort Port { get; set; }
     public Direction OutDirection { get; set; } = Direction.Right;
 
+    private float Range => _range.localScale.x * .5f;
+
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
-    public void Update()
+    internal void Update()
     {
         if (Port == null || !Port.CanReceiveResource(_type))
             return;
@@ -36,7 +38,7 @@ public class ResourceCollector : Building, IOutPort
         ));
     }
 
-    public void OnDisable()
+    internal void OnDisable()
     {
         foreach (var node in r_resourceNodes)
         {
@@ -44,9 +46,24 @@ public class ResourceCollector : Building, IOutPort
         }
     }
 
+    public override void Place()
+    {
+        _range.gameObject.SetActive(false);
+    }
+
+    public override void Hover()
+    {
+        _range.gameObject.SetActive(true);
+    }
+
+    public override void Unhover()
+    {
+        _range.gameObject.SetActive(false);
+    }
+
     public void TryAddNode(ResourceNode node)
     {
-        if (node.Type != _type || Vector2Int.Distance(Position, node.Position) > _range)
+        if (node.Type != _type || Vector2Int.Distance(Position, node.Position) > Range)
             return;
 
         r_resourceNodes.Add(node);
@@ -78,11 +95,5 @@ public class ResourceCollector : Building, IOutPort
         var colour = _sr.color;
         colour.a = alpha;
         _sr.color = colour;
-    }
-
-    public void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _range);
     }
 }
