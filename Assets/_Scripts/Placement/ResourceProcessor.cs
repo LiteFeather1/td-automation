@@ -20,7 +20,11 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 
     internal void Update()
     {
-        if (Port != null && _processedResource != null)
+        if (
+            Port != null
+            && _processedResource != null
+            && Port.CanReceiveResource(_processedResource.Type)
+        )
         {
             Port.ReceiveResource(_processedResource);
             _processedResource = null;
@@ -44,8 +48,15 @@ public class ResourceProcessor : Building, IInPort, IOutPort
     public bool CanReceiveResource(ResourceType type)
         => _processingResource == null && _processedResource == null && type == _resourceType;
 
-    public void ReceiveResource(ResourceBehaviour resource)
+    public void ReceiveResource(ResourceBehaviour resource) => _processingResource = resource;
+
+    public override void Destroy()
     {
-        _processingResource = resource;
+        base.Destroy();
+        if (_processedResource != null)
+            Destroy(_processedResource.gameObject);
+
+        if (_processingResource != null)
+            Destroy(_processingResource.gameObject);
     }
 }
