@@ -80,11 +80,6 @@ public class GameHUD : MonoBehaviour
         UpdateBuildingButtons(resourceType, amount);
     }
 
-    public void UpdatePlayerHealth(float _, IDamageable damageable)
-    {
-        i_playerHealth.fillAmount = damageable.HP / damageable.MaxHP;
-    }
-
     public void SetWave(int wave)
     {
         t_currentWave.text = $"Wave {wave + 1}";
@@ -98,6 +93,16 @@ public class GameHUD : MonoBehaviour
     public void SetTimeToWave(string text)
     {
         t_timeToWave.text = text;
+    }
+
+    public void UpdatePlayerHealth(float _, IDamageable damageable)
+    {
+        i_playerHealth.fillAmount = damageable.HP / damageable.MaxHP;
+    }
+
+    public void SetTowerCount(int count)
+    {
+        t_towerCount.text = count.ToString();
     }
 
     public void UpdateAmountsAndBuildingButtons(Dictionary<ResourceType, int> resources)

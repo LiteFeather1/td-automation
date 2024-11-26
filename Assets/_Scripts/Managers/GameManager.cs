@@ -18,6 +18,8 @@ public class GameManager : Singleton<GameManager>
 
     private float _elapsedTime;
 
+    private int _towerCount;
+
     public FactoryTower TowerFactory => _factoryTower;
 
     internal void OnEnable()
@@ -64,6 +66,7 @@ public class GameManager : Singleton<GameManager>
         AddBuildings(_factoryTower.StarterTowers);
 
         _gameHUD.SetWave(_enemyManager.CurrentStage);
+        _gameHUD.SetTowerCount(_towerCount = _factoryTower.StarterTowers.Length);
 
         void AddBuildings(Building[] buildings)
         {
@@ -155,6 +158,11 @@ public class GameManager : Singleton<GameManager>
             _beltPathSystem.AddOutPort(outPort);
         }
 
+        if (building is Tower)
+        {
+            _gameHUD.SetTowerCount(++_towerCount);
+        }
+
         _factoryTower.RemoveResources(building.ResourceCost);
 
         if (!_factoryTower.HasEnoughResourceToBuild(building.ResourceCost))
@@ -166,6 +174,11 @@ public class GameManager : Singleton<GameManager>
         _beltPathSystem.TryRemovePosition(building.Position);
 
         _factoryTower.AddResources(building.ResourceCost);
+
+        if (building is Tower)
+        {
+            _gameHUD.SetTowerCount(--_towerCount);
+        }
     }
 
     private void EnemyKilled()
