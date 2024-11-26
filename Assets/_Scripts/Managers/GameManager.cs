@@ -34,7 +34,7 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.OnHoverableUnhovered += _gameHUD.HideHover;
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
-        _enemyManager.OnEnemyKilled += _endScreen.AddEnemyKilled;
+        _enemyManager.OnEnemyKilled += EnemyKilled;
         _enemyManager.OnWaveStarted += WaveStarted;
         _enemyManager.OnStageEnded += _gameHUD.SetWave;
         _enemyManager.OnAllStagesEnded += AllStagesEnded;
@@ -99,7 +99,7 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.OnHoverableUnhovered -= _gameHUD.HideHover;
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
-        _enemyManager.OnEnemyKilled -= _endScreen.AddEnemyKilled;
+        _enemyManager.OnEnemyKilled -= EnemyKilled;
         _enemyManager.OnWaveStarted -= WaveStarted;
         _enemyManager.OnStageEnded -= _gameHUD.SetWave;
         _enemyManager.OnAllStagesEnded -= AllStagesEnded;
@@ -166,6 +166,12 @@ public class GameManager : Singleton<GameManager>
         _beltPathSystem.TryRemovePosition(building.Position);
 
         _factoryTower.AddResources(building.ResourceCost);
+    }
+
+    private void EnemyKilled()
+    {
+        _endScreen.AddEnemyKilled();
+        _factoryTower.AddResource(ResourceType.Essence);
     }
 
     private void WaveStarted()
