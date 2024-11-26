@@ -83,6 +83,15 @@ public class FactoryTower : MonoBehaviour
         OnResourcesAdded?.Invoke(r_resources);
     }
 
+    public bool HasEnoughResourceToBuild(IDictionary<ResourceType, int> resourceCosts)
+    {
+        foreach (var resourceCost in resourceCosts)
+            if (r_resources[resourceCost.Key] < -resourceCost.Value)
+                return false;
+
+        return true;
+    }
+
     private void OnResourceGot(ResourceBehaviour resource)
     {
         ModifyResource(resource.Type, 1);

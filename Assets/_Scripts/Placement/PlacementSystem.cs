@@ -45,7 +45,7 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
+    internal void FixedUpdate()
     {
         var worldPos = Vector3Int.RoundToInt(_camera.ScreenToWorldPoint(Input.mousePosition));
         worldPos.z = 0;
@@ -93,7 +93,6 @@ public class PlacementSystem : MonoBehaviour
     public void SetPlaceable(PlaceableData placeableData)
     {
         _tileHighlight.enabled = false;
-        _tileHighlight.transform.eulerAngles = new(0f, 0f, 0f);
 
         _buildingPrefab = placeableData.BuildingPrefab;
 
@@ -103,11 +102,16 @@ public class PlacementSystem : MonoBehaviour
         _outDirection = _buildingToPlace is IOutPort outPort ? outPort.OutDirection : Direction.None;
     }
 
-    public void AddBuilding(Building building)
+    public void AddBuildingRaw(Building building)
     {
         building.Place();
         r_buildings.Add(building.Position, building);
         r_hoverables.Add(building.Position, building);
+    }
+
+    public void AddBuilding(Building building)
+    {
+        AddBuildingRaw(building);
         OnBuildingPlaced?.Invoke(building);
     }
 
@@ -150,22 +154,28 @@ public class PlacementSystem : MonoBehaviour
         }
 
         _buildingToPlace.SetSortingOrder(0);
-        AddBuilding(_buildingToPlace);
+        var newBuilding = _buildingToPlace;
         InstantiateBuilding();
         _buildingToPlace.SetColour(_notPlaceableHighlight);
+        AddBuilding(newBuilding);
+    }
+
+    public void UnselectBuildingBuilding()
+    {
+        _tileHighlight.enabled = true;
+        _tileHighlight.transform.position = _buildingToPlace.transform.position;
+        SetCanPlaceBuilding((Vector3Int)_mousePos);
+        SetHighlightColour();
+
+        Destroy(_buildingToPlace.gameObject);
+        _buildingPrefab = null;
     }
 
     public void TryCancelOrDesconstructBuilding()
     {
         if (_buildingToPlace != null)
         {
-            _tileHighlight.enabled = true;
-            _tileHighlight.transform.position = _buildingToPlace.transform.position;
-            SetCanPlaceBuilding((Vector3Int)_mousePos);
-            SetHighlightColour();
-
-            Destroy(_buildingToPlace.gameObject);
-            _buildingPrefab = null;
+            UnselectBuildingBuilding();
         }
         else if (r_buildings.TryGetValue(_mousePos, out var building) && building.CanBeDestroyed)
         {

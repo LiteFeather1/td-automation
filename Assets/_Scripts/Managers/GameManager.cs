@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
 
     public FactoryTower TowerFactory => _factoryTower;
 
-    public void OnEnable()
+    internal void OnEnable()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.LMB.performed += PlaceBuilding;
@@ -58,7 +58,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void Start()
+    internal void Start()
     {
         AddBuildings(_factoryTower.Receivers);
         AddBuildings(_factoryTower.StarterTowers);
@@ -70,14 +70,14 @@ public class GameManager : Singleton<GameManager>
             foreach (var building in buildings)
             {
                 building.Position = Vector2Int.FloorToInt(building.transform.position);
-                _placementSystem.AddBuilding(building);
+                _placementSystem.AddBuildingRaw(building);
             }
         }
 
         _endScreen.Init();
     }
 
-    public void Update()
+    internal void Update()
     {
         _elapsedTime += Time.deltaTime;
 
@@ -85,7 +85,7 @@ public class GameManager : Singleton<GameManager>
             _gameHUD.SetTimeToWave(_enemyManager.TimeToWave);
     }
 
-    public void OnDisable()
+    internal void OnDisable()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
         inputs.LMB.performed -= PlaceBuilding;
@@ -156,6 +156,9 @@ public class GameManager : Singleton<GameManager>
         }
 
         _factoryTower.RemoveResources(building.ResourceCost);
+
+        if (!_factoryTower.HasEnoughResourceToBuild(building.ResourceCost))
+            _placementSystem.UnselectBuildingBuilding();
     }
 
     public void BuildingRemoved(Building building)
