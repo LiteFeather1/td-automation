@@ -1124,11 +1124,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3410277556084309178}
   - {fileID: 1597341181277116795}
   - {fileID: 4158620324624364240}
   - {fileID: 3651361232367841219}
   - {fileID: 1049027730526077878}
+  - {fileID: 3410277556084309178}
   - {fileID: 6373194551141030613}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1231,7 +1231,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -4370,6 +4370,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _resourceDescription
+      value: "<b>Wood</b>\nGatherable from <b>Trees</b> by left click on it \nor\nAutomated
+        with <b>Tree Cutters</b>"
+      objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
       value: UI_Resource_Wood
@@ -4482,6 +4487,15 @@ PrefabInstance:
     - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456319167590790980, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _resourceDescription
+      value: "<b>Metal Plate</b>\nProcessed resource made by suppling \n<b>Metal</b>
+        to a <b>Smelter</b>"
       objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
@@ -4717,6 +4731,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6456319167590790980, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _resourceDescription
+      value: '<b>Essence</b>
+
+        Automatically collected when killing enemies.'
+      objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
       value: UI_Resource_Essence
@@ -4830,6 +4854,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6456319167590790980, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _resourceDescription
+      value: "<b>Wood Plank</b>\nProcessed resource made by suppling \n<b>Wood</b>
+        to a <b>Sawmill</b>"
+      objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
       value: UI_Resource_Wood_Plank
@@ -4942,6 +4975,15 @@ PrefabInstance:
     - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456319167590790980, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _resourceDescription
+      value: "<b>Metal</b>\nGatherable from Stones by left click on it \nor\nAutomated
+        with Quarries"
       objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name

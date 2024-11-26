@@ -50345,6 +50345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lullStageDurations:
   - 60
+  - 20
   _portals:
   - {fileID: 1741471820}
   - {fileID: 740015674}

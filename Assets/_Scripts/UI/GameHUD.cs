@@ -38,6 +38,12 @@ public class GameHUD : MonoBehaviour
 
     internal void OnEnable()
     {
+        foreach (var uiResource in _uiResources.Values)
+        {
+            uiResource.OnMouseHover += ShowUIResourceDescription;
+            uiResource.OnMouseUnhover += HideHover;
+        }
+
         foreach (var buildingButton in _uiBuildingButtons)
         {
             buildingButton.OnButtonHovered += BuildingButtonHovered;
@@ -55,6 +61,12 @@ public class GameHUD : MonoBehaviour
 
     internal void OnDisable()
     {
+        foreach (var uiResource in _uiResources.Values)
+        {
+            uiResource.OnMouseHover -= ShowUIResourceDescription;
+            uiResource.OnMouseUnhover -= HideHover;
+        }
+
         foreach (var buildingButton in _uiBuildingButtons)
         {
             buildingButton.OnButtonHovered -= BuildingButtonHovered;
@@ -97,6 +109,28 @@ public class GameHUD : MonoBehaviour
         }
     }
 
+    public void ShowHover(IHoverable hoverable)
+    {
+        ShowHover(hoverable.GetText());
+    }
+
+    public void HideHover()
+    {
+        _hoverBuildingInfo.gameObject.SetActive(false);
+    }
+
+    private void ShowHover(string text)
+    {
+        t_hoverBuilding.text = text;
+        _hoverBuildingInfo.gameObject.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_hoverBuildingInfo);
+    }
+
+    private void ShowUIResourceDescription(string description)
+    {
+        ShowHover(description);
+    }
+
     private void UpdateBuildingButtons(ResourceType type, int cost)
     {
         foreach (var button in _uiBuildingButtons)
@@ -113,18 +147,6 @@ public class GameHUD : MonoBehaviour
 
             button.SetButtonInteractable(count == button.ResourceCost.Count);
         }
-    }
-
-    public void SetHoverBuilding(IHoverable hoverable)
-    {
-        t_hoverBuilding.text = hoverable.GetText();
-        _hoverBuildingInfo.gameObject.SetActive(true);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_hoverBuildingInfo);
-    }
-
-    public void UnhoverBuilding()
-    {
-        _hoverBuildingInfo.gameObject.SetActive(false);
     }
 
     private void BuildingButtonHovered(UIBuildingButton buildingButton)

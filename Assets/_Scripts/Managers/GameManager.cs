@@ -30,8 +30,8 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.OnBuildingPlaced += BuildingPlaced;
         _placementSystem.OnBuildingRemoved += BuildingRemoved;
         _placementSystem.OnResourceCollected += _factoryTower.AddResource;
-        _placementSystem.OnHoverableHovered += _gameHUD.SetHoverBuilding;
-        _placementSystem.OnHoverableUnhovered += _gameHUD.UnhoverBuilding;
+        _placementSystem.OnHoverableHovered += _gameHUD.ShowHover;
+        _placementSystem.OnHoverableUnhovered += _gameHUD.HideHover;
 
         _enemyManager.OnEnemyReachedPathEnd += _factoryTower.Health.TakeDamage;
         _enemyManager.OnEnemyKilled += _endScreen.AddEnemyKilled;
@@ -95,8 +95,8 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.OnBuildingPlaced -= BuildingPlaced;
         _placementSystem.OnBuildingRemoved -= BuildingRemoved;
         _placementSystem.OnResourceCollected -= _factoryTower.AddResource;
-        _placementSystem.OnHoverableHovered -= _gameHUD.SetHoverBuilding;
-        _placementSystem.OnHoverableUnhovered -= _gameHUD.UnhoverBuilding;
+        _placementSystem.OnHoverableHovered -= _gameHUD.ShowHover;
+        _placementSystem.OnHoverableUnhovered -= _gameHUD.HideHover;
 
         _enemyManager.OnEnemyReachedPathEnd -= _factoryTower.Health.TakeDamage;
         _enemyManager.OnEnemyKilled -= _endScreen.AddEnemyKilled;
