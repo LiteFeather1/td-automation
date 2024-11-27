@@ -68,6 +68,8 @@ public class GameManager : Singleton<GameManager>
         _gameHUD.SetWave(_enemyManager.CurrentStage);
         _gameHUD.SetTowerCount(_towerCount = _factoryTower.StarterTowers.Length);
 
+        _endScreen.Init();
+
         void AddBuildings(Building[] buildings)
         {
             foreach (var building in buildings)
@@ -76,8 +78,6 @@ public class GameManager : Singleton<GameManager>
                 _placementSystem.AddBuildingRaw(building);
             }
         }
-
-        _endScreen.Init();
     }
 
     internal void Update()

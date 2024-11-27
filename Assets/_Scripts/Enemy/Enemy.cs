@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     [Header("References")]
     [SerializeField] private Health _health;
     [SerializeField] private PathFollow _pathFollow;
-
+    [SerializeField] private HitFlash _hitFlash;
 
     public Action<Enemy> OnDied { get; set; }
     public Action<Enemy> OnPathReached { get; set; }
@@ -23,12 +23,14 @@ public class Enemy : MonoBehaviour
     public void Awake()
     {
         _health.OnDied += Died;
+        _health.OnDamageTaken += DamageTaken;
         _pathFollow.OnPathFinished += PathFinished;
     }
 
     public void Destroy()
     {
         _health.OnDied -= Died;
+        _health.OnDamageTaken -= DamageTaken;
         _pathFollow.OnPathFinished -= PathFinished;
     }
 
@@ -41,6 +43,11 @@ public class Enemy : MonoBehaviour
     private void Died()
     {
         OnDied?.Invoke(this);
+    }
+
+    private void DamageTaken(float _, IDamageable __)
+    {
+        _hitFlash.DoFlash();
     }
 
     private void PathFinished()
