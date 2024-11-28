@@ -133,8 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf843a2409ed9244b8feac2b7a05f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
   _resourcesCost:
     _entries: []
+  _sr: {fileID: 0}
   _timeToCollect: 1
   _resourceToGive: {fileID: 143309904664887199, guid: 228b6141f32a7544eb14f7b291d7ad28, type: 3}
 --- !u!212 &6812179435623572066
