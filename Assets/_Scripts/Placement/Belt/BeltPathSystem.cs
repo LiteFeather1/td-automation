@@ -15,6 +15,14 @@ public class BeltPathSystem : MonoBehaviour
         { Direction.Down, sr_directions[3] },
     };
 
+    private static readonly Dictionary<Direction, Direction> sr_directionToOpposite = new()
+    {
+        { Direction.Left, Direction.Right},
+        { Direction.Right, Direction.Left},
+        { Direction.Up, Direction.Down},
+        { Direction.Down, Direction.Up},
+    };
+
     private readonly Dictionary<Vector2Int, IInPort> r_inPorts = new();
     private readonly Dictionary<Vector2Int, IOutPort> r_outPort = new();
 
@@ -59,11 +67,36 @@ public class BeltPathSystem : MonoBehaviour
     {
         r_outPort.Add(newOutPort.Position, newOutPort);
 
-        if (r_inPorts.TryGetValue(
-            newOutPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
-        ))
+        if (newOutPort.OutDirection == Direction.Any)
         {
-            newOutPort.Ports[0] = inPort;
+            foreach (var direction in sr_direction)
+            {
+                if (direction.Key == newOutPort.OutDirection
+                    || !r_inPorts.TryGetValue(newOutPort.Position + direction.Value, out var inPort)
+                    || inPort.InDirection != sr_directionToOpposite[direction.Key]
+                )
+                    continue;
+
+                for (var i = 0; i < newOutPort.Ports.Length; i++)
+                {
+                    if (newOutPort.Ports[i] == null)
+                    {
+                        newOutPort.Ports[i] = inPort;
+                        break;
+                    }
+                }
+            }
+
+            return;
+        }
+        else
+        {
+            if (r_inPorts.TryGetValue(
+                newOutPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
+            ))
+            {
+                newOutPort.Ports[0] = inPort;
+            }
         }
     }
 

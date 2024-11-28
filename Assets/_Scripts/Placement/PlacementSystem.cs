@@ -187,7 +187,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void RotateBuilding()
     {
-        if (_buildingToPlace == null && !_buildingToPlace.CanBeRotated)
+        if (_buildingToPlace == null || !_buildingToPlace.CanBeRotated)
             return;
 
         _buildingToPlace.transform.eulerAngles = new(
