@@ -1,6 +1,6 @@
 
 public interface IOutPort : IPlaceable
 {
-	public IInPort Port { get; set; }
+	public IInPort[] Ports { get; }
 	public Direction OutDirection { get; set; }
 }

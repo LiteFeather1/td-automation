@@ -7,7 +7,6 @@ public class Receiver : Building, IInPort
 
     public Action<ResourceBehaviour> OnResourceGot { get; set; }
 
-
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => false;
 

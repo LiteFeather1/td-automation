@@ -8,25 +8,28 @@ public class ResourceProcessor : Building, IInPort, IOutPort
     [SerializeField] private float _timeToProcessResource = 1f;
     private float _elapsedTime;
 
+    private readonly IInPort[] r_ports = new IInPort[1];
+
     private ResourceBehaviour _processingResource;
     private ResourceBehaviour _processedResource;
 
-    public IInPort Port { get; set; }
     public Direction InDirection { get; set; } = Direction.Left;
     public Direction OutDirection { get; set; } = Direction.Right;
 
+    public IInPort[] Ports => r_ports;
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
     internal void Update()
     {
+        var port = r_ports[0];
         if (
-            Port != null
+            port != null
             && _processedResource != null
-            && Port.CanReceiveResource(_processedResource.Type)
+            && port.CanReceiveResource(_processedResource.Type)
         )
         {
-            Port.ReceiveResource(_processedResource);
+            port.ReceiveResource(_processedResource);
             _processedResource = null;
         }
 
@@ -41,7 +44,7 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 
         _processingResource.Deactive();
         _processedResource = _processedBehaviourPool.ObjectPool.GetObject();
-        _processedResource.transform.position = (Vector2)Port.Position;
+        _processedResource.transform.position = (Vector2)port.Position;
         _processedResource.gameObject.SetActive(true);
     }
 

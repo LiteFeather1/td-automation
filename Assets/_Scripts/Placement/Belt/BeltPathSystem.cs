@@ -31,7 +31,7 @@ public class BeltPathSystem : MonoBehaviour
                 newInPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
             ))
             {
-                newOutPort.Port = inPort;
+                newOutPort.Ports[0] = inPort;
             }
         }
 
@@ -42,14 +42,14 @@ public class BeltPathSystem : MonoBehaviour
                 if (inPort is IOutPort outPort
                     && newInPort.Position == inPort.Position + sr_direction[outPort.OutDirection])
                 {
-                    outPort.Port = newInPort;
+                    outPort.Ports[0] = newInPort;
                 }
             }
             else if (r_outPort.TryGetValue(newInPort.Position + direction, out var outPort))
             {
                 if (newInPort.Position == outPort.Position + sr_direction[outPort.OutDirection])
                 {
-                    outPort.Port = newInPort;
+                    outPort.Ports[0] = newInPort;
                 }
             }
         }
@@ -63,7 +63,7 @@ public class BeltPathSystem : MonoBehaviour
             newOutPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
         ))
         {
-            newOutPort.Port = inPort;
+            newOutPort.Ports[0] = inPort;
         }
     }
 
@@ -77,7 +77,7 @@ public class BeltPathSystem : MonoBehaviour
                 {
                     if (r_outPort.TryGetValue(position + direction, out var outPort))
                     {
-                        outPort.Port = null;
+                        outPort.Ports[0] = null;
                     }
                 }
             }
@@ -85,7 +85,7 @@ public class BeltPathSystem : MonoBehaviour
             {
                 if (r_outPort.TryGetValue(position - sr_direction[inPort.InDirection], out var outPort))
                 {
-                    outPort.Port = null;
+                    outPort.Ports[0] = null;
                 }
             }
 

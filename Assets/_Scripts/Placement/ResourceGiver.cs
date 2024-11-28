@@ -8,23 +8,26 @@ public class ResourceGiver : Building, IOutPort
     private Direction _outDirection = Direction.Right;
     private float _elapsedTime = 0f;
 
-    public IInPort Port { get; set; }
+    private readonly IInPort[] r_ports = new IInPort[0];
+
     public Direction OutDirection { get => _outDirection; set => _outDirection = value; }
 
+    public IInPort[] Ports => r_ports;
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
     public void Update()
     {
-        if (Port == null || !Port.CanReceiveResource(_resourceToGive.Type))
+        var port = r_ports[0];
+        if (port == null || !port.CanReceiveResource(_resourceToGive.Type))
             return;
 
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime > _timeToCollect)
         {
             _elapsedTime %= _timeToCollect;
-            Port.ReceiveResource(Instantiate(
-                _resourceToGive, new(Port.Position.x, Port.Position.y), Quaternion.identity
+            r_ports[0].ReceiveResource(Instantiate(
+                _resourceToGive, new(port.Position.x, port.Position.y), Quaternion.identity
             ));
         }
     }

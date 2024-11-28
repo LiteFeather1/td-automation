@@ -11,19 +11,23 @@ public class ResourceCollector : Building, IOutPort
 
     private float _elapsedTime = 0f;
 
+    private readonly IInPort[] r_ports = new IInPort[1];
+
     private readonly List<ResourceNode> r_resourceNodes = new();
 
-    public IInPort Port { get; set; }
     public Direction OutDirection { get; set; } = Direction.Right;
 
-    private float Range => _range.localScale.x * .5f;
 
+    public IInPort[] Ports => r_ports;
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
+    private float Range => _range.localScale.x * .5f;
+
     internal void Update()
     {
-        if (Port == null || !Port.CanReceiveResource(_type))
+        var port = r_ports[0];
+        if (port == null || !port.CanReceiveResource(_type))
             return;
 
         _elapsedTime += Time.deltaTime * _speedPerNode * r_resourceNodes.Count;
@@ -33,8 +37,8 @@ public class ResourceCollector : Building, IOutPort
         _elapsedTime %= _timeToCollect;
 
         var resource = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource();
-        resource.transform.position = (Vector2)Port.Position;
-        Port.ReceiveResource(resource);
+        resource.transform.position = (Vector2)port.Position;
+        port.ReceiveResource(resource);
         resource.gameObject.SetActive(true);
     }
 

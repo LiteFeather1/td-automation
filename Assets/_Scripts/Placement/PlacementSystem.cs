@@ -96,20 +96,17 @@ public class PlacementSystem : MonoBehaviour
 
         _buildingPrefab = placeableData.BuildingPrefab;
 
-        InstantiateBuilding();
+        InstantiateBuilding(Quaternion.identity);
 
         _inDirection = _buildingToPlace is IInPort inPort ? inPort.InDirection : Direction.None;
         _outDirection = _buildingToPlace is IOutPort outPort ? outPort.OutDirection : Direction.None;
     }
 
+    public void AddBuilding(Building building)
     {
         building.Place();
         r_buildings.Add(building.Position, building);
         r_hoverables.Add(building.Position, building);
-
-    public void AddBuilding(Building building)
-    {
-        AddBuildingRaw(building);
         OnBuildingPlaced?.Invoke(building);
     }
 
@@ -133,7 +130,7 @@ public class PlacementSystem : MonoBehaviour
 
         if (_buildingToPlace is IInPort inPort)
         {
-            inPort.InDirection = _outDirection;
+            inPort.InDirection = _inDirection;
         }
 
         if (_buildingToPlace is IOutPort outPort)
@@ -153,7 +150,7 @@ public class PlacementSystem : MonoBehaviour
 
         _buildingToPlace.SetSortingOrder(0);
         var newBuilding = _buildingToPlace;
-        InstantiateBuilding();
+        InstantiateBuilding(_buildingToPlace.transform.rotation);
         _buildingToPlace.SetColour(_notPlaceableHighlight);
         AddBuilding(newBuilding);
     }
@@ -240,10 +237,10 @@ public class PlacementSystem : MonoBehaviour
             _tileHighlight.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
     }
 
-    private void InstantiateBuilding()
+    private void InstantiateBuilding(Quaternion rotation)
     {
         _buildingToPlace = Instantiate(
-            _buildingPrefab, _tileHighlight.transform.position, Quaternion.identity
+            _buildingPrefab, _tileHighlight.transform.position, rotation
         );
         _buildingToPlace.SetSortingOrder(2);
     }
