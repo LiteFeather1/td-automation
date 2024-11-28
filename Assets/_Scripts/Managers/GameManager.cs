@@ -148,21 +148,24 @@ public class GameManager : Singleton<GameManager>
 
     public void BuildingPlaced(Building building)
     {
-        if (building is IInPort inPort)
-        {
-            _beltPathSystem.AddIInPort(inPort);
-        }
-
-        if (building is IOutPort outPort)
-        {
-            _beltPathSystem.AddOutPort(outPort);
-        }
 
         if (building is Tower)
         {
             _gameHUD.SetTowerCount(++_towerCount);
         }
+        else
+        {
+            if (building is IInPort inPort)
+            {
+                _beltPathSystem.AddIInPort(inPort);
+            }
 
+            if (building is IOutPort outPort)
+            {
+                _beltPathSystem.AddOutPort(outPort);
+            }
+        }
+        
         _factoryTower.RemoveResources(building.ResourceCost);
 
         if (!_factoryTower.HasEnoughResourceToBuild(building.ResourceCost))

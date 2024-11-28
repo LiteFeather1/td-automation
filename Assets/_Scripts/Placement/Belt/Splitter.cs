@@ -20,12 +20,13 @@ public class Splitter : Building, IOutPort, IInPort
         for (var i = 0; i < r_ports.Length; i++)
         {
             var port = r_ports[(i + _offset) % r_ports.Length];
-            if (port == null || !port.CanReceiveResource(_resource.Type))
-                continue;
-
-            port.ReceiveResource(_resource);
-            _resource = null;
-            _offset++;
+            if (port != null && port.CanReceiveResource(_resource.Type))
+            {
+                port.ReceiveResource(_resource);
+                _resource = null;
+                _offset++;
+                break;
+            }
         }
     }
 
@@ -47,5 +48,11 @@ public class Splitter : Building, IOutPort, IInPort
     public void ReceiveResource(ResourceBehaviour resource)
     {
         _resource = resource;
+    }
+
+    public override void Destroy()
+    {
+        base.Destroy();
+        _resource?.Deactive();
     }
 }

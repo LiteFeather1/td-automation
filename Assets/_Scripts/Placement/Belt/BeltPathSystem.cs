@@ -30,32 +30,23 @@ public class BeltPathSystem : MonoBehaviour
     {
         r_inPorts.Add(newInPort.Position, newInPort);
 
-        if (r_inPorts.Count == 1)
-            return;
-
-        if (newInPort is IOutPort newOutPort)
+        if (newInPort.InDirection == Direction.Any)
         {
-            if (r_inPorts.TryGetValue(
-                newInPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
+
+        }
+        else
+        {
+            if (r_outPort.TryGetValue(
+                newInPort.Position + sr_direction[newInPort.InDirection], out var outPort
             ))
             {
-                newOutPort.SetPort(inPort, 0);
-            }
-        }
-
-        foreach (var direction in sr_directions)
-        {
-            if (r_inPorts.TryGetValue(newInPort.Position + direction, out var inPort))
-            {
-                if (inPort is IOutPort outPort
-                    && newInPort.Position == inPort.Position + sr_direction[outPort.OutDirection])
+                if (outPort.OutDirection == Direction.Any)
                 {
-                    outPort.SetPort(newInPort, 0);
+                    if (outPort is IInPort inPort)
+                    {
+                    }
                 }
-            }
-            else if (r_outPort.TryGetValue(newInPort.Position + direction, out var outPort))
-            {
-                if (newInPort.Position == outPort.Position + sr_direction[outPort.OutDirection])
+                else if (outPort.OutDirection == sr_directionToOpposite[newInPort.InDirection])
                 {
                     outPort.SetPort(newInPort, 0);
                 }
@@ -86,13 +77,14 @@ public class BeltPathSystem : MonoBehaviour
                     }
                 }
             }
-
-            return;
         }
         else
         {
             if (r_inPorts.TryGetValue(
                 newOutPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
+            ) && (
+                inPort.InDirection == Direction.Any
+                ||  inPort.InDirection == sr_directionToOpposite[newOutPort.OutDirection]
             ))
             {
                 newOutPort.SetPort(inPort, 0);
