@@ -75,7 +75,7 @@ public class GameManager : Singleton<GameManager>
             foreach (var building in buildings)
             {
                 building.Position = Vector2Int.FloorToInt(building.transform.position);
-                _placementSystem.AddBuildingRaw(building);
+                _placementSystem.AddBuilding(building);
             }
         }
     }

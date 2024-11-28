@@ -102,12 +102,10 @@ public class PlacementSystem : MonoBehaviour
         _outDirection = _buildingToPlace is IOutPort outPort ? outPort.OutDirection : Direction.None;
     }
 
-    public void AddBuildingRaw(Building building)
     {
         building.Place();
         r_buildings.Add(building.Position, building);
         r_hoverables.Add(building.Position, building);
-    }
 
     public void AddBuilding(Building building)
     {
