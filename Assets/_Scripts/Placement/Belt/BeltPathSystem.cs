@@ -44,6 +44,17 @@ public class BeltPathSystem : MonoBehaviour
                 {
                     if (outPort is IInPort inPort)
                     {
+                        if (newInPort.Position == outPort.Position + sr_direction[inPort.InDirection])
+                            return;
+
+                        for (var i = 0; i < 3; i++)
+                        {
+                            if (outPort.GetPort(i) == null)
+                            {
+                                outPort.SetPort(newInPort, i);
+                                break;
+                            }
+                        }
                     }
                 }
                 else if (outPort.OutDirection == sr_directionToOpposite[newInPort.InDirection])
