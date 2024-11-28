@@ -1,3 +1,4 @@
+using UnityEngine;
 
 public class Splitter : Building, IOutPort, IInPort
 {
@@ -24,11 +25,19 @@ public class Splitter : Building, IOutPort, IInPort
             if (port != null && port.CanReceiveResource(_resource.Type))
             {
                 port.ReceiveResource(_resource);
+                _resource.transform.position = (Vector2)port.Position;
                 _resource = null;
                 _offset++;
                 break;
             }
         }
+    }
+
+    internal void OnDisable()
+    {
+        foreach (var port in r_ports)
+            if (port != null)
+                port.OnDestroyed -= PortDestroyed;
     }
 
     public IInPort GetPort(int index)
@@ -39,6 +48,7 @@ public class Splitter : Building, IOutPort, IInPort
     public void SetPort(IInPort inPort, int index)
     {
         r_ports[index] = inPort;
+        inPort.OnDestroyed += PortDestroyed;
     }
 
     public bool CanReceiveResource(ResourceType type)
@@ -55,5 +65,18 @@ public class Splitter : Building, IOutPort, IInPort
     {
         base.Destroy();
         _resource?.Deactive();
+    }
+
+    private void PortDestroyed(Vector2Int position)
+    {
+        for (var i = 0; i < r_ports.Length; i++)
+        {
+            if (r_ports[i] != null && r_ports[i].Position == position)
+            {
+                r_ports[i].OnDestroyed -= PortDestroyed;
+                r_ports[i] = null;
+                break;
+            }
+        }
     }
 }
