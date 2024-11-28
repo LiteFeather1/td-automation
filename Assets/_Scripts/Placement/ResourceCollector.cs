@@ -11,14 +11,12 @@ public class ResourceCollector : Building, IOutPort
 
     private float _elapsedTime = 0f;
 
-    private readonly IInPort[] r_ports = new IInPort[1];
+    private IInPort _port;
 
     private readonly List<ResourceNode> r_resourceNodes = new();
 
     public Direction OutDirection { get; set; } = Direction.Right;
 
-
-    public IInPort[] Ports => r_ports;
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
@@ -26,8 +24,7 @@ public class ResourceCollector : Building, IOutPort
 
     internal void Update()
     {
-        var port = r_ports[0];
-        if (port == null || !port.CanReceiveResource(_type))
+        if (_port == null || !_port.CanReceiveResource(_type))
             return;
 
         _elapsedTime += Time.deltaTime * _speedPerNode * r_resourceNodes.Count;
@@ -37,8 +34,8 @@ public class ResourceCollector : Building, IOutPort
         _elapsedTime %= _timeToCollect;
 
         var resource = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource();
-        resource.transform.position = (Vector2)port.Position;
-        port.ReceiveResource(resource);
+        resource.transform.position = (Vector2)_port.Position;
+        _port.ReceiveResource(resource);
         resource.gameObject.SetActive(true);
     }
 
@@ -48,6 +45,17 @@ public class ResourceCollector : Building, IOutPort
         {
             node.OnDepleted -= OnNodeDepleted;
         }
+
+        if (_port != null)
+            _port.OnDestroyed -= PortDestroyed;
+    }
+
+    public IInPort GetPort(int _) => _port;
+
+    public void SetPort(IInPort inPort, int _)
+    {
+        _port = inPort;
+        inPort.OnDestroyed += PortDestroyed;
     }
 
     public override void Place()
@@ -100,5 +108,11 @@ public class ResourceCollector : Building, IOutPort
         var colour = _sr.color;
         colour.a = alpha;
         _sr.color = colour;
+    }
+
+    private void PortDestroyed(Vector2Int _)
+    {
+        _port.OnDestroyed -= PortDestroyed;
+        _port = null;
     }
 }

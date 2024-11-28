@@ -8,7 +8,7 @@ public class ResourceProcessor : Building, IInPort, IOutPort
     [SerializeField] private float _timeToProcessResource = 1f;
     private float _elapsedTime;
 
-    private readonly IInPort[] r_ports = new IInPort[1];
+    private IInPort _port;
 
     private ResourceBehaviour _processingResource;
     private ResourceBehaviour _processedResource;
@@ -16,20 +16,18 @@ public class ResourceProcessor : Building, IInPort, IOutPort
     public Direction InDirection { get; set; } = Direction.Left;
     public Direction OutDirection { get; set; } = Direction.Right;
 
-    public IInPort[] Ports => r_ports;
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
     internal void Update()
-    {
-        var port = r_ports[0];
+    {;
         if (
-            port != null
+            _port != null
             && _processedResource != null
-            && port.CanReceiveResource(_processedResource.Type)
+            && _port.CanReceiveResource(_processedResource.Type)
         )
         {
-            port.ReceiveResource(_processedResource);
+            _port.ReceiveResource(_processedResource);
             _processedResource = null;
         }
 
@@ -44,8 +42,22 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 
         _processingResource.Deactive();
         _processedResource = _processedBehaviourPool.ObjectPool.GetObject();
-        _processedResource.transform.position = (Vector2)port.Position;
+        _processedResource.transform.position = (Vector2)_port.Position;
         _processedResource.gameObject.SetActive(true);
+    }
+
+    internal void OnDisable()
+    {
+        if (_port != null)
+            _port.OnDestroyed -= PortDestroyed;
+    }
+
+    public IInPort GetPort(int _) => _port;
+
+    public void SetPort(IInPort inPort, int _)
+    {
+        _port = inPort;
+        _port.OnDestroyed += PortDestroyed;
     }
 
     public bool CanReceiveResource(ResourceType type)
@@ -58,5 +70,11 @@ public class ResourceProcessor : Building, IInPort, IOutPort
         base.Destroy();
         _processedResource?.Deactive();
         _processingResource?.Deactive();
+    }
+
+    private void PortDestroyed(Vector2Int _)
+    {
+        _port.OnDestroyed -= PortDestroyed;
+        _port = null;
     }
 }

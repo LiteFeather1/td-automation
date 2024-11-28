@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ResourceGiver : Building, IOutPort
@@ -8,27 +9,45 @@ public class ResourceGiver : Building, IOutPort
     private Direction _outDirection = Direction.Right;
     private float _elapsedTime = 0f;
 
-    private readonly IInPort[] r_ports = new IInPort[0];
+    private IInPort _port;
 
     public Direction OutDirection { get => _outDirection; set => _outDirection = value; }
 
-    public IInPort[] Ports => r_ports;
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
     public void Update()
     {
-        var port = r_ports[0];
-        if (port == null || !port.CanReceiveResource(_resourceToGive.Type))
+        if (_port == null || !_port.CanReceiveResource(_resourceToGive.Type))
             return;
 
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime > _timeToCollect)
         {
             _elapsedTime %= _timeToCollect;
-            r_ports[0].ReceiveResource(Instantiate(
-                _resourceToGive, new(port.Position.x, port.Position.y), Quaternion.identity
+            _port.ReceiveResource(Instantiate(
+                _resourceToGive, new(_port.Position.x, _port.Position.y), Quaternion.identity
             ));
         }
+    }
+
+    internal void OnDisable()
+    {
+        if (_port != null)
+            _port.OnDestroyed -= PortDestroyed;
+    }
+
+    public IInPort GetPort(int _) => _port;
+
+    public void SetPort(IInPort inPort, int _)
+    {
+        _port = inPort;
+        inPort.OnDestroyed += PortDestroyed;
+    }
+
+    private void PortDestroyed(Vector2Int _)
+    {
+        _port.OnDestroyed -= PortDestroyed;
+        _port = null;
     }
 }

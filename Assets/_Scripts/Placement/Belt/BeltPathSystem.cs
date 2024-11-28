@@ -39,7 +39,7 @@ public class BeltPathSystem : MonoBehaviour
                 newInPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
             ))
             {
-                newOutPort.Ports[0] = inPort;
+                newOutPort.SetPort(inPort, 0);
             }
         }
 
@@ -50,14 +50,14 @@ public class BeltPathSystem : MonoBehaviour
                 if (inPort is IOutPort outPort
                     && newInPort.Position == inPort.Position + sr_direction[outPort.OutDirection])
                 {
-                    outPort.Ports[0] = newInPort;
+                    outPort.SetPort(newInPort, 0);
                 }
             }
             else if (r_outPort.TryGetValue(newInPort.Position + direction, out var outPort))
             {
                 if (newInPort.Position == outPort.Position + sr_direction[outPort.OutDirection])
                 {
-                    outPort.Ports[0] = newInPort;
+                    outPort.SetPort(newInPort, 0);
                 }
             }
         }
@@ -77,11 +77,11 @@ public class BeltPathSystem : MonoBehaviour
                 )
                     continue;
 
-                for (var i = 0; i < newOutPort.Ports.Length; i++)
+                for (var i = 0; i < 3; i++)
                 {
-                    if (newOutPort.Ports[i] == null)
+                    if (newOutPort.GetPort(i) == null)
                     {
-                        newOutPort.Ports[i] = inPort;
+                        newOutPort.SetPort(inPort, i);
                         break;
                     }
                 }
@@ -95,35 +95,15 @@ public class BeltPathSystem : MonoBehaviour
                 newOutPort.Position + sr_direction[newOutPort.OutDirection], out var inPort
             ))
             {
-                newOutPort.Ports[0] = inPort;
+                newOutPort.SetPort(inPort, 0);
             }
         }
     }
 
     public void TryRemovePosition(Vector2Int position)
     {
-        if (r_inPorts.TryGetValue(position, out var inPort))
-        {
-            if (inPort.InDirection == Direction.Any)
-            {
-                foreach (var direction in sr_directions)
-                {
-                    if (r_outPort.TryGetValue(position + direction, out var outPort))
-                    {
-                        outPort.Ports[0] = null;
-                    }
-                }
-            }
-            else
-            {
-                if (r_outPort.TryGetValue(position - sr_direction[inPort.InDirection], out var outPort))
-                {
-                    outPort.Ports[0] = null;
-                }
-            }
-
+        if (r_inPorts.ContainsKey(position))
             r_inPorts.Remove(position);
-        }
 
         if (r_outPort.ContainsKey(position))
             r_outPort.Remove(position);

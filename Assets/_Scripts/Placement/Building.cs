@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using LTF.SerializedDictionary;
 
 public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
@@ -8,7 +9,9 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
     [SerializeField] private SerializedDictionary<ResourceType, int> _resourcesCost;
     [SerializeField] protected SpriteRenderer _sr;
 
+    public Action<Vector2Int> OnDestroyed { get; set; }
     public Vector2Int Position { get; set; }
+
     public abstract bool CanBeRotated { get; }
     public abstract bool CanBeDestroyed { get; }
 
@@ -22,6 +25,7 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
 
     public virtual void Destroy()
     {
+        OnDestroyed?.Invoke(Position);
         Destroy(gameObject);
     }
 

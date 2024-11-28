@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ResourceNode : MonoBehaviour, IPlaceable, IHoverable
+public class ResourceNode : MonoBehaviour, IHoverable
 {
     [SerializeField] private string _name;
     [SerializeField] private Vector2Int _position;
@@ -13,9 +13,6 @@ public class ResourceNode : MonoBehaviour, IPlaceable, IHoverable
     public Action<ResourceNode> OnDepleted { get; set; }
 
     public Vector2Int Position { get => _position; set => _position = value; }
-
-    public bool CanBeRotated => false;
-    public bool CanBeDestroyed => false;
 
     public ResourceType GetResource()
     {

@@ -6,36 +6,43 @@ public class BeltPath : Building, IOutPort, IInPort
     [SerializeField] private float _itemMoveSpeed = 2f;
     private ResourceBehaviour _resource;
 
-    public bool debug;
-
-    private readonly IInPort[] r_ports = new IInPort[1];
+    private IInPort _port;
 
     public Direction InDirection { get; set; } = Direction.Left;
  
     public Direction OutDirection { get; set; } = Direction.Right;
-
-    public IInPort[] Ports => r_ports;
 
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
     public void Update()
     {
-        var port = r_ports[0];
-        if (debug)
-            print(port);
-        if (port == null || _resource == null || !port.CanReceiveResource(_resource.Type))
+        if (_port == null || _resource == null || !_port.CanReceiveResource(_resource.Type))
             return;
 
         _resource.transform.position = Vector2.MoveTowards(
-            _resource.transform.position, port.Position, _itemMoveSpeed * Time.deltaTime
+            _resource.transform.position, _port.Position, _itemMoveSpeed * Time.deltaTime
         );
 
-        if (Vector2.Distance(_resource.transform.position, port.Position) < float.Epsilon)
+        if (Vector2.Distance(_resource.transform.position, _port.Position) < float.Epsilon)
         {
-            port.ReceiveResource(_resource);
+            _port.ReceiveResource(_resource);
             _resource = null;
         }
+    }
+
+    internal void OnDisable()
+    {
+        if (_port != null)
+            _port.OnDestroyed -= PortDestroyed;
+    }
+
+    public IInPort GetPort(int _) => _port;
+
+    public void SetPort(IInPort inPort, int _)
+    {
+        _port = inPort;
+        _port.OnDestroyed += PortDestroyed;
     }
 
     public bool CanReceiveResource(ResourceType _) => _resource == null;
@@ -49,5 +56,11 @@ public class BeltPath : Building, IOutPort, IInPort
     {
         _resource?.Deactive();
         base.Destroy();
+    }
+
+    private void PortDestroyed(Vector2Int _)
+    {
+        _port.OnDestroyed -= OnDestroyed;
+        _port = null;
     }
 }
