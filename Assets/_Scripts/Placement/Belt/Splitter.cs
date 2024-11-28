@@ -1,3 +1,4 @@
+
 public class Splitter : Building, IOutPort, IInPort
 {
     private readonly IInPort[] r_ports = new IInPort[3];

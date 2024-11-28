@@ -96,7 +96,7 @@ public class PlacementSystem : MonoBehaviour
 
         _buildingPrefab = placeableData.BuildingPrefab;
 
-        InstantiateBuilding(Quaternion.identity);
+        InstantiateBuilding(_tileHighlight.transform);
 
         _inDirection = _buildingToPlace is IInPort inPort ? inPort.InDirection : Direction.None;
         _outDirection = _buildingToPlace is IOutPort outPort ? outPort.OutDirection : Direction.None;
@@ -150,7 +150,7 @@ public class PlacementSystem : MonoBehaviour
 
         _buildingToPlace.SetSortingOrder(0);
         var newBuilding = _buildingToPlace;
-        InstantiateBuilding(_buildingToPlace.transform.rotation);
+        InstantiateBuilding(_buildingToPlace.transform);
         _buildingToPlace.SetColour(_notPlaceableHighlight);
         AddBuilding(newBuilding);
     }
@@ -237,10 +237,10 @@ public class PlacementSystem : MonoBehaviour
             _tileHighlight.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
     }
 
-    private void InstantiateBuilding(Quaternion rotation)
+    private void InstantiateBuilding(Transform transform)
     {
         _buildingToPlace = Instantiate(
-            _buildingPrefab, _tileHighlight.transform.position, rotation
+            _buildingPrefab, transform.position, transform.rotation
         );
         _buildingToPlace.SetSortingOrder(2);
     }
