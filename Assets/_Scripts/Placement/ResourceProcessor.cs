@@ -54,7 +54,7 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 
     public IInPort GetPort(int _) => _port;
 
-    public void SetPort(IInPort inPort, int _)
+    public void SetPort(IInPort inPort)
     {
         _port = inPort;
         _port.OnDestroyed += PortDestroyed;

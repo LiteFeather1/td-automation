@@ -45,10 +45,17 @@ public class Splitter : Building, IOutPort, IInPort
         return r_ports[index];
     }
 
-    public void SetPort(IInPort inPort, int index)
+    public void SetPort(IInPort inPort)
     {
-        r_ports[index] = inPort;
-        inPort.OnDestroyed += PortDestroyed;
+        for (var i = 0; i < r_ports.Length; i++)
+        {
+            if (r_ports[i] != null)
+            {
+                r_ports[i] = inPort;
+                inPort.OnDestroyed += PortDestroyed;
+                break;
+            }
+        }
     }
 
     public bool CanReceiveResource(ResourceType type)

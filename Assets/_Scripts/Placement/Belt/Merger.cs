@@ -31,7 +31,7 @@ public class Merger : Building, IOutPort, IInPort
 
     public IInPort GetPort(int _) => _port;
 
-    public void SetPort(IInPort port, int _)
+    public void SetPort(IInPort port)
     {
         _port = port;
         _port.OnDestroyed += PortDestroyed;
