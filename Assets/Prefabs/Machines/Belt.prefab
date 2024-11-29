@@ -52,6 +52,7 @@ MonoBehaviour:
       Value: -1
   _sr: {fileID: 7122688018477215906}
   _itemMoveSpeed: 2
+  _outDirection: 200
 --- !u!212 &7122688018477215906
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -70,8 +70,8 @@ public class Splitter : Building, IOutPort, IInPort
 
     public override void Destroy()
     {
-        base.Destroy();
         _resource?.Deactive();
+        base.Destroy();
     }
 
     private void PortDestroyed(Vector2Int position)

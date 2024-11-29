@@ -128,24 +128,27 @@ public class PlacementSystem : MonoBehaviour
 
         _buildingToPlace.Position = _mousePos;
 
-        if (_buildingToPlace is IInPort inPort)
-        {
-            inPort.InDirection = _inDirection;
-        }
-
-        if (_buildingToPlace is IOutPort outPort)
-        {
-            outPort.OutDirection = _outDirection;
-        }
-
         if (_buildingToPlace is ResourceCollector collector)
         {
+            collector.OutDirection = _outDirection;
             foreach (var node in _resourceNodes.Values)
             {
                 collector.TryAddNode(node);
             }
 
             collector.TryEnable();
+        }
+        else
+        {
+            if (_buildingToPlace is IInPort inPort)
+            {
+                inPort.InDirection = _inDirection;
+            }
+
+            if (_buildingToPlace is IOutPort outPort)
+            {
+                outPort.OutDirection = _outDirection;
+            }
         }
 
         _buildingToPlace.SetSortingOrder(0);
