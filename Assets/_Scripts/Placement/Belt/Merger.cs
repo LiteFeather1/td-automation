@@ -7,8 +7,8 @@ public class Merger : Building, IOutPort, IInPort
 
     private ResourceBehaviour _resource;
 
-    public Direction OutDirection { get; set; } = Direction.Right;
     public Direction InDirection { get; set; } = Direction.Any;
+    public Direction OutDirection { get; set; } = Direction.Right;
 
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
