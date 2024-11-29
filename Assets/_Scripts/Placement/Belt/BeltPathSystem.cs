@@ -44,66 +44,37 @@ public class BeltPathSystem : MonoBehaviour
             if (newInPort is not IOutPort newOutPort)
                 return;
 
-            foreach (var vector in sr_vectors)
+            foreach (var directionVector in sr_directionToVector)
             {
-                if (vector == sr_directionToVector[newOutPort.OutDirection])
+                if (directionVector.Key == newOutPort.OutDirection
+                    || !r_outPort.TryGetValue(newInPort.Position + directionVector.Value, out var outPort)
+                )
                     continue;
 
-                if (!r_outPort.TryGetValue(newInPort.Position + vector, out var outPort))
-                    continue;
-
-                if (outPort.OutDirection != sr_vectorToDirection[newInPort.Position - outPort.Position])
-                    continue;
-
-                if (outPort.OutDirection == Direction.Any)
+                if (outPort.OutDirection == Direction.Any
+                    || outPort.OutDirection == sr_vectorToDirection[newInPort.Position - outPort.Position]
+                )
                 {
-                    if (outPort is not IInPort inPort)
-                        continue;
-
-                    for (var i = 0; i < 3; i++)
-                    {
-                        if (outPort.GetPort(i) == null)
-                        {
-                            print("add");
-                            outPort.SetPort(newInPort, i);
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    print("here");
-                    outPort.SetPort(newInPort, 0);
+                    outPort.SetPort(newInPort);
                 }
             }
         }
-        else
+        else if (r_outPort.TryGetValue(
+            newInPort.Position + sr_directionToVector[newInPort.InDirection], out var outPort
+        ))
         {
-            if (r_outPort.TryGetValue(
-                newInPort.Position + sr_directionToVector[newInPort.InDirection], out var outPort
-            ))
+            if (outPort.OutDirection == Direction.Any)
             {
-                if (outPort.OutDirection == Direction.Any)
-                {
-                    if (outPort is not IInPort inPort)
-                        return;
+                if (outPort is not IInPort inPort
+                    || newInPort.Position == outPort.Position + sr_directionToVector[inPort.InDirection]
+                )
+                    return;
 
-                    if (newInPort.Position == outPort.Position + sr_directionToVector[inPort.InDirection])
-                        return;
-
-                    for (var i = 0; i < 3; i++)
-                    {
-                        if (outPort.GetPort(i) == null)
-                        {
-                            outPort.SetPort(newInPort, i);
-                            break;
-                        }
-                    }
-                }
-                else if (outPort.OutDirection == sr_directionToOpposite[newInPort.InDirection])
-                {
-                    outPort.SetPort(newInPort, 0);
-                }
+                outPort.SetPort(newInPort);
+            }
+            else if (outPort.OutDirection == sr_directionToOpposite[newInPort.InDirection])
+            {
+                outPort.SetPort(newInPort);
             }
         }
     }

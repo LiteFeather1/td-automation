@@ -49,7 +49,7 @@ public class Splitter : Building, IOutPort, IInPort
     {
         for (var i = 0; i < r_ports.Length; i++)
         {
-            if (r_ports[i] != null)
+            if (r_ports[i] == null)
             {
                 r_ports[i] = inPort;
                 inPort.OnDestroyed += PortDestroyed;
