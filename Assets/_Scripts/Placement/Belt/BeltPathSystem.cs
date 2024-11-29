@@ -5,7 +5,7 @@ public class BeltPathSystem : MonoBehaviour
 {
     private static readonly Vector2Int[] sr_vectors = new Vector2Int[4]
     {
-        new(-1, 0), new(1, 0), new (0, 1), new(0, -1)
+        new(-1, 0), new(1, 0), new(0, 1), new(0, -1)
     };
 
     private static readonly Dictionary<Direction, Vector2Int> sr_directionToVector = new()
@@ -66,7 +66,7 @@ public class BeltPathSystem : MonoBehaviour
             if (outPort.OutDirection == Direction.Any)
             {
                 if (outPort is not IInPort inPort
-                    || newInPort.Position == outPort.Position + sr_directionToVector[inPort.InDirection]
+                    || inPort.InDirection == sr_vectorToDirection[newInPort.Position - inPort.Position]
                 )
                     return;
 
