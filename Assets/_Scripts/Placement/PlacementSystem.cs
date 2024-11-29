@@ -9,6 +9,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Tilemap _groundTilemap;
     [SerializeField] private Tilemap _pathTilemap;
+    [SerializeField] private BeltPathSystem _beltPathSystem;
     [SerializeField] private SerializedDictionary<Vector2Int, ResourceNode> _resourceNodes = new();
 
     [Header("Tile Hightlight")]
@@ -136,6 +137,7 @@ public class PlacementSystem : MonoBehaviour
                 collector.TryAddNode(node);
             }
 
+            _beltPathSystem.AddOutPort(collector);
             collector.TryEnable();
         }
         else
@@ -143,11 +145,13 @@ public class PlacementSystem : MonoBehaviour
             if (_buildingToPlace is IInPort inPort)
             {
                 inPort.InDirection = _inDirection;
+                _beltPathSystem.AddIInPort(inPort);
             }
 
             if (_buildingToPlace is IOutPort outPort)
             {
                 outPort.OutDirection = _outDirection;
+                _beltPathSystem.AddOutPort(outPort);
             }
         }
 
@@ -184,6 +188,7 @@ public class PlacementSystem : MonoBehaviour
             UnhoverResource();
 
             OnBuildingRemoved?.Invoke(building);
+            _beltPathSystem.TryRemovePosition(building.Position);
             OnHoverableUnhovered?.Invoke();
         }
     }

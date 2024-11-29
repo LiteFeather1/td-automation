@@ -554,7 +554,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factoryTower: {fileID: 1396621434}
   _placementSystem: {fileID: 900071249}
-  _beltPathSystem: {fileID: 695680645}
   _enemyManager: {fileID: 2102129621}
   _gameHUD: {fileID: 1571453347}
   _endScreen: {fileID: 8423220882976336530}
@@ -5780,6 +5779,7 @@ MonoBehaviour:
   _camera: {fileID: 330585545}
   _groundTilemap: {fileID: 1309892861}
   _pathTilemap: {fileID: 516606568}
+  _beltPathSystem: {fileID: 695680645}
   _resourceNodes:
     _entries:
     - Key: {x: -14, y: 5}

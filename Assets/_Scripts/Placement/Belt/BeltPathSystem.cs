@@ -33,7 +33,10 @@ public class BeltPathSystem : MonoBehaviour
     };
 
     private readonly Dictionary<Vector2Int, IInPort> r_inPorts = new();
-    private readonly Dictionary<Vector2Int, IOutPort> r_outPort = new();
+    private readonly Dictionary<Vector2Int, IOutPort> r_outPorts = new();
+
+    public Dictionary<Vector2Int, IInPort> InPort => r_inPorts;
+    public Dictionary<Vector2Int, IOutPort> OutPort => r_outPorts;
 
     public void AddIInPort(IInPort newInPort)
     {
@@ -47,7 +50,7 @@ public class BeltPathSystem : MonoBehaviour
             foreach (var directionVector in sr_directionToVector)
             {
                 if (directionVector.Key == newOutPort.OutDirection
-                    || !r_outPort.TryGetValue(newInPort.Position + directionVector.Value, out var outPort)
+                    || !r_outPorts.TryGetValue(newInPort.Position + directionVector.Value, out var outPort)
                 )
                     continue;
 
@@ -59,7 +62,7 @@ public class BeltPathSystem : MonoBehaviour
                 }
             }
         }
-        else if (r_outPort.TryGetValue(
+        else if (r_outPorts.TryGetValue(
             newInPort.Position + sr_directionToVector[newInPort.InDirection], out var outPort
         ))
         {
@@ -81,7 +84,7 @@ public class BeltPathSystem : MonoBehaviour
 
     public void AddOutPort(IOutPort newOutPort)
     {
-        r_outPort.Add(newOutPort.Position, newOutPort);
+        r_outPorts.Add(newOutPort.Position, newOutPort);
 
         if (newOutPort.OutDirection == Direction.Any)
         {
@@ -128,7 +131,7 @@ public class BeltPathSystem : MonoBehaviour
         if (r_inPorts.ContainsKey(position))
             r_inPorts.Remove(position);
 
-        if (r_outPort.ContainsKey(position))
-            r_outPort.Remove(position);
+        if (r_outPorts.ContainsKey(position))
+            r_outPorts.Remove(position);
     }
 }

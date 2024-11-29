@@ -8,7 +8,6 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Systems")]
     [SerializeField] private PlacementSystem _placementSystem;
-    [SerializeField] private BeltPathSystem _beltPathSystem;
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameHUD _gameHUD;
     [SerializeField] private UIEndScreen _endScreen;
@@ -148,24 +147,11 @@ public class GameManager : Singleton<GameManager>
 
     public void BuildingPlaced(Building building)
     {
-
         if (building is Tower)
         {
             _gameHUD.SetTowerCount(++_towerCount);
         }
-        else
-        {
-            if (building is IInPort inPort)
-            {
-                _beltPathSystem.AddIInPort(inPort);
-            }
 
-            if (building is IOutPort outPort)
-            {
-                _beltPathSystem.AddOutPort(outPort);
-            }
-        }
-        
         _factoryTower.RemoveResources(building.ResourceCost);
 
         if (!_factoryTower.HasEnoughResourceToBuild(building.ResourceCost))
@@ -174,8 +160,6 @@ public class GameManager : Singleton<GameManager>
 
     public void BuildingRemoved(Building building)
     {
-        _beltPathSystem.TryRemovePosition(building.Position);
-
         _factoryTower.AddResources(building.ResourceCost);
 
         if (building is Tower)
