@@ -6,6 +6,14 @@ using LTF.SerializedDictionary;
 
 public class PlacementSystem : MonoBehaviour
 {
+    private static readonly Dictionary<Direction, float> sr_outDirectionToAngle = new()
+    {
+        { Direction.Right, 0f },
+        { Direction.Down, 270f },
+        { Direction.Left, 180f },
+        { Direction.Up, 90f },
+    };
+
     [SerializeField] private Camera _camera;
     [SerializeField] private Tilemap _groundTilemap;
     [SerializeField] private Tilemap _pathTilemap;
@@ -175,8 +183,8 @@ public class PlacementSystem : MonoBehaviour
 
         if (_buildingToPlace is BeltPath)
         {
-            _buildingToPlace.SR.sprite = buildingToAdd.SR.sprite;
-            _buildingToPlace.SR.flipY = buildingToAdd.SR.flipY;
+            _inDirection = _beltPathSystem.OppositeDirection(_outDirection);
+            _buildingToPlace.transform.eulerAngles = new(0f, 0f, sr_outDirectionToAngle[_outDirection]);
         }
 
         AddBuilding(buildingToAdd);
