@@ -62,6 +62,10 @@ public class GameManager : Singleton<GameManager>
     internal void Start()
     {
         AddBuildings(_factoryTower.Receivers);
+        foreach (var receiver in _factoryTower.Receivers)
+        {
+            _placementSystem.BeltPathSystem.AddInPort(receiver);
+        }
         AddBuildings(_factoryTower.StarterTowers);
 
         _gameHUD.SetWave(_enemyManager.CurrentStage);

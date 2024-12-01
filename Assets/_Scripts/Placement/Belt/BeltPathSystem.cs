@@ -38,7 +38,7 @@ public class BeltPathSystem : MonoBehaviour
     public Dictionary<Vector2Int, IInPort> InPort => r_inPorts;
     public Dictionary<Vector2Int, IOutPort> OutPort => r_outPorts;
 
-    public void AddIInPort(IInPort newInPort)
+    public void AddInPort(IInPort newInPort)
     {
         r_inPorts.Add(newInPort.Position, newInPort);
 
@@ -137,10 +137,18 @@ public class BeltPathSystem : MonoBehaviour
 
     public bool HasOutPortAt(Vector2Int position, Direction inDirection)
     {
-        // FIX does not work with any outport correctly
-        // FIX does not work with the currect direction of the outport
-        return r_outPorts.TryGetValue(position + sr_directionToVector[inDirection], out var outPort)
-            && position == outPort.Position + sr_directionToVector[outPort.OutDirection];
+        if (!r_outPorts.TryGetValue(position + sr_directionToVector[inDirection], out var outPort))
+            return false;
+
+        if (outPort.OutDirection == Direction.Any)
+        {
+            return outPort is IInPort inPort
+                && sr_directionToOpposite[inDirection] != inPort.InDirection;
+        }
+        else
+        {
+            return inDirection == sr_directionToOpposite[outPort.OutDirection];
+        }
     }
 
     public Direction OppositeDirection(Direction direction) => sr_directionToOpposite[direction];

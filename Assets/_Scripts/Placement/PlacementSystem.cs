@@ -49,6 +49,8 @@ public class PlacementSystem : MonoBehaviour
     public Action<IHoverable> OnHoverableHovered { get; set; }
     public Action OnHoverableUnhovered { get; set; }
 
+    public BeltPathSystem BeltPathSystem => _beltPathSystem;
+
     internal void Start()
     {
         foreach (var node in _resourceNodes.Values)
@@ -166,7 +168,7 @@ public class PlacementSystem : MonoBehaviour
             if (_buildingToPlace is IInPort inPort)
             {
                 inPort.InDirection = _inDirection;
-                _beltPathSystem.AddIInPort(inPort);
+                _beltPathSystem.AddInPort(inPort);
             }
 
             if (_buildingToPlace is IOutPort outPort)
