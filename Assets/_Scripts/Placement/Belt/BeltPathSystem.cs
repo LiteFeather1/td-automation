@@ -41,7 +41,6 @@ public class BeltPathSystem : MonoBehaviour
     public void AddInPort(IInPort newInPort)
     {
         r_inPorts.Add(newInPort.Position, newInPort);
-
         if (newInPort.InDirection == Direction.Any)
         {
             if (newInPort is not IOutPort newOutPort)
@@ -112,9 +111,9 @@ public class BeltPathSystem : MonoBehaviour
         {
             if (inPort.InDirection == Direction.Any)
             {
-                if (inPort is not IOutPort outPort
-                    || outPort.OutDirection == sr_vectorToDirection[newOutPort.Position - outPort.Position]
-                )
+                if (inPort is not IOutPort outPort)
+                    newOutPort.SetPort(inPort);
+                else if (outPort.OutDirection == sr_vectorToDirection[newOutPort.Position - outPort.Position])
                     return;
 
                 newOutPort.SetPort(inPort);
