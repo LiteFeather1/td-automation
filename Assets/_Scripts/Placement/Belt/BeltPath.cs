@@ -17,14 +17,16 @@ public class BeltPath : Building, IOutPort, IInPort
 
     public void Update()
     {
-        if (_port == null || _resource == null || !_port.CanReceiveResource(_resource.Type))
+        if (_resource == null)
             return;
 
-        _resource.transform.position = Vector2.MoveTowards(
-            _resource.transform.position, _port.Position, _itemMoveSpeed * Time.deltaTime
-        );
-
-        if (Vector2.Distance(_resource.transform.position, _port.Position) < float.Epsilon)
+        if (Vector2.Distance(_resource.transform.position, transform.position) > float.Epsilon)
+        {
+            _resource.transform.position = Vector2.MoveTowards(
+                _resource.transform.position, transform.position, _itemMoveSpeed * Time.deltaTime
+            );
+        }
+        else if (_port != null && _port.CanReceiveResource(_resource.Type))
         {
             _port.ReceiveResource(_resource);
             _resource = null;
