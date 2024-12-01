@@ -139,6 +139,7 @@ public class BeltPathSystem : MonoBehaviour
     {
         // FIX does not work with any outport correctly
         // FIX does not work with the currect direction of the outport
-        return r_outPorts.ContainsKey(position + sr_directionToVector[inDirection]);
+        return r_outPorts.TryGetValue(position + sr_directionToVector[inDirection], out var outPort)
+            && position == outPort.Position + sr_directionToVector[outPort.OutDirection];
     }
 }
