@@ -5779,7 +5779,6 @@ MonoBehaviour:
   _camera: {fileID: 330585545}
   _groundTilemap: {fileID: 1309892861}
   _pathTilemap: {fileID: 516606568}
-  _beltPathSystem: {fileID: 695680645}
   _resourceNodes:
     _entries:
     - Key: {x: -14, y: 5}
@@ -5842,6 +5841,9 @@ MonoBehaviour:
       Value: {fileID: 1453652484}
     - Key: {x: 16, y: 3}
       Value: {fileID: 1567463645}
+  _beltPathSystem: {fileID: 695680645}
+  _straightBelt: {fileID: 21300000, guid: a1e28edd38fb1af4db64b2288864f41a, type: 3}
+  _curvedBelt: {fileID: 21300000, guid: bfd29f139560f4c419558119c7dd19a5, type: 3}
   _tileHighlight: {fileID: 165485787}
   _notPlaceableHighlight: {r: 0.9245283, g: 0.18752226, b: 0.18752226, a: 1}
   _nodeHighlight: {r: 0.1254902, g: 0.54901963, b: 0.81568635, a: 1}

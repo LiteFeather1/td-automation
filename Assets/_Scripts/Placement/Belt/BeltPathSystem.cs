@@ -134,4 +134,11 @@ public class BeltPathSystem : MonoBehaviour
         if (r_outPorts.ContainsKey(position))
             r_outPorts.Remove(position);
     }
+
+    public bool HasOutPortAt(Vector2Int position, Direction inDirection)
+    {
+        // FIX does not work with any outport correctly
+        // FIX does not work with the currect direction of the outport
+        return r_outPorts.ContainsKey(position + sr_directionToVector[inDirection]);
+    }
 }

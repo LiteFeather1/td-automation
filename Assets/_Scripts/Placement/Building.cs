@@ -16,10 +16,10 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
     public abstract bool CanBeDestroyed { get; }
 
     public string Name => _name;
+
     public SerializedDictionary<ResourceType, int> ResourceCost => _resourcesCost;
 
-    public void SetColour(Color colour) => _sr.color = colour;
-    public void SetSortingOrder(int order) => _sr.sortingOrder = order;
+    public SpriteRenderer SR => _sr;
 
     public virtual void Place() {}
 

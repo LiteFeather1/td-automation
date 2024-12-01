@@ -9,8 +9,12 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Tilemap _groundTilemap;
     [SerializeField] private Tilemap _pathTilemap;
-    [SerializeField] private BeltPathSystem _beltPathSystem;
     [SerializeField] private SerializedDictionary<Vector2Int, ResourceNode> _resourceNodes = new();
+
+    [Header("Belt")]
+    [SerializeField] private BeltPathSystem _beltPathSystem;
+    [SerializeField] private Sprite _straightBelt;
+    [SerializeField] private Sprite _curvedBelt;
 
     [Header("Tile Hightlight")]
     [SerializeField] private SpriteRenderer _tileHighlight;
@@ -59,8 +63,8 @@ public class PlacementSystem : MonoBehaviour
 
         if (_buildingToPlace != null)
         {
-            _buildingToPlace.SetColour(_canPlaceBuilding && !_resourceNodes.ContainsKey(mousePos)
-                ? Color.white : _notPlaceableHighlight);
+            _buildingToPlace.SR.color = (_canPlaceBuilding && !_resourceNodes.ContainsKey(mousePos))
+                ? Color.white : _notPlaceableHighlight;
             _buildingToPlace.transform.localPosition = worldPos;
             return;
         }
@@ -155,10 +159,10 @@ public class PlacementSystem : MonoBehaviour
             }
         }
 
-        _buildingToPlace.SetSortingOrder(0);
+        _buildingToPlace.SR.sortingOrder = 0;
         var newBuilding = _buildingToPlace;
         InstantiateBuilding(_buildingToPlace.transform);
-        _buildingToPlace.SetColour(_notPlaceableHighlight);
+        _buildingToPlace.SR.color = _notPlaceableHighlight;
         AddBuilding(newBuilding);
     }
 
@@ -198,12 +202,33 @@ public class PlacementSystem : MonoBehaviour
         if (_buildingToPlace == null || !_buildingToPlace.CanBeRotated)
             return;
 
-        _buildingToPlace.transform.eulerAngles = new(
-            0f, 0f, _buildingToPlace.transform.eulerAngles.z - 90f
-        );
+        if (_buildingToPlace is BeltPath && _beltPathSystem.HasOutPortAt(_mousePos, _inDirection))
+        {
+            do
+                _outDirection = RotateDirection(_outDirection);
+            while (_outDirection == _inDirection);
 
-        _inDirection = RotateDirection(_inDirection);
-        _outDirection = RotateDirection(_outDirection);
+            var sr = _buildingToPlace.SR;
+            if (sr.sprite == _straightBelt)
+            {
+                sr.sprite = _curvedBelt;
+            }
+            else
+            {
+                if (sr.flipY)
+                    sr.sprite = _straightBelt;
+
+                sr.flipY = !sr.flipY;
+            }
+        }
+        else
+        {
+            _buildingToPlace.transform.eulerAngles = new(
+                0f, 0f, _buildingToPlace.transform.eulerAngles.z - 90f
+            );
+            _inDirection = RotateDirection(_inDirection);
+            _outDirection = RotateDirection(_outDirection);
+        }
 
         static Direction RotateDirection(Direction dir) => dir switch
         {
@@ -250,7 +275,8 @@ public class PlacementSystem : MonoBehaviour
         _buildingToPlace = Instantiate(
             _buildingPrefab, transform.position, transform.rotation
         );
-        _buildingToPlace.SetSortingOrder(2);
+
+        _buildingToPlace.SR.sortingOrder = 2;
     }
 
 #if UNITY_EDITOR
