@@ -66,6 +66,14 @@ public class PlacementSystem : MonoBehaviour
             _buildingToPlace.SR.color = (_canPlaceBuilding && !_resourceNodes.ContainsKey(mousePos))
                 ? Color.white : _notPlaceableHighlight;
             _buildingToPlace.transform.localPosition = worldPos;
+
+            if (_buildingToPlace is not BeltPath || _buildingToPlace.SR.sprite == _straightBelt)
+                return;
+
+            _buildingToPlace.SR.sprite = _straightBelt;
+            _buildingToPlace.SR.flipY = false;
+            _outDirection = _beltPathSystem.OppositeDirection(_inDirection);
+
             return;
         }
         else

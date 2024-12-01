@@ -142,4 +142,6 @@ public class BeltPathSystem : MonoBehaviour
         return r_outPorts.TryGetValue(position + sr_directionToVector[inDirection], out var outPort)
             && position == outPort.Position + sr_directionToVector[outPort.OutDirection];
     }
+
+    public Direction OppositeDirection(Direction direction) => sr_directionToOpposite[direction];
 }
