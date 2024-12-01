@@ -117,7 +117,8 @@ public class PlacementSystem : MonoBehaviour
 
         _buildingPrefab = placeableData.BuildingPrefab;
 
-        InstantiateBuilding(_tileHighlight.transform);
+        _tileHighlight.transform.GetPositionAndRotation(out var pos, out var rot);
+        InstantiateBuilding(pos, rot);
 
         _inDirection = _buildingToPlace is IInPort inPort ? inPort.InDirection : Direction.None;
         _outDirection = _buildingToPlace is IOutPort outPort ? outPort.OutDirection : Direction.None;
@@ -178,14 +179,21 @@ public class PlacementSystem : MonoBehaviour
         _buildingToPlace.SR.sortingOrder = 0;
         var buildingToAdd = _buildingToPlace;
 
-        InstantiateBuilding(_buildingToPlace.transform);
-        _buildingToPlace.SR.color = _notPlaceableHighlight;
-
+        Vector3 position;
+        Quaternion rotation;
         if (_buildingToPlace is BeltPath)
         {
             _inDirection = _beltPathSystem.OppositeDirection(_outDirection);
-            _buildingToPlace.transform.eulerAngles = new(0f, 0f, sr_outDirectionToAngle[_outDirection]);
+            position = _buildingToPlace.transform.position;
+            rotation = Quaternion.Euler(0f, 0f, sr_outDirectionToAngle[_outDirection]);
         }
+        else
+        {
+            _buildingToPlace.transform.GetPositionAndRotation(out position, out rotation);
+        }
+
+        InstantiateBuilding(position, rotation);
+        _buildingToPlace.SR.color = _notPlaceableHighlight;
 
         AddBuilding(buildingToAdd);
     }
@@ -294,10 +302,10 @@ public class PlacementSystem : MonoBehaviour
             _tileHighlight.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
     }
 
-    private void InstantiateBuilding(Transform transform)
+    private void InstantiateBuilding(Vector3 position, Quaternion rotation)
     {
         _buildingToPlace = Instantiate(
-            _buildingPrefab, transform.position, transform.rotation
+            _buildingPrefab, position, rotation
         );
 
         _buildingToPlace.SR.sortingOrder = 2;
