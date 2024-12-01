@@ -160,10 +160,18 @@ public class PlacementSystem : MonoBehaviour
         }
 
         _buildingToPlace.SR.sortingOrder = 0;
-        var newBuilding = _buildingToPlace;
+        var buildingToAdd = _buildingToPlace;
+
         InstantiateBuilding(_buildingToPlace.transform);
         _buildingToPlace.SR.color = _notPlaceableHighlight;
-        AddBuilding(newBuilding);
+
+        if (_buildingToPlace is BeltPath)
+        {
+            _buildingToPlace.SR.sprite = buildingToAdd.SR.sprite;
+            _buildingToPlace.SR.flipY = buildingToAdd.SR.flipY;
+        }
+
+        AddBuilding(buildingToAdd);
     }
 
     public void UnselectBuildingBuilding()
