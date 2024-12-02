@@ -39,6 +39,7 @@ public class Splitter : InPort, IOutPort
         {
             if (r_ports[i] == null)
             {
+                print(inPort);
                 r_ports[i] = inPort;
                 inPort.OnDestroyed += PortDestroyed;
                 break;

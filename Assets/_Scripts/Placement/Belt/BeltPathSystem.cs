@@ -37,9 +37,6 @@ public class BeltPathSystem : MonoBehaviour
     private readonly Dictionary<Vector2Int, IInPort> r_inPorts = new();
     private readonly Dictionary<Vector2Int, IOutPort> r_outPorts = new();
 
-    public Dictionary<Vector2Int, IInPort> InPort => r_inPorts;
-    public Dictionary<Vector2Int, IOutPort> OutPort => r_outPorts;
-
     internal void Update()
     {
         var deltaTime = Time.deltaTime;
@@ -123,7 +120,7 @@ public class BeltPathSystem : MonoBehaviour
                     continue;
 
                 if (inPort.InDirection == Direction.Any
-                    || inPort.InDirection != sr_directionToOpposite[directionVector.Key]
+                    || inPort.InDirection == sr_directionToOpposite[directionVector.Key]
                 )
                 {
                     newOutPort.SetPort(inPort);
