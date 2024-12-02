@@ -32,6 +32,7 @@ public class BeltPathSystem : MonoBehaviour
         { Direction.Down, Direction.Up},
     };
 
+    // Note: This should live in the InPort if we will upgrade machines
     [SerializeField] private float _moveItemSpeed = 2f;
 
     private readonly Dictionary<Vector2Int, IInPort> r_inPorts = new();

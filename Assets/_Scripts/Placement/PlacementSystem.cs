@@ -122,8 +122,7 @@ public class PlacementSystem : MonoBehaviour
         if (_buildingToPlace != null)
             Destroy(_buildingToPlace.gameObject);
 
-        _tileHighlight.transform.GetPositionAndRotation(out var pos, out var rot);
-        InstantiateBuilding(pos, rot);
+        InstantiateBuilding((Vector2)_mousePos, Quaternion.identity);
 
         _inDirection = _buildingToPlace is IInPort inPort ? inPort.InDirection : Direction.None;
         _outDirection = _buildingToPlace is IOutPort outPort ? outPort.OutDirection : Direction.None;
