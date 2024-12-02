@@ -92,7 +92,7 @@ public class PlacementSystem : MonoBehaviour
             _tileHighlight.transform.localPosition = worldPos;
         }
 
-        if (r_hoverables.TryGetValue(mousePos, out var hoverable))
+        if (!UIMouseBlocker.MouseBlocked && r_hoverables.TryGetValue(mousePos, out var hoverable))
         {
             OnHoverableHovered?.Invoke(hoverable);
             _currentHoverable?.Unhover();
@@ -149,7 +149,7 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        if (!_canPlaceBuilding)
+        if (!_canPlaceBuilding || UIMouseBlocker.MouseBlocked)
             return;
 
         _buildingToPlace.Position = _mousePos;

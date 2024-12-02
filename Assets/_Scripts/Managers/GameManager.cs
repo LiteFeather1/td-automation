@@ -135,8 +135,7 @@ public class GameManager : Singleton<GameManager>
 
     private void PlaceBuilding(InputAction.CallbackContext _)
     {
-        if (!UIMouseBlocker.MouseBlocked)
-            _placementSystem.LeftClick();
+        _placementSystem.LeftClick();
     }
 
     private void CancelBuilding(InputAction.CallbackContext _)

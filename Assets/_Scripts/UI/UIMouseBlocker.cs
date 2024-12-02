@@ -5,13 +5,13 @@ public class UIMouseBlocker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
 	public static bool MouseBlocked { get; private set; } = false;
 
-    public void OnPointerEnter(PointerEventData _)
-    {
+  public void OnPointerEnter(PointerEventData _)
+  {
 		MouseBlocked = true;
-    }
+  }
 
-    public void OnPointerExit(PointerEventData _)
-    {
-		MouseBlocked = false;
-    }
+  public void OnPointerExit(PointerEventData _)
+  {
+   MouseBlocked = false;
+  }
 }
