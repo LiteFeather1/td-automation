@@ -32,11 +32,35 @@ public class BeltPathSystem : MonoBehaviour
         { Direction.Down, Direction.Up},
     };
 
+    [SerializeField] private float _moveItemSpeed = 2f;
+
     private readonly Dictionary<Vector2Int, IInPort> r_inPorts = new();
     private readonly Dictionary<Vector2Int, IOutPort> r_outPorts = new();
 
     public Dictionary<Vector2Int, IInPort> InPort => r_inPorts;
     public Dictionary<Vector2Int, IOutPort> OutPort => r_outPorts;
+
+    internal void Update()
+    {
+        var deltaTime = Time.deltaTime;
+        foreach (var inPort in r_inPorts.Values)
+        {
+            if (inPort.Resource == null)
+                continue;
+
+            var transform = inPort.Resource.transform;
+            if (Vector2.Distance(inPort.Position, transform.position) > float.Epsilon)
+            {
+                transform.position = Vector2.MoveTowards(
+                    transform.position, inPort.Position, deltaTime * _moveItemSpeed
+                );
+            }
+            else
+            {
+                inPort.ResourceCentralized();
+            }
+        }
+    }
 
     public void AddInPort(IInPort newInPort)
     {
