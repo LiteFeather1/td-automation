@@ -40,8 +40,8 @@ public class GameHUD : MonoBehaviour
     {
         foreach (var uiResource in _uiResources.Values)
         {
-            uiResource.OnMouseHover += ShowUIResourceDescription;
-            uiResource.OnMouseUnhover += HideHover;
+            uiResource.UIHover.OnHover += ShowUIResourceDescription;
+            uiResource.UIHover.OnUnhover += HideHover;
         }
 
         foreach (var buildingButton in _uiBuildingButtons)
@@ -63,8 +63,8 @@ public class GameHUD : MonoBehaviour
     {
         foreach (var uiResource in _uiResources.Values)
         {
-            uiResource.OnMouseHover -= ShowUIResourceDescription;
-            uiResource.OnMouseUnhover -= HideHover;
+            uiResource.UIHover.OnHover -= ShowUIResourceDescription;
+            uiResource.UIHover.OnUnhover -= HideHover;
         }
 
         foreach (var buildingButton in _uiBuildingButtons)

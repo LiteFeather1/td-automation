@@ -4712,6 +4712,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _text
       value: "<b>Wood</b>\nGatherable from <b>Trees</b> by left click on it \nor\nAutomated
         with <b>Tree Cutters</b>"
       objectReference: {fileID: 0}
@@ -4834,6 +4838,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _text
       value: "<b>Metal Plate</b>\nProcessed resource made by suppling \n<b>Metal</b>
         to a <b>Smelter</b>"
       objectReference: {fileID: 0}
@@ -5081,6 +5089,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _text
       value: '<b>Essence</b>
 
         Automatically collected when killing enemies.'
@@ -5204,6 +5216,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _text
       value: "<b>Wood Plank</b>\nProcessed resource made by suppling \n<b>Wood</b>
         to a <b>Sawmill</b>"
       objectReference: {fileID: 0}
@@ -5326,6 +5342,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: _text
       value: "<b>Metal</b>\nGatherable from Stones by left click on it \nor\nAutomated
         with Quarries"
       objectReference: {fileID: 0}
