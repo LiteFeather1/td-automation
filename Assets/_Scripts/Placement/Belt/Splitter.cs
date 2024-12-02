@@ -33,11 +33,6 @@ public class Splitter : InPort, IOutPort
         }
     }
 
-    public IInPort GetPort(int index)
-    {
-        return r_ports[index];
-    }
-
     public void SetPort(IInPort inPort)
     {
         for (var i = 0; i < r_ports.Length; i++)

@@ -37,8 +37,6 @@ public class ResourceGiver : Building, IOutPort
             _port.OnDestroyed -= PortDestroyed;
     }
 
-    public IInPort GetPort(int _) => _port;
-
     public void SetPort(IInPort inPort)
     {
         _port = inPort;

@@ -26,8 +26,6 @@ public class Merger : InPort, IOutPort
         _resource = null;
     }
 
-    public IInPort GetPort(int _) => _port;
-
     public void SetPort(IInPort port)
     {
         _port = port;

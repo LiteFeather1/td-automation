@@ -50,8 +50,6 @@ public class ResourceProcessor : InPort, IOutPort
         _hasProcessedResource = true;
     }
 
-    public IInPort GetPort(int _) => _port;
-
     public void SetPort(IInPort inPort)
     {
         _port = inPort;
