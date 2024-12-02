@@ -311,7 +311,7 @@ public class PlacementSystem : MonoBehaviour
     private void InstantiateBuilding(Vector3 position, Quaternion rotation)
     {
         _buildingToPlace = Instantiate(
-            _buildingPrefab, position, rotation
+            _buildingPrefab, position, rotation, transform
         );
 
         _buildingToPlace.SR.sortingOrder = 2;
