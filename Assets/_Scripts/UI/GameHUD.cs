@@ -15,6 +15,7 @@ public class GameHUD : MonoBehaviour
 
     [Header("Resources")]
     [SerializeField] private TextMeshProUGUI t_towerCount;
+    [SerializeField] private UIHover _towerCount;
     [SerializeField] private SerializedDictionary<ResourceType, UIResource> _uiResources;
 
     [Header("Building Buttons")]
@@ -38,16 +39,23 @@ public class GameHUD : MonoBehaviour
 
     internal void OnEnable()
     {
+        SubscribeToUIHover(_towerCount);
+
         foreach (var uiResource in _uiResources.Values)
         {
-            uiResource.UIHover.OnHover += ShowUIResourceDescription;
-            uiResource.UIHover.OnUnhover += HideHover;
+            SubscribeToUIHover(uiResource.UIHover);
         }
 
         foreach (var buildingButton in _uiBuildingButtons)
         {
             buildingButton.OnButtonHovered += BuildingButtonHovered;
             buildingButton.OnButtonUnhovered += BuildingButtonUnhovered;
+        }
+
+        void SubscribeToUIHover(UIHover uiHover)
+        {
+            uiHover.OnHover += ShowUIResourceDescription;
+            uiHover.OnUnhover += HideHover;
         }
     }
 
@@ -61,16 +69,23 @@ public class GameHUD : MonoBehaviour
 
     internal void OnDisable()
     {
+        UnsubscribeToUIHover(_towerCount);
+
         foreach (var uiResource in _uiResources.Values)
         {
-            uiResource.UIHover.OnHover -= ShowUIResourceDescription;
-            uiResource.UIHover.OnUnhover -= HideHover;
+            UnsubscribeToUIHover(uiResource.UIHover);
         }
 
         foreach (var buildingButton in _uiBuildingButtons)
         {
             buildingButton.OnButtonHovered -= BuildingButtonHovered;
             buildingButton.OnButtonUnhovered -= BuildingButtonUnhovered;
+        }
+
+        void UnsubscribeToUIHover(UIHover uiHover)
+        {
+            uiHover.OnHover -= ShowUIResourceDescription;
+            uiHover.OnUnhover -= HideHover;
         }
     }
 

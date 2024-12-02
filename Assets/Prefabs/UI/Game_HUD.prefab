@@ -1229,6 +1229,7 @@ MonoBehaviour:
   t_timeToWave: {fileID: 8774365429940453512}
   i_playerHealth: {fileID: 6828038820938306985}
   t_towerCount: {fileID: 8193922550875819277}
+  _towerCount: {fileID: 8557781123739187644}
   _uiResources:
     _entries:
     - Key: 100
@@ -2374,6 +2375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 40881784349458017}
+  - component: {fileID: 8557781123739187644}
   - component: {fileID: 3571948788969344456}
   - component: {fileID: 2870585905768665004}
   - component: {fileID: 1433250959007418316}
@@ -2405,6 +2407,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 100}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &8557781123739187644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5109628324974441409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37f85b3a6067a148b486acb3f9af04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: Tower Count
 --- !u!114 &3571948788969344456
 MonoBehaviour:
   m_ObjectHideFlags: 0
