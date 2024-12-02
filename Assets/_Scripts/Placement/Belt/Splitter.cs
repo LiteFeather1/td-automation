@@ -1,15 +1,12 @@
 using UnityEngine;
 
-public class Splitter : Building, IOutPort, IInPort
+public class Splitter : InPort, IOutPort
 {
     private readonly IInPort[] r_ports = new IInPort[3];
 
     private int _offset;
 
-    private ResourceBehaviour _resource;
-
     public Direction OutDirection { get; set; } = Direction.Any;
-    public Direction InDirection { get; set; } = Direction.Left;
 
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
@@ -25,7 +22,6 @@ public class Splitter : Building, IOutPort, IInPort
             if (port != null && port.CanReceiveResource(_resource.Type))
             {
                 port.ReceiveResource(_resource);
-                _resource.transform.position = (Vector2)port.Position;
                 _resource = null;
                 _offset++;
                 break;
@@ -56,22 +52,6 @@ public class Splitter : Building, IOutPort, IInPort
                 break;
             }
         }
-    }
-
-    public bool CanReceiveResource(ResourceType type)
-    {
-        return _resource == null;
-    }
-
-    public void ReceiveResource(ResourceBehaviour resource)
-    {
-        _resource = resource;
-    }
-
-    public override void Destroy()
-    {
-        _resource?.Deactive();
-        base.Destroy();
     }
 
     private void PortDestroyed(Vector2Int position)

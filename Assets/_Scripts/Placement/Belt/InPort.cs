@@ -14,19 +14,20 @@ public abstract class InPort : Building, IInPort
 
     public ResourceBehaviour Resource => _resource;
 
-    public bool CanReceiveResource(ResourceType type)
+    public virtual bool CanReceiveResource(ResourceType type)
     {
         return _resource == null;
     }
 
-    public void ReceiveResource(ResourceBehaviour resource)
+    public virtual void ReceiveResource(ResourceBehaviour resource)
     {
         _resource = resource;
+        resource.transform.position = transform.position;
     }
 
     public override void Destroy()
     {
+        _resource?.Deactive();
         base.Destroy();
-        StopAllCoroutines();
     }
 }

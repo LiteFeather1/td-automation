@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class Merger : Building, IOutPort, IInPort
+public class Merger : InPort, IOutPort
 {
     private IInPort _port;
-    private int _offset;
 
-    private ResourceBehaviour _resource;
+    public override Direction InDirection { get; set; } = Direction.Any;
 
-    public Direction InDirection { get; set; } = Direction.Any;
     public Direction OutDirection { get; set; } = Direction.Right;
 
     public override bool CanBeRotated => true;
@@ -19,7 +17,6 @@ public class Merger : Building, IOutPort, IInPort
             return;
 
         _port.ReceiveResource(_resource);
-        _resource.transform.position = (Vector2)_port.Position;
         _resource = null;
     }
 
@@ -35,19 +32,6 @@ public class Merger : Building, IOutPort, IInPort
     {
         _port = port;
         _port.OnDestroyed += PortDestroyed;
-    }
-
-    public bool CanReceiveResource(ResourceType _) => _resource == null;
-
-    public void ReceiveResource(ResourceBehaviour resource)
-    {
-        _resource = resource;
-    }
-
-    public override void Destroy()
-    {
-        _resource?.Deactive();
-        base.Destroy();
     }
 
     private void PortDestroyed(Vector2Int _)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ResourceProcessor : Building, IInPort, IOutPort
+public class ResourceProcessor : InPort, IOutPort
 {
     [Header("Resource Processor")]
     [SerializeField] private ResourceType _resourceType;
@@ -10,14 +10,9 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 
     private IInPort _port;
 
-    private ResourceBehaviour _processingResource;
     private ResourceBehaviour _processedResource;
 
-    public Direction InDirection { get; set; } = Direction.Left;
     public Direction OutDirection { get; set; } = Direction.Right;
-
-    public override bool CanBeRotated => true;
-    public override bool CanBeDestroyed => true;
 
     internal void Update()
     {;
@@ -31,7 +26,7 @@ public class ResourceProcessor : Building, IInPort, IOutPort
             _processedResource = null;
         }
 
-        if (_processingResource == null || _processedResource != null)
+        if (_resource == null || _processedResource != null)
             return;
 
         _elapsedTime += Time.deltaTime;
@@ -40,9 +35,8 @@ public class ResourceProcessor : Building, IInPort, IOutPort
 
         _elapsedTime %= _timeToProcessResource;
 
-        _processingResource.Deactive();
+        _resource.Deactive();
         _processedResource = _processedBehaviourPool.ObjectPool.GetObject();
-        _processedResource.transform.position = (Vector2)_port.Position;
         _processedResource.gameObject.SetActive(true);
     }
 
@@ -60,16 +54,13 @@ public class ResourceProcessor : Building, IInPort, IOutPort
         _port.OnDestroyed += PortDestroyed;
     }
 
-    public bool CanReceiveResource(ResourceType type)
-        => _processingResource == null && _processedResource == null && type == _resourceType;
-
-    public void ReceiveResource(ResourceBehaviour resource) => _processingResource = resource;
+    public override bool CanReceiveResource(ResourceType type)
+        => base.CanReceiveResource(type) && _processedResource == null && type == _resourceType;
 
     public override void Destroy()
     {
-        base.Destroy();
         _processedResource?.Deactive();
-        _processingResource?.Deactive();
+        base.Destroy();
     }
 
     private void PortDestroyed(Vector2Int _)

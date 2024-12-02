@@ -196,6 +196,7 @@ public class PlacementSystem : MonoBehaviour
 
         InstantiateBuilding(position, rotation);
         _buildingToPlace.SR.color = _notPlaceableHighlight;
+        _canPlaceBuilding = false;
 
         AddBuilding(buildingToAdd);
     }
