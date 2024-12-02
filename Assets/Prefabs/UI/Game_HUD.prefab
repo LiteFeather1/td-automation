@@ -3876,6 +3876,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: 81c1efa4ddb11424d92f58e9f13dc550, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/1
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3997,6 +4001,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: 037c763c24afc46489faa6945d58612f, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/6
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4118,6 +4126,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: 1c07f4e04af3225498bf1550863bddb9, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/f3
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4239,6 +4251,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: 7e9114fe20577974db0e174d650f475c, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/5
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4364,6 +4380,22 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: 39a24266a0f51a74dbfc9bb131652c57, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: b86db25e-4cd3-43c5-b89a-d287adb97f6b
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/f1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Press Input
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4485,6 +4517,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: bd5f70b3d447e3b409cb47fc18fdd7f1, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/2
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4846,6 +4882,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: c111fb7f5815fb34a95c5c7e58c4fa1f, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/7
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5334,6 +5374,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: 3714fca976b6fbd40be2be80b7de1dda, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/f4
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5455,6 +5499,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: 31b8171953ac5d64e91193576c1ea5a5, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/4
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5576,6 +5624,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: f6a263f365924c64cb1559429dfb08db, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/3
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5697,6 +5749,10 @@ PrefabInstance:
       propertyPath: _placeableData
       value: 
       objectReference: {fileID: 11400000, guid: 2e87a851768db5c44b115a227cf91529, type: 2}
+    - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/f2
+      objectReference: {fileID: 0}
     - target: {fileID: 8834466806817870073, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

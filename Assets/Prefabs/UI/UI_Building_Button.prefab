@@ -193,7 +193,15 @@ MonoBehaviour:
     m_Id: 9f048902-f774-4484-a88d-21996175c392
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4fad23dc-3b45-4f85-a8b2-7a67cb9d0536
+      m_Path: 
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Press Input
+      m_Flags: 0
     m_Flags: 0
 --- !u!222 &3576767409230051799
 CanvasRenderer:
