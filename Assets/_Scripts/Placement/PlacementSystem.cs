@@ -119,6 +119,9 @@ public class PlacementSystem : MonoBehaviour
 
         _buildingPrefab = placeableData.BuildingPrefab;
 
+        if (_buildingToPlace != null)
+            Destroy(_buildingToPlace.gameObject);
+
         _tileHighlight.transform.GetPositionAndRotation(out var pos, out var rot);
         InstantiateBuilding(pos, rot);
 
