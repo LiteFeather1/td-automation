@@ -186,6 +186,15 @@ MonoBehaviour:
   _placeableData: {fileID: 0}
   _image: {fileID: 7596742827990384233}
   _button: {fileID: 3047055457836074915}
+  _pressInputAction:
+    m_Name: Press Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9f048902-f774-4484-a88d-21996175c392
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!222 &3576767409230051799
 CanvasRenderer:
   m_ObjectHideFlags: 0
