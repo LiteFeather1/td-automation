@@ -4,7 +4,7 @@ public abstract class InPort : Building, IInPort
 {
     protected ResourceBehaviour _resource;
 
-    public virtual Direction InDirection { get; set; } = Direction.Left;
+    public Direction InDirection { get; set; } = Direction.Left;
 
     public override bool CanBeRotated => true;
 
@@ -22,7 +22,6 @@ public abstract class InPort : Building, IInPort
     public virtual void ReceiveResource(ResourceBehaviour resource)
     {
         _resource = resource;
-        resource.transform.position = transform.position;
     }
 
     public override void Destroy()
@@ -30,4 +29,6 @@ public abstract class InPort : Building, IInPort
         _resource?.Deactive();
         base.Destroy();
     }
+
+    public abstract void ResourceCentralized();
 }

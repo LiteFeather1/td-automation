@@ -11,11 +11,15 @@ public class Splitter : InPort, IOutPort
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
-    internal void Update()
+    internal void OnDisable()
     {
-        if (_resource == null)
-            return;
+        foreach (var port in r_ports)
+            if (port != null)
+                port.OnDestroyed -= PortDestroyed;
+    }
 
+    public override void ResourceCentralized()
+    {
         for (var i = 0; i < r_ports.Length; i++)
         {
             var port = r_ports[(i + _offset) % r_ports.Length];
@@ -27,13 +31,6 @@ public class Splitter : InPort, IOutPort
                 break;
             }
         }
-    }
-
-    internal void OnDisable()
-    {
-        foreach (var port in r_ports)
-            if (port != null)
-                port.OnDestroyed -= PortDestroyed;
     }
 
     public IInPort GetPort(int index)

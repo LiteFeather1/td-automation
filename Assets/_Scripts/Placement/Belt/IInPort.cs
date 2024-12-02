@@ -11,4 +11,6 @@ public interface IInPort : IPlaceable
 	public bool CanReceiveResource(ResourceType type);
 
 	public void ReceiveResource(ResourceBehaviour resource);
+
+	public void ResourceCentralized();
 }

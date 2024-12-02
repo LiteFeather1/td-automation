@@ -8,26 +8,34 @@ public class ResourceProcessor : InPort, IOutPort
     [SerializeField] private float _timeToProcessResource = 1f;
     private float _elapsedTime;
 
-    private IInPort _port;
+    private bool _hasProcessedResource;
 
-    private ResourceBehaviour _processedResource;
+    private IInPort _port;
 
     public Direction OutDirection { get; set; } = Direction.Right;
 
-    internal void Update()
-    {;
-        if (
-            _port != null
-            && _processedResource != null
-            && _port.CanReceiveResource(_processedResource.Type)
-        )
-        {
-            _port.ReceiveResource(_processedResource);
-            _processedResource = null;
-        }
+    internal void OnDisable()
+    {
+        if (_port != null)
+            _port.OnDestroyed -= PortDestroyed;
+    }
 
-        if (_resource == null || _processedResource != null)
+    public override bool CanReceiveResource(ResourceType type)
+        => base.CanReceiveResource(type) && !_hasProcessedResource && type == _resourceType;
+
+    public override void ResourceCentralized()
+    {
+        if (_hasProcessedResource)
+        {
+            if (_port != null && _port.CanReceiveResource(_resource.Type))
+            {
+                _port.ReceiveResource(_resource);
+                _resource = null;
+                _hasProcessedResource = false;
+            }
+
             return;
+        }
 
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime < _timeToProcessResource)
@@ -36,14 +44,10 @@ public class ResourceProcessor : InPort, IOutPort
         _elapsedTime %= _timeToProcessResource;
 
         _resource.Deactive();
-        _processedResource = _processedBehaviourPool.ObjectPool.GetObject();
-        _processedResource.gameObject.SetActive(true);
-    }
-
-    internal void OnDisable()
-    {
-        if (_port != null)
-            _port.OnDestroyed -= PortDestroyed;
+        _resource = _processedBehaviourPool.ObjectPool.GetObject();
+        _resource.transform.position = transform.position;
+        _resource.gameObject.SetActive(true);
+        _hasProcessedResource = true;
     }
 
     public IInPort GetPort(int _) => _port;
@@ -52,15 +56,6 @@ public class ResourceProcessor : InPort, IOutPort
     {
         _port = inPort;
         _port.OnDestroyed += PortDestroyed;
-    }
-
-    public override bool CanReceiveResource(ResourceType type)
-        => base.CanReceiveResource(type) && _processedResource == null && type == _resourceType;
-
-    public override void Destroy()
-    {
-        _processedResource?.Deactive();
-        base.Destroy();
     }
 
     private void PortDestroyed(Vector2Int _)
