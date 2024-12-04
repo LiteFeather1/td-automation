@@ -65,6 +65,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 143309904664887199, guid: 72b76ec11d5a49840b4674007c8bb1f3, type: 3}
     - target: {fileID: 9122423759337509587, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: _timeToProcessResource
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122423759337509587, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
       propertyPath: _processedBehaviourPool
       value: 
       objectReference: {fileID: 11400000, guid: 2c92e4a764df46c4ba36a625995cee59, type: 2}

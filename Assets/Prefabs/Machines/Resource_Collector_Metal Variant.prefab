@@ -17,6 +17,14 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: _timeToCollect
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: _speedMultiplierPerNode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: _resourcesCost._entries.Array.size
       value: 2
       objectReference: {fileID: 0}

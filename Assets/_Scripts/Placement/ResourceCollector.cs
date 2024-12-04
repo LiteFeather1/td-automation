@@ -7,7 +7,7 @@ public class ResourceCollector : Building, IOutPort
     [SerializeField] private ResourceType _type;
     [SerializeField] private Transform _range;
     [SerializeField] private float _timeToCollect = 5f;
-    [SerializeField] private float _speedPerNode = 2f;
+    [SerializeField] private float _speedMultiplierPerNode = 2f;
 
     private float _elapsedTime = 0f;
 
@@ -27,7 +27,7 @@ public class ResourceCollector : Building, IOutPort
         if (_port == null || !_port.CanReceiveResource(_type))
             return;
 
-        _elapsedTime += Time.deltaTime * _speedPerNode * r_resourceNodes.Count;
+        _elapsedTime += Time.deltaTime * _speedMultiplierPerNode * r_resourceNodes.Count;
         if (_elapsedTime < _timeToCollect)
             return;
 
