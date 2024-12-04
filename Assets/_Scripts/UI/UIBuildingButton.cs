@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private PlaceableData _placeableData;
     [SerializeField] private Image _image;
     [SerializeField] private Button _button;
+    [SerializeField] private TextMeshProUGUI t_inputName;
 
     [SerializeField] private InputAction _pressInputAction;
 
@@ -24,6 +26,11 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         _pressInputAction.performed += PressInput;
         _pressInputAction.Enable();
+    }
+
+    private void Awake()
+    {
+        t_inputName.text = _pressInputAction.GetBindingDisplayString();
     }
 
     internal void OnDisable()
