@@ -13,7 +13,7 @@ public class PathFollow : MonoBehaviour
 
     public void ResetIt()
     {
-        _currentPointIndex = 0;
+        _currentSegmentIndex = 0;
         _currentPointIndex = 0;
     }
 

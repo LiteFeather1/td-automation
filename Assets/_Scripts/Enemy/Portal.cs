@@ -29,7 +29,8 @@ public class Portal : MonoBehaviour
 
     private Stage GetStage(int currentStage)
     {
-        return _stages[Mathf.Min(currentStage, _stages.Length - 1)];
+        var index = Mathf.Clamp(currentStage, 0, _stages.Length - 1);
+        return _stages[index];
     }
 
     public void StageEnded()
