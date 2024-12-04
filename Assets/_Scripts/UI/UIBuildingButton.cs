@@ -59,8 +59,9 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _button.interactable = interactable;
     }
 
-    private void PressInput(InputAction.CallbackContext ctx)
+    private void PressInput(InputAction.CallbackContext _)
     {
-        OnButtonPressed?.Invoke(_placeableData);
+        if (_button.interactable)
+            OnButtonPressed?.Invoke(_placeableData);
     }
 }
