@@ -92,7 +92,26 @@ public class GameHUD : MonoBehaviour
     public void UpdateUIResource(ResourceType resourceType, int amount)
     {
         _uiResources[resourceType].SetAmount(amount);
-        UpdateBuildingButtons(resourceType, amount);
+    }
+
+    public void UpdateBuildingButtons(
+        ResourceType type, int totalAmount, IDictionary<ResourceType, int> resources
+    )
+    {
+        foreach (var button in _uiBuildingButtons)
+        {
+            if (!button.ResourceCost.TryGetValue(type, out var cost) || -cost < totalAmount)
+                continue;
+
+            var count = button.ResourceCost.Count;
+            foreach (var pair in button.ResourceCost)
+            {
+                if (-pair.Value <= resources[pair.Key])
+                    count--;
+            }
+
+            button.SetButtonInteractable(count == 0);
+        }
     }
 
     public void SetWave(int wave)
@@ -122,10 +141,10 @@ public class GameHUD : MonoBehaviour
 
     public void UpdateAmountsAndBuildingButtons(Dictionary<ResourceType, int> resources)
     {
-        foreach (var resource in resources)
+        foreach (var pair in resources)
         {
-            UpdateUIResource(resource.Key, resource.Value);
-            UpdateBuildingButtons(resource.Key, resource.Value);
+            UpdateUIResource(pair.Key, pair.Value);
+            UpdateBuildingButtons(pair.Key, pair.Value, resources);
         }
     }
 
@@ -151,39 +170,12 @@ public class GameHUD : MonoBehaviour
         ShowHover(description);
     }
 
-    private void UpdateBuildingButtons(ResourceType type, int cost)
-    {
-        foreach (var button in _uiBuildingButtons)
-        {
-            if (button.ResourceCost.Count == 0 || !button.ResourceCost.ContainsKey(type))
-                continue;
-
-            var count = 0;
-            foreach (var resourceCost in button.ResourceCost.Values)
-            {
-                if (-resourceCost <= cost)
-                    count++;
-            }
-
-            button.SetButtonInteractable(count == button.ResourceCost.Count);
-        }
-    }
-
     private void BuildingButtonHovered(UIBuildingButton buildingButton)
     {
         var buildingRect = (RectTransform)buildingButton.transform;
-        float pivot;
-        float paddingDir;
-        if (buildingRect.position.x > rt_canvas.rect.width * .5f)
-        {
-            pivot = 1f;
-            paddingDir = -1f;
-        }
-        else
-        {
-            pivot = 0;
-            paddingDir = 1f;
-        }
+        var (pivot, paddingDir) = (buildingRect.position.x > rt_canvas.rect.width * .5f) ?
+            (1f, -1f) : (0, 1f);
+
         _hoverBuildingButtonInfo.pivot = new(pivot, .5f);
         _hoverBuildingButtonInfo.position = new(
             buildingRect.position.x + ((buildingRect.rect.width + _hoverBuildingButtonPadding) * paddingDir),

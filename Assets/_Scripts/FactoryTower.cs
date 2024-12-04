@@ -22,6 +22,8 @@ public class FactoryTower : MonoBehaviour
     public Receiver[] Receivers => _receivers;
     public Tower[] StarterTowers => _starterTowers;
 
+    public IDictionary<ResourceType, int> Resources => r_resources;
+
     public void Awake()
     {
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))

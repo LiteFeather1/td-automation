@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
         _enemyManager.OnStageEnded += _gameHUD.SetWave;
         _enemyManager.OnAllStagesEnded += AllStagesEnded;
 
-        _factoryTower.OnResourceModified += _gameHUD.UpdateUIResource;
+        _factoryTower.OnResourceModified += UpdateUIResources;
         _factoryTower.OnResourcesModified += _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.OnResourceAdded += _endScreen.AddResource;
         _factoryTower.OnResourcesAdded += _endScreen.AddResources;
@@ -118,7 +118,7 @@ public class GameManager : Singleton<GameManager>
         _enemyManager.OnStageEnded -= _gameHUD.SetWave;
         _enemyManager.OnAllStagesEnded -= AllStagesEnded;
 
-        _factoryTower.OnResourceModified -= _gameHUD.UpdateUIResource;
+        _factoryTower.OnResourceModified -= UpdateUIResources;
         _factoryTower.OnResourcesModified -= _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.OnResourceAdded -= _endScreen.AddResource;
         _factoryTower.OnResourcesAdded -= _endScreen.AddResources;
@@ -204,6 +204,12 @@ public class GameManager : Singleton<GameManager>
     {
         _endScreen.Enable(_factoryTower.Health.HP > 0, _elapsedTime);
         Time.timeScale = 0f;
+    }
+
+    private void UpdateUIResources(ResourceType type, int amount)
+    {
+        _gameHUD.UpdateUIResource(type, amount);
+        _gameHUD.UpdateBuildingButtons(type, amount, _factoryTower.Resources);
     }
 
     private void ResourceCreated(ResourceBehaviour resource)

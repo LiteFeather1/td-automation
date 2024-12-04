@@ -63,7 +63,6 @@ public class EnemyManager : Singleton<EnemyManager>
                 while (portal.AllGroupsSpawned(_currentStage));
 
                 SpawnEnemy(portal, portal.GetRandomEnemy(_currentStage));
-                print("random");
             }
 
             return;
