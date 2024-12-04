@@ -26,27 +26,19 @@ public class CameraManager : MonoBehaviour
     internal void Update()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
-        var deltaTime = Time.deltaTime;
-
         if (inputs.Drag.IsPressed())
         {
-            MoveCamera(_mouseSpeed * deltaTime * -inputs.Look.ReadValue<Vector2>());
+            MoveCameraInput(_mouseSpeed * Time.deltaTime * -inputs.Look.ReadValue<Vector2>());
+        }
+        else
+        {
+            MoveCameraInput(_keyboardSpeed * Time.deltaTime * inputs.Move.ReadValue<Vector2>());
         }
 
-        var wasdMove = inputs.Move.ReadValue<Vector2>();
-        if (wasdMove != Vector2.zero)
+        void MoveCameraInput(Vector2 delta)
         {
-            MoveCamera(_keyboardSpeed * deltaTime * wasdMove);
-        }
-
-        void MoveCamera(Vector2 delta)
-        {
-            var camSizeY = _camera.orthographicSize;
-            var camSizeX = camSizeY * 16f / 9f;
-            var pos = transform.position;
-            pos.x = Mathf.Clamp(pos.x + delta.x, _min.x + camSizeX, _max.x - camSizeX);
-            pos.y = Mathf.Clamp(pos.y + delta.y, _min.y + camSizeY, _max.y - camSizeY);
-            transform.position = pos;
+            if (delta != Vector2.zero)
+                MoveCamera(delta);
         }
     }
 
@@ -62,11 +54,22 @@ public class CameraManager : MonoBehaviour
         _camera.orthographicSize = Mathf.Clamp(
             _camera.orthographicSize - ctx.ReadValue<Vector2>().y * _zSpeed, _zRange.x, _zRange.y
         );
+        MoveCamera(Vector2.zero);
     }
 
     private void DefaultZoom(InputAction.CallbackContext ctx)
     {
         _camera.orthographicSize = _defaultZ;
+    }
+
+    private void MoveCamera(Vector2 delta)
+    {
+        var camSizeY = _camera.orthographicSize;
+        var camSizeX = camSizeY * 16f / 9f;
+        var pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x + delta.x, _min.x + camSizeX, _max.x - camSizeX);
+        pos.y = Mathf.Clamp(pos.y + delta.y, _min.y + camSizeY, _max.y - camSizeY);
+        transform.position = pos;
     }
 
 #if UNITY_EDITOR
