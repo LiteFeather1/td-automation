@@ -343,8 +343,12 @@ MonoBehaviour:
   _name: Zapper
   _resourcesCost:
     _entries:
-    - Key: 100
-      Value: -1
+    - Key: 300
+      Value: -20
+    - Key: 400
+      Value: -20
+    - Key: 500
+      Value: -10
   _sr: {fileID: 7138210802647603289}
   _range: {fileID: 7013843987129502161}
   _damage: 10

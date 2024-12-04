@@ -226,7 +226,9 @@ MonoBehaviour:
   _resourcesCost:
     _entries:
     - Key: 100
-      Value: -1
+      Value: -8
+    - Key: 200
+      Value: -4
   _sr: {fileID: 1891684160032127136}
 --- !u!212 &1891684160032127136
 SpriteRenderer:

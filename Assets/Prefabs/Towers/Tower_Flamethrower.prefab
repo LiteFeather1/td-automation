@@ -169,8 +169,12 @@ MonoBehaviour:
   _name: Flamethrower
   _resourcesCost:
     _entries:
-    - Key: 100
-      Value: -1
+    - Key: 300
+      Value: -20
+    - Key: 400
+      Value: -20
+    - Key: 500
+      Value: -5
   _sr: {fileID: 1071184834035600572}
   _range: {fileID: 6604266370505615649}
   _damage: 1

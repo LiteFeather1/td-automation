@@ -51,7 +51,9 @@ MonoBehaviour:
   _resourcesCost:
     _entries:
     - Key: 100
-      Value: -1
+      Value: -40
+    - Key: 200
+      Value: -20
   _sr: {fileID: 828324963780454766}
   _range: {fileID: 0}
   _damage: 6
