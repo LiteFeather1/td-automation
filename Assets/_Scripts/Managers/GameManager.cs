@@ -6,6 +6,10 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private FactoryTower _factoryTower;
 
+    [Header("Game Speed")]
+    [SerializeField] private Vector2 _gameSpeedRange = new(.5f, 2f);
+    [SerializeField] private float _gameSpeedDelta = .5f;
+
     [Header("Systems")]
     [SerializeField] private PlacementSystem _placementSystem;
     [SerializeField] private EnemyManager _enemyManager;
@@ -27,6 +31,8 @@ public class GameManager : Singleton<GameManager>
         inputs.LMB.performed += PlaceBuilding;
         inputs.RMB.performed += CancelBuilding;
         inputs.Rotate.performed += RotateBuilding;
+        inputs.SpeedUp.performed += SpeedUp;
+        inputs.SpeedDown.performed += SpeedDown;
 
         _placementSystem.OnBuildingPlaced += BuildingPlaced;
         _placementSystem.OnBuildingRemoved += BuildingRemoved;
@@ -97,6 +103,8 @@ public class GameManager : Singleton<GameManager>
         inputs.LMB.performed -= PlaceBuilding;
         inputs.RMB.performed -= CancelBuilding;
         inputs.Rotate.performed -= RotateBuilding;
+        inputs.SpeedUp.performed -= SpeedUp;
+        inputs.SpeedDown.performed -= SpeedDown;
 
         _placementSystem.OnBuildingPlaced -= BuildingPlaced;
         _placementSystem.OnBuildingRemoved -= BuildingRemoved;
@@ -146,6 +154,16 @@ public class GameManager : Singleton<GameManager>
     private void RotateBuilding(InputAction.CallbackContext _)
     {
         _placementSystem.RotateBuilding();
+    }
+
+    private void SpeedUp(InputAction.CallbackContext _)
+    {
+        Time.timeScale = Mathf.Min(Time.timeScale + _gameSpeedDelta, _gameSpeedRange.y);
+    }
+
+    private void SpeedDown(InputAction.CallbackContext _)
+    {
+        Time.timeScale = Mathf.Max(Time.timeScale - _gameSpeedDelta, _gameSpeedRange.x);
     }
 
     public void BuildingPlaced(Building building)
