@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using LTF.SerializedDictionary;
+using Random = UnityEngine.Random;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
-    [SerializeField] private float[] _lullStageDurations;
+    [SerializeField] private LullStages[] _lullStages;
     [SerializeField] private Portal[] _portals;
     [SerializeField] private SerializedDictionary<int, SOObjectPoolEnemy> _enemiesObjectPools;
     private int _currentStage;
@@ -13,6 +14,7 @@ public class EnemyManager : Singleton<EnemyManager>
     private readonly List<Enemy> _enemies = new();
 
     private float _elapsedTime;
+    private float _lullSpawnTime;
 
     public Action OnWaveStarted { get; set; }
     public Action<int> OnStageEnded { get; set; }
@@ -27,8 +29,8 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public bool HasEnemies => _enemies.Count > 0;
 
-    public float TimeToWave => _lullStageDurations[_currentStage] - _elapsedTime;
-    public bool AllStagesCompleted => _currentStage == _lullStageDurations.Length;
+    public float TimeToWave => _lullStages[_currentStage].LullDuration - _elapsedTime;
+    public bool AllStagesCompleted => _currentStage == _lullStages.Length;
 
     internal void OnEnable()
     {
@@ -41,12 +43,31 @@ public class EnemyManager : Singleton<EnemyManager>
         }
     }
 
+    private void Start()
+    {
+        _lullSpawnTime = _lullStages[_currentStage].LullSpawnTime;
+    }
+
     public void Update()
     {
         _elapsedTime += Time.deltaTime;
-        var currentLullDuration = _lullStageDurations[_currentStage];
+        var currentLullDuration = _lullStages[_currentStage].LullDuration;
         if (_elapsedTime < currentLullDuration)
+        {
+            if (_elapsedTime >= _lullSpawnTime)
+            {
+                _lullSpawnTime = _lullStages[_currentStage].LullSpawnTime + _elapsedTime;
+                Portal portal;
+                do
+                    portal = _portals[Random.Range(0, _portals.Length)];
+                while (portal.AllGroupsSpawned(_currentStage));
+
+                SpawnEnemy(portal, portal.GetRandomEnemy(_currentStage));
+                print("random");
+            }
+
             return;
+        }
 
         if (!_waveInProgress)
         {
@@ -59,13 +80,7 @@ public class EnemyManager : Singleton<EnemyManager>
             if (!portal.CanSpawn(_currentStage, _elapsedTime - currentLullDuration))
                 continue;
 
-            var newEnemy = portal.GetEnemy(_currentStage);
-            newEnemy.transform.position = portal.transform.position;
-            newEnemy.ResetIt();
-            newEnemy.PathFollow.SetPath(portal.Path);
-            newEnemy.gameObject.SetActive(true);
-
-            _enemies.Add(newEnemy);
+            SpawnEnemy(portal, portal.GetEnemy(_currentStage));
         }
     }
 
@@ -114,7 +129,8 @@ public class EnemyManager : Singleton<EnemyManager>
         _currentStage++;
         _waveInProgress = false;
         OnStageEnded?.Invoke(_currentStage);
-        if (_currentStage == _lullStageDurations.Length)
+
+        if (AllStagesCompleted)
         {
             Debug.Log("All Stages Completed");
             enabled = false;
@@ -132,5 +148,25 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         OnEnemyReachedPathEnd?.Invoke(enemy.Damage);
         RemoveEnemy(enemy);
+    }
+
+    private void SpawnEnemy(Portal portal, Enemy enemy)
+    {
+        enemy.transform.position = portal.transform.position;
+        enemy.ResetIt();
+        enemy.PathFollow.SetPath(portal.Path);
+        enemy.gameObject.SetActive(true);
+        _enemies.Add(enemy);
+    }
+
+    [Serializable]
+    private struct LullStages
+    {
+        [SerializeField] private float _lullDuration;
+        [SerializeField] private Vector2 _lullSpawnTimeRange;
+
+        public readonly float LullDuration => _lullDuration;
+        public readonly float LullSpawnTime
+            => Random.Range(_lullSpawnTimeRange.x, _lullSpawnTimeRange.y);
     }
 }

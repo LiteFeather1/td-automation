@@ -877,6 +877,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _factoryTower: {fileID: 1396621434}
+  _gameSpeedRange: {x: 0.5, y: 2}
+  _gameSpeedDelta: 0.5
   _placementSystem: {fileID: 900071249}
   _enemyManager: {fileID: 2102129621}
   _gameHUD: {fileID: 1571453347}
@@ -7184,9 +7186,6 @@ MonoBehaviour:
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
     - _spawnTime: 4
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-  - _enemySpawns:
-    - _spawnTime: 1
-      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1001 &747855483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8910,9 +8909,6 @@ MonoBehaviour:
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
     - _spawnTime: 10
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-  - _enemySpawns:
-    - _spawnTime: 1
-      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1001 &1019380642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54658,6 +54654,8 @@ MonoBehaviour:
   - _enemySpawns:
     - _spawnTime: 1
       _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 5
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1001 &1743996337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56229,9 +56227,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b5c4df28a18f14fb720e01c6883f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lullStageDurations:
-  - 60
-  - 20
+  _lullStages:
+  - _lullDuration: 240
+    _lullSpawnTimeRange: {x: 10, y: 15}
+  - _lullDuration: 180
+    _lullSpawnTimeRange: {x: 7.5, y: 12.5}
+  - _lullDuration: 120
+    _lullSpawnTimeRange: {x: 5, y: 10}
   _portals:
   - {fileID: 1741471820}
   - {fileID: 740015674}
@@ -56296,15 +56298,11 @@ MonoBehaviour:
     - {fileID: 932215714}
     - {fileID: 1471481709}
   _stages:
-  - _enemySpawns:
-    - _spawnTime: 0
-      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-    - _spawnTime: 2
-      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-    - _spawnTime: 4
-      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+  - _enemySpawns: []
   - _enemySpawns:
     - _spawnTime: 1
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 5
       _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1001 &2126549214
 PrefabInstance:

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Portal : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class Portal : MonoBehaviour
     public Enemy GetEnemy(int currentStage)
     {
         return GetStage(currentStage).EnemySpawns[_currentEnemyGroup++].Enemy;
+    }
+
+    public Enemy GetRandomEnemy(int currentStage)
+    {
+        return GetStage(currentStage).GetRandomEnemy();
     }
 
     private Stage GetStage(int currentStage)
@@ -55,6 +61,8 @@ public class Portal : MonoBehaviour
         [SerializeField] private EnemySpawn[] _enemySpawns;
 
         public EnemySpawn[] EnemySpawns => _enemySpawns;
+
+        public Enemy GetRandomEnemy() => _enemySpawns[Random.Range(0, _enemySpawns.Length)].Enemy;
     }
 
     [Serializable]
