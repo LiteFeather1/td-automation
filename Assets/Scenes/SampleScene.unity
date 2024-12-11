@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b4598d40130a1b04d9d9d826a1ba60a2, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1664,7 +1664,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.019607844, g: 0.023529412, b: 0.05490196, a: 0}
+  m_BackGroundColor: {r: 0.007843138, g: 0.011764706, b: 0.02745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -6916,7 +6916,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 0.38039216, b: 0.7764706, a: 1}
+  m_Color: {r: 1, g: 0.44313726, b: 0.80784315, a: 1}
   m_Origin: {x: -32, y: -33, z: 0}
   m_Size: {x: 70, y: 59, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -54450,7 +54450,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0.36078432, g: 0.9254902, b: 1, a: 1}
+  m_Color: {r: 0.003921569, g: 0.8039216, b: 0.99607843, a: 1}
   m_Origin: {x: -35, y: -33, z: 0}
   m_Size: {x: 69, y: 68, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
