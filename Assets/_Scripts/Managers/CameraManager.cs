@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class CameraManager : MonoBehaviour
 {
+    private static readonly Color sr_boundsColour = new(0.94f, 0.39f, 0.01f, 1f);
+
     [SerializeField] private Camera _camera;
 
     [Header("Z")]
@@ -28,17 +30,11 @@ public class CameraManager : MonoBehaviour
         var inputs = InputManager.Instance.InputSystem.Player;
         if (inputs.Drag.IsPressed())
         {
-            MoveCameraInput(_mouseSpeed * Time.deltaTime * -inputs.Look.ReadValue<Vector2>());
+            MoveCamera(_mouseSpeed * Time.deltaTime * -inputs.Look.ReadValue<Vector2>());
         }
-        else
+        else if (inputs.Move.IsPressed())
         {
-            MoveCameraInput(_keyboardSpeed * Time.deltaTime * inputs.Move.ReadValue<Vector2>());
-        }
-
-        void MoveCameraInput(Vector2 delta)
-        {
-            if (delta != Vector2.zero)
-                MoveCamera(delta);
+            MoveCamera(_keyboardSpeed * Time.deltaTime * inputs.Move.ReadValue<Vector2>());
         }
     }
 
@@ -57,7 +53,7 @@ public class CameraManager : MonoBehaviour
         MoveCamera(Vector2.zero);
     }
 
-    private void DefaultZoom(InputAction.CallbackContext ctx)
+    private void DefaultZoom(InputAction.CallbackContext _)
     {
         _camera.orthographicSize = _defaultZ;
     }
@@ -75,7 +71,7 @@ public class CameraManager : MonoBehaviour
 #if UNITY_EDITOR
     internal void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = sr_boundsColour;
 
         var topLeft = new Vector3(_min.x, _max.y);
         var bottomRight = new Vector3(_max.x, _min.y);

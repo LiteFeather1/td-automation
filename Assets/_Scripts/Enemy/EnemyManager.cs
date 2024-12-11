@@ -123,7 +123,7 @@ public class EnemyManager : Singleton<EnemyManager>
         foreach (var portal in _portals)
             portal.StageEnded();
 
-        Debug.Log("Stage ended");
+        print("Stage ended");
         _elapsedTime = 0f;
         _currentStage++;
         _waveInProgress = false;
@@ -131,7 +131,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
         if (AllStagesCompleted)
         {
-            Debug.Log("All Stages Completed");
+            print("All Stages Completed");
             enabled = false;
             OnAllStagesEnded?.Invoke();
         }
