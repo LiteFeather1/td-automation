@@ -1685,7 +1685,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 1
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -1780,8 +1780,8 @@ MonoBehaviour:
   _defaultZ: 10
   _zRange: {x: 5, y: 15}
   _zSpeed: 0.33
-  _keyboardSpeed: 10
-  _mouseSpeed: 5
+  _keyboardSpeed: 25
+  _mouseSpeed: 7.5
   _min: {x: -32, y: -32}
   _max: {x: 32, y: 32}
 --- !u!1 &333799708
@@ -2856,7 +2856,7 @@ Transform:
   m_GameObject: {fileID: 516606565}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6917,7 +6917,7 @@ Tilemap:
   m_Color: {r: 0.8490566, g: 0.5704634, b: 0.26032397, a: 1}
   m_Origin: {x: -32, y: -33, z: 0}
   m_Size: {x: 70, y: 59, z: 1}
-  m_TileAnchor: {x: 0, y: 0, z: 0}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -8006,6 +8006,25 @@ MonoBehaviour:
       _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
     - _spawnTime: 25
       _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+  - _enemySpawns:
+    - _spawnTime: 1
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 3
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 5
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 10
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 10
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 10
+      _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
+    - _spawnTime: 20
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 22
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 30
+      _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
 --- !u!1 &744437350
 GameObject:
   m_ObjectHideFlags: 0
@@ -10010,12 +10029,25 @@ MonoBehaviour:
   - _enemySpawns:
     - _spawnTime: 0
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-    - _spawnTime: 2
+    - _spawnTime: 3
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-    - _spawnTime: 4
+    - _spawnTime: 6
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
-    - _spawnTime: 10
+    - _spawnTime: 9
       _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 25
+      _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
+  - _enemySpawns:
+    - _spawnTime: 7
+      _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
+    - _spawnTime: 14
+      _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
+    - _spawnTime: 21
+      _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
+    - _spawnTime: 28
+      _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
+    - _spawnTime: 37
+      _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
 --- !u!1001 &1019380642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12006,7 +12038,7 @@ Transform:
   m_GameObject: {fileID: 1309892858}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61350,6 +61382,19 @@ MonoBehaviour:
     - _spawnTime: 15
       _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
     - _spawnTime: 18
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+  - _enemySpawns:
+    - _spawnTime: 10
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 12
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 14
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 20
+      _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
+    - _spawnTime: 22
+      _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+    - _spawnTime: 24
       _enemyPool: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
 --- !u!1001 &2116685884
 PrefabInstance:
