@@ -15,7 +15,6 @@ public class PlacementSystem : MonoBehaviour
     };
 
     [SerializeField] private Camera _camera;
-    [SerializeField] private Tilemap _groundTilemap;
     [SerializeField] private Tilemap _pathTilemap;
     [SerializeField] private SerializedDictionary<Vector2Int, ResourceNode> _resourceNodes = new();
 
@@ -292,11 +291,7 @@ public class PlacementSystem : MonoBehaviour
 
     private void SetCanPlaceBuilding(Vector3Int worldPos)
     {
-        _canPlaceBuilding = (
-            !r_buildings.ContainsKey(_mousePos)
-            && !_pathTilemap.HasTile(worldPos)
-            && _groundTilemap.HasTile(worldPos)
-        );
+        _canPlaceBuilding = !r_buildings.ContainsKey(_mousePos) && !_pathTilemap.HasTile(worldPos);
     }
 
     private void SetHighlightColour()
