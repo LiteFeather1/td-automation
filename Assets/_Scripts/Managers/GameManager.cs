@@ -197,7 +197,7 @@ public class GameManager : Singleton<GameManager>
 
     private void WaveStarted()
     {
-        _gameHUD.SetTimeToWave("Attacking");
+        _gameHUD.SetTimeToWave("Defend!");
     }
 
     private void AllStagesEnded()
