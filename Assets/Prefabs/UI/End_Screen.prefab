@@ -398,7 +398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: VICTORY
+  m_text: VICTORY!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c20cd72a91afdfb47ac57b25ce3f1b79, type: 2}
   m_sharedMaterial: {fileID: -2764738233812642794, guid: c20cd72a91afdfb47ac57b25ce3f1b79, type: 2}
@@ -407,8 +407,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294888705
+  m_fontColor: {r: 0.003921569, g: 0.8039216, b: 0.99607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -525,6 +525,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_result: {fileID: 84658263018109042}
+  _victoryColour: {r: 0.003921569, g: 0.8039216, b: 0.99607843, a: 1}
+  _defeatColour: {r: 1, g: 0.44313726, b: 0.80784315, a: 1}
   _elapsedTime: {fileID: 2931538709095028776}
   _enemies: {fileID: 1087631320940574392}
   _resourceStats:

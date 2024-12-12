@@ -7,6 +7,7 @@ using LTF.SerializedDictionary;
 public class UIEndScreen : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI t_result;
+    [SerializeField] private Color _victoryColour, _defeatColour;
     [SerializeField] private UIEndScreenStat _elapsedTime;
     [SerializeField] private UIEndScreenStat _enemies;
     [SerializeField] private SerializedDictionary<ResourceType, UIEndScreenStat> _resourceStats;
@@ -22,13 +23,23 @@ public class UIEndScreen : MonoBehaviour
 
     public void Enable(bool victory, float time)
     {
-        t_result.text = victory ? "Victory!" : "Defeat!";
+        // Add Colour for defeat and victory
+        if (victory)
+        {
+            t_result.text = "Victory!";
+            t_result.color = _victoryColour;
+        }
+        else
+        {
+            t_result.text = "Defeat!";
+            t_result.color = _defeatColour;
+        }
 
         _elapsedTime.SetStat($"{Mathf.FloorToInt(time / 60f):00}:{Mathf.FloorToInt(time % 60f):00}");
         _enemies.SetStat($"{_enemiesKilledCount}");
 
         foreach (var resource in r_resourceCount)
-            _resourceStats[resource.Key].SetStat($"{resource.Value}");
+            _resourceStats[resource.Key].SetStat($"{resource.Value:000000}");
 
         gameObject.SetActive(true);
     }
