@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 25645953643645541, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 250494689945465921, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: _speed
@@ -30,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792577125574523428, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3792577125574523428, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792577125574523428, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: _damage
@@ -119,7 +119,7 @@ PrefabInstance:
     - target: {fileID: 8805988793405938397, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 025c78a3f89c54c4bbec5a78328720fc, type: 2}
+      objectReference: {fileID: 2100000, guid: d116215e9cade444484243fff54bfd6a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
