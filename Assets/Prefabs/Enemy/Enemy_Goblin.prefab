@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8010355723377097984, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      propertyPath: m_Name
+      value: Spriterenderer
+      objectReference: {fileID: 0}
     - target: {fileID: 8119826878547449110, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: _maxHP
       value: 8
@@ -91,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 8805988793405938397, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1b6ce3d8c939c7c4984681500a0bdde5, type: 3}
+      objectReference: {fileID: 21300000, guid: ebdcaee42fd670347ab91b756c42ccb1, type: 3}
     - target: {fileID: 8805988793405938397, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_Color.b
       value: 1

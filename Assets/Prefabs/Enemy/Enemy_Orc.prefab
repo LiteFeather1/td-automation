@@ -30,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792577125574523428, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3792577125574523428, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792577125574523428, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: <ID>k__BackingField
@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8010355723377097984, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
+      propertyPath: m_Name
+      value: Spriterenderer
+      objectReference: {fileID: 0}
     - target: {fileID: 8119826878547449110, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: _maxHP
       value: 20
@@ -91,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 8805988793405938397, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1b6ce3d8c939c7c4984681500a0bdde5, type: 3}
+      objectReference: {fileID: 21300000, guid: d2771d3e353507246a52a2061e581e42, type: 3}
     - target: {fileID: 8805988793405938397, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: m_Color.b
       value: 1
