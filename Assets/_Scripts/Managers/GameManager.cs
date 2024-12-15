@@ -53,6 +53,9 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed += _gameHUD.UpdatePlayerHealth;
 
+        _gameHUD.IncreaseSpeedButton.onClick.AddListener(IncreaseGameSpeed);
+        _gameHUD.DecreaseSpeedButton.onClick.AddListener(DecreaseGameSpeed);
+
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed += _placementSystem.SetPlaceable;
@@ -126,6 +129,9 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.Health.OnDamageTaken -= _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed -= _gameHUD.UpdatePlayerHealth;
 
+        _gameHUD.IncreaseSpeedButton.onClick.RemoveListener(IncreaseGameSpeed);
+        _gameHUD.DecreaseSpeedButton.onClick.RemoveListener(DecreaseGameSpeed);
+
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed -= _placementSystem.SetPlaceable;
@@ -161,21 +167,25 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = speed;
         _gameHUD.SetGameSpeed(speed);
-        _gameHUD.SetIncreaseButtonState(_gameSpeedIndex != _gameSpeeds.Length - 1);
-        _gameHUD.SetDecreaseButtonState(_gameSpeedIndex != 0);
+        _gameHUD.IncreaseSpeedButton.interactable = _gameSpeedIndex != _gameSpeeds.Length - 1;
+        _gameHUD.DecreaseSpeedButton.interactable = _gameSpeedIndex != 0;
     }
 
-    private void SpeedUp(InputAction.CallbackContext _)
+    private void IncreaseGameSpeed()
     {
         _gameSpeedIndex = Mathf.Min(++_gameSpeedIndex, _gameSpeeds.Length - 1);
         ChangeGameSpeed(_gameSpeeds[_gameSpeedIndex]);
     }
 
-    private void SpeedDown(InputAction.CallbackContext _)
+    private void SpeedUp(InputAction.CallbackContext _) => IncreaseGameSpeed();
+
+    private void DecreaseGameSpeed()
     {
         _gameSpeedIndex = Mathf.Max(--_gameSpeedIndex, 0);
         ChangeGameSpeed(_gameSpeeds[_gameSpeedIndex]);
     }
+
+    private void SpeedDown(InputAction.CallbackContext _) => DecreaseGameSpeed();
 
     public void BuildingPlaced(Building building)
     {

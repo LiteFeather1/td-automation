@@ -1045,6 +1045,7 @@ GameObject:
   - component: {fileID: 5483884669268717648}
   - component: {fileID: 6536544086262898939}
   - component: {fileID: 8755774201307842350}
+  - component: {fileID: 9199579102272222360}
   m_Layer: 5
   m_Name: i_Tower_Icon
   m_TagString: Untagged
@@ -1094,7 +1095,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -8, y: -8, z: -108, w: -8}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1109,6 +1110,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9199579102272222360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338017867925968613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37f85b3a6067a148b486acb3f9af04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: Tower Count
 --- !u!1 &1494200615125104106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,19 +1542,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8164589256203596432}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 22891903743808434}
-        m_TargetAssemblyTypeName: GameHUD, Assembly-CSharp
-        m_MethodName: BDecreaseSpeed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2843568978551822107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,7 +1881,7 @@ MonoBehaviour:
   t_timeToWave: {fileID: 8774365429940453512}
   i_playerHealth: {fileID: 6828038820938306985}
   t_towerCount: {fileID: 8193922550875819277}
-  _towerCount: {fileID: 8557781123739187644}
+  _towerCount: {fileID: 9199579102272222360}
   _uiResources:
     _entries:
     - Key: 100
@@ -2932,19 +2934,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 442146869136672221}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 22891903743808434}
-        m_TargetAssemblyTypeName: GameHUD, Assembly-CSharp
-        m_MethodName: BIncreaseSpeed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &4367991114679170905
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,7 +4038,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 40881784349458017}
-  - component: {fileID: 8557781123739187644}
   - component: {fileID: 3571948788969344456}
   - component: {fileID: 2870585905768665004}
   - component: {fileID: 1433250959007418316}
@@ -4083,19 +4072,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 198, y: 0}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &8557781123739187644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5109628324974441409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f37f85b3a6067a148b486acb3f9af04e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _text: Tower Count
 --- !u!114 &3571948788969344456
 MonoBehaviour:
   m_ObjectHideFlags: 0

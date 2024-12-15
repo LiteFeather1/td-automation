@@ -43,8 +43,8 @@ public class GameHUD : MonoBehaviour
 
     public UIBuildingButton[] UIBuildingButtons => _uiBuildingButtons;
 
-    public Action OnIncreaseSpeedPressed { get; set; }
-    public Action OnDecreaseSpeedPressed { get; set; }
+    public Button IncreaseSpeedButton => b_increaseSpeed;
+    public Button DecreaseSpeedButton => b_decreaseSpeed;
 
     internal void OnEnable()
     {
@@ -110,14 +110,6 @@ public class GameHUD : MonoBehaviour
         else
             t_gameSpeed.text = $"Speed {speed:0.00}x";
     }
-
-    public void BIncreaseSpeed() => OnIncreaseSpeedPressed?.Invoke();
-
-    public void BDecreaseSpeed() => OnDecreaseSpeedPressed?.Invoke();
-
-    public void SetIncreaseButtonState(bool state) => b_increaseSpeed.interactable = state;
-
-    public void SetDecreaseButtonState(bool state) => b_decreaseSpeed.interactable = state;
 
     public void UpdateBuildingButtons(
         ResourceType type, int totalAmount, IDictionary<ResourceType, int> resources
