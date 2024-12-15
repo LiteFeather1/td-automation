@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameHUD _gameHUD;
     [SerializeField] private UIEndScreen _endScreen;
+    [SerializeField] private CameraManager _cameraManager;
 
     [Header("Misc")]
     [SerializeField] private SerializedDictionary<ResourceType, SOObjectPoolResourceBehaviour> _poolResources;
@@ -44,7 +45,7 @@ public class GameManager : Singleton<GameManager>
         _enemyManager.OnEnemyKilled += EnemyKilled;
         _enemyManager.OnWaveStarted += WaveStarted;
         _enemyManager.OnStageEnded += _gameHUD.SetWave;
-        _enemyManager.OnAllStagesEnded += AllStagesEnded;
+        _enemyManager.OnAllStagesEnded += GameEnded;
 
         _factoryTower.OnResourceModified += UpdateUIResources;
         _factoryTower.OnResourcesModified += _gameHUD.UpdateAmountsAndBuildingButtons;
@@ -52,6 +53,7 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.OnResourcesAdded += _endScreen.AddResources;
         _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed += _gameHUD.UpdatePlayerHealth;
+        _factoryTower.Health.OnDied += GameEnded;
 
         _gameHUD.IncreaseSpeedButton.onClick.AddListener(IncreaseGameSpeed);
         _gameHUD.DecreaseSpeedButton.onClick.AddListener(DecreaseGameSpeed);
@@ -79,7 +81,7 @@ public class GameManager : Singleton<GameManager>
 
         _gameHUD.SetWave(_enemyManager.CurrentStage);
         _gameHUD.SetTowerCount(_towerCount = _factoryTower.StarterTowers.Length);
-        _gameHUD.SetGameSpeed(_gameSpeeds[_gameSpeedIndex]);
+        _gameHUD.SetGameSpeed(Time.timeScale);
 
         _endScreen.Init();
 
@@ -120,7 +122,7 @@ public class GameManager : Singleton<GameManager>
         _enemyManager.OnEnemyKilled -= EnemyKilled;
         _enemyManager.OnWaveStarted -= WaveStarted;
         _enemyManager.OnStageEnded -= _gameHUD.SetWave;
-        _enemyManager.OnAllStagesEnded -= AllStagesEnded;
+        _enemyManager.OnAllStagesEnded -= GameEnded;
 
         _factoryTower.OnResourceModified -= UpdateUIResources;
         _factoryTower.OnResourcesModified -= _gameHUD.UpdateAmountsAndBuildingButtons;
@@ -128,6 +130,7 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.OnResourcesAdded -= _endScreen.AddResources;
         _factoryTower.Health.OnDamageTaken -= _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed -= _gameHUD.UpdatePlayerHealth;
+        _factoryTower.Health.OnDied -= GameEnded;
 
         _gameHUD.IncreaseSpeedButton.onClick.RemoveListener(IncreaseGameSpeed);
         _gameHUD.DecreaseSpeedButton.onClick.RemoveListener(DecreaseGameSpeed);
@@ -221,7 +224,7 @@ public class GameManager : Singleton<GameManager>
         _gameHUD.SetTimeToWave("Defend!");
     }
 
-    private void AllStagesEnded()
+    private void GameEnded()
     {
         _endScreen.Enable(_factoryTower.Health.HP > 0, _elapsedTime);
         Time.timeScale = 0f;
