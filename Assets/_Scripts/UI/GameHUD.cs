@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,11 @@ public class GameHUD : MonoBehaviour
     [SerializeField] private UIHover _towerCount;
     [SerializeField] private SerializedDictionary<ResourceType, UIResource> _uiResources;
 
+    [Header("Speedd")]
+    [SerializeField] private TextMeshProUGUI t_gameSpeed;
+    [SerializeField] private Button b_increaseSpeed;
+    [SerializeField] private Button b_decreaseSpeed;
+
     [Header("Building Buttons")]
     [SerializeField] private UIBuildingButton[] _uiBuildingButtons;
 
@@ -36,6 +42,9 @@ public class GameHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_hoverBuilding;
 
     public UIBuildingButton[] UIBuildingButtons => _uiBuildingButtons;
+
+    public Action OnIncreaseSpeedPressed { get; set; }
+    public Action OnDecreaseSpeedPressed { get; set; }
 
     internal void OnEnable()
     {
@@ -93,6 +102,14 @@ public class GameHUD : MonoBehaviour
     {
         _uiResources[resourceType].SetAmount(amount);
     }
+
+    public void BIncreaseSpeed() => OnIncreaseSpeedPressed?.Invoke();
+
+    public void BDecreaseSpeed() => OnDecreaseSpeedPressed?.Invoke();
+
+    public void SetIncreaseButtonState(bool state) => b_increaseSpeed.interactable = state;
+
+    public void SetDecreaseButtonState(bool state) => b_decreaseSpeed.interactable = state;
 
     public void UpdateBuildingButtons(
         ResourceType type, int totalAmount, IDictionary<ResourceType, int> resources
