@@ -76,6 +76,7 @@ public class GameManager : Singleton<GameManager>
 
         _gameHUD.SetWave(_enemyManager.CurrentStage);
         _gameHUD.SetTowerCount(_towerCount = _factoryTower.StarterTowers.Length);
+        _gameHUD.SetGameSpeed(_gameSpeeds[_gameSpeedIndex]);
 
         _endScreen.Init();
 
@@ -156,16 +157,24 @@ public class GameManager : Singleton<GameManager>
         _placementSystem.RotateBuilding();
     }
 
+    private void ChangeGameSpeed(float speed)
+    {
+        Time.timeScale = speed;
+        _gameHUD.SetGameSpeed(speed);
+        _gameHUD.SetIncreaseButtonState(_gameSpeedIndex != _gameSpeeds.Length - 1);
+        _gameHUD.SetDecreaseButtonState(_gameSpeedIndex != 0);
+    }
+
     private void SpeedUp(InputAction.CallbackContext _)
     {
         _gameSpeedIndex = Mathf.Min(++_gameSpeedIndex, _gameSpeeds.Length - 1);
-        Time.timeScale = _gameSpeeds[_gameSpeedIndex];
+        ChangeGameSpeed(_gameSpeeds[_gameSpeedIndex]);
     }
 
     private void SpeedDown(InputAction.CallbackContext _)
     {
         _gameSpeedIndex = Mathf.Max(--_gameSpeedIndex, 0);
-        Time.timeScale = _gameSpeeds[_gameSpeedIndex];
+        ChangeGameSpeed(_gameSpeeds[_gameSpeedIndex]);
     }
 
     public void BuildingPlaced(Building building)

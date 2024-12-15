@@ -103,6 +103,14 @@ public class GameHUD : MonoBehaviour
         _uiResources[resourceType].SetAmount(amount);
     }
 
+    public void SetGameSpeed(float speed)
+    {
+        if (speed % 1f <= float.Epsilon)
+            t_gameSpeed.text = $"Speed {speed}x";
+        else
+            t_gameSpeed.text = $"Speed {speed:0.00}x";
+    }
+
     public void BIncreaseSpeed() => OnIncreaseSpeedPressed?.Invoke();
 
     public void BDecreaseSpeed() => OnDecreaseSpeedPressed?.Invoke();
