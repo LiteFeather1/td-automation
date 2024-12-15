@@ -7,8 +7,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private FactoryTower _factoryTower;
 
     [Header("Game Speed")]
-    [SerializeField] private Vector2 _gameSpeedRange = new(.5f, 2f);
-    [SerializeField] private float _gameSpeedDelta = .5f;
+    [SerializeField] private float[] _gameSpeeds = new float[] { .25f, .5f, .75f, 1f, 1.25f, 1.5f, 2f };
+    private int _gameSpeedIndex = 3;
 
     [Header("Systems")]
     [SerializeField] private PlacementSystem _placementSystem;
@@ -158,12 +158,14 @@ public class GameManager : Singleton<GameManager>
 
     private void SpeedUp(InputAction.CallbackContext _)
     {
-        Time.timeScale = Mathf.Min(Time.timeScale + _gameSpeedDelta, _gameSpeedRange.y);
+        _gameSpeedIndex = Mathf.Min(++_gameSpeedIndex, _gameSpeeds.Length - 1);
+        Time.timeScale = _gameSpeeds[_gameSpeedIndex];
     }
 
     private void SpeedDown(InputAction.CallbackContext _)
     {
-        Time.timeScale = Mathf.Max(Time.timeScale - _gameSpeedDelta, _gameSpeedRange.x);
+        _gameSpeedIndex = Mathf.Max(--_gameSpeedIndex, 0);
+        Time.timeScale = _gameSpeeds[_gameSpeedIndex];
     }
 
     public void BuildingPlaced(Building building)
