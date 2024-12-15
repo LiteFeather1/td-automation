@@ -8,6 +8,8 @@ public class FactoryTower : MonoBehaviour
     [SerializeField] private Receiver[] _receivers;
     [SerializeField] private Tower[] _starterTowers;
 
+    [SerializeField] private SpriteRenderer _sr;
+
     private readonly Dictionary<ResourceType, int> r_resources = new();
 
     public delegate void ResourceAdded(ResourceType type, int totalAmount);
@@ -36,6 +38,8 @@ public class FactoryTower : MonoBehaviour
 
     public void OnEnable()
     {
+        _health.OnDied += Died;
+
         foreach (var receiver in _receivers)
         {
             receiver.OnResourceGot += OnResourceGot;
@@ -44,6 +48,8 @@ public class FactoryTower : MonoBehaviour
 
     public void OnDisable()
     {
+        _health.OnDied -= Died;
+
         foreach (var receiver in _receivers)
         {
             receiver.OnResourceGot -= OnResourceGot;
@@ -92,6 +98,11 @@ public class FactoryTower : MonoBehaviour
                 return false;
 
         return true;
+    }
+
+    private void Died()
+    {
+        _sr.enabled = false;
     }
 
     private void OnResourceGot(ResourceBehaviour resource)

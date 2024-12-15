@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 1612035288037083633}
   - component: {fileID: 1396190899828828967}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Spriterenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,6 +234,7 @@ MonoBehaviour:
   _starterTowers:
   - {fileID: 2105097679800237734}
   - {fileID: 2452374895070854462}
+  _sr: {fileID: 1396190899828828967}
 --- !u!114 &80722398481535603
 MonoBehaviour:
   m_ObjectHideFlags: 0
