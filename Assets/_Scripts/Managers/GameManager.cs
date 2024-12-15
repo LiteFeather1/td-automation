@@ -151,6 +151,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void OnDestroy()
+    {
+        Time.timeScale = 0f;
+    }
+
     private void PlaceBuilding(InputAction.CallbackContext _)
     {
         _placementSystem.LeftClick();
@@ -228,6 +233,7 @@ public class GameManager : Singleton<GameManager>
     {
         _endScreen.Enable(_factoryTower.Health.HP > 0, _elapsedTime);
         Time.timeScale = 0f;
+        _cameraManager.enabled = false;
     }
 
     private void UpdateUIResources(ResourceType type, int amount)
