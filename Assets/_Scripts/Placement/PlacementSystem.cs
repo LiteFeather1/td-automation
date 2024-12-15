@@ -204,6 +204,9 @@ public class PlacementSystem : MonoBehaviour
 
     public void UnselectBuildingBuilding()
     {
+        if (_buildingToPlace == null)
+            return;
+
         _tileHighlight.enabled = true;
         _tileHighlight.transform.position = _buildingToPlace.transform.position;
         SetCanPlaceBuilding((Vector3Int)_mousePos);
