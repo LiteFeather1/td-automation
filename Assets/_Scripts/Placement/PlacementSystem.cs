@@ -241,7 +241,7 @@ public class PlacementSystem : MonoBehaviour
         if (_buildingToPlace == null || !_buildingToPlace.CanBeRotated)
             return;
 
-        if (_buildingToPlace is BeltPath && _beltPathSystem.HasOutPortAt(_mousePos, _inDirection))
+        if (_buildingToPlace is BeltPath beltPath && _beltPathSystem.HasOutPortAt(_mousePos, _inDirection))
         {
             do
                 _outDirection = RotateDirection(_outDirection);
@@ -251,13 +251,18 @@ public class PlacementSystem : MonoBehaviour
             if (sr.sprite == _straightBelt)
             {
                 sr.sprite = _curvedBelt;
+                beltPath.SetArrowRotation(270f);
+            }
+            else if (sr.flipY)
+            {
+                sr.sprite = _straightBelt;
+                beltPath.SetArrowRotation(0f);
+                sr.flipY = false;
             }
             else
             {
-                if (sr.flipY)
-                    sr.sprite = _straightBelt;
-
-                sr.flipY = !sr.flipY;
+                sr.flipY = true;
+                beltPath.SetArrowRotation(90f);
             }
         }
         else

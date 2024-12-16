@@ -2,9 +2,19 @@
 
 public class BeltPath : InPort, IOutPort
 {
+
+    [Header("Belt Path")]
+    [SerializeField] private Transform _arrow;
+
     private IInPort _port;
 
     public Direction OutDirection { get; set; } = Direction.Right;
+
+    private void OnDisable()
+    {
+        if (_port != null)
+            _port.OnDestroyed -= PortDestroyed;
+    }
 
     public override void ResourceCentralized()
     {
@@ -15,16 +25,15 @@ public class BeltPath : InPort, IOutPort
         _resource = null;
     }
 
-    internal void OnDisable()
-    {
-        if (_port != null)
-            _port.OnDestroyed -= PortDestroyed;
-    }
-
     public void SetPort(IInPort inPort)
     {
         _port = inPort;
         _port.OnDestroyed += PortDestroyed;
+    }
+
+    public void SetArrowRotation(float angle)
+    {
+        _arrow.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void PortDestroyed(Vector2Int _)
