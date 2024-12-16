@@ -28,10 +28,10 @@ public class SegmentBehaviour : MonoBehaviour, ISegment
             if (_points[i] == null || _points[i + 1] == null)
                 continue;
 
-            Gizmos.color = Color.white;
+            Gizmos.color = Color.yellow;
             Vector2 midPoint = (_points[i].position + _points[i + 1].position) * .5f;
             Gizmos.DrawLine(_points[i].position, midPoint);
-            Gizmos.color = Color.black;
+            Gizmos.color = Color.white;
             Gizmos.DrawLine(midPoint, _points[i + 1].position);
         }
     }
