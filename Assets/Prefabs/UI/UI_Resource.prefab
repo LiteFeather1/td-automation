@@ -345,8 +345,8 @@ MonoBehaviour:
   _uiHover: {fileID: 8675542983586623813}
   t_count: {fileID: 580669139939112091}
   i_icon: {fileID: 7151123923488536394}
-  _normalColour: {r: 0.7647059, g: 0.52156866, b: 0.2, a: 1}
-  _fadedColor: {r: 0.7647059, g: 0.52156866, b: 0.2, a: 0.16470589}
+  _normalColour: {r: 1, g: 1, b: 1, a: 1}
+  _fadedColor: {r: 1, g: 1, b: 1, a: 0.16470589}
 --- !u!114 &8675542983586623813
 MonoBehaviour:
   m_ObjectHideFlags: 0
