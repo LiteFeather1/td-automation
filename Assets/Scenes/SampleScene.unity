@@ -1045,12 +1045,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _factoryTower: {fileID: 1396621434}
-  _gameSpeedRange: {x: 0.5, y: 2}
-  _gameSpeedDelta: 0.5
+  _gameSpeeds:
+  - 0.25
+  - 0.5
+  - 0.75
+  - 1
+  - 1.25
+  - 1.5
+  - 2
   _placementSystem: {fileID: 900071249}
   _enemyManager: {fileID: 2102129621}
   _gameHUD: {fileID: 1571453347}
   _endScreen: {fileID: 8423220882976336530}
+  _cameraManager: {fileID: 330585548}
   _poolResources:
     _entries:
     - Key: 100
