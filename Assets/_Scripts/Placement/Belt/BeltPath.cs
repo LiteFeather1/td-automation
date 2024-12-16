@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BeltPath : InPort, IOutPort
 {
@@ -10,8 +11,20 @@ public class BeltPath : InPort, IOutPort
 
     public Direction OutDirection { get; set; } = Direction.Right;
 
+    private static Action s_onHovered;
+    private static Action s_onUnhovered;
+
+    private void OnEnable()
+    {
+        s_onHovered += BeltHovered;
+        s_onUnhovered += BeltUnhovered;
+    }
+
     private void OnDisable()
     {
+        s_onHovered -= BeltHovered;
+        s_onUnhovered -= BeltUnhovered;
+
         if (_port != null)
             _port.OnDestroyed -= PortDestroyed;
     }
@@ -34,13 +47,13 @@ public class BeltPath : InPort, IOutPort
     public override void Hover()
     {
         base.Hover();
-        _arrow.gameObject.SetActive(true);
+        s_onHovered?.Invoke();
     }
 
     public override void Unhover()
     {
         base.Unhover();
-        _arrow.gameObject.SetActive(false);
+        s_onUnhovered?.Invoke();
     }
 
     public void SetPort(IInPort inPort)
@@ -59,4 +72,8 @@ public class BeltPath : InPort, IOutPort
         _port.OnDestroyed -= OnDestroyed;
         _port = null;
     }
+
+    private void BeltHovered() => _arrow.gameObject.SetActive(true);
+
+    private void BeltUnhovered() => _arrow.gameObject.SetActive(false);
 }
