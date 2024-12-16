@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class BeltPath : InPort, IOutPort
 {
+    private static readonly Color sr_fadedColour = new(1f, 1f, 1f, .33f);
 
     [Header("Belt Path")]
-    [SerializeField] private Transform _arrow;
+    [SerializeField] private SpriteRenderer _arrow;
 
     private IInPort _port;
 
@@ -41,18 +42,24 @@ public class BeltPath : InPort, IOutPort
     public override void Place()
     {
         base.Place();
-        _arrow.gameObject.SetActive(false);
+        _arrow.enabled = false;
+        _arrow.color = sr_fadedColour;
     }
 
     public override void Hover()
     {
         base.Hover();
+
+        _arrow.color = Color.white;
         s_onHovered?.Invoke();
     }
 
     public override void Unhover()
     {
         base.Unhover();
+
+        _arrow.color = sr_fadedColour;
+
         s_onUnhovered?.Invoke();
     }
 
@@ -73,7 +80,13 @@ public class BeltPath : InPort, IOutPort
         _port = null;
     }
 
-    private void BeltHovered() => _arrow.gameObject.SetActive(true);
+    private void BeltHovered()
+    {
+        _arrow.enabled = true;
+    }
 
-    private void BeltUnhovered() => _arrow.gameObject.SetActive(false);
+    private void BeltUnhovered()
+    {
+        _arrow.enabled = false;
+    }
 }

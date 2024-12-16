@@ -140,7 +140,7 @@ MonoBehaviour:
     - Key: 100
       Value: -1
   _sr: {fileID: 7122688018477215906}
-  _arrow: {fileID: 7860629362375656481}
+  _arrow: {fileID: 6195513689766479593}
 --- !u!212 &7122688018477215906
 SpriteRenderer:
   m_ObjectHideFlags: 0
