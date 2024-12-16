@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5803922, g: 0.08627451, b: 0.49803922, a: 1}
+  m_Color: {r: 0.24313726, g: 0.62352943, b: 0.627451, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9843137, b: 0.5882353, a: 1}
+  m_Color: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08235294, g: 0.23529412, b: 0.7058824, a: 1}
+  m_Color: {r: 0.43529412, g: 0.14509805, b: 0.47058824, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1256,7 +1256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9843137, b: 0.5882353, a: 1}
+  m_Color: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1331,7 +1331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08235294, g: 0.23529412, b: 0.7058824, a: 1}
+  m_Color: {r: 0.43529412, g: 0.14509805, b: 0.47058824, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08235294, g: 0.23529412, b: 0.7058824, a: 1}
+  m_Color: {r: 0.43529412, g: 0.14509805, b: 0.47058824, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2474,7 +2474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9843137, b: 0.5882353, a: 1}
+  m_Color: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2722,7 +2722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5803922, g: 0.08627451, b: 0.49803922, a: 1}
+  m_Color: {r: 0.24313726, g: 0.62352943, b: 0.627451, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2797,7 +2797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9843137, b: 0.5882353, a: 1}
+  m_Color: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3030,7 +3030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5803922, g: 0.08627451, b: 0.49803922, a: 1}
+  m_Color: {r: 0.24313726, g: 0.62352943, b: 0.627451, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3937,7 +3937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5803922, g: 0.08627451, b: 0.49803922, a: 1}
+  m_Color: {r: 0.24313726, g: 0.62352943, b: 0.627451, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4389,7 +4389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5803922, g: 0.08627451, b: 0.49803922, a: 1}
+  m_Color: {r: 0.24313726, g: 0.62352943, b: 0.627451, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4539,7 +4539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5803922, g: 0.08627451, b: 0.49803922, a: 1}
+  m_Color: {r: 0.24313726, g: 0.62352943, b: 0.627451, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5044,7 +5044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9843137, b: 0.5882353, a: 1}
+  m_Color: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5735,7 +5735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08235294, g: 0.23529412, b: 0.7058824, a: 1}
+  m_Color: {r: 0.43529412, g: 0.14509805, b: 0.47058824, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6020,7 +6020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9843137, b: 0.5882353, a: 1}
+  m_Color: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7142,14 +7142,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7201,6 +7193,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1207890551, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
       value: 
@@ -7268,14 +7264,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7331,6 +7319,10 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1719173421, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
       value: 
@@ -7535,14 +7527,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7597,6 +7581,10 @@ PrefabInstance:
     - target: {fileID: 6456319167590790980, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_RaycastTarget
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
@@ -7666,14 +7654,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7729,6 +7709,10 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1222598112, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
       value: 
@@ -7796,14 +7780,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 545329039129415247, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7859,6 +7835,10 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -761103295, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
       value: 
