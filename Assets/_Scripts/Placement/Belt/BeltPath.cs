@@ -25,6 +25,24 @@ public class BeltPath : InPort, IOutPort
         _resource = null;
     }
 
+    public override void Place()
+    {
+        base.Place();
+        _arrow.gameObject.SetActive(false);
+    }
+
+    public override void Hover()
+    {
+        base.Hover();
+        _arrow.gameObject.SetActive(true);
+    }
+
+    public override void Unhover()
+    {
+        base.Unhover();
+        _arrow.gameObject.SetActive(false);
+    }
+
     public void SetPort(IInPort inPort)
     {
         _port = inPort;
