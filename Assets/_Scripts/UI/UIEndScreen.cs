@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 using LTF.SerializedDictionary;
 
@@ -52,5 +53,10 @@ public class UIEndScreen : MonoBehaviour
     {
         foreach (var resource in resouces)
             AddResource(resource.Key, -resource.Value);
+    }
+
+    public void ButtonExit()
+    {
+        SceneManager.LoadScene(SceneNamesIDs.MAIN_MENU_ID);
     }
 }
