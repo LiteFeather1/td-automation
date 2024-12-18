@@ -72,7 +72,7 @@ public class PlacementSystem : MonoBehaviour
 
         if (_buildingToPlace != null)
         {
-            _buildingToPlace.SR.color = (_canPlaceBuilding && !_resourceNodes.ContainsKey(mousePos))
+            _buildingToPlace.SR.color = _canPlaceBuilding
                 ? Color.white : _notPlaceableHighlight;
             _buildingToPlace.transform.localPosition = worldPos;
 
@@ -299,7 +299,9 @@ public class PlacementSystem : MonoBehaviour
 
     private void SetCanPlaceBuilding(Vector3Int worldPos)
     {
-        _canPlaceBuilding = !r_buildings.ContainsKey(_mousePos) && !_pathTilemap.HasTile(worldPos);
+        _canPlaceBuilding = !r_buildings.ContainsKey(_mousePos)
+            && !_pathTilemap.HasTile(worldPos)
+            && !_resourceNodes.ContainsKey(new(worldPos.x, worldPos.y));
     }
 
     private void SetHighlightColour()
