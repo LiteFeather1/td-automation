@@ -71,7 +71,7 @@ public class BeltPath : InPort, IOutPort
 
     public void SetArrowRotation(float angle)
     {
-        _arrow.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        _arrow.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void PortDestroyed(Vector2Int _)

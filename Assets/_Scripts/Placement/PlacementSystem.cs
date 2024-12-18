@@ -72,8 +72,7 @@ public class PlacementSystem : MonoBehaviour
 
         if (_buildingToPlace != null)
         {
-            _buildingToPlace.SR.color = _canPlaceBuilding
-                ? Color.white : _notPlaceableHighlight;
+            _buildingToPlace.SR.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
             _buildingToPlace.transform.localPosition = worldPos;
 
             if (_buildingToPlace is not BeltPath || _buildingToPlace.SR.sprite == _straightBelt)
@@ -248,22 +247,25 @@ public class PlacementSystem : MonoBehaviour
             while (_outDirection == _inDirection);
 
             var sr = _buildingToPlace.SR;
+            float zRot;
             if (sr.sprite == _straightBelt)
             {
                 sr.sprite = _curvedBelt;
-                beltPath.SetArrowRotation(270f);
+                zRot = 270f;
             }
             else if (sr.flipY)
             {
                 sr.sprite = _straightBelt;
-                beltPath.SetArrowRotation(0f);
                 sr.flipY = false;
+                zRot = 0f;
             }
             else
             {
                 sr.flipY = true;
-                beltPath.SetArrowRotation(90f);
+                zRot = 90f;
             }
+
+            beltPath.SetArrowRotation(zRot);
         }
         else
         {
