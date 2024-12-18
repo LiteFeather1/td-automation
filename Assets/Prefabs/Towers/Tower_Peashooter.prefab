@@ -143,7 +143,7 @@ MonoBehaviour:
   _sr: {fileID: 828324963780454766}
   _range: {fileID: 6627803679422170471}
   _damage: 4
-  _damageRate: 2
+  _damageRate: 1.5
   _head: {fileID: 8793221537690332159}
   _line: {fileID: 6484567382767351699}
   _firePoint: {fileID: 586065225589052559}

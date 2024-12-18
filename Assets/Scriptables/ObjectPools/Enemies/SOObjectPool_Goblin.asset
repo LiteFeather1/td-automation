@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectPool:
     _object: {fileID: 3426824003869704130, guid: fd2512ae83314e6478babc566692e61c, type: 3}
-    _initialPoolSize: 1
+    _initialPoolSize: 20

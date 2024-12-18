@@ -20,7 +20,7 @@ public class TowerProjectile : Tower
         IEnumerator Fade()
         {
             var halfPoint = (_firePoint.position + enemy.transform.position) * .5f;
-            var endPos = _line.GetPosition(1);
+            var startPos = _line.GetPosition(0);
             var eTime = 0f;
             while (eTime < FADE_TIME)
             {
@@ -28,6 +28,7 @@ public class TowerProjectile : Tower
                 eTime += Time.deltaTime;
                 yield return null;
 
+                // From https://easings.net/#easeInOutQuad
                 static float EaseInOutQuad(float x)=> (x < 0.5f) ?
                     (2f * x * x) : (1f - Mathf.Pow(-2f * x + 2f, 2f) * .5f);
             }
@@ -39,7 +40,7 @@ public class TowerProjectile : Tower
                 var colour = new Color(1f, 1f, 1f, t);
                 _line.startColor = colour;
                 _line.endColor = colour;
-                _line.SetPosition(1, Vector3.Lerp(halfPoint, endPos, t));
+                _line.SetPosition(0, Vector3.Lerp(halfPoint, startPos, t));
             }
         }
     }

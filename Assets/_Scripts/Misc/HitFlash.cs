@@ -3,29 +3,33 @@ using UnityEngine;
 
 public class HitFlash : MonoBehaviour
 {
-    private const string INTENSITY = "_Intensity";
-
     [SerializeField] private SpriteRenderer _sr;
+    [SerializeField] private Material _flashMaterial;
+    private Material _originalMaterial;
 
     private readonly YieldInstruction r_waitFlash = new WaitForSeconds(.125f);
 
+    private void Awake()
+    {
+        _originalMaterial = _sr.material;
+    }
+
     private void OnDisable()
     {
-        _sr.material.SetFloat(INTENSITY, 0f);
+        _sr.material = _originalMaterial;
     }
 
     [ContextMenu("Test")]
     public void DoFlash()
     {
         StopAllCoroutines();
-        _sr.material.SetFloat(INTENSITY, 0f);
         StartCoroutine(FlashAnimation());
     }
 
     private IEnumerator FlashAnimation()
     {
-        _sr.material.SetFloat(INTENSITY, 1f);
+        _sr.material = _flashMaterial;
         yield return r_waitFlash;
-        _sr.material.SetFloat(INTENSITY, 0f);
+        _sr.material = _originalMaterial;
     }
 }
