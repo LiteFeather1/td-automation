@@ -11,7 +11,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
             Destroy(gameObject);
             return;
         }
-        
+
         InitialiseInstance();
     }
 
