@@ -3,11 +3,13 @@ using UnityEngine;
 public class TowerProjectile : Tower
 {
     [Header("Projectile Tower")]
-    [SerializeField] private GameObject _projectile;
+    [SerializeField] private LineRenderer _line;
+    [SerializeField] private Transform _firePoint;
 
     protected override void DamageEnemy(Enemy enemy)
     {
-        // TODO Spawn projectile to damage enemy
+        _line.SetPosition(0, _firePoint.position);
+        _line.SetPosition(1, enemy.transform.position);
         enemy.Health.TakeDamage(_damage);
     }
 }

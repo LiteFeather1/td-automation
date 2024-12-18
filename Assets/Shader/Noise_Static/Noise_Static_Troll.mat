@@ -54,6 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Chance: 0
     - _Sides: 5
     - _Size: 25
     - _Speed: 1
