@@ -11,13 +11,16 @@ public class TowerProjectile : Tower
 
     protected override void DamageEnemy(Enemy enemy)
     {
+        enemy.Health.TakeDamage(_damage);
+
         _line.SetPosition(0, _firePoint.position);
         _line.SetPosition(1, enemy.transform.position);
         StartCoroutine(Fade());
-        enemy.Health.TakeDamage(_damage);
 
         IEnumerator Fade()
         {
+            var halfPoint = (_firePoint.position + enemy.transform.position) * .5f;
+            var endPos = _line.GetPosition(1);
             var eTime = 0f;
             while (eTime < FADE_TIME)
             {
@@ -36,6 +39,7 @@ public class TowerProjectile : Tower
                 var colour = new Color(1f, 1f, 1f, t);
                 _line.startColor = colour;
                 _line.endColor = colour;
+                _line.SetPosition(1, Vector3.Lerp(halfPoint, endPos, t));
             }
         }
     }
