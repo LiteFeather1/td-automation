@@ -1,4 +1,3 @@
-
 public class InputManager : Singleton<InputManager>
 {
     public InputSystem_Actions InputSystem { get; private set; }
@@ -9,5 +8,11 @@ public class InputManager : Singleton<InputManager>
 
         InputSystem = new();
         InputSystem.Player.Enable();
+    }
+
+    public void Disable()
+    {
+        Instance = null;
+        InputSystem.Disable();
     }
 }
