@@ -90,17 +90,7 @@ public class PlacementSystem : MonoBehaviour
             _tileHighlight.transform.localPosition = worldPos;
         }
 
-        if (!UIMouseBlocker.MouseBlocked && r_hoverables.TryGetValue(mousePos, out var hoverable))
-        {
-            OnHoverableHovered?.Invoke(hoverable);
-            _currentHoverable?.Unhover();
-            hoverable.Hover();
-            _currentHoverable = hoverable;
-        }
-        else if (_currentHoverable != null)
-        {
-            UnhoverResource();
-        }
+        TryGetHoverable(mousePos);
     }
 
     internal void OnDisable()
@@ -210,6 +200,7 @@ public class PlacementSystem : MonoBehaviour
         _tileHighlight.transform.position = _buildingToPlace.transform.position;
         SetCanPlaceBuilding((Vector3Int)_mousePos);
         SetHighlightColour();
+        TryGetHoverable(_mousePos);
 
         Destroy(_buildingToPlace.gameObject);
         _buildingPrefab = null;
@@ -312,6 +303,21 @@ public class PlacementSystem : MonoBehaviour
             _tileHighlight.color = _nodeHighlight;
         else
             _tileHighlight.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
+    }
+
+    private void TryGetHoverable(Vector2Int pos)
+    {
+        if (!UIMouseBlocker.MouseBlocked && r_hoverables.TryGetValue(pos, out var hoverable))
+        {
+            OnHoverableHovered?.Invoke(hoverable);
+            _currentHoverable?.Unhover();
+            hoverable.Hover();
+            _currentHoverable = hoverable;
+        }
+        else if (_currentHoverable != null)
+        {
+            UnhoverResource();
+        }
     }
 
     private void InstantiateBuilding(Vector3 position, Quaternion rotation)
