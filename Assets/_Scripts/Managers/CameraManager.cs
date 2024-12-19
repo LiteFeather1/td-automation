@@ -33,6 +33,7 @@ public class CameraManager : MonoBehaviour
             * Time.deltaTime
             / Time.timeScale
         );
+
         if (inputs.Drag.IsPressed())
         {
             MoveCamera(_mouseSpeed * speedMultiplier * -inputs.Look.ReadValue<Vector2>());

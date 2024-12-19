@@ -8,4 +8,8 @@ public class InputManager : PersistentSingleton<InputManager>
         InputSystem = new();
         InputSystem.Enable();
     }
+
+    public void EnableInputSystem() => InputSystem.Enable();
+
+    public void DisableInputSystem() => InputSystem.Disable();
 }

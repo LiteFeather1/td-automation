@@ -164,7 +164,10 @@ public class GameManager : Singleton<GameManager>
 
     private void OnDestroy()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
+        var inputManager = InputManager.Instance;
+        inputManager.InputSystem.Player.Enable();
+        inputManager.EnableInputSystem();
     }
 
     private void PlaceBuilding(InputAction.CallbackContext _)
@@ -229,7 +232,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Forfeit()
     {
-        Unpause();
+        _pauseScreen.SetContentState(false);
         _factoryTower.Health.TakeDamage(_factoryTower.Health.HP);
     }
 
@@ -271,8 +274,11 @@ public class GameManager : Singleton<GameManager>
 
     private void GameEnded()
     {
-        _endScreen.Enable(_factoryTower.Health.HP > 0, _elapsedTime);
         Time.timeScale = 0f;
+
+        InputManager.Instance.DisableInputSystem();
+
+        _endScreen.Enable(_factoryTower.Health.HP > 0, _elapsedTime);
         _cameraManager.enabled = false;
     }
 
