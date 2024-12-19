@@ -71512,6 +71512,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2320879711660536694, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2559396672578493849, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -71551,10 +71555,6 @@ PrefabInstance:
     - target: {fileID: 4312902349688419304, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
       propertyPath: m_Name
       value: Pause_Screen
-      objectReference: {fileID: 0}
-    - target: {fileID: 4312902349688419304, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4931970584893894361, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
       propertyPath: m_AnchorMax.y
