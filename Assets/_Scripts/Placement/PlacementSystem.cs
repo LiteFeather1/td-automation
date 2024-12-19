@@ -277,17 +277,17 @@ public class PlacementSystem : MonoBehaviour
         };
     }
 
-    private void ResourceDepleted(ResourceNode node)
-    {
-        node.OnDepleted -= ResourceDepleted;
-        _resourceNodes.Remove(node.Position);
-    }
-
-    private void UnhoverResource()
+    public void UnhoverResource()
     {
         OnHoverableUnhovered?.Invoke();
         _currentHoverable?.Unhover();
         _currentHoverable = null;
+    }
+
+    private void ResourceDepleted(ResourceNode node)
+    {
+        node.OnDepleted -= ResourceDepleted;
+        _resourceNodes.Remove(node.Position);
     }
 
     private void SetCanPlaceBuilding(Vector3Int worldPos)
