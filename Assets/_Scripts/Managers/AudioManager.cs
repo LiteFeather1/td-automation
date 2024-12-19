@@ -17,6 +17,11 @@ public class AudioManager : Singleton<AudioManager>
     [Header("Pitch")]
     [SerializeField] private Vector2 _randomPitchRange = new(.95f, 1.15f);
 
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
     public void SetMusic(AudioClip clip, bool looping = true)
     {
         _musicSource.clip = clip;
