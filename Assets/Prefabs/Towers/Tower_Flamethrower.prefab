@@ -174,7 +174,7 @@ MonoBehaviour:
     - Key: 400
       Value: -20
     - Key: 500
-      Value: -5
+      Value: -10
   _sr: {fileID: 1071184834035600572}
   _range: {fileID: 6604266370505615649}
   _damage: 1
