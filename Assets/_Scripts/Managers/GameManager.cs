@@ -229,8 +229,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Forfeit()
     {
-        _factoryTower.Health.TakeDamage(_factoryTower.Health.HP);
         Unpause();
+        _factoryTower.Health.TakeDamage(_factoryTower.Health.HP);
     }
 
     private void PauseUnpause(InputAction.CallbackContext _) => PauseUnpause();
