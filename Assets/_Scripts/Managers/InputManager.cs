@@ -7,7 +7,7 @@ public class InputManager : Singleton<InputManager>
         base.Awake();
 
         InputSystem = new();
-        InputSystem.Player.Enable();
+        InputSystem.Enable();
     }
 
     public void Disable()

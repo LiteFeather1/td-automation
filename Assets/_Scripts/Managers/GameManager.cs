@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameHUD _gameHUD;
     [SerializeField] private UIEndScreen _endScreen;
+    [SerializeField] private UIPauseScreen _pauseScreen;
     [SerializeField] private CameraManager _cameraManager;
 
     [Header("Misc")]
@@ -34,6 +35,8 @@ public class GameManager : Singleton<GameManager>
         inputs.Rotate.performed += RotateBuilding;
         inputs.SpeedUp.performed += SpeedUp;
         inputs.SpeedDown.performed += SpeedDown;
+
+        InputManager.Instance.InputSystem.UI.Cancel.performed += PauseUnpause;
 
         _placementSystem.OnBuildingPlaced += BuildingPlaced;
         _placementSystem.OnBuildingRemoved += BuildingRemoved;
@@ -111,6 +114,8 @@ public class GameManager : Singleton<GameManager>
         inputs.Rotate.performed -= RotateBuilding;
         inputs.SpeedUp.performed -= SpeedUp;
         inputs.SpeedDown.performed -= SpeedDown;
+
+        InputManager.Instance.InputSystem.UI.Cancel.performed -= PauseUnpause;
 
         _placementSystem.OnBuildingPlaced -= BuildingPlaced;
         _placementSystem.OnBuildingRemoved -= BuildingRemoved;
@@ -194,6 +199,26 @@ public class GameManager : Singleton<GameManager>
     }
 
     private void SpeedDown(InputAction.CallbackContext _) => DecreaseGameSpeed();
+
+    private void PauseUnpause()
+    {
+        var paused = Time.timeScale <= float.Epsilon;
+        _pauseScreen.SetContentState(!paused);
+
+        var inputs = InputManager.Instance.InputSystem;
+        if (paused)
+        {
+            Time.timeScale = _gameSpeeds[_gameSpeedIndex];
+            inputs.Player.Enable();
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            inputs.Player.Disable();
+        }
+    }
+
+    private void PauseUnpause(InputAction.CallbackContext _) => PauseUnpause();
 
     public void BuildingPlaced(Building building)
     {
