@@ -4,7 +4,7 @@ public class InputManagerDenitter : MonoBehaviour
 {
     [SerializeField] private InputManager _inputManager;
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         _inputManager.Disable();
     }

@@ -7,7 +7,7 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _sfxSlider;
 
-    private void Awake()
+    private void Start()
     {
         var audioManager = AudioManager.Instance;
         InitSlider(_musicSlider, audioManager.SetMusicVolume, AudioManager.GROUP_MUSIC);

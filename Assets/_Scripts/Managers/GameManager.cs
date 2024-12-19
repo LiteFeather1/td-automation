@@ -61,6 +61,9 @@ public class GameManager : Singleton<GameManager>
         _gameHUD.IncreaseSpeedButton.onClick.AddListener(IncreaseGameSpeed);
         _gameHUD.DecreaseSpeedButton.onClick.AddListener(DecreaseGameSpeed);
 
+        _pauseScreen.OnResume.AddListener(Unpause);
+        _pauseScreen.OnForfeit.AddListener(Forfeit);
+
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed += _placementSystem.SetPlaceable;
@@ -140,6 +143,9 @@ public class GameManager : Singleton<GameManager>
         _gameHUD.IncreaseSpeedButton.onClick.RemoveListener(IncreaseGameSpeed);
         _gameHUD.DecreaseSpeedButton.onClick.RemoveListener(DecreaseGameSpeed);
 
+        _pauseScreen.OnResume.RemoveListener(Unpause);
+        _pauseScreen.OnForfeit.RemoveListener(Forfeit);
+
         foreach (var buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed -= _placementSystem.SetPlaceable;
@@ -200,22 +206,31 @@ public class GameManager : Singleton<GameManager>
 
     private void SpeedDown(InputAction.CallbackContext _) => DecreaseGameSpeed();
 
+    private void Unpause()
+    {
+        Time.timeScale = _gameSpeeds[_gameSpeedIndex];
+        InputManager.Instance.InputSystem.Player.Enable();
+        _pauseScreen.SetContentState(false);
+    }
+
     private void PauseUnpause()
     {
-        var paused = Time.timeScale <= float.Epsilon;
-        _pauseScreen.SetContentState(!paused);
-
-        var inputs = InputManager.Instance.InputSystem;
-        if (paused)
+        if (Time.timeScale <= float.Epsilon)
         {
-            Time.timeScale = _gameSpeeds[_gameSpeedIndex];
-            inputs.Player.Enable();
+            Unpause();
         }
         else
         {
             Time.timeScale = 0f;
-            inputs.Player.Disable();
+            InputManager.Instance.InputSystem.Player.Disable();
+            _pauseScreen.SetContentState(true);
         }
+    }
+
+    private void Forfeit()
+    {
+        _factoryTower.Health.TakeDamage(_factoryTower.Health.HP);
+        Unpause();
     }
 
     private void PauseUnpause(InputAction.CallbackContext _) => PauseUnpause();
