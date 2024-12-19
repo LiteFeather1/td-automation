@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private PlaceableData _placeableData;
     [SerializeField] private Image _image;
     [SerializeField] private Button _button;
+    [SerializeField] private Image i_inputBackground;
     [SerializeField] private TextMeshProUGUI t_inputName;
 
     [SerializeField] private InputAction _pressInputAction;
@@ -28,9 +30,11 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _pressInputAction.Enable();
     }
 
-    private void Awake()
+    private IEnumerator Start()
     {
         t_inputName.text = _pressInputAction.GetBindingDisplayString();
+        yield return null;
+        i_inputBackground.rectTransform.sizeDelta = t_inputName.rectTransform.sizeDelta;
     }
 
     internal void OnDisable()
