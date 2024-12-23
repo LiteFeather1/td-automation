@@ -71565,6 +71565,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8305292795553704846, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305292795553704846, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305292795553704846, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9188622039562243163, guid: 356ecc9647cd4df439ccd44bcb3b9b27, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
