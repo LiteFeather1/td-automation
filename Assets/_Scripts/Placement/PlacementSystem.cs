@@ -25,8 +25,9 @@ public class PlacementSystem : MonoBehaviour
 
     [Header("Tile Hightlight")]
     [SerializeField] private SpriteRenderer _tileHighlight;
+    [SerializeField] private Color _canPlaceHighlight = Color.blue;
     [SerializeField] private Color _notPlaceableHighlight = Color.red;
-    [SerializeField] private Color _nodeHighlight = Color.red;
+    [SerializeField] private Color _nodeHighlight = Color.yellow;
 
     private Vector2Int _mousePos;
 
@@ -74,7 +75,7 @@ public class PlacementSystem : MonoBehaviour
 
         if (_buildingToPlace != null)
         {
-            _buildingToPlace.SR.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
+            _tileHighlight.color = _canPlaceBuilding ? _canPlaceHighlight : _notPlaceableHighlight;
             _buildingToPlace.transform.localPosition = worldPos;
 
             if (_buildingToPlace is not BeltPath || _buildingToPlace.SR.sprite == _straightBelt)
