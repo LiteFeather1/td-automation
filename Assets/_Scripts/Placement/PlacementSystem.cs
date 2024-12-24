@@ -105,6 +105,7 @@ public class PlacementSystem : MonoBehaviour
     public void SetPlaceable(PlaceableData placeableData)
     {
         _buildingPrefab = placeableData.BuildingPrefab;
+        _tileHighlight.transform.localScale = new(1.33f, 1.33f, 1f);
 
         if (_buildingToPlace != null)
             Destroy(_buildingToPlace.gameObject);
@@ -199,6 +200,7 @@ public class PlacementSystem : MonoBehaviour
         _tileHighlight.transform.position = _buildingToPlace.transform.position;
         SetCanPlaceBuilding((Vector3Int)_mousePos);
 
+        _tileHighlight.transform.localScale = Vector3.one;
         SetHighlightColour();
 
         TryGetHoverable(_mousePos);
