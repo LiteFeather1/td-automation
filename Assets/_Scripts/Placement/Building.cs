@@ -33,5 +33,5 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
 
     public virtual void Hover() { }
 
-    public virtual void Unhover() {}
+    public virtual void Unhover() { }
 }
