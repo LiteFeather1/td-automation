@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using LTF.SerializedDictionary;
@@ -254,7 +256,7 @@ public class GameManager : Singleton<GameManager>
 
     public void BuildingRemoved(Building building)
     {
-        _factoryTower.AddResources(building.ResourceCost);
+        _factoryTower.BuildingRefund(building.ResourceCost);
 
         if (building is Tower)
         {
@@ -292,5 +294,15 @@ public class GameManager : Singleton<GameManager>
     private void ResourceCreated(ResourceBehaviour resource)
     {
         resource.OnReturnToPool += _poolResources[resource.Type].ObjectPool.ReturnObject;
+    }
+
+    [ContextMenu("Give Infinite Resource")]
+    private void GiveInfiniteResdource()
+    {
+        var resources = new Dictionary<ResourceType, int>();
+        foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
+            resources.Add(type, -20000);
+
+        _factoryTower.BuildingRefund(resources);
     }
 }

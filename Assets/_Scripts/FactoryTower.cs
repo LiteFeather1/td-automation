@@ -80,7 +80,7 @@ public class FactoryTower : MonoBehaviour
         OnResourcesModified?.Invoke(r_resources);
     }
 
-    public void AddResources(Dictionary<ResourceType, int> resources)
+    public void BuildingRefund(Dictionary<ResourceType, int> resources)
     {
         foreach (var resource in resources)
         {
