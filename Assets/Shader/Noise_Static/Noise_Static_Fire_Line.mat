@@ -56,7 +56,7 @@ Material:
     m_Floats:
     - _Sides: 3
     - _Size: 1
-    - _Speed: 5
+    - _Speed: 7.5
     m_Colors:
     - _ColorEnd: {r: 0, g: 0, b: 0, a: 1}
     - _ColorStart: {r: 4, g: 4, b: 4, a: 1}

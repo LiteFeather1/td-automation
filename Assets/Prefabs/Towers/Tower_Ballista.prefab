@@ -364,16 +364,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 661284030296353025}
     m_Modifications:
     - target: {fileID: 1858534926451976577, guid: db57093f68a7fc74d90eddf2cb9dc472, type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858534926451976577, guid: db57093f68a7fc74d90eddf2cb9dc472, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.33
+      value: 0.16666667
       objectReference: {fileID: 0}
     - target: {fileID: 1858534926451976577, guid: db57093f68a7fc74d90eddf2cb9dc472, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
-      value: 0.33
+      value: 0.16666667
       objectReference: {fileID: 0}
     - target: {fileID: 3028700137547179057, guid: db57093f68a7fc74d90eddf2cb9dc472, type: 3}
       propertyPath: m_Name
       value: Fire_Line
+      objectReference: {fileID: 0}
+    - target: {fileID: 3215247476369391769, guid: db57093f68a7fc74d90eddf2cb9dc472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.16666667
       objectReference: {fileID: 0}
     - target: {fileID: 3215247476369391769, guid: db57093f68a7fc74d90eddf2cb9dc472, type: 3}
       propertyPath: m_LocalPosition.x
