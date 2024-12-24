@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class FactoryTower : MonoBehaviour
 {
+    private static readonly int sr_botColourID = Shader.PropertyToID("_BotColour");
+    private static readonly int sr_strengthID = Shader.PropertyToID("_Strength");
+
     [SerializeField] private Health _health;
     [SerializeField] private Receiver[] _receivers;
     [SerializeField] private Tower[] _starterTowers;
 
     [SerializeField] private SpriteRenderer _sr;
+    [SerializeField] private Color _topColour;
+    [SerializeField] private Color _botColour;
 
     private readonly Dictionary<ResourceType, int> r_resources = new();
 
@@ -34,10 +39,13 @@ public class FactoryTower : MonoBehaviour
         foreach (var tower in _starterTowers)
             foreach (var cost in tower.ResourceCost)
                 r_resources[cost.Key] -= cost.Value;
+
+        SetGradient(0f);
     }
 
     public void OnEnable()
     {
+        _health.OnDamageTaken += DamageTaken;
         _health.OnDied += Died;
 
         foreach (var receiver in _receivers)
@@ -48,6 +56,7 @@ public class FactoryTower : MonoBehaviour
 
     public void OnDisable()
     {
+        _health.OnDamageTaken -= DamageTaken;
         _health.OnDied -= Died;
 
         foreach (var receiver in _receivers)
@@ -98,6 +107,17 @@ public class FactoryTower : MonoBehaviour
                 return false;
 
         return true;
+    }
+
+    private void SetGradient(float t)
+    {
+        _sr.material.SetColor(sr_botColourID, Color.Lerp(_topColour, _botColour, t));
+        _sr.material.SetFloat(sr_strengthID, (t > .5f) ? (1f - t) : 1f);
+    }
+
+    private void DamageTaken(float _, IDamageable __)
+    {
+        SetGradient(_health.HP / _health.MaxHP);
     }
 
     private void Died()
