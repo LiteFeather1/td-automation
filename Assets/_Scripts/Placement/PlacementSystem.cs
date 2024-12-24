@@ -24,7 +24,9 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Sprite _curvedBelt;
 
     [Header("Tile Hightlight")]
-    [SerializeField] private SpriteRenderer _tileHighlight;
+    [SerializeField] private Transform _tileHighlight;
+    [SerializeField] private SpriteRenderer _tileHighlightRenderer;
+    [SerializeField] private SpriteRenderer _highlightNotPlaceable;
     [SerializeField] private Color _canPlaceHighlight = Color.blue;
     [SerializeField] private Color _notPlaceableHighlight = Color.red;
     [SerializeField] private Color _nodeHighlight = Color.yellow;
@@ -71,11 +73,13 @@ public class PlacementSystem : MonoBehaviour
         _mousePos = mousePos;
         SetCanPlaceBuilding(worldPos);
 
-        _tileHighlight.transform.localPosition = worldPos;
+        _tileHighlight.localPosition = worldPos;
 
         if (_buildingToPlace != null)
         {
-            _tileHighlight.color = _canPlaceBuilding ? _canPlaceHighlight : _notPlaceableHighlight;
+            _tileHighlightRenderer.color = _canPlaceBuilding ? _canPlaceHighlight : _notPlaceableHighlight;
+            _highlightNotPlaceable.enabled = !_canPlaceBuilding;
+
             _buildingToPlace.transform.localPosition = worldPos;
 
             if (_buildingToPlace is not BeltPath || _buildingToPlace.SR.sprite == _straightBelt)
@@ -106,7 +110,7 @@ public class PlacementSystem : MonoBehaviour
     public void SetPlaceable(PlaceableData placeableData)
     {
         _buildingPrefab = placeableData.BuildingPrefab;
-        _tileHighlight.transform.localScale = new(1.33f, 1.33f, 1f);
+        _tileHighlightRenderer.transform.localScale = new(1.5f, 1.5f, 1f);
 
         if (_buildingToPlace != null)
             Destroy(_buildingToPlace.gameObject);
@@ -186,7 +190,10 @@ public class PlacementSystem : MonoBehaviour
         }
 
         InstantiateBuilding(position, rotation);
-        _tileHighlight.color = _notPlaceableHighlight;
+
+        _tileHighlightRenderer.color = _notPlaceableHighlight;
+        _highlightNotPlaceable.enabled = true;
+
         _canPlaceBuilding = false;
 
         AddBuilding(buildingToAdd);
@@ -197,11 +204,11 @@ public class PlacementSystem : MonoBehaviour
         if (_buildingToPlace == null)
             return;
 
-        _tileHighlight.enabled = true;
-        _tileHighlight.transform.position = _buildingToPlace.transform.position;
-        SetCanPlaceBuilding((Vector3Int)_mousePos);
+        _tileHighlight.position = _buildingToPlace.transform.position;
+        _tileHighlightRenderer.transform.localScale = Vector3.one;
+        _highlightNotPlaceable.enabled = false;
 
-        _tileHighlight.transform.localScale = Vector3.one;
+        SetCanPlaceBuilding((Vector3Int)_mousePos);
         SetHighlightColour();
 
         TryGetHoverable(_mousePos);
@@ -304,9 +311,9 @@ public class PlacementSystem : MonoBehaviour
     private void SetHighlightColour()
     {
         if (_resourceNodes.ContainsKey(_mousePos))
-            _tileHighlight.color = _nodeHighlight;
+            _tileHighlightRenderer.color = _nodeHighlight;
         else
-            _tileHighlight.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
+            _tileHighlightRenderer.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
     }
 
     private void TryGetHoverable(Vector2Int pos)
