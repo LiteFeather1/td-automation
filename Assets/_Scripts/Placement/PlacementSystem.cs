@@ -70,6 +70,8 @@ public class PlacementSystem : MonoBehaviour
         _mousePos = mousePos;
         SetCanPlaceBuilding(worldPos);
 
+        _tileHighlight.transform.localPosition = worldPos;
+
         if (_buildingToPlace != null)
         {
             _buildingToPlace.SR.color = _canPlaceBuilding ? Color.white : _notPlaceableHighlight;
@@ -87,7 +89,6 @@ public class PlacementSystem : MonoBehaviour
         else
         {
             SetHighlightColour();
-            _tileHighlight.transform.localPosition = worldPos;
         }
 
         TryGetHoverable(mousePos);
@@ -103,8 +104,6 @@ public class PlacementSystem : MonoBehaviour
 
     public void SetPlaceable(PlaceableData placeableData)
     {
-        _tileHighlight.enabled = false;
-
         _buildingPrefab = placeableData.BuildingPrefab;
 
         if (_buildingToPlace != null)
@@ -185,7 +184,7 @@ public class PlacementSystem : MonoBehaviour
         }
 
         InstantiateBuilding(position, rotation);
-        _buildingToPlace.SR.color = _notPlaceableHighlight;
+        _tileHighlight.color = _notPlaceableHighlight;
         _canPlaceBuilding = false;
 
         AddBuilding(buildingToAdd);
@@ -199,7 +198,9 @@ public class PlacementSystem : MonoBehaviour
         _tileHighlight.enabled = true;
         _tileHighlight.transform.position = _buildingToPlace.transform.position;
         SetCanPlaceBuilding((Vector3Int)_mousePos);
+
         SetHighlightColour();
+
         TryGetHoverable(_mousePos);
 
         Destroy(_buildingToPlace.gameObject);
