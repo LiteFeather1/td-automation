@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Radius_Circle_Receiver
+  m_Name: Radius_Circle_Collector_Indicator
   m_Shader: {fileID: -6465566751694194690, guid: 9d66800c8877a174dbf315f7fa5a95dd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -41,7 +41,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Percent: 0.4
+    - _Percent: 0
+    - _Size: 0
     m_Colors:
     - _Colour: {r: 2, g: 2, b: 2, a: 1}
   m_BuildTextureStacks: []

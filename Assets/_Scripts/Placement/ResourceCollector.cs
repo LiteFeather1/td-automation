@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class ResourceCollector : Building, IOutPort
 {
+    private static readonly int sr_SizeId = Shader.PropertyToID("_Size");
+
     [Header("Resource Collector")]
     [SerializeField] private ResourceType _type;
     [SerializeField] private Transform _range;
     [SerializeField] private float _timeToCollect = 5f;
     [SerializeField] private float _speedMultiplierPerNode = 2f;
+    [SerializeField] private SpriteRenderer _indicator;
 
     private float _elapsedTime = 0f;
 
@@ -29,6 +32,12 @@ public class ResourceCollector : Building, IOutPort
         if (_resource == null)
         {
             _elapsedTime += Time.deltaTime * _speedMultiplierPerNode * r_resourceNodes.Count;
+
+            _indicator.material.SetFloat(
+                sr_SizeId,
+                Mathf.Lerp(0f, _indicator.transform.localScale.x, _elapsedTime / _timeToCollect)
+            );
+
             if (_elapsedTime < _timeToCollect)
                 return;
 
@@ -36,6 +45,7 @@ public class ResourceCollector : Building, IOutPort
 
             _resource = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource();
             _resource.transform.position = transform.position;
+            _indicator.material.SetFloat(sr_SizeId, 0f);
             _resource.gameObject.SetActive(true);
         }
         else if (_port != null && _port.CanReceiveResource(_type))
@@ -44,6 +54,7 @@ public class ResourceCollector : Building, IOutPort
             _resource = null;
         }
     }
+
     internal void OnDisable()
     {
         foreach (var node in r_resourceNodes)

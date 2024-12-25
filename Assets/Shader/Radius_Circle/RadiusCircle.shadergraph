@@ -1938,10 +1938,10 @@
     "m_Guid": {
         "m_GuidSerialized": "f60a2133-26bb-409f-9c59-eb6b70c95b14"
     },
-    "m_Name": "Percent",
+    "m_Name": "Size",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Percent",
-    "m_DefaultReferenceName": "_Percent",
+    "m_RefNameGeneratedByDisplayName": "Size",
+    "m_DefaultReferenceName": "_Size",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -1964,7 +1964,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "a4f38ef7a92a4bccbac02193a0449dc8",
     "m_Id": 0,
-    "m_DisplayName": "Percent",
+    "m_DisplayName": "Size",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
