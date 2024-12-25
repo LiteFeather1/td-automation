@@ -77,6 +77,12 @@ public class ResourceCollector : Building, IOutPort
         _range.gameObject.SetActive(false);
     }
 
+    public override void Destroy()
+    {
+        base.Destroy();
+        _resource?.Deactive();
+    }
+
     public override void Hover()
     {
         _range.gameObject.SetActive(true);
