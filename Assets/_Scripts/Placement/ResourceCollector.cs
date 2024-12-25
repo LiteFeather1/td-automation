@@ -11,6 +11,8 @@ public class ResourceCollector : Building, IOutPort
 
     private float _elapsedTime = 0f;
 
+    private ResourceBehaviour _resource;
+
     private IInPort _port;
 
     private readonly List<ResourceNode> r_resourceNodes = new();
@@ -24,21 +26,24 @@ public class ResourceCollector : Building, IOutPort
 
     internal void Update()
     {
-        if (_port == null || !_port.CanReceiveResource(_type))
-            return;
+        if (_resource == null)
+        {
+            _elapsedTime += Time.deltaTime * _speedMultiplierPerNode * r_resourceNodes.Count;
+            if (_elapsedTime < _timeToCollect)
+                return;
 
-        _elapsedTime += Time.deltaTime * _speedMultiplierPerNode * r_resourceNodes.Count;
-        if (_elapsedTime < _timeToCollect)
-            return;
+            _elapsedTime %= _timeToCollect;
 
-        _elapsedTime %= _timeToCollect;
-
-        var resource = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource();
-        resource.transform.position = transform.position;
-        _port.ReceiveResource(resource);
-        resource.gameObject.SetActive(true);
+            _resource = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource();
+            _resource.transform.position = transform.position;
+            _resource.gameObject.SetActive(true);
+        }
+        else if (_port != null && _port.CanReceiveResource(_type))
+        {
+            _port.ReceiveResource(_resource);
+            _resource = null;
+        }
     }
-
     internal void OnDisable()
     {
         foreach (var node in r_resourceNodes)
