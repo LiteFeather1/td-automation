@@ -3124,7 +3124,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4288084991
-  m_fontColor: {r: 1, g: 0.9843137, b: 0.5882353, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6706,6 +6706,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7596742827990384233, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596742827990384233, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1fe569ada1ef50c479c6a29affb6b10d, type: 3}
     - target: {fileID: 7709654089897952300, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_fontSizeBase
       value: 26
@@ -8070,6 +8078,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7596742827990384233, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596742827990384233, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3104ead6805f8004eb9307ae9dba2d21, type: 3}
     - target: {fileID: 7709654089897952300, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_fontSizeBase
       value: 26
@@ -8080,7 +8096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
-      value: UI_Building_Button_Lumber_Mill
+      value: UI_Building_Button_Tree_Cutter
       objectReference: {fileID: 0}
     - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: _placeableData
