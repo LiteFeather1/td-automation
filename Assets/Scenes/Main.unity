@@ -71441,7 +71441,6 @@ MonoBehaviour:
   _path:
     _segments:
     - {fileID: 1589117359}
-    - {fileID: 932215714}
     - {fileID: 1471481709}
   _stages:
   - _enemySpawns:
