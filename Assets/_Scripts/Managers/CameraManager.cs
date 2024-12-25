@@ -28,19 +28,23 @@ public class CameraManager : MonoBehaviour
     internal void Update()
     {
         var inputs = InputManager.Instance.InputSystem.Player;
-        var speedMultiplier =  (
-            (.25f + (_camera.orthographicSize - _zRange.x) * (1f - .25f) / (_zRange.y - _zRange.x))
-            * Time.deltaTime
-            / Time.timeScale
-        );
 
         if (inputs.Drag.IsPressed())
         {
-            MoveCamera(_mouseSpeed * speedMultiplier * -inputs.Look.ReadValue<Vector2>());
+            MoveCameraInput(_mouseSpeed * -inputs.Look.ReadValue<Vector2>());
         }
         else if (inputs.Move.IsPressed())
         {
-            MoveCamera(_keyboardSpeed * speedMultiplier * inputs.Move.ReadValue<Vector2>());
+            MoveCameraInput(_keyboardSpeed * inputs.Move.ReadValue<Vector2>());
+        }
+
+        void MoveCameraInput(Vector2 delta)
+        {
+            MoveCamera(delta * (
+                Helpers.Map(_camera.orthographicSize, _zRange.x, _zRange.y, .25f, 1f)
+                * Time.deltaTime
+                / Time.timeScale
+            ));
         }
     }
 
