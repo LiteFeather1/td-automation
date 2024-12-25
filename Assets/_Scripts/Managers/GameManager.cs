@@ -288,7 +288,7 @@ public class GameManager : Singleton<GameManager>
     private void UpdateUIResources(ResourceType type, int amount)
     {
         _gameHUD.UpdateUIResource(type, amount);
-        _gameHUD.UpdateBuildingButtons(type, amount, _factoryTower.Resources);
+        _gameHUD.UpdateBuildingButtons(_factoryTower.Resources);
     }
 
     private void ResourceCreated(ResourceBehaviour resource)

@@ -111,23 +111,21 @@ public class GameHUD : MonoBehaviour
             t_gameSpeed.text = $"Speed {speed:0.00}x";
     }
 
-    public void UpdateBuildingButtons(
-        ResourceType type, int totalAmount, IDictionary<ResourceType, int> resources
-    )
+    public void UpdateBuildingButtons(IDictionary<ResourceType, int> resources)
     {
         foreach (var button in _uiBuildingButtons)
         {
-            if (!button.ResourceCost.TryGetValue(type, out var cost) || -cost < totalAmount)
-                continue;
-
-            var count = button.ResourceCost.Count;
+            var next = false;
             foreach (var pair in button.ResourceCost)
             {
-                if (-pair.Value <= resources[pair.Key])
-                    count--;
+                if (resources[pair.Key] < -pair.Value)
+                {
+                    next = true;
+                    break;
+                }
             }
 
-            button.SetButtonInteractable(count == 0);
+            button.SetButtonInteractable(!next);
         }
     }
 
@@ -161,8 +159,9 @@ public class GameHUD : MonoBehaviour
         foreach (var pair in resources)
         {
             UpdateUIResource(pair.Key, pair.Value);
-            UpdateBuildingButtons(pair.Key, pair.Value, resources);
         }
+
+        UpdateBuildingButtons(resources);
     }
 
     public void ShowHover(IHoverable hoverable)

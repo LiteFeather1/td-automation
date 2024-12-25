@@ -20,9 +20,9 @@ public class FactoryTower : MonoBehaviour
 
     public delegate void ResourceAdded(ResourceType type, int totalAmount);
     public ResourceAdded OnResourceModified { get; set; }
+    public ResourceAdded OnResourceAdded { get; set; }
 
     public Action<Dictionary<ResourceType, int>> OnResourcesModified { get; set; }
-    public ResourceAdded OnResourceAdded { get; set; }
     public Action<Dictionary<ResourceType, int>> OnResourcesAdded { get; set; }
 
     public Health Health => _health;
