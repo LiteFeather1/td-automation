@@ -30,19 +30,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: _resourcesCost._entries.Array.data[0].Value
-      value: -20
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 3330408899659620278, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: m_Color.b
-      value: 0.15294118
+      value: 0.3254902
       objectReference: {fileID: 0}
     - target: {fileID: 3330408899659620278, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: m_Color.g
-      value: 0.40392157
+      value: 0.6745098
       objectReference: {fileID: 0}
     - target: {fileID: 3330408899659620278, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: m_Color.r
-      value: 0.6117647
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 6238726987825207506, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: m_LocalScale.x
@@ -92,9 +92,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0.019607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931664290213401964, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.019607844
+      objectReference: {fileID: 0}
     - target: {fileID: 7937275587650164836, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: m_Name
       value: Resource_Collector_Wood Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8598162561200036869, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 8598162561200036869, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
+      propertyPath: m_Color.r
+      value: 0.019607844
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
