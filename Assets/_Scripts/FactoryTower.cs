@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class FactoryTower : MonoBehaviour
 {
-    private static readonly int sr_botColourID = Shader.PropertyToID("_BotColour");
-    private static readonly int sr_strengthID = Shader.PropertyToID("_Strength");
+    private static readonly int sr_midColourID = Shader.PropertyToID("_MiddleColour");
+    private static readonly int sr_topInfluenceID = Shader.PropertyToID("_TopInfluence");
+    private static readonly int sr_botInfluenceID = Shader.PropertyToID("_BotInfluence");
 
     [SerializeField] private Health _health;
     [SerializeField] private Receiver[] _receivers;
@@ -40,7 +41,7 @@ public class FactoryTower : MonoBehaviour
             foreach (var cost in tower.ResourceCost)
                 r_resources[cost.Key] -= cost.Value;
 
-        SetGradient(0f);
+        SetGradient(1f);
     }
 
     public void OnEnable()
@@ -111,8 +112,12 @@ public class FactoryTower : MonoBehaviour
 
     private void SetGradient(float t)
     {
-        _sr.material.SetColor(sr_botColourID, Color.Lerp(_topColour, _botColour, t));
-        _sr.material.SetFloat(sr_strengthID, (t > .5f) ? (1f - t) : 1f);
+        _sr.material.SetColor(sr_midColourID, Color.Lerp(_botColour, _topColour, t));
+
+        const float MAX_INFLUENCE = .5f;
+        var topInfluence = Helpers.Map(t, 1f, 0f, MAX_INFLUENCE, 0f);
+        _sr.material.SetFloat(sr_topInfluenceID, topInfluence);
+        _sr.material.SetFloat(sr_botInfluenceID, MAX_INFLUENCE - topInfluence);
     }
 
     private void DamageTaken(float _, IDamageable __)

@@ -235,6 +235,9 @@ MonoBehaviour:
   - {fileID: 2105097679800237734}
   - {fileID: 2452374895070854462}
   _sr: {fileID: 1396190899828828967}
+  _topColour: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
+  _botColour: {r: 0.9137255, g: 0.20392157, b: 0.4745098, a: 1}
+  t: 1
 --- !u!114 &80722398481535603
 MonoBehaviour:
   m_ObjectHideFlags: 0
