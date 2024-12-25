@@ -1,8 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceCollector : Building, IOutPort
 {
+    private const float ANIMATION_TIME = .2f;
+
     private static readonly int sr_SizeId = Shader.PropertyToID("_Size");
 
     [Header("Resource Collector")]
@@ -11,6 +14,7 @@ public class ResourceCollector : Building, IOutPort
     [SerializeField] private float _timeToCollect = 5f;
     [SerializeField] private float _speedMultiplierPerNode = 2f;
     [SerializeField] private SpriteRenderer _indicator;
+    [SerializeField] private LineRenderer _line;
 
     private float _elapsedTime = 0f;
 
@@ -43,10 +47,13 @@ public class ResourceCollector : Building, IOutPort
 
             _elapsedTime %= _timeToCollect;
 
-            _resource = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)].CollectResource();
+            var node = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)];
+            _resource = node.CollectResource();
             _resource.transform.position = transform.position;
             _indicator.material.SetFloat(sr_SizeId, 0f);
             _resource.gameObject.SetActive(true);
+
+            StartCoroutine(Animation(node.transform.position));
         }
         else if (_port != null && _port.CanReceiveResource(_type))
         {
@@ -134,5 +141,30 @@ public class ResourceCollector : Building, IOutPort
     {
         _port.OnDestroyed -= PortDestroyed;
         _port = null;
+    }
+
+    private IEnumerator Animation(Vector3 endPos)
+    {
+        var colour = _line.startColor;
+        _line.SetPosition(0, transform.position);
+        _line.SetPosition(1, endPos);
+
+        var eTime = 0f;
+        while (eTime < ANIMATION_TIME)
+        {
+            Set(1f - Helpers.EaseInOutCubic(eTime / ANIMATION_TIME));
+            eTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Set(0f);
+
+        void Set(float t)
+        {
+            colour.a = Mathf.Lerp(0f, .5f, t);
+            _line.startColor = colour;
+            _line.endColor = colour;
+            _line.SetPosition(1, Vector3.Lerp(transform.position, endPos, t));
+        }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TowerProjectile : Tower
 {
-    private const float FADE_TIME = .25f;
+    private const float ANIMATION_TIME = .25f;
 
     [Header("Projectile Tower")]
     [SerializeField] private LineRenderer _line;
@@ -23,15 +23,11 @@ public class TowerProjectile : Tower
             var startPos = _line.GetPosition(0);
             var defaultWidth = _line.startWidth;
             var eTime = 0f;
-            while (eTime < FADE_TIME)
+            while (eTime < ANIMATION_TIME)
             {
-                Set(1f - EaseInOutQuad(eTime / FADE_TIME));
+                Set(1f - Helpers.EaseInOutQuad(eTime / ANIMATION_TIME));
                 eTime += Time.deltaTime;
                 yield return null;
-
-                // From https://easings.net/#easeInOutQuad
-                static float EaseInOutQuad(float x)=> (x < 0.5f) ?
-                    (2f * x * x) : (1f - Mathf.Pow(-2f * x + 2f, 2f) * .5f);
             }
 
             Set(0f);
