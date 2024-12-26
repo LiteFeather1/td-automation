@@ -87,6 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8834466806817870073}
   - component: {fileID: 7943467148808507552}
+  - component: {fileID: 1976951502258330272}
   - component: {fileID: 3576767409230051799}
   - component: {fileID: 2271987812399503840}
   - component: {fileID: 1530577168136164721}
@@ -151,6 +152,18 @@ MonoBehaviour:
       m_Action: Press Input
       m_Flags: 0
     m_Flags: 0
+--- !u!114 &1976951502258330272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741586433128463554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdfe9e53b431054bb3dd89df0a39b6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &3576767409230051799
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -305,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
