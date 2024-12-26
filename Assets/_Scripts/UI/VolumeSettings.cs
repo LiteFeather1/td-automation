@@ -9,7 +9,7 @@ public class VolumeSettings : MonoBehaviour
 
     private void Start()
     {
-        var audioManager = AudioManager.Instance;
+        AudioManager audioManager = AudioManager.Instance;
         InitSlider(_musicSlider, audioManager.SetMusicVolume, AudioManager.GROUP_MUSIC);
         InitSlider(_sfxSlider, audioManager.SetSFXVolume, AudioManager.GROUP_SFX);
 

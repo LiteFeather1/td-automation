@@ -23,7 +23,7 @@ public class FactoryTower : MonoBehaviour
     public ResourceAdded OnResourceAdded { get; set; }
 
     public Action<Dictionary<ResourceType, int>> OnResourcesModified { get; set; }
-    public Action<Dictionary<ResourceType, int>> OnResourcesAdded { get; set; }
+    public Action<Dictionary<ResourceType, int>> OnResourcesRefundAdded { get; set; }
 
     public Health Health => _health;
 
@@ -37,8 +37,8 @@ public class FactoryTower : MonoBehaviour
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
             r_resources.Add(type, 0);
 
-        foreach (var tower in _starterTowers)
-            foreach (var cost in tower.ResourceCost)
+        foreach (Tower tower in _starterTowers)
+            foreach (KeyValuePair<ResourceType, int> cost in tower.ResourceCost)
                 r_resources[cost.Key] -= cost.Value;
 
         SetGradient(1f);
@@ -49,7 +49,7 @@ public class FactoryTower : MonoBehaviour
         _health.OnDamageTaken += DamageTaken;
         _health.OnDied += Died;
 
-        foreach (var receiver in _receivers)
+        foreach (Receiver receiver in _receivers)
         {
             receiver.OnResourceGot += OnResourceGot;
         }
@@ -60,7 +60,7 @@ public class FactoryTower : MonoBehaviour
         _health.OnDamageTaken -= DamageTaken;
         _health.OnDied -= Died;
 
-        foreach (var receiver in _receivers)
+        foreach (Receiver receiver in _receivers)
         {
             receiver.OnResourceGot -= OnResourceGot;
         }
@@ -82,7 +82,7 @@ public class FactoryTower : MonoBehaviour
 
     public void RemoveResources(Dictionary<ResourceType, int> resources)
     {
-        foreach (var resource in resources)
+        foreach (KeyValuePair<ResourceType, int> resource in resources)
         {
             r_resources[resource.Key] += resource.Value;
         }
@@ -92,18 +92,18 @@ public class FactoryTower : MonoBehaviour
 
     public void BuildingRefund(Dictionary<ResourceType, int> resources)
     {
-        foreach (var resource in resources)
+        foreach (KeyValuePair<ResourceType, int> resource in resources)
         {
             r_resources[resource.Key] -= Mathf.FloorToInt(resource.Value * .5f);
         }
 
         OnResourcesModified?.Invoke(r_resources);
-        OnResourcesAdded?.Invoke(r_resources);
+        OnResourcesRefundAdded?.Invoke(r_resources);
     }
 
     public bool HasEnoughResourceToBuild(IDictionary<ResourceType, int> resourceCosts)
     {
-        foreach (var resourceCost in resourceCosts)
+        foreach (KeyValuePair<ResourceType, int> resourceCost in resourceCosts)
             if (r_resources[resourceCost.Key] < -resourceCost.Value)
                 return false;
 
@@ -115,7 +115,7 @@ public class FactoryTower : MonoBehaviour
         _sr.material.SetColor(sr_midColourID, Color.Lerp(_botColour, _topColour, t));
 
         const float MAX_INFLUENCE = .5f;
-        var topInfluence = Helpers.Map(t, 1f, 0f, MAX_INFLUENCE, 0f);
+        float topInfluence = Helpers.Map(t, 1f, 0f, MAX_INFLUENCE, 0f);
         _sr.material.SetFloat(sr_topInfluenceID, topInfluence);
         _sr.material.SetFloat(sr_botInfluenceID, MAX_INFLUENCE - topInfluence);
     }

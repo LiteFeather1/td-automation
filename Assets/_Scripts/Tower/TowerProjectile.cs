@@ -19,10 +19,10 @@ public class TowerProjectile : Tower
 
         IEnumerator Fade()
         {
-            var halfPoint = (_firePoint.position + enemy.transform.position) * .5f;
-            var startPos = _line.GetPosition(0);
-            var defaultWidth = _line.startWidth;
-            var eTime = 0f;
+            Vector3 halfPoint = (_firePoint.position + enemy.transform.position) * .5f;
+            Vector3 startPos = _line.GetPosition(0);
+            float defaultWidth = _line.startWidth;
+            float eTime = 0f;
             while (eTime < ANIMATION_TIME)
             {
                 Set(1f - Helpers.EaseInOutQuad(eTime / ANIMATION_TIME));
@@ -34,10 +34,10 @@ public class TowerProjectile : Tower
 
             void Set(float t)
             {
-                var colour = new Color(1f, 1f, 1f, t);
+                Color colour = new(1f, 1f, 1f, t);
                 _line.startColor = colour;
                 _line.endColor = colour;
-                var width = defaultWidth + defaultWidth * t * 2f;
+                float width = defaultWidth + defaultWidth * t * 2f;
                 _line.startWidth = width;
                 _line.endWidth = width;
                 _line.SetPosition(0, Vector3.Lerp(halfPoint, startPos, t));

@@ -12,7 +12,7 @@ public class SegmentBehaviour : MonoBehaviour, ISegment
     {
         _segment = new(_points.Length);
 
-        foreach (var point in _points)
+        foreach (Transform point in _points)
         {
             _segment.Points.Add(point.position);
         }
@@ -23,7 +23,7 @@ public class SegmentBehaviour : MonoBehaviour, ISegment
         if (_points.Length == 0)
             return;
 
-        for (var i = 0; i < _points.Length - 1; i++)
+        for (int i = 0; i < _points.Length - 1; i++)
         {
             if (_points[i] == null || _points[i + 1] == null)
                 continue;

@@ -11,8 +11,8 @@ public class TowerZapper : Tower
         if (!EnemyManager.Instance.HasEnemies)
             return;
 
-        var enemiesInRange = new List<Enemy>();
-        foreach (var enemy in EnemyManager.Instance.Enemies)
+        List<Enemy> enemiesInRange = new();
+        foreach (Enemy enemy in EnemyManager.Instance.Enemies)
         {
             if (Vector2.Distance(enemy.transform.position, transform.position) < Range)
                 enemiesInRange.Add(enemy);
@@ -25,7 +25,7 @@ public class TowerZapper : Tower
         if (_elapsedTime < _damageRate)
             return;
 
-        foreach (var enemy in enemiesInRange)
+        foreach (Enemy enemy in enemiesInRange)
             DamageEnemy(enemy);
 
         _elapsedTime %= _damageRate;

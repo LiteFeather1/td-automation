@@ -8,7 +8,7 @@ public class TowerFlamethrower : Tower
 
     protected override void DamageEnemy(Enemy enemy)
     {
-        foreach (var e in EnemyManager.Instance.Enemies)
+        foreach (Enemy e in EnemyManager.Instance.Enemies)
         {
             if (Vector2.Distance(enemy.transform.position, e.transform.position) > _fireDamageRadius)
                 continue;

@@ -19,7 +19,7 @@ public class PathFollow : MonoBehaviour
 
     public void Update()
     {
-        var currentPoint = _path.GetPoint(_currentSegmentIndex, _currentPointIndex);
+        Vector2 currentPoint = _path.GetPoint(_currentSegmentIndex, _currentPointIndex);
         transform.position = Vector2.MoveTowards(
             transform.position, currentPoint, _speed * Time.deltaTime
         );

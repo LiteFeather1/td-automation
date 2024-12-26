@@ -40,13 +40,13 @@ public class BeltPathSystem : MonoBehaviour
 
     internal void Update()
     {
-        var deltaTime = Time.deltaTime;
-        foreach (var inPort in r_inPorts.Values)
+        float deltaTime = Time.deltaTime;
+        foreach (IInPort inPort in r_inPorts.Values)
         {
             if (inPort.Resource == null)
                 continue;
 
-            var transform = inPort.Resource.transform;
+            Transform transform = inPort.Resource.transform;
             if (Vector2.Distance(inPort.Position, transform.position) > float.Epsilon)
             {
                 transform.position = Vector2.MoveTowards(
@@ -69,10 +69,10 @@ public class BeltPathSystem : MonoBehaviour
             if (newInPort is not IOutPort newOutPort)
                 return;
 
-            foreach (var directionVector in sr_directionToVector)
+            foreach (KeyValuePair<Direction, Vector2Int> directionVector in sr_directionToVector)
             {
                 if (directionVector.Key == newOutPort.OutDirection
-                    || !r_outPorts.TryGetValue(newInPort.Position + directionVector.Value, out var outPort)
+                    || !r_outPorts.TryGetValue(newInPort.Position + directionVector.Value, out IOutPort outPort)
                 )
                     continue;
 
@@ -85,7 +85,7 @@ public class BeltPathSystem : MonoBehaviour
             }
         }
         else if (r_outPorts.TryGetValue(
-            newInPort.Position + sr_directionToVector[newInPort.InDirection], out var outPort
+            newInPort.Position + sr_directionToVector[newInPort.InDirection], out IOutPort outPort
         ))
         {
             if (outPort.OutDirection == Direction.Any)
@@ -113,10 +113,10 @@ public class BeltPathSystem : MonoBehaviour
             if (newOutPort is not IInPort newInPort)
                 return;
 
-            foreach (var directionVector in sr_directionToVector)
+            foreach (KeyValuePair<Direction, Vector2Int> directionVector in sr_directionToVector)
             {
                 if (newInPort.InDirection == directionVector.Key
-                    || !r_inPorts.TryGetValue(newOutPort.Position + directionVector.Value, out var inPort)
+                    || !r_inPorts.TryGetValue(newOutPort.Position + directionVector.Value, out IInPort inPort)
                 )
                     continue;
 
@@ -129,7 +129,7 @@ public class BeltPathSystem : MonoBehaviour
             }
         }
         else if (r_inPorts.TryGetValue(
-            newOutPort.Position + sr_directionToVector[newOutPort.OutDirection], out var inPort
+            newOutPort.Position + sr_directionToVector[newOutPort.OutDirection], out IInPort inPort
         ))
         {
             if (inPort.InDirection == Direction.Any)
@@ -159,7 +159,7 @@ public class BeltPathSystem : MonoBehaviour
 
     public bool HasOutPortAt(Vector2Int position, Direction inDirection)
     {
-        if (!r_outPorts.TryGetValue(position + sr_directionToVector[inDirection], out var outPort))
+        if (!r_outPorts.TryGetValue(position + sr_directionToVector[inDirection], out IOutPort outPort))
             return false;
 
         if (outPort.OutDirection == Direction.Any)

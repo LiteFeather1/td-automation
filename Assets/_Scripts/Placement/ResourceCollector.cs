@@ -47,7 +47,7 @@ public class ResourceCollector : Building, IOutPort
 
             _elapsedTime %= _timeToCollect;
 
-            var node = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)];
+            ResourceNode node = r_resourceNodes[Random.Range(0, r_resourceNodes.Count)];
             _resource = node.CollectResource();
             _resource.transform.position = transform.position;
             _indicator.material.SetFloat(sr_SizeId, 0f);
@@ -64,7 +64,7 @@ public class ResourceCollector : Building, IOutPort
 
     internal void OnDisable()
     {
-        foreach (var node in r_resourceNodes)
+        foreach (ResourceNode node in r_resourceNodes)
         {
             node.OnDepleted -= OnNodeDepleted;
         }
@@ -102,11 +102,11 @@ public class ResourceCollector : Building, IOutPort
 
     public void TryAddNode(ResourceNode node)
     {
-        var dir = Position - node.Position;
-        var mag = (int)dir.magnitude;
+        Vector2Int dir = Position - node.Position;
+        int mag = (int)dir.magnitude;
         dir = new(dir.x / mag, dir.y / mag);
-        if (node.Type != _type
-            || Vector2Int.Distance(Position - dir, node.Position) > Range
+        if (
+            node.Type != _type || Vector2Int.Distance(Position - dir, node.Position) > Range
         )
             return;
 
@@ -132,7 +132,7 @@ public class ResourceCollector : Building, IOutPort
 
     private void ChangeAlpha(float alpha)
     {
-        var colour = _sr.color;
+        Color colour = _sr.color;
         colour.a = alpha;
         _sr.color = colour;
     }
@@ -145,11 +145,11 @@ public class ResourceCollector : Building, IOutPort
 
     private IEnumerator Animation(Vector3 endPos)
     {
-        var colour = _line.startColor;
+        Color colour = _line.startColor;
         _line.SetPosition(0, transform.position);
         _line.SetPosition(1, endPos);
 
-        var eTime = 0f;
+        float eTime = 0f;
         while (eTime < ANIMATION_TIME)
         {
             Set(1f - Helpers.EaseInOutCubic(eTime / ANIMATION_TIME));

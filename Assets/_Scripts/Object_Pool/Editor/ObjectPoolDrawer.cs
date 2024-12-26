@@ -10,14 +10,14 @@ public class WeightedObjectDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        using var p = property.FindPropertyRelative("_object");
+        using SerializedProperty p = property.FindPropertyRelative("_object");
         return EditorGUI.GetPropertyHeight(p, label);
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        using var objectP = property.FindPropertyRelative("_object");
-        using var initialSizeP = property.FindPropertyRelative("_initialPoolSize");
+        using SerializedProperty objectP = property.FindPropertyRelative("_object");
+        using SerializedProperty initialSizeP = property.FindPropertyRelative("_initialPoolSize");
         label.tooltip = TOOLTIP;
 
         using (new EditorGUI.PropertyScope(position, label, property))
@@ -25,7 +25,7 @@ public class WeightedObjectDrawer : PropertyDrawer
             position.width -= PAD;
             EditorGUI.PropertyField(position, objectP, label, true);
 
-            var indent = EditorGUI.indentLevel;
+            int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
             position.x += PAD + position.width;

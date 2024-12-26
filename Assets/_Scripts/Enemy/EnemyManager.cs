@@ -34,9 +34,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
     internal void OnEnable()
     {
-        foreach (var pool in _enemiesObjectPools)
+        foreach (KeyValuePair<int, SOObjectPoolEnemy> pool in _enemiesObjectPools)
         {
-            var objectPool = pool.Value.ObjectPool;
+            ObjectPool<Enemy> objectPool = pool.Value.ObjectPool;
             objectPool.Object.ID = pool.Key;
             objectPool.ObjectCreated += EnemyCreated;
             objectPool.InitPool();
@@ -51,7 +51,7 @@ public class EnemyManager : Singleton<EnemyManager>
     public void Update()
     {
         _elapsedTime += Time.deltaTime;
-        var currentLullDuration = _lullStages[_currentStage].LullDuration;
+        float currentLullDuration = _lullStages[_currentStage].LullDuration;
         if (_elapsedTime < currentLullDuration)
         {
             if (_elapsedTime >= _lullSpawnTime)
@@ -74,7 +74,7 @@ public class EnemyManager : Singleton<EnemyManager>
             OnWaveStarted?.Invoke();
         }
 
-        foreach (var portal in _portals)
+        foreach (Portal portal in _portals)
         {
             if (!portal.CanSpawn(_currentStage, _elapsedTime - currentLullDuration))
                 continue;
@@ -85,11 +85,11 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void OnDisable()
     {
-        foreach (var pool in _enemiesObjectPools.Values)
+        foreach (SOObjectPoolEnemy pool in _enemiesObjectPools.Values)
         {
             pool.ObjectPool.ObjectCreated -= EnemyCreated;
 
-            foreach (var enemy in pool.ObjectPool.Objects)
+            foreach (Enemy enemy in pool.ObjectPool.Objects)
             {
                 enemy.OnDied -= EnemyDied;
                 enemy.OnPathReached -= EnemyReachedPathEnd;
@@ -114,13 +114,13 @@ public class EnemyManager : Singleton<EnemyManager>
         if (_enemies.Count != 0)
             return;
 
-        foreach (var portal in _portals)
+        foreach (Portal portal in _portals)
         {
             if (!portal.AllGroupsSpawned(_currentStage))
                 return;
         }
 
-        foreach (var portal in _portals)
+        foreach (Portal portal in _portals)
             portal.StageEnded();
 
         print("Stage ended");

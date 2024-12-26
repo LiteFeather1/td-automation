@@ -55,7 +55,7 @@ public class PlacementSystem : MonoBehaviour
 
     internal void Start()
     {
-        foreach (var node in _resourceNodes.Values)
+        foreach (ResourceNode node in _resourceNodes.Values)
         {
             node.OnDepleted += ResourceDepleted;
             r_hoverables.Add(node.Position, node);
@@ -64,9 +64,9 @@ public class PlacementSystem : MonoBehaviour
 
     internal void FixedUpdate()
     {
-        var worldPos = Vector3Int.RoundToInt(_camera.ScreenToWorldPoint(Input.mousePosition));
+        Vector3Int worldPos = Vector3Int.RoundToInt(_camera.ScreenToWorldPoint(Input.mousePosition));
         worldPos.z = 0;
-        var mousePos = (Vector2Int)worldPos;
+        Vector2Int mousePos = (Vector2Int)worldPos;
         if (mousePos == _mousePos)
             return;
 
@@ -101,7 +101,7 @@ public class PlacementSystem : MonoBehaviour
 
     internal void OnDisable()
     {
-        foreach (var node in _resourceNodes.Values)
+        foreach (ResourceNode node in _resourceNodes.Values)
         {
             node.OnDepleted -= ResourceDepleted;
         }
@@ -133,7 +133,7 @@ public class PlacementSystem : MonoBehaviour
     {
         if (_buildingToPlace == null)
         {
-            if (_resourceNodes.TryGetValue(_mousePos, out var node))
+            if (_resourceNodes.TryGetValue(_mousePos, out ResourceNode node))
             {
                 OnResourceCollected?.Invoke(node.GetResource());
                 OnHoverableHovered?.Invoke(_currentHoverable);
@@ -150,7 +150,7 @@ public class PlacementSystem : MonoBehaviour
         if (_buildingToPlace is ResourceCollector collector)
         {
             collector.OutDirection = _outDirection;
-            foreach (var node in _resourceNodes.Values)
+            foreach (ResourceNode  node in _resourceNodes.Values)
             {
                 collector.TryAddNode(node);
             }
@@ -174,7 +174,7 @@ public class PlacementSystem : MonoBehaviour
         }
 
         _buildingToPlace.SR.sortingOrder = 0;
-        var buildingToAdd = _buildingToPlace;
+        Building buildingToAdd = _buildingToPlace;
 
         Vector3 position;
         Quaternion rotation;
@@ -223,7 +223,7 @@ public class PlacementSystem : MonoBehaviour
         {
             UnselectBuildingBuilding();
         }
-        else if (r_buildings.TryGetValue(_mousePos, out var building) && building.CanBeDestroyed)
+        else if (r_buildings.TryGetValue(_mousePos, out Building building) && building.CanBeDestroyed)
         {
             r_buildings.Remove(_mousePos);
             r_hoverables.Remove(_mousePos);
@@ -248,7 +248,7 @@ public class PlacementSystem : MonoBehaviour
                 _outDirection = RotateDirection(_outDirection);
             while (_outDirection == _inDirection);
 
-            var sr = _buildingToPlace.SR;
+            SpriteRenderer sr = _buildingToPlace.SR;
             float zRot;
             if (sr.sprite == _straightBelt)
             {
@@ -318,7 +318,7 @@ public class PlacementSystem : MonoBehaviour
 
     private void TryGetHoverable(Vector2Int pos)
     {
-        if (!UIMouseBlocker.MouseBlocked && r_hoverables.TryGetValue(pos, out var hoverable))
+        if (!UIMouseBlocker.MouseBlocked && r_hoverables.TryGetValue(pos, out IHoverable hoverable))
         {
             OnHoverableHovered?.Invoke(hoverable);
             _currentHoverable?.Unhover();
@@ -345,7 +345,7 @@ public class PlacementSystem : MonoBehaviour
     internal void GetResourceNodes()
     {
         _resourceNodes = new();
-        foreach (var node in GetComponentsInChildren<ResourceNode>())
+        foreach (ResourceNode node in GetComponentsInChildren<ResourceNode>())
         {
             node.Position = Vector2Int.RoundToInt(node.transform.position);
             _resourceNodes.Add(node.Position, node);

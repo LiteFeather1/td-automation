@@ -50,12 +50,12 @@ public class GameHUD : MonoBehaviour
     {
         SubscribeToUIHover(_towerCount);
 
-        foreach (var uiResource in _uiResources.Values)
+        foreach (UIResource uiResource in _uiResources.Values)
         {
             SubscribeToUIHover(uiResource.UIHover);
         }
 
-        foreach (var buildingButton in _uiBuildingButtons)
+        foreach (UIBuildingButton buildingButton in _uiBuildingButtons)
         {
             buildingButton.OnButtonHovered += BuildingButtonHovered;
             buildingButton.OnButtonUnhovered += BuildingButtonUnhovered;
@@ -80,12 +80,12 @@ public class GameHUD : MonoBehaviour
     {
         UnsubscribeToUIHover(_towerCount);
 
-        foreach (var uiResource in _uiResources.Values)
+        foreach (UIResource uiResource in _uiResources.Values)
         {
             UnsubscribeToUIHover(uiResource.UIHover);
         }
 
-        foreach (var buildingButton in _uiBuildingButtons)
+        foreach (UIBuildingButton buildingButton in _uiBuildingButtons)
         {
             buildingButton.OnButtonHovered -= BuildingButtonHovered;
             buildingButton.OnButtonUnhovered -= BuildingButtonUnhovered;
@@ -113,10 +113,10 @@ public class GameHUD : MonoBehaviour
 
     public void UpdateBuildingButtons(IDictionary<ResourceType, int> resources)
     {
-        foreach (var button in _uiBuildingButtons)
+        foreach (UIBuildingButton button in _uiBuildingButtons)
         {
-            var next = false;
-            foreach (var pair in button.ResourceCost)
+            bool next = false;
+            foreach (KeyValuePair<ResourceType, int> pair in button.ResourceCost)
             {
                 if (resources[pair.Key] < -pair.Value)
                 {
@@ -156,7 +156,7 @@ public class GameHUD : MonoBehaviour
 
     public void UpdateAmountsAndBuildingButtons(Dictionary<ResourceType, int> resources)
     {
-        foreach (var pair in resources)
+        foreach (KeyValuePair<ResourceType, int> pair in resources)
         {
             UpdateUIResource(pair.Key, pair.Value);
         }
@@ -188,8 +188,8 @@ public class GameHUD : MonoBehaviour
 
     private void BuildingButtonHovered(UIBuildingButton buildingButton)
     {
-        var buildingRect = (RectTransform)buildingButton.transform;
-        var (pivot, paddingDir) = (buildingRect.position.x > rt_canvas.rect.width * .5f) ?
+        RectTransform buildingRect = (RectTransform)buildingButton.transform;
+        (float pivot, float paddingDir) = (buildingRect.position.x > rt_canvas.rect.width * .5f) ?
             (1f, -1f) : (0, 1f);
 
         _hoverBuildingButtonInfo.pivot = new(pivot, .5f);
@@ -200,26 +200,25 @@ public class GameHUD : MonoBehaviour
 
         t_hoverBuildingInfoName.text = buildingButton.PlaceableData.Name;
 
-        foreach (var resourceType in _hoverInfoCost)
+        foreach (KeyValuePair<ResourceType, HoverBuildingCost> resourceType in _hoverInfoCost)
         {
-            var hoverInfoCost = _hoverInfoCost[resourceType.Key];
-            var hasResource = buildingButton.PlaceableData.BuildingPrefab.ResourceCost.
-                TryGetValue(resourceType.Key, out var cost);
-            hoverInfoCost.Root.SetActive(hasResource);
+            bool hasResource = buildingButton.PlaceableData.BuildingPrefab.ResourceCost.
+                TryGetValue(resourceType.Key, out int cost);
+            resourceType.Value.Root.SetActive(hasResource);
 
             if (!hasResource)
                 continue;
 
-            hoverInfoCost.CountText.text = $"{-cost:00}";
+            resourceType.Value.CountText.text = $"{-cost:00}";
             if (GameManager.Instance.TowerFactory.GetResourceAmount(resourceType.Key) >= -cost)
             {
-                hoverInfoCost.CountText.color = _hasEnoughResourceColour;
-                hoverInfoCost.Image.color = Color.white;
+                resourceType.Value.CountText.color = _hasEnoughResourceColour;
+                resourceType.Value.Image.color = Color.white;
             }
             else
             {
-                hoverInfoCost.CountText.color = _notEnoughResourceColour;
-                hoverInfoCost.Image.color = new(1f, 1f, 1f, .5f);
+                resourceType.Value.CountText.color = _notEnoughResourceColour;
+                resourceType.Value.Image.color = new(1f, 1f, 1f, .5f);
             }
         }
 

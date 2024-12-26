@@ -20,11 +20,11 @@ public abstract class Tower : Building
         if (!EnemyManager.Instance.HasEnemies || _elapsedTime < _damageRate)
             return;
 
-        var closestDistance = float.MaxValue;
+        float closestDistance = float.MaxValue;
         Enemy closestEnemy = null;
-        foreach (var enemy in EnemyManager.Instance.Enemies)
+        foreach (Enemy enemy in EnemyManager.Instance.Enemies)
         {
-            var distance = Vector2.Distance(transform.position, enemy.transform.position);
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance > Range)
                 continue;
 

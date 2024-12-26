@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
 
     internal void OnEnable()
     {
-        var inputs = InputManager.Instance.InputSystem.Player;
+        InputSystem_Actions.PlayerActions inputs = InputManager.Instance.InputSystem.Player;
         inputs.LMB.performed += PlaceBuilding;
         inputs.RMB.performed += CancelBuilding;
         inputs.Rotate.performed += RotateBuilding;
@@ -55,7 +55,7 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.OnResourceModified += UpdateUIResources;
         _factoryTower.OnResourcesModified += _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.OnResourceAdded += _endScreen.AddResource;
-        _factoryTower.OnResourcesAdded += _endScreen.AddResources;
+        _factoryTower.OnResourcesRefundAdded += _endScreen.AddResources;
         _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed += _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnDied += GameEnded;
@@ -66,12 +66,12 @@ public class GameManager : Singleton<GameManager>
         _pauseScreen.OnResume.AddListener(Unpause);
         _pauseScreen.OnForfeit.AddListener(Forfeit);
 
-        foreach (var buildingButton in _gameHUD.UIBuildingButtons)
+        foreach (UIBuildingButton buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed += _placementSystem.SetPlaceable;
         }
 
-        foreach (var pool in _poolResources.Values)
+        foreach (SOObjectPoolResourceBehaviour pool in _poolResources.Values)
         {
             pool.ObjectPool.ObjectCreated += ResourceCreated;
             pool.ObjectPool.InitPool();
@@ -81,7 +81,7 @@ public class GameManager : Singleton<GameManager>
     internal void Start()
     {
         AddBuildings(_factoryTower.Receivers);
-        foreach (var receiver in _factoryTower.Receivers)
+        foreach (Receiver receiver in _factoryTower.Receivers)
         {
             _placementSystem.BeltPathSystem.AddInPort(receiver);
         }
@@ -95,7 +95,7 @@ public class GameManager : Singleton<GameManager>
 
         void AddBuildings(Building[] buildings)
         {
-            foreach (var building in buildings)
+            foreach (Building building in buildings)
             {
                 building.Position = Vector2Int.FloorToInt(building.transform.position);
                 _placementSystem.AddBuilding(building);
@@ -113,7 +113,7 @@ public class GameManager : Singleton<GameManager>
 
     internal void OnDisable()
     {
-        var inputs = InputManager.Instance.InputSystem.Player;
+        InputSystem_Actions.PlayerActions inputs = InputManager.Instance.InputSystem.Player;
         inputs.LMB.performed -= PlaceBuilding;
         inputs.RMB.performed -= CancelBuilding;
         inputs.Rotate.performed -= RotateBuilding;
@@ -137,7 +137,7 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.OnResourceModified -= UpdateUIResources;
         _factoryTower.OnResourcesModified -= _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.OnResourceAdded -= _endScreen.AddResource;
-        _factoryTower.OnResourcesAdded -= _endScreen.AddResources;
+        _factoryTower.OnResourcesRefundAdded -= _endScreen.AddResources;
         _factoryTower.Health.OnDamageTaken -= _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnHealed -= _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnDied -= GameEnded;
@@ -148,15 +148,15 @@ public class GameManager : Singleton<GameManager>
         _pauseScreen.OnResume.RemoveListener(Unpause);
         _pauseScreen.OnForfeit.RemoveListener(Forfeit);
 
-        foreach (var buildingButton in _gameHUD.UIBuildingButtons)
+        foreach (UIBuildingButton buildingButton in _gameHUD.UIBuildingButtons)
         {
             buildingButton.OnButtonPressed -= _placementSystem.SetPlaceable;
         }
 
-        foreach (var pool in _poolResources.Values)
+        foreach (SOObjectPoolResourceBehaviour pool in _poolResources.Values)
         {
             pool.ObjectPool.ObjectCreated -= ResourceCreated;
-            foreach (var resource in pool.ObjectPool.Objects)
+            foreach (ResourceBehaviour resource in pool.ObjectPool.Objects)
             {
                 resource.OnReturnToPool -= pool.ObjectPool.ReturnObject;
             }
@@ -167,7 +167,7 @@ public class GameManager : Singleton<GameManager>
     private void OnDestroy()
     {
         Time.timeScale = 1f;
-        var inputManager = InputManager.Instance;
+        InputManager inputManager = InputManager.Instance;
         inputManager.InputSystem.Player.Enable();
         inputManager.EnableInputSystem();
     }
@@ -299,7 +299,7 @@ public class GameManager : Singleton<GameManager>
     [ContextMenu("Give Infinite Resource")]
     private void GiveInfiniteResdource()
     {
-        var resources = new Dictionary<ResourceType, int>();
+        Dictionary<ResourceType, int> resources = new();
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
             resources.Add(type, -20000);
 

@@ -20,14 +20,14 @@ public class CameraManager : MonoBehaviour
 
     internal void OnEnable()
     {
-        var inputs = InputManager.Instance.InputSystem.Player;
+        InputSystem_Actions.PlayerActions inputs = InputManager.Instance.InputSystem.Player;
         inputs.ScrollWheel.performed += ZoomPerformed;
         inputs.DefaultZoom.performed += DefaultZoom;
     }
 
     internal void Update()
     {
-        var inputs = InputManager.Instance.InputSystem.Player;
+        InputSystem_Actions.PlayerActions inputs = InputManager.Instance.InputSystem.Player;
 
         if (inputs.Drag.IsPressed())
         {
@@ -50,7 +50,7 @@ public class CameraManager : MonoBehaviour
 
     internal void OnDisable()
     {
-        var inputs = InputManager.Instance.InputSystem.Player;
+        InputSystem_Actions.PlayerActions inputs = InputManager.Instance.InputSystem.Player;
         inputs.ScrollWheel.performed -= ZoomPerformed;
         inputs.DefaultZoom.performed -= DefaultZoom;
     }
@@ -71,9 +71,9 @@ public class CameraManager : MonoBehaviour
 
     private void MoveCamera(Vector2 delta)
     {
-        var camSizeY = _camera.orthographicSize;
-        var camSizeX = camSizeY * 16f / 9f;
-        var pos = transform.position;
+        float camSizeY = _camera.orthographicSize;
+        float camSizeX = camSizeY * 16f / 9f;
+        Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x + delta.x, _min.x + camSizeX, _max.x - camSizeX);
         pos.y = Mathf.Clamp(pos.y + delta.y, _min.y + camSizeY, _max.y - camSizeY);
         transform.position = pos;
@@ -84,8 +84,8 @@ public class CameraManager : MonoBehaviour
     {
         Gizmos.color = sr_boundsColour;
 
-        var topLeft = new Vector3(_min.x, _max.y);
-        var bottomRight = new Vector3(_max.x, _min.y);
+        Vector3 topLeft = new(_min.x, _max.y);
+        Vector3 bottomRight = new(_max.x, _min.y);
         Gizmos.DrawLine(topLeft, _max);
         Gizmos.DrawLine(_max, bottomRight);
         Gizmos.DrawLine(bottomRight, _min);

@@ -13,16 +13,16 @@ public class Splitter : InPort, IOutPort
 
     internal void OnDisable()
     {
-        foreach (var port in r_ports)
+        foreach (IInPort port in r_ports)
             if (port != null)
                 port.OnDestroyed -= PortDestroyed;
     }
 
     public override void ResourceCentralized()
     {
-        for (var i = 0; i < r_ports.Length; i++)
+        for (int i = 0; i < r_ports.Length; i++)
         {
-            var port = r_ports[(i + _offset) % r_ports.Length];
+            IInPort port = r_ports[(i + _offset) % r_ports.Length];
             if (port != null && port.CanReceiveResource(_resource.Type))
             {
                 port.ReceiveResource(_resource);
@@ -35,11 +35,10 @@ public class Splitter : InPort, IOutPort
 
     public void SetPort(IInPort inPort)
     {
-        for (var i = 0; i < r_ports.Length; i++)
+        for (int i = 0; i < r_ports.Length; i++)
         {
             if (r_ports[i] == null)
             {
-                print(inPort);
                 r_ports[i] = inPort;
                 inPort.OnDestroyed += PortDestroyed;
                 break;
@@ -49,7 +48,7 @@ public class Splitter : InPort, IOutPort
 
     private void PortDestroyed(Vector2Int position)
     {
-        for (var i = 0; i < r_ports.Length; i++)
+        for (int i = 0; i < r_ports.Length; i++)
         {
             if (r_ports[i] != null && r_ports[i].Position == position)
             {

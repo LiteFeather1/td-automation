@@ -39,7 +39,7 @@ public class ObjectPool<T> : IDisposable where T : Component
         if (_poolParent != null)
             return;
 
-        var name = _object.name;
+        string name = _object.name;
 
         _poolParent = new GameObject($"Pool_{name}").transform;
 

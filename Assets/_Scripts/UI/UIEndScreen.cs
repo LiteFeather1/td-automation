@@ -39,7 +39,7 @@ public class UIEndScreen : MonoBehaviour
         _elapsedTime.SetStat($"{Mathf.FloorToInt(time / 60f):00}:{Mathf.FloorToInt(time % 60f):00}");
         _enemies.SetStat($"{_enemiesKilledCount}");
 
-        foreach (var resource in r_resourceCount)
+        foreach (KeyValuePair<ResourceType, int> resource in r_resourceCount)
             _resourceStats[resource.Key].SetStat($"{resource.Value:000000}");
 
         gameObject.SetActive(true);
@@ -51,7 +51,7 @@ public class UIEndScreen : MonoBehaviour
 
     public void AddResources(IDictionary<ResourceType, int> resouces)
     {
-        foreach (var resource in resouces)
+        foreach (KeyValuePair<ResourceType, int> resource in resouces)
             AddResource(resource.Key, -resource.Value);
     }
 

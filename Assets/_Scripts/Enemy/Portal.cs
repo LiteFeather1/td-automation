@@ -35,7 +35,7 @@ public class Portal : MonoBehaviour
 
     private Stage GetStage(int currentStage)
     {
-        var index = Mathf.Clamp(currentStage, 0, _stages.Length - 1);
+        int index = Mathf.Clamp(currentStage, 0, _stages.Length - 1);
         return _stages[index];
     }
 
@@ -46,7 +46,7 @@ public class Portal : MonoBehaviour
 
     public void OnDrawGizmosSelected()
     {
-        foreach (var segment in _path.Segments)
+        foreach (SegmentBehaviour segment in _path.Segments)
         {
             if (segment == null)
                 continue;

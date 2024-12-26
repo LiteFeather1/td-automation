@@ -15,14 +15,14 @@ namespace LTF.SerializedDictionary.Editor
             if (source == null)
                 return null;
 
-            var type = source.GetType();
+            Type type = source.GetType();
             while (type != null)
             {
-                var fieldInfo = type.GetField(name, PUBLIC_OR_NON_INSTANCE);
+                FieldInfo fieldInfo = type.GetField(name, PUBLIC_OR_NON_INSTANCE);
                 if (fieldInfo != null)
                     return fieldInfo.GetValue(source);
 
-                var prop = type.GetProperty(name, PUBLIC_OR_NON_INSTANCE | BindingFlags.IgnoreCase);
+                PropertyInfo prop = type.GetProperty(name, PUBLIC_OR_NON_INSTANCE | BindingFlags.IgnoreCase);
                 if (prop != null)
                     return prop.GetValue(source, null);
 
@@ -37,7 +37,7 @@ namespace LTF.SerializedDictionary.Editor
             if (GetValue(source, name) is not IEnumerable enumerable)
                 return null;
 
-            var iEnumerator = enumerable.GetEnumerator();
+            IEnumerator iEnumerator = enumerable.GetEnumerator();
             for (int i = 0; i <= index; i++)
                 if (!iEnumerator.MoveNext())
                     return null;
@@ -48,14 +48,14 @@ namespace LTF.SerializedDictionary.Editor
         public static object GetTargetObject(this SerializedProperty prop)
         {
             object targetObject = prop.serializedObject.targetObject;
-            var elements = prop.propertyPath.Replace(".Array.data[", "[").Split('.');
-            var length = elements.Length;
-            for (var i = 0; i < length; i++)
+            string[] elements = prop.propertyPath.Replace(".Array.data[", "[").Split('.');
+            int length = elements.Length;
+            for (int i = 0; i < length; i++)
             {
                 if (elements[i].Contains("["))
                 {
-                    var elementName = elements[i][..elements[i].IndexOf("[")];
-                    var index = Convert.ToInt32(elements[i][elements[i].IndexOf("[")..].Replace("[", "").Replace("]", ""));
+                    string elementName = elements[i][..elements[i].IndexOf("[")];
+                    int index = Convert.ToInt32(elements[i][elements[i].IndexOf("[")..].Replace("[", "").Replace("]", ""));
                     targetObject = GetValue(targetObject, elementName, index);
                 }
                 else
@@ -99,15 +99,15 @@ namespace LTF.SerializedDictionary.Editor
 
         public static bool HasAnyElementSameValue(this SerializedProperty array, SerializedProperty key1, int skipIndex)
         {
-            var length = array.arraySize;
-            for (var i = 0; i < length; i++)
+            int length = array.arraySize;
+            for (int i = 0; i < length; i++)
             {
                 if (i == skipIndex)
                     continue;
 
-                var key2 = array.GetArrayElementAtIndex(i);
-                var key1Value = key1?.GetValue();
-                var key2Value = key2?.GetValue();
+                SerializedProperty key2 = array.GetArrayElementAtIndex(i);
+                object key1Value = key1?.GetValue();
+                object key2Value = key2?.GetValue();
                 if (key1Value == null ? key2Value == null : key1Value.Equals(key2Value))
                     return true;
             }

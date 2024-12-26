@@ -17,7 +17,7 @@ namespace LTF.SerializedDictionary
         {
             _entries.Clear();
 
-            foreach (var pair in this)
+            foreach (KeyValuePair<TKey, TValue> pair in this)
                 _entries.Add(pair);
         }
 
@@ -25,9 +25,9 @@ namespace LTF.SerializedDictionary
         {
             Clear();
 
-            foreach (var entry in _entries)
+            foreach (Pair entry in _entries)
             {
-                var key = entry.Key;
+                TKey key = entry.Key;
                 if (ContainsKey(key))
                     key = key is string ? (TKey)(object)"" : default;
 
