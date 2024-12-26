@@ -9,8 +9,10 @@ using TMPro;
 
 public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    private static readonly Color sr_fadedColour = new(1f, 1f, 1f, .125f);
+
     [SerializeField] private PlaceableData _placeableData;
-    [SerializeField] private Image _image;
+    [SerializeField] private Image i_icon;
     [SerializeField] private Button _button;
     [SerializeField] private Image i_inputBackground;
     [SerializeField] private TextMeshProUGUI t_inputName;
@@ -61,6 +63,7 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void SetButtonInteractable(bool interactable)
     {
         _button.interactable = interactable;
+        i_icon.color = interactable ? Color.white : sr_fadedColour;
     }
 
     private void PressInput(InputAction.CallbackContext _)
