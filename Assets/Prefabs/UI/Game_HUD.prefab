@@ -1975,7 +1975,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -7628,13 +7628,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6456319167590790980, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456319167590790980, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_RaycastTarget
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Type
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151123923488536394, guid: 48934837c12a9e94088103121cae6529, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 4bfe8ce41ca63424ca944928877a4fea, type: 2}
     - target: {fileID: 8663312651400460043, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _resourceDescription
       value: 
