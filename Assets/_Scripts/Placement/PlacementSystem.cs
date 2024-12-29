@@ -82,11 +82,12 @@ public class PlacementSystem : MonoBehaviour
 
             _buildingToPlace.transform.localPosition = worldPos;
 
-            if (_buildingToPlace is not BeltPath || _buildingToPlace.SR.sprite == _straightBelt)
+            if (_buildingToPlace is not BeltPath belt || _buildingToPlace.SR.sprite == _straightBelt)
                 return;
 
             _buildingToPlace.SR.sprite = _straightBelt;
             _buildingToPlace.SR.flipY = false;
+            belt.SetArrowRotation(0f);
             _outDirection = _beltPathSystem.OppositeDirection(_inDirection);
 
             return;
