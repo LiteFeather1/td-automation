@@ -6451,7 +6451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
-      value: UI_Building_Button_Sawmill
+      value: UI_Building_Button_Circuit_Processor
       objectReference: {fileID: 0}
     - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: _placeableData
@@ -6749,7 +6749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
-      value: UI_Building_Button_Quarry
+      value: UI_Building_Button_Data_Collector
       objectReference: {fileID: 0}
     - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: _placeableData
@@ -7280,12 +7280,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _text
-      value: "<b>Wood</b>\nGatherable from <b>Trees</b> by left click on it \nor\nAutomated
-        with <b>Tree Cutters</b>"
+      value: "<b>Chip</b>\nGatherable from <b>Silicon_Nodes</b> by left click on
+        it \nor\nAutomated with <b>Chip_Collector</b>"
       objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
-      value: UI_Resource_Wood
+      value: UI_Resource_Chip
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7406,12 +7406,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _text
-      value: "<b>Metal Plate</b>\nProcessed resource made by suppling \n<b>Metal</b>
-        to a <b>Smelter</b>"
+      value: "<b>Processed_Data</b>\nProcessed resource made by suppling \n<b>Raw_Data</b>
+        to a <b>Data_Processor</b>"
       objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
-      value: UI_Resource_Metal_Plate
+      value: UI_Resource_Processed_Data
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7464,7 +7464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
-      value: UI_Building_Button_Smelter
+      value: UI_Building_Button_Data_Processor
       objectReference: {fileID: 0}
     - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: _placeableData
@@ -7693,13 +7693,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _text
-      value: '<b>Essence</b>
+      value: '<b>SegFault</b>
 
-        Automatically collected when killing enemies.'
+        Automatically collected when destroying <b>Bugs</b>.'
       objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
-      value: UI_Resource_Essence
+      value: UI_Resource_SegFault
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7820,12 +7820,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _text
-      value: "<b>Wood Plank</b>\nProcessed resource made by suppling \n<b>Wood</b>
-        to a <b>Sawmill</b>"
+      value: "<b>Circuit</b>\nProcessed resource made by suppling \n<b>Chip</b> to
+        a <b>Circuit_Processor</b>"
       objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
-      value: UI_Resource_Wood_Plank
+      value: UI_Resource_Circuit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7946,12 +7946,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675542983586623813, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: _text
-      value: "<b>Metal</b>\nGatherable from Stones by left click on it \nor\nAutomated
-        with Quarries"
+      value: "<b>Raw_Data</b>\nGatherable from <b>Data_Point</b> by left click on
+        it \nor\nAutomated with <b>Data_Collector</b>"
       objectReference: {fileID: 0}
     - target: {fileID: 8675605767387845957, guid: 48934837c12a9e94088103121cae6529, type: 3}
       propertyPath: m_Name
-      value: UI_Resource_Metal
+      value: UI_Resource_Raw_Data
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8165,7 +8165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741586433128463554, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: m_Name
-      value: UI_Building_Button_Tree_Cutter
+      value: UI_Building_Button_Chip_Collector
       objectReference: {fileID: 0}
     - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: _placeableData

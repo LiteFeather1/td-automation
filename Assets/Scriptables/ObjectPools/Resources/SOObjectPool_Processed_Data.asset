@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b32fb75d0e46484993b580cbafa94bc, type: 3}
-  m_Name: PlacebleData_Processor_Wood_Plank
+  m_Script: {fileID: 11500000, guid: 85c8b1b2a34d172448aeca3c8aff0ad4, type: 3}
+  m_Name: SOObjectPool_Processed_Data
   m_EditorClassIdentifier: 
-  _name: Sawmill
-  _resourcesCost:
-    _entries:
-    - Key: 100
-      Value: -40
-    - Key: 200
-      Value: -20
+  _objectPool:
+    _object: {fileID: 143309904664887199, guid: 72b76ec11d5a49840b4674007c8bb1f3, type: 3}
+    _initialPoolSize: 10

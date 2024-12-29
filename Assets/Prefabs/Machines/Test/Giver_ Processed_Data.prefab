@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 2599581948675358023}
   - component: {fileID: 6812179435623572066}
   m_Layer: 0
-  m_Name: Giver_Metal
+  m_Name: Giver_ Processed_Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
     _entries: []
   _sr: {fileID: 0}
   _timeToCollect: 1
-  _resourceToGive: {fileID: 143309904664887199, guid: 7c966538779186843abbb5dfc93c1c1d, type: 3}
+  _resourceToGive: {fileID: 143309904664887199, guid: 72b76ec11d5a49840b4674007c8bb1f3, type: 3}
 --- !u!212 &6812179435623572066
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
+  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 2599581948675358023}
   - component: {fileID: 6812179435623572066}
   m_Layer: 0
-  m_Name: Giver_Wood_Plank
+  m_Name: Giver_Chip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
     _entries: []
   _sr: {fileID: 0}
   _timeToCollect: 1
-  _resourceToGive: {fileID: 143309904664887199, guid: 228b6141f32a7544eb14f7b291d7ad28, type: 3}
+  _resourceToGive: {fileID: 143309904664887199, guid: 3418c8c033c0a1b4c8e24eed7d555af4, type: 3}
 --- !u!212 &6812179435623572066
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.8584906, g: 0.48610714, b: 0.1822268, a: 1}
+  m_Color: {r: 0.6132076, g: 0.40482643, b: 0.1533019, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

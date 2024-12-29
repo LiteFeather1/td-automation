@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b32fb75d0e46484993b580cbafa94bc, type: 3}
-  m_Name: PlacebleData_Collector_Metal
+  m_Name: PlacebleData_Collector_Chip
   m_EditorClassIdentifier: 
-  _name: Quarry
+  _name: Chip_Collector
   _resourcesCost:
     _entries:
     - Key: 100
-      Value: -15
-    - Key: 200
-      Value: -10
-  _buildingPrefab: {fileID: 8048112178887326767, guid: 1d1f6ede4ddc1924a86159294f069c41, type: 3}
+      Value: -20

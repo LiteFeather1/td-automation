@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField, TextArea] private string _text;
+    [SerializeField, TextArea(4, 4)] private string _text;
 
     public Action<string> OnHover { get; set; }
     public Action OnUnhover { get; set; }

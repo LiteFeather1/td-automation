@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 143309904664887199}
   - component: {fileID: 523709810410667934}
   m_Layer: 0
-  m_Name: Resource_Metal
+  m_Name: Resource_Chip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sr: {fileID: 523709810410667934}
-  _resourceType: 200
+  _resourceType: 100
 --- !u!212 &523709810410667934
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SortingLayerID: -185384135
   m_SortingLayer: 1
   m_SortingOrder: 100
-  m_Sprite: {fileID: -761103295, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
+  m_Sprite: {fileID: -1207890551, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

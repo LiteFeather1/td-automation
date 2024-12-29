@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1581077136699122721, guid: 585395a95e1795a4fa3976b0a07c6791, type: 3}
       propertyPath: _name
-      value: Rock
+      value: Data_Point
       objectReference: {fileID: 0}
     - target: {fileID: 1581077136699122721, guid: 585395a95e1795a4fa3976b0a07c6791, type: 3}
       propertyPath: _resourceToGive
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4144814548160614849, guid: 585395a95e1795a4fa3976b0a07c6791, type: 3}
       propertyPath: m_Name
-      value: Resource_Node_Metal Variant
+      value: Resource_Node_Data_Point Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8738769446728990972, guid: 585395a95e1795a4fa3976b0a07c6791, type: 3}
       propertyPath: m_LocalPosition.x

@@ -44,7 +44,7 @@ Material:
     - _Percent: 0.2
     - _Size: 0.33
     m_Colors:
-    - _Colour: {r: 2, g: 2, b: 2, a: 1}
+    - _Colour: {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7075556611971610875

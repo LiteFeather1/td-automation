@@ -267,7 +267,7 @@ public class GameManager : Singleton<GameManager>
     private void EnemyKilled()
     {
         _endScreen.AddEnemyKilled();
-        _factoryTower.AddResource(ResourceType.Essence);
+        _factoryTower.AddResource(ResourceType.SegFault);
     }
 
     private void WaveStarted()
