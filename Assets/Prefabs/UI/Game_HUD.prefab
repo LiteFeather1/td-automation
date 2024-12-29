@@ -6758,7 +6758,7 @@ PrefabInstance:
     - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: _buildingPrefab
       value: 
-      objectReference: {fileID: 4562916050523252488, guid: c1437922a6c7d0c41b80076e28f767b5, type: 3}
+      objectReference: {fileID: 8048112178887326767, guid: 1d1f6ede4ddc1924a86159294f069c41, type: 3}
     - target: {fileID: 7943467148808507552, guid: 940dfb797bcb2fb45b5d439d20c6ad94, type: 3}
       propertyPath: _pressInputAction.m_SingletonActionBindings.Array.data[0].m_Path
       value: <Keyboard>/5

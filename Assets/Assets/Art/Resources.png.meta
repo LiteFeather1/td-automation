@@ -93,11 +93,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Resource_Wood
+      name: Resource_Chip
       rect:
         serializedVersion: 2
         x: 0
@@ -119,7 +132,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resource_Wood_Plank
+      name: Resource_Circuit
       rect:
         serializedVersion: 2
         x: 512
@@ -141,7 +154,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resource_Metal
+      name: Resource_Raw_Data
       rect:
         serializedVersion: 2
         x: 0
@@ -163,7 +176,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Metal_Plate
+      name: Resource_Processed_Data
       rect:
         serializedVersion: 2
         x: 512
@@ -198,10 +211,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Resource_Metal: -761103295
-      Resource_Wood: -1207890551
-      Resource_Wood_Plank: -1222598112
-      Resources_Metal_Plate: 1719173421
+      Resource_Chip: -1207890551
+      Resource_Circuit: -1222598112
+      Resource_Processed_Data: 1719173421
+      Resource_Raw_Data: -761103295
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
