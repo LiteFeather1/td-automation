@@ -46,7 +46,7 @@ public class GameHUD : MonoBehaviour
     public Button IncreaseSpeedButton => b_increaseSpeed;
     public Button DecreaseSpeedButton => b_decreaseSpeed;
 
-    internal void OnEnable()
+    private void OnEnable()
     {
         SubscribeToUIHover(_towerCount);
 
@@ -68,7 +68,7 @@ public class GameHUD : MonoBehaviour
         }
     }
 
-    internal void Update()
+    private void Update()
     {
         if (_hoverBuildingInfo.gameObject.activeSelf)
         {
@@ -76,7 +76,7 @@ public class GameHUD : MonoBehaviour
         }
     }
 
-    internal void OnDisable()
+    private void OnDisable()
     {
         UnsubscribeToUIHover(_towerCount);
 
@@ -144,9 +144,10 @@ public class GameHUD : MonoBehaviour
         t_timeToWave.text = text;
     }
 
-    public void UpdatePlayerHealth(float _, IDamageable damageable)
+    public void UpdatePlayerHealth(float t, Color colour)
     {
-        i_playerHealth.fillAmount = damageable.HP / damageable.MaxHP;
+        i_playerHealth.fillAmount = t;
+        i_playerHealth.color = colour;
     }
 
     public void SetTowerCount(int count)

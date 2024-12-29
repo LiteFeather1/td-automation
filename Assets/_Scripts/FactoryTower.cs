@@ -25,6 +25,8 @@ public class FactoryTower : MonoBehaviour
     public Action<Dictionary<ResourceType, int>> OnResourcesModified { get; set; }
     public Action<Dictionary<ResourceType, int>> OnResourcesRefundAdded { get; set; }
 
+    public Action<float, Color> OnDamaged { get; set; }
+
     public Health Health => _health;
 
     public Receiver[] Receivers => _receivers;
@@ -41,7 +43,7 @@ public class FactoryTower : MonoBehaviour
             foreach (KeyValuePair<ResourceType, int> cost in tower.Data.ResourcesCost)
                 r_resources[cost.Key] -= cost.Value;
 
-        SetGradient(1f);
+        SetGradient(1f, _topColour);
     }
 
     public void OnEnable()
@@ -110,9 +112,9 @@ public class FactoryTower : MonoBehaviour
         return true;
     }
 
-    private void SetGradient(float t)
+    private void SetGradient(float t, Color colour)
     {
-        _sr.material.SetColor(sr_midColourID, Color.Lerp(_botColour, _topColour, t));
+        _sr.material.SetColor(sr_midColourID, colour);
 
         const float MAX_INFLUENCE = .5f;
         float topInfluence = Helpers.Map(t, 1f, 0f, MAX_INFLUENCE, 0f);
@@ -122,7 +124,10 @@ public class FactoryTower : MonoBehaviour
 
     private void DamageTaken(float _, IDamageable __)
     {
-        SetGradient(_health.HP / _health.MaxHP);
+        float t = _health.HP / _health.MaxHP;
+        Color colour = Color.Lerp(_botColour, _topColour, t);
+        SetGradient(t, colour);
+        OnDamaged?.Invoke(t, colour);
     }
 
     private void Died()

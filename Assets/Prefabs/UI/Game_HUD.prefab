@@ -3834,7 +3834,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tower HP
+  m_text: Base HP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 32a544e4bc804c34ebc15cd1f653406e, type: 2}
   m_sharedMaterial: {fileID: 6271075037043380842, guid: 32a544e4bc804c34ebc15cd1f653406e, type: 2}
@@ -4778,7 +4778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.23527974, g: 0.509434, b: 0.14658241, a: 1}
+  m_Color: {r: 0.003921569, g: 0.8039216, b: 0.99607843, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

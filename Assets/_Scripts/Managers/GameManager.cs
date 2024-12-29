@@ -56,8 +56,7 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.OnResourcesModified += _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.OnResourceAdded += _endScreen.AddResource;
         _factoryTower.OnResourcesRefundAdded += _endScreen.AddResources;
-        _factoryTower.Health.OnDamageTaken += _gameHUD.UpdatePlayerHealth;
-        _factoryTower.Health.OnHealed += _gameHUD.UpdatePlayerHealth;
+        _factoryTower.OnDamaged += _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnDied += GameEnded;
 
         _gameHUD.IncreaseSpeedButton.onClick.AddListener(IncreaseGameSpeed);
@@ -138,8 +137,7 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.OnResourcesModified -= _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.OnResourceAdded -= _endScreen.AddResource;
         _factoryTower.OnResourcesRefundAdded -= _endScreen.AddResources;
-        _factoryTower.Health.OnDamageTaken -= _gameHUD.UpdatePlayerHealth;
-        _factoryTower.Health.OnHealed -= _gameHUD.UpdatePlayerHealth;
+        _factoryTower.OnDamaged -= _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnDied -= GameEnded;
 
         _gameHUD.IncreaseSpeedButton.onClick.RemoveListener(IncreaseGameSpeed);
