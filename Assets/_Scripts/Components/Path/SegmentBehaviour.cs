@@ -17,13 +17,15 @@ public class SegmentBehaviour : MonoBehaviour, ISegment
             _segment.Points.Add(point.position);
         }
     }
+
 #if UNITY_EDITOR
     public void OnDrawGizmosSelected()
     {
         if (_points.Length == 0)
             return;
 
-        for (int i = 0; i < _points.Length - 1; i++)
+        int length = _points.Length - 1;
+        for (int i = 0; i < length; i++)
         {
             if (_points[i] == null || _points[i + 1] == null)
                 continue;
@@ -33,6 +35,16 @@ public class SegmentBehaviour : MonoBehaviour, ISegment
             Gizmos.DrawLine(_points[i].position, midPoint);
             Gizmos.color = Color.white;
             Gizmos.DrawLine(midPoint, _points[i + 1].position);
+
+            DrawPoint(_points[i]);
+        }
+
+        DrawPoint(_points[_points.Length - 1]);
+
+        static void DrawPoint(Transform point)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawSphere(point.position, .333f);
         }
     }
 #endif

@@ -44,6 +44,7 @@ public class Portal : MonoBehaviour
         _currentEnemyGroup = 0;
     }
 
+#if UNITY_EDITOR
     public void OnDrawGizmosSelected()
     {
         foreach (SegmentBehaviour segment in _path.Segments)
@@ -54,6 +55,7 @@ public class Portal : MonoBehaviour
             segment.OnDrawGizmosSelected();
         }
     }
+#endif
 
     [Serializable]
     public class Stage
