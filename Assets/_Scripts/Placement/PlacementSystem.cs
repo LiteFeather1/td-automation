@@ -107,9 +107,9 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    public void SetPlaceable(PlaceableData placeableData)
+    public void SetPlaceable(Building prefab)
     {
-        _buildingPrefab = placeableData.BuildingPrefab;
+        _buildingPrefab = prefab;
         _tileHighlightRenderer.transform.localScale = new(1.5f, 1.5f, 1f);
 
         if (_buildingToPlace != null)

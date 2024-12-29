@@ -116,7 +116,7 @@ public class GameHUD : MonoBehaviour
         foreach (UIBuildingButton button in _uiBuildingButtons)
         {
             bool next = false;
-            foreach (KeyValuePair<ResourceType, int> pair in button.ResourceCost)
+            foreach (KeyValuePair<ResourceType, int> pair in button.Building.Data.ResourcesCost)
             {
                 if (resources[pair.Key] < -pair.Value)
                 {
@@ -198,11 +198,11 @@ public class GameHUD : MonoBehaviour
             buildingRect.position.y
         );
 
-        t_hoverBuildingInfoName.text = buildingButton.PlaceableData.Name;
+        t_hoverBuildingInfoName.text = buildingButton.Building.Data.Name;
 
         foreach (KeyValuePair<ResourceType, HoverBuildingCost> resourceType in _hoverInfoCost)
         {
-            bool hasResource = buildingButton.PlaceableData.BuildingPrefab.ResourceCost.
+            bool hasResource = buildingButton.Building.Data.ResourcesCost.
                 TryGetValue(resourceType.Key, out int cost);
             resourceType.Value.Root.SetActive(hasResource);
 

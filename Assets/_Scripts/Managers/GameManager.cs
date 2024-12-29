@@ -248,15 +248,15 @@ public class GameManager : Singleton<GameManager>
             _gameHUD.SetTowerCount(++_towerCount);
         }
 
-        _factoryTower.RemoveResources(building.ResourceCost);
+        _factoryTower.RemoveResources(building.Data.ResourcesCost);
 
-        if (!_factoryTower.HasEnoughResourceToBuild(building.ResourceCost))
+        if (!_factoryTower.HasEnoughResourceToBuild(building.Data.ResourcesCost))
             _placementSystem.UnselectBuildingBuilding();
     }
 
     public void BuildingRemoved(Building building)
     {
-        _factoryTower.BuildingRefund(building.ResourceCost);
+        _factoryTower.BuildingRefund(building.Data.ResourcesCost);
 
         if (building is Tower)
         {

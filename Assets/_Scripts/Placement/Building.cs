@@ -5,6 +5,7 @@ using LTF.SerializedDictionary;
 public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
 {
     [Header("Building")]
+    [SerializeField] private PlaceableData _data;
     [SerializeField] private string _name;
     [SerializeField] private SerializedDictionary<ResourceType, int> _resourcesCost;
     [SerializeField] protected SpriteRenderer _sr;
@@ -15,9 +16,7 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
     public abstract bool CanBeRotated { get; }
     public abstract bool CanBeDestroyed { get; }
 
-    public string Name => _name;
-
-    public SerializedDictionary<ResourceType, int> ResourceCost => _resourcesCost;
+    public PlaceableData Data => _data;
 
     public SpriteRenderer SR => _sr;
 

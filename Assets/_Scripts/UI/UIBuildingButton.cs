@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -11,7 +10,7 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 {
     private static readonly Color sr_fadedColour = new(1f, 1f, 1f, .125f);
 
-    [SerializeField] private PlaceableData _placeableData;
+    [SerializeField] private Building _buildingPrefab;
     [SerializeField] private Image i_icon;
     [SerializeField] private Button _button;
     [SerializeField] private Image i_inputBackground;
@@ -19,12 +18,11 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     [SerializeField] private InputAction _pressInputAction;
 
-    public Action<PlaceableData> OnButtonPressed { get; set; }
+    public Action<Building> OnButtonPressed { get; set; }
     public Action<UIBuildingButton> OnButtonHovered { get; set; }
     public Action OnButtonUnhovered { get; set; }
 
-    public PlaceableData PlaceableData => _placeableData;
-    public Dictionary<ResourceType, int> ResourceCost => _placeableData.BuildingPrefab.ResourceCost;
+    public Building Building => _buildingPrefab;
 
     internal void OnEnable()
     {
@@ -47,7 +45,7 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void B_ButtonPressed()
     {
-        OnButtonPressed?.Invoke(_placeableData);
+        OnButtonPressed?.Invoke(_buildingPrefab);
     }
 
     public void OnPointerEnter(PointerEventData _)
@@ -69,6 +67,6 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void PressInput(InputAction.CallbackContext _)
     {
         if (_button.interactable)
-            OnButtonPressed?.Invoke(_placeableData);
+            OnButtonPressed?.Invoke(_buildingPrefab);
     }
 }

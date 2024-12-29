@@ -38,7 +38,7 @@ public class FactoryTower : MonoBehaviour
             r_resources.Add(type, 0);
 
         foreach (Tower tower in _starterTowers)
-            foreach (KeyValuePair<ResourceType, int> cost in tower.ResourceCost)
+            foreach (KeyValuePair<ResourceType, int> cost in tower.Data.ResourcesCost)
                 r_resources[cost.Key] -= cost.Value;
 
         SetGradient(1f);
