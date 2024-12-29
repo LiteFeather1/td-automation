@@ -49,9 +49,9 @@ Material:
     - _Strength: 1
     - _TopInfluence: 0.5
     m_Colors:
-    - _BotColour: {r: 0.5803921, g: 0.08627448, b: 0.49803913, a: 1}
-    - _MiddleColour: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
-    - _TopColour: {r: 0.9764706, g: 0.6745098, b: 0.3254902, a: 1}
+    - _BotColour: {r: 0.9137255, g: 0.20392157, b: 0.4745098, a: 1}
+    - _MiddleColour: {r: 0.003921569, g: 0.8039216, b: 0.99607843, a: 1}
+    - _TopColour: {r: 0.003921569, g: 0.8039216, b: 0.99607843, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6731443122585880863
