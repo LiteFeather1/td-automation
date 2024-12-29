@@ -261,7 +261,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3743199868370559443, guid: 30b85e1313cdb724bbdffc1b9c52a4f4, type: 3}
       propertyPath: m_Name
-      value: Receiver_1
+      value: Receiver_Port_1
       objectReference: {fileID: 0}
     - target: {fileID: 9117691547107622009, guid: 30b85e1313cdb724bbdffc1b9c52a4f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -338,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3743199868370559443, guid: 30b85e1313cdb724bbdffc1b9c52a4f4, type: 3}
       propertyPath: m_Name
-      value: Receiver
+      value: Receiver_Port
       objectReference: {fileID: 0}
     - target: {fileID: 9117691547107622009, guid: 30b85e1313cdb724bbdffc1b9c52a4f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -411,7 +411,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3743199868370559443, guid: 30b85e1313cdb724bbdffc1b9c52a4f4, type: 3}
       propertyPath: m_Name
-      value: Receiver_2
+      value: Receiver_Port_2
       objectReference: {fileID: 0}
     - target: {fileID: 9117691547107622009, guid: 30b85e1313cdb724bbdffc1b9c52a4f4, type: 3}
       propertyPath: m_LocalPosition.x

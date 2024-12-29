@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3105417220027485835}
   - component: {fileID: 2111581275000110495}
   m_Layer: 0
-  m_Name: Receiver
+  m_Name: Receiver_Port
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
