@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22912beb9ea7c149be8f6a38f847dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: f6a263f365924c64cb1559429dfb08db, type: 2}
   _name: Splitter
   _resourcesCost:
     _entries:

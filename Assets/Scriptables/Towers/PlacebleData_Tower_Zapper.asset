@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b32fb75d0e46484993b580cbafa94bc, type: 3}
   m_Name: PlacebleData_Tower_Zapper
   m_EditorClassIdentifier: 
-  _description: 
-  _icon: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  _buildingPrefab: {fileID: 8953137246625728244, guid: fb161a70bc2c8214eb7be09d3c1eaa1e, type: 3}
+  _name: Zapper
+  _resourcesCost:
+    _entries:
+    - Key: 300
+      Value: -20
+    - Key: 400
+      Value: -20
+    - Key: 500
+      Value: -20

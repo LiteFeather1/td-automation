@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b32fb75d0e46484993b580cbafa94bc, type: 3}
   m_Name: PlacebleData_Merger
   m_EditorClassIdentifier: 
-  _description: 
-  _icon: {fileID: 21300000, guid: a1e28edd38fb1af4db64b2288864f41a, type: 3}
+  _name: Merger
+  _resourcesCost:
+    _entries:
+    - Key: 100
+      Value: -8
+    - Key: 200
+      Value: -4
   _buildingPrefab: {fileID: 3232038384400585206, guid: 89a26156373c40f4aa67da013b686cbd, type: 3}

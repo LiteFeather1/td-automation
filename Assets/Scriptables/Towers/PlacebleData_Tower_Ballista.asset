@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: PlacebleData_Tower_Ballista
   m_EditorClassIdentifier: 
   _name: Ballista
-  _description: 
-  _icon: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  _buildingPrefab: {fileID: 5105425056373330437, guid: c1ee0e566acc80545973244395a69548, type: 3}
+  _resourcesCost:
+    _entries:
+    - Key: 100
+      Value: -40
+    - Key: 200
+      Value: -20

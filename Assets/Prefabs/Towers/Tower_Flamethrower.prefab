@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 059adf43c460a5b4fb0f66e0589bb88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 1c07f4e04af3225498bf1550863bddb9, type: 2}
   _name: Flamethrower
   _resourcesCost:
     _entries:

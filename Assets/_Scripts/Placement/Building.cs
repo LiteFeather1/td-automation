@@ -1,13 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using LTF.SerializedDictionary;
 
 public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
 {
     [Header("Building")]
     [SerializeField] private PlaceableData _data;
-    [SerializeField] private string _name;
-    [SerializeField] private SerializedDictionary<ResourceType, int> _resourcesCost;
     [SerializeField] protected SpriteRenderer _sr;
 
     public Action<Vector2Int> OnDestroyed { get; set; }
@@ -28,7 +25,7 @@ public abstract class Building : MonoBehaviour, IPlaceable, IHoverable
         Destroy(gameObject);
     }
 
-    public string GetText() => _name;
+    public string GetText() => _data.Name;
 
     public virtual void Hover() { }
 

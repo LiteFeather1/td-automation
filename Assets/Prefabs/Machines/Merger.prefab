@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6186d205306826447af83b6d3480273f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: bd5f70b3d447e3b409cb47fc18fdd7f1, type: 2}
   _name: Merger
   _resourcesCost:
     _entries:

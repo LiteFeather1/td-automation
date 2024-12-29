@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: PlacebleData_Processor_Wood_Plank
   m_EditorClassIdentifier: 
   _name: Sawmill
-  _description: 
-  _icon: {fileID: 21300000, guid: 000c8df9cbea2d44781340465fd0dcd8, type: 3}
-  _buildingPrefab: {fileID: 1411145097863767826, guid: 59902d427facdff498ea9113477b1788, type: 3}
+  _resourcesCost:
+    _entries:
+    - Key: 100
+      Value: -40
+    - Key: 200
+      Value: -20

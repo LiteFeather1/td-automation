@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb8e7bd957ea6f4f9d07970dc324963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 39a24266a0f51a74dbfc9bb131652c57, type: 2}
   _name: Peashooter
   _resourcesCost:
     _entries:

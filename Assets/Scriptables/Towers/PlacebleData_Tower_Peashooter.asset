@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlacebleData_Tower_Peashooter
   m_EditorClassIdentifier: 
   _name: Peashooter
-  _description: 
-  _icon: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  _buildingPrefab: {fileID: 5105425056373330437, guid: 39ee71e38c85a574e9f79a36c9d59c11, type: 3}
+  _resourcesCost:
+    _entries:
+    - Key: 100
+      Value: -40

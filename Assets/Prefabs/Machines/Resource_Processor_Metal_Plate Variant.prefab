@@ -53,6 +53,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9122423759337509587, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: c111fb7f5815fb34a95c5c7e58c4fa1f, type: 2}
+    - target: {fileID: 9122423759337509587, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
       propertyPath: _name
       value: Smelter
       objectReference: {fileID: 0}

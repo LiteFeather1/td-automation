@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82950ebfa60878a4bb78ccb02942e9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 81c1efa4ddb11424d92f58e9f13dc550, type: 2}
   _name: Belt
   _resourcesCost:
     _entries:

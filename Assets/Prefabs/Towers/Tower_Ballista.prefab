@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb8e7bd957ea6f4f9d07970dc324963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 2e87a851768db5c44b115a227cf91529, type: 2}
   _name: Ballista
   _resourcesCost:
     _entries:
