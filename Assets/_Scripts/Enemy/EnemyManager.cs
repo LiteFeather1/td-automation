@@ -9,6 +9,7 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private LullStages[] _lullStages;
     [SerializeField] private Portal[] _portals;
     [SerializeField] private SerializedDictionary<int, SOObjectPoolEnemy> _enemiesObjectPools;
+    [SerializeField] private ObjectPool<ParticleStoppedCallback> _enemyHitParticlePool;
     private int _currentStage;
     private bool _waveInProgress;
     private readonly List<Enemy> _enemies = new();
@@ -41,6 +42,9 @@ public class EnemyManager : Singleton<EnemyManager>
             objectPool.ObjectCreated += EnemyCreated;
             objectPool.InitPool();
         }
+
+        _enemyHitParticlePool.ObjectCreated += HitParticleCreated;
+        _enemyHitParticlePool.InitPool();
     }
 
     private void Start()
@@ -48,7 +52,7 @@ public class EnemyManager : Singleton<EnemyManager>
         _lullSpawnTime = _lullStages[_currentStage].LullSpawnTime;
     }
 
-    public void Update()
+    private void Update()
     {
         _elapsedTime += Time.deltaTime;
         float currentLullDuration = _lullStages[_currentStage].LullDuration;
@@ -81,9 +85,18 @@ public class EnemyManager : Singleton<EnemyManager>
 
             SpawnEnemy(portal, portal.GetEnemy(_currentStage));
         }
+
+        void SpawnEnemy(Portal portal, Enemy enemy)
+        {
+            enemy.transform.position = portal.transform.position;
+            enemy.ResetIt();
+            enemy.PathFollow.SetPath(portal.Path);
+            enemy.gameObject.SetActive(true);
+            _enemies.Add(enemy);
+        }
     }
 
-    public void OnDisable()
+    private void OnDisable()
     {
         foreach (SOObjectPoolEnemy pool in _enemiesObjectPools.Values)
         {
@@ -91,16 +104,21 @@ public class EnemyManager : Singleton<EnemyManager>
 
             foreach (Enemy enemy in pool.ObjectPool.Objects)
             {
+                enemy.OnDamaged -= EnemyDamaged;
                 enemy.OnDied -= EnemyDied;
                 enemy.OnPathReached -= EnemyReachedPathEnd;
             }
 
             pool.ObjectPool.Dispose();
         }
+
+        _enemyHitParticlePool.ObjectCreated -= HitParticleCreated;
+        _enemyHitParticlePool.Dispose();
     }
 
     private void EnemyCreated(Enemy enemy)
     {
+        enemy.OnDamaged += EnemyDamaged;
         enemy.OnDied += EnemyDied;
         enemy.OnPathReached += EnemyReachedPathEnd;
     }
@@ -149,13 +167,22 @@ public class EnemyManager : Singleton<EnemyManager>
         RemoveEnemy(enemy);
     }
 
-    private void SpawnEnemy(Portal portal, Enemy enemy)
+    private void HitParticleCreated(ParticleStoppedCallback psHit)
     {
-        enemy.transform.position = portal.transform.position;
-        enemy.ResetIt();
-        enemy.PathFollow.SetPath(portal.Path);
-        enemy.gameObject.SetActive(true);
-        _enemies.Add(enemy);
+        psHit.OnStopped += ReturnHitParticle;
+
+        void ReturnHitParticle(ParticleStoppedCallback psHit)
+        {
+            psHit.gameObject.SetActive(false);
+            _enemyHitParticlePool.ReturnObject(psHit);
+        }
+    }
+
+    private void EnemyDamaged(Enemy enemy)
+    {
+        ParticleStoppedCallback ps = _enemyHitParticlePool.GetObject();
+        ps.transform.position = enemy.transform.position;
+        ps.gameObject.SetActive(true);
     }
 
     [Serializable]

@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private PathFollow _pathFollow;
     [SerializeField] private HitFlash _hitFlash;
 
+    public Action<Enemy> OnDamaged { get; set; }
     public Action<Enemy> OnDied { get; set; }
     public Action<Enemy> OnPathReached { get; set; }
 
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
     private void DamageTaken(float _, IDamageable __)
     {
         _hitFlash.DoFlash();
+        OnDamaged?.Invoke(this);
     }
 
     private void PathFinished()

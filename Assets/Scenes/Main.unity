@@ -71424,6 +71424,9 @@ MonoBehaviour:
       Value: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
     - Key: 3
       Value: {fileID: 11400000, guid: 617907a320359ec4ab1d91ceebc34026, type: 2}
+  _enemyHitParticlePool:
+    _object: {fileID: 6997331626645399421, guid: 9a9c0bf8b2993ee47bb0a18ef4bb1cf6, type: 3}
+    _initialPoolSize: 10
 --- !u!1 &2114138637
 GameObject:
   m_ObjectHideFlags: 0
