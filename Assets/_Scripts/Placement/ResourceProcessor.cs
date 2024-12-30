@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class ResourceProcessor : InPort, IOutPort
 {
+    private const float MAX_FILL = 2f;
+
+    private static readonly int sr_fillID = Shader.PropertyToID("_Fill");
+
     [Header("Resource Processor")]
     [SerializeField] private ResourceType _resourceType;
     [SerializeField] private SOObjectPoolResourceBehaviour _processedBehaviourPool;
@@ -32,12 +36,14 @@ public class ResourceProcessor : InPort, IOutPort
                 _port.ReceiveResource(_resource);
                 _resource = null;
                 _hasProcessedResource = false;
+                SetFill(0f);
             }
 
             return;
         }
 
         _elapsedTime += Time.deltaTime;
+        SetFill(Mathf.Min(MAX_FILL, _elapsedTime / _timeToProcessResource * MAX_FILL));
         if (_elapsedTime < _timeToProcessResource)
             return;
 
@@ -48,6 +54,11 @@ public class ResourceProcessor : InPort, IOutPort
         _resource.transform.position = transform.position;
         _resource.gameObject.SetActive(true);
         _hasProcessedResource = true;
+
+        void SetFill(float t)
+        {
+            _sr.material.SetFloat(sr_fillID, t);
+        }
     }
 
     public void SetPort(IInPort inPort)

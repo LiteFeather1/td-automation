@@ -72242,6 +72242,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6862249039288848794, guid: 29087eaf1f1792a4dbbcd464f4d8385f, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7073062537406835494, guid: 29087eaf1f1792a4dbbcd464f4d8385f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

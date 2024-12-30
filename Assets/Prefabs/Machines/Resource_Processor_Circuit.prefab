@@ -13,12 +13,48 @@ PrefabInstance:
       value: 0.6313726
       objectReference: {fileID: 0}
     - target: {fileID: 1071597396686366608, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1071597396686366608, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.r
+      value: 0.019607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752233656721361824, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752233656721361824, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752233656721361824, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.r
+      value: 0.019607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543244002560946342, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543244002560946342, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
       propertyPath: m_Color.r
       value: 0.019607844
       objectReference: {fileID: 0}
     - target: {fileID: 7709259568592947729, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
       propertyPath: m_Name
       value: Resource_Processor_Circuit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795450690988009607, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795450690988009607, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795450690988009607, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
+      propertyPath: m_Color.r
+      value: 0.019607844
       objectReference: {fileID: 0}
     - target: {fileID: 9109719065164573165, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
       propertyPath: m_LocalPosition.x
