@@ -3,10 +3,21 @@ using UnityEngine;
 
 public class ResourceNode : MonoBehaviour, IHoverable
 {
+    private const float MIN_SIZE = 0.1f;
+
+    private static readonly int sr_size = Shader.PropertyToID("_Size");
+
     [SerializeField] private string _name;
-    [SerializeField] private Vector2Int _position;
-    [SerializeField] private SOObjectPoolResourceBehaviour _resourceToGivePool;
     [SerializeField] private int _timesThatCanBeCollect = 256;
+    private int _collectedTimes;
+
+    [SerializeField] private Vector2Int _position;
+
+    [Space]
+    [SerializeField] private SOObjectPoolResourceBehaviour _resourceToGivePool;
+
+    [Space]
+    [SerializeField] private SpriteRenderer _sr;
 
     public ResourceType Type => _resourceToGivePool.ObjectPool.Object.Type;
 
@@ -28,9 +39,12 @@ public class ResourceNode : MonoBehaviour, IHoverable
 
     private void RemoveTime()
     {
-        _timesThatCanBeCollect--;
+        _collectedTimes++;
+        _sr.material.SetFloat(sr_size, Mathf.Lerp(
+            MIN_SIZE, transform.localScale.y - MIN_SIZE, 1f - _collectedTimes / (float)_timesThatCanBeCollect
+        ));
 
-        if (_timesThatCanBeCollect == 0)
+        if (_collectedTimes == _timesThatCanBeCollect)
         {
             OnDepleted?.Invoke(this);
             Destroy(gameObject);
@@ -39,16 +53,10 @@ public class ResourceNode : MonoBehaviour, IHoverable
 
     public string GetText()
     {
-        return $"{_name}\n{_timesThatCanBeCollect:000}";
+        return $"{_name}\n{_timesThatCanBeCollect - _collectedTimes:000}";
     }
 
-    public void Hover()
-    {
+    public void Hover() { }
 
-    }
-
-    public void Unhover()
-    {
-
-    }
+    public void Unhover() {}
 }

@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Percent: 0.2
-    - _Size: 0.33
+    - _Size: 0.8
     m_Colors:
     - _Colour: {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 1}
   m_BuildTextureStacks: []
