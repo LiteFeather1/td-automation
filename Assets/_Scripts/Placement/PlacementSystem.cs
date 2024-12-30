@@ -137,7 +137,11 @@ public class PlacementSystem : MonoBehaviour
             if (_resourceNodes.TryGetValue(_mousePos, out ResourceNode node))
             {
                 OnResourceCollected?.Invoke(node.GetResource());
-                OnHoverableHovered?.Invoke(_currentHoverable);
+
+                if (!node.Depleted)
+                    OnHoverableHovered?.Invoke(_currentHoverable);
+                else
+                    UnhoverHoverable();
             }
 
             return;
@@ -230,7 +234,7 @@ public class PlacementSystem : MonoBehaviour
             r_hoverables.Remove(_mousePos);
 
             building.Destroy();
-            UnhoverResource();
+            UnhoverHoverable();
 
             OnBuildingRemoved?.Invoke(building);
             _beltPathSystem.TryRemovePosition(building.Position);
@@ -289,7 +293,7 @@ public class PlacementSystem : MonoBehaviour
         };
     }
 
-    public void UnhoverResource()
+    public void UnhoverHoverable()
     {
         OnHoverableUnhovered?.Invoke();
         _currentHoverable?.Unhover();
@@ -300,6 +304,7 @@ public class PlacementSystem : MonoBehaviour
     {
         node.OnDepleted -= ResourceDepleted;
         _resourceNodes.Remove(node.Position);
+        r_hoverables.Remove(node.Position);
     }
 
     private void SetCanPlaceBuilding(Vector3Int worldPos)
@@ -328,7 +333,7 @@ public class PlacementSystem : MonoBehaviour
         }
         else if (_currentHoverable != null)
         {
-            UnhoverResource();
+            UnhoverHoverable();
         }
     }
 

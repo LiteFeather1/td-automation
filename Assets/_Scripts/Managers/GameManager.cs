@@ -227,7 +227,7 @@ public class GameManager : Singleton<GameManager>
             Time.timeScale = 0f;
             InputManager.Instance.InputSystem.Player.Disable();
             _pauseScreen.SetContentState(true);
-            _placementSystem.UnhoverResource();
+            _placementSystem.UnhoverHoverable();
         }
     }
 

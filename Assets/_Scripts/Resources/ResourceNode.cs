@@ -25,6 +25,8 @@ public class ResourceNode : MonoBehaviour, IHoverable
 
     public Vector2Int Position { get => _position; set => _position = value; }
 
+    public bool Depleted => _collectedTimes == _timesThatCanBeCollect;
+
     public ResourceType GetResource()
     {
         RemoveTime();
@@ -44,7 +46,7 @@ public class ResourceNode : MonoBehaviour, IHoverable
             MIN_SIZE, transform.localScale.y - MIN_SIZE, 1f - _collectedTimes / (float)_timesThatCanBeCollect
         ));
 
-        if (_collectedTimes == _timesThatCanBeCollect)
+        if (Depleted)
         {
             OnDepleted?.Invoke(this);
             Destroy(gameObject);
