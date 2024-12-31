@@ -346,4 +346,7 @@ MonoBehaviour:
   _damage: 20
   _damageRate: 5
   _head: {fileID: 4763425209474587197}
+  _rotationArc: 360
+  _rotationSpeed: 1.57
+  _stopDuration: 1
   _multiplierPerEnemyInRange: 0.25

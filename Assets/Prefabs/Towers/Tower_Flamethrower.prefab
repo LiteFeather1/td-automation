@@ -173,6 +173,9 @@ MonoBehaviour:
   _damage: 1.5
   _damageRate: 0.2
   _head: {fileID: 3304314266657821397}
+  _rotationArc: 30
+  _rotationSpeed: 0.7849999
+  _stopDuration: 0.75
   _fireDamageRadius: 2
   _fireDamagePercetage: 0.33
   _ps: {fileID: 5996509270715192868}

@@ -141,6 +141,9 @@ MonoBehaviour:
   _damage: 3
   _damageRate: 1
   _head: {fileID: 8793221537690332159}
+  _rotationArc: 30
+  _rotationSpeed: 2.093333
+  _stopDuration: 0.75
   _line: {fileID: 6484567382767351699}
   _firePoint: {fileID: 586065225589052559}
 --- !u!1 &2257692685330191918
