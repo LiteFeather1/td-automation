@@ -8,6 +8,7 @@ public class ZapEffectManager : Singleton<ZapEffectManager>
     [SerializeField] private Vector2Int _zapUpdatesRange = new(4, 6);
     [SerializeField] private Vector2 _zapSegmentLengthRange = new(1f, 1.5f);
     [SerializeField] private Vector2 _zapSegmentOffsetRange = new(.333f, .666f);
+    [SerializeField] private Color[] _colours = new Color[2] { Color.white, Color.cyan };
 
     private void Start()
     {
@@ -48,6 +49,9 @@ public class ZapEffectManager : Singleton<ZapEffectManager>
                 for (int j = 0; j < length; j++)
                 {
                     LineRenderer line = lines[j];
+                    var colour = _colours[Random.Range(0, _colours.Length)];
+                    line.startColor = colour;
+                    line.endColor = colour;
                     int pointCount = line.positionCount;
                     for (int k = 1; k < pointCount - 1; k++)
                     {
@@ -76,25 +80,25 @@ public class ZapEffectManager : Singleton<ZapEffectManager>
     }
 
 #region Test
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.T))
-    //     {
-    //         Test();
-    //     }
-    // }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Test();
+        }
+    }
 
-    // [ContextMenu("Test")]
-    // private void Test()
-    // {
-    //     Vector2[] positions = new Vector2[8];
-    //     for (var i = 0; i < positions.Length; i++)
-    //         positions[i] = new(
-    //             Random.value * 5f * (Random.value >= .5f ? 1f : -1f),
-    //             Random.value * 5f * (Random.value >= .5f ? 1f : -1f)
-    //         );
+    [ContextMenu("Test")]
+    private void Test()
+    {
+        Vector2[] positions = new Vector2[8];
+        for (var i = 0; i < positions.Length; i++)
+            positions[i] = new(
+                Random.value * 5f * (Random.value >= .5f ? 1f : -1f),
+                Random.value * 5f * (Random.value >= .5f ? 1f : -1f)
+            );
 
-    //     LightningEffect(transform.position, positions);
-    // }
+        ZapEffect(transform.position, positions);
+    }
 #endregion
 }
