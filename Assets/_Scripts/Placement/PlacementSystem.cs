@@ -178,6 +178,12 @@ public class PlacementSystem : MonoBehaviour
             }
         }
 
+        _tileHighlightRenderer.color = _notPlaceableHighlight;
+        _highlightNotPlaceable.enabled = true;
+        _canPlaceBuilding = false;
+
+        _buildingToPlace.enabled = true;
+
         Vector3 position = _buildingToPlace.transform.position;
         Quaternion rotation;
         if (_buildingToPlace is BeltPath)
@@ -190,14 +196,10 @@ public class PlacementSystem : MonoBehaviour
             rotation = _buildingToPlace.transform.rotation;
         }
 
-        _tileHighlightRenderer.color = _notPlaceableHighlight;
-        _highlightNotPlaceable.enabled = true;
-        _canPlaceBuilding = false;
-
-        _buildingToPlace.enabled = true;
         AddBuilding(_buildingToPlace);
 
-        InstantiateBuilding(position, rotation);
+        if (_buildingPrefab != null)
+            InstantiateBuilding(position, rotation);
     }
 
     public void UnselectBuildingBuilding()
@@ -214,7 +216,7 @@ public class PlacementSystem : MonoBehaviour
 
         TryGetHoverable(_mousePos);
 
-        Destroy(_buildingToPlace.gameObject);
+        _buildingToPlace = null;
         _buildingPrefab = null;
     }
 
