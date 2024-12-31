@@ -39,12 +39,9 @@ public class ObjectPool<T> : IDisposable where T : Component
         if (_poolParent != null)
             return;
 
-        string name = _object.name;
-
-        _poolParent = new GameObject($"Pool_{name}").transform;
+        _poolParent = new GameObject($"Pool_{_object.name}").transform;
 
         _object.gameObject.SetActive(spawnActive);
-        _object.name = name;
 
         for (int i = 0; i < size; i++)
             _inactiveObjects.Enqueue(Instantiate());

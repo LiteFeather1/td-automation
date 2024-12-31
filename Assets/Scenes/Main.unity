@@ -71427,6 +71427,9 @@ MonoBehaviour:
   _enemyHitParticlePool:
     _object: {fileID: 6997331626645399421, guid: 9a9c0bf8b2993ee47bb0a18ef4bb1cf6, type: 3}
     _initialPoolSize: 10
+  _enemyDiedParticlePool:
+    _object: {fileID: 1460597647194257650, guid: fbb68689b9ca2e94ba5f0b237d009ed3, type: 3}
+    _initialPoolSize: 10
 --- !u!1 &2114138637
 GameObject:
   m_ObjectHideFlags: 0

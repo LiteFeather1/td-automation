@@ -10,6 +10,7 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private Portal[] _portals;
     [SerializeField] private SerializedDictionary<int, SOObjectPoolEnemy> _enemiesObjectPools;
     [SerializeField] private ObjectPool<ParticleStoppedCallback> _enemyHitParticlePool;
+    [SerializeField] private ObjectPool<ParticleStoppedCallback> _enemyDiedParticlePool;
     private int _currentStage;
     private bool _waveInProgress;
     private readonly List<Enemy> _enemies = new();
@@ -45,6 +46,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
         _enemyHitParticlePool.ObjectCreated += HitParticleCreated;
         _enemyHitParticlePool.InitPool();
+
+        _enemyDiedParticlePool.ObjectCreated += DiedParticleCreated;
+        _enemyDiedParticlePool.InitPool();
     }
 
     private void Start()
@@ -114,6 +118,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
         _enemyHitParticlePool.ObjectCreated -= HitParticleCreated;
         _enemyHitParticlePool.Dispose();
+
+        _enemyDiedParticlePool.ObjectCreated -= HitParticleCreated;
+        _enemyDiedParticlePool.Dispose();
     }
 
     private void EnemyCreated(Enemy enemy)
@@ -128,6 +135,8 @@ public class EnemyManager : Singleton<EnemyManager>
         _enemies.Remove(enemy);
         enemy.gameObject.SetActive(false);
         _enemiesObjectPools[enemy.ID].ObjectPool.ReturnObject(enemy);
+
+        PlayParticle(enemy, _enemyDiedParticlePool);
 
         if (_enemies.Count != 0)
             return;
@@ -167,22 +176,37 @@ public class EnemyManager : Singleton<EnemyManager>
         RemoveEnemy(enemy);
     }
 
-    private void HitParticleCreated(ParticleStoppedCallback psHit)
+    private void ParticleCreated(ParticleStoppedCallback ps, ObjectPool<ParticleStoppedCallback> pool)
     {
-        psHit.OnStopped += ReturnHitParticle;
+        ps.OnStopped += ReturnHitParticle;
 
         void ReturnHitParticle(ParticleStoppedCallback psHit)
         {
             psHit.gameObject.SetActive(false);
-            _enemyHitParticlePool.ReturnObject(psHit);
+            pool.ReturnObject(psHit);
         }
+    }
+
+    private void HitParticleCreated(ParticleStoppedCallback ps)
+    {
+        ParticleCreated(ps, _enemyHitParticlePool);
+    }
+
+    private void DiedParticleCreated(ParticleStoppedCallback ps)
+    {
+        ParticleCreated(ps, _enemyDiedParticlePool);
+    }
+
+    private void PlayParticle(Enemy enemy, ObjectPool<ParticleStoppedCallback> pool)
+    {
+        ParticleStoppedCallback ps = pool.GetObject();
+        ps.transform.position = enemy.transform.position;
+        ps.gameObject.SetActive(true);
     }
 
     private void EnemyDamaged(Enemy enemy)
     {
-        ParticleStoppedCallback ps = _enemyHitParticlePool.GetObject();
-        ps.transform.position = enemy.transform.position;
-        ps.gameObject.SetActive(true);
+        PlayParticle(enemy, _enemyHitParticlePool);
     }
 
     [Serializable]
