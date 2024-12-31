@@ -13,7 +13,8 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private ObjectPool<ParticleStoppedCallback> _enemyDiedParticlePool;
     private int _currentStage;
     private bool _waveInProgress;
-    private readonly List<Enemy> _enemies = new();
+    private List<Enemy> _enemies = new();
+    private List<Enemy> _enemiesToRemove = new();
 
     private float _elapsedTime;
     private float _lullSpawnTime;
@@ -97,6 +98,42 @@ public class EnemyManager : Singleton<EnemyManager>
         }
     }
 
+    private void LateUpdate()
+    {
+        if (_enemiesToRemove.Count == 0)
+            return;
+
+        foreach (var enemy in _enemiesToRemove)
+            _enemies.Remove(enemy);
+
+        _enemiesToRemove.Clear();
+
+        if (_enemies.Count != 0)
+            return;
+
+        foreach (Portal portal in _portals)
+        {
+            if (!portal.AllGroupsSpawned(_currentStage))
+                return;
+        }
+
+        foreach (Portal portal in _portals)
+            portal.StageEnded();
+
+        print("Stage ended");
+        _elapsedTime = 0f;
+        _currentStage++;
+        _waveInProgress = false;
+        OnStageEnded?.Invoke(_currentStage);
+
+        if (AllStagesCompleted)
+        {
+            print("All Stages Completed");
+            enabled = false;
+            OnAllStagesEnded?.Invoke();
+        }
+    }
+
     private void OnDisable()
     {
         foreach (SOObjectPoolEnemy pool in _enemiesObjectPools.Values)
@@ -125,36 +162,11 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void RemoveEnemy(Enemy enemy)
     {
-        _enemies.Remove(enemy);
+        _enemiesToRemove.Add(enemy);
         enemy.gameObject.SetActive(false);
         _enemiesObjectPools[enemy.ID].ObjectPool.ReturnObject(enemy);
 
         PlayParticle(enemy, _enemyDiedParticlePool);
-
-        if (_enemies.Count != 0)
-            return;
-
-        foreach (Portal portal in _portals)
-        {
-            if (!portal.AllGroupsSpawned(_currentStage))
-                return;
-        }
-
-        foreach (Portal portal in _portals)
-            portal.StageEnded();
-
-        print("Stage ended");
-        _elapsedTime = 0f;
-        _currentStage++;
-        _waveInProgress = false;
-        OnStageEnded?.Invoke(_currentStage);
-
-        if (AllStagesCompleted)
-        {
-            print("All Stages Completed");
-            enabled = false;
-            OnAllStagesEnded?.Invoke();
-        }
     }
 
     private void EnemyDied(Enemy enemy)
