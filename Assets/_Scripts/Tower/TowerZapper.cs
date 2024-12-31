@@ -7,10 +7,13 @@ public class TowerZapper : Tower
 
     protected override void Update()
     {
+        var deltaTime = Time.deltaTime;
+        UpdateState(deltaTime);
+
         if (!EnemyManager.Instance.HasEnemies)
         {
-            if (_elapsedTime <= _damageRate * .5f)
-                _elapsedTime += Time.deltaTime;
+            if (_fireRateElapsedTime <= _damageRate * .5f)
+                _fireRateElapsedTime += deltaTime;
 
             return;
         }
@@ -25,11 +28,11 @@ public class TowerZapper : Tower
         if (enemiesInRange == 0)
             return;
 
-        _elapsedTime += Time.deltaTime * (1f + (_multiplierPerEnemyInRange * enemiesInRange));
-        if (_elapsedTime < _damageRate)
+        _fireRateElapsedTime += deltaTime * (1f + (_multiplierPerEnemyInRange * enemiesInRange));
+        if (_fireRateElapsedTime < _damageRate)
             return;
 
-        _elapsedTime %= _damageRate;
+        _fireRateElapsedTime %= _damageRate;
 
         Vector2[] positions = new Vector2[enemiesInRange];
         for (int i = 0; i < EnemyManager.Instance.Enemies.Count; i++)
@@ -42,6 +45,7 @@ public class TowerZapper : Tower
             positions[i] = enemy.transform.position;
         }
 
+        StopIdle();
         ZapEffectManager.Instance.ZapEffect(transform.position, positions);
     }
 

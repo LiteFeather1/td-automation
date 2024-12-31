@@ -7,7 +7,17 @@ public abstract class Tower : Building
     [SerializeField] protected float _damage = 1f;
     [SerializeField] protected float _damageRate = 1f;
     [SerializeField] protected Transform _head;
-    protected float _elapsedTime;
+
+    [Header("States")]
+    [SerializeField] private float _rotationArc = 30f;
+    [SerializeField] private float _rotationSpeed = 1.57f;
+    [SerializeField] private float _stopDuration = .75f;
+
+    protected float _fireRateElapsedTime;
+
+    private float _stoppedAngle;
+    private float _idleElapsedTime = 1f;
+    private float _stopElapsedTime;
 
     public override bool CanBeRotated => false;
     public override bool CanBeDestroyed => true;
@@ -16,8 +26,11 @@ public abstract class Tower : Building
 
     protected virtual void Update()
     {
-        _elapsedTime += Time.deltaTime;
-        if (!EnemyManager.Instance.HasEnemies || _elapsedTime < _damageRate)
+        var deltaTime = Time.deltaTime;
+        UpdateState(deltaTime);
+
+        _fireRateElapsedTime += deltaTime;
+        if (!EnemyManager.Instance.HasEnemies || _fireRateElapsedTime < _damageRate)
             return;
 
         float closestDistance = float.MaxValue;
@@ -38,11 +51,13 @@ public abstract class Tower : Building
         if (closestEnemy == null)
             return;
 
-        _elapsedTime = 0f;
+        _fireRateElapsedTime = 0f;
         Vector2 direction = (closestEnemy.transform.position - transform.position).normalized;
         _head.transform.eulerAngles = new(
             0f, 0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f
         );
+        StopIdle();
+
         DamageEnemy(closestEnemy);
     }
 
@@ -59,6 +74,31 @@ public abstract class Tower : Building
     public override void Unhover()
     {
         _range.gameObject.SetActive(false);
+    }
+
+    protected void StopIdle()
+    {
+        _stoppedAngle = _head.transform.eulerAngles.z;
+        _idleElapsedTime = 0f;
+    }
+
+    protected void UpdateState(float deltaTime)
+    {
+        if (_idleElapsedTime <= float.Epsilon)
+        {
+            _stopElapsedTime += deltaTime;
+            if (_stopElapsedTime >= _stopDuration)
+            {
+                _stopElapsedTime = 0f;
+            }
+            else
+                return;
+        }
+
+        _idleElapsedTime += deltaTime;
+        _head.eulerAngles = new(0f, 0f,
+            _stoppedAngle + Mathf.Sin(_idleElapsedTime * _rotationSpeed) * _rotationArc
+        );
     }
 
     protected abstract void DamageEnemy(Enemy enemy);
