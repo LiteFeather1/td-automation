@@ -3,7 +3,7 @@ using UnityEngine;
 public class TowerFlamethrower : Tower
 {
     [Header("Flamethrower tower")]
-    [SerializeField] private float _fireDamageRadius = 4f;
+    [SerializeField] private float _fireDamageRadius = 2f;
     [SerializeField, Range(0f, 1f)] private float _fireDamagePercetage = .33f;
 
     protected override void DamageEnemy(Enemy enemy)
