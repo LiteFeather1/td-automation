@@ -170,11 +170,12 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: 1c07f4e04af3225498bf1550863bddb9, type: 2}
   _sr: {fileID: 1071184834035600572}
   _range: {fileID: 6604266370505615649}
-  _damage: 1
-  _damageRate: 0.125
+  _damage: 1.5
+  _damageRate: 0.2
   _head: {fileID: 3304314266657821397}
   _fireDamageRadius: 2
   _fireDamagePercetage: 0.33
+  _ps: {fileID: 5996509270715192868}
 --- !u!1 &6971452074571583592
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,5 +410,10 @@ PrefabInstance:
 --- !u!4 &4040906038158269640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3902578793369511070, guid: 38cf27f774614c74fa365de2adf93579, type: 3}
+  m_PrefabInstance: {fileID: 1025853271809767510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5996509270715192868 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6704577216467201650, guid: 38cf27f774614c74fa365de2adf93579, type: 3}
   m_PrefabInstance: {fileID: 1025853271809767510}
   m_PrefabAsset: {fileID: 0}

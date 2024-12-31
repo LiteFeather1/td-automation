@@ -48,16 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 2e87a851768db5c44b115a227cf91529, type: 2}
-  _name: Ballista
-  _resourcesCost:
-    _entries:
-    - Key: 100
-      Value: -40
-    - Key: 200
-      Value: -20
   _sr: {fileID: 828324963780454766}
   _range: {fileID: 1702194125724348909}
-  _damage: 8
+  _damage: 10
   _damageRate: 2
   _head: {fileID: 661284030296353025}
   _line: {fileID: 6226956201456744192}
