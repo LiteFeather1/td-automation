@@ -72,8 +72,7 @@ public class GameManager : Singleton<GameManager>
 
         foreach (SOObjectPoolResourceBehaviour pool in _poolResources.Values)
         {
-            pool.ObjectPool.ObjectCreated += ResourceCreated;
-            pool.ObjectPool.InitPool();
+            pool.ObjectPool.InitPool(ResourceCreated);
         }
     }
 
@@ -153,12 +152,12 @@ public class GameManager : Singleton<GameManager>
 
         foreach (SOObjectPoolResourceBehaviour pool in _poolResources.Values)
         {
-            pool.ObjectPool.ObjectCreated -= ResourceCreated;
             foreach (ResourceBehaviour resource in pool.ObjectPool.Objects)
             {
                 resource.OnReturnToPool -= pool.ObjectPool.ReturnObject;
             }
-            pool.ObjectPool.Dispose();
+
+            pool.ObjectPool.Deinit(ResourceCreated);
         }
     }
 

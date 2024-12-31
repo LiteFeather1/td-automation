@@ -40,15 +40,12 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             ObjectPool<Enemy> objectPool = pool.Value.ObjectPool;
             objectPool.Object.ID = pool.Key;
-            objectPool.ObjectCreated += EnemyCreated;
-            objectPool.InitPool();
+            objectPool.InitPool(EnemyCreated);
         }
 
-        _enemyHitParticlePool.ObjectCreated += HitParticleCreated;
-        _enemyHitParticlePool.InitPool();
+        _enemyHitParticlePool.InitPool(HitParticleCreated);
 
-        _enemyDiedParticlePool.ObjectCreated += DiedParticleCreated;
-        _enemyDiedParticlePool.InitPool();
+        _enemyDiedParticlePool.InitPool(DiedParticleCreated);
     }
 
     private void Start()
@@ -104,8 +101,6 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         foreach (SOObjectPoolEnemy pool in _enemiesObjectPools.Values)
         {
-            pool.ObjectPool.ObjectCreated -= EnemyCreated;
-
             foreach (Enemy enemy in pool.ObjectPool.Objects)
             {
                 enemy.OnDamaged -= EnemyDamaged;
@@ -113,14 +108,12 @@ public class EnemyManager : Singleton<EnemyManager>
                 enemy.OnPathReached -= EnemyReachedPathEnd;
             }
 
-            pool.ObjectPool.Dispose();
+            pool.ObjectPool.Deinit(EnemyCreated);
         }
 
-        _enemyHitParticlePool.ObjectCreated -= HitParticleCreated;
-        _enemyHitParticlePool.Dispose();
+        _enemyHitParticlePool.Deinit(HitParticleCreated);
 
-        _enemyDiedParticlePool.ObjectCreated -= HitParticleCreated;
-        _enemyDiedParticlePool.Dispose();
+        _enemyDiedParticlePool.Deinit(DiedParticleCreated);
     }
 
     private void EnemyCreated(Enemy enemy)

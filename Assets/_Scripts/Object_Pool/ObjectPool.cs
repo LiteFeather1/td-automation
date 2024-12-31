@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class ObjectPool<T> : IDisposable where T : Component
+public class ObjectPool<T> where T : Component
 {
     [SerializeField] private T _object;
     [SerializeField] private int _initialPoolSize;
@@ -12,7 +12,7 @@ public class ObjectPool<T> : IDisposable where T : Component
 
     public List<T> Objects { get; private set; } = new();
 
-    public Action<T> ObjectCreated { get; set; }
+    private Action<T> _objectCreated;
 
     public T Object => _object;
     public Transform PoolParent => _poolParent;
@@ -31,10 +31,11 @@ public class ObjectPool<T> : IDisposable where T : Component
 
     ~ObjectPool()
     {
-        Dispose();
+        _objectCreated = null;
+        Objects.Clear();
     }
 
-    public void InitPool(int size, bool spawnActive = false)
+    public void InitPool(int size, Action<T> created, bool spawnActive = false)
     {
         if (_poolParent != null)
             return;
@@ -43,11 +44,14 @@ public class ObjectPool<T> : IDisposable where T : Component
 
         _object.gameObject.SetActive(spawnActive);
 
+        _objectCreated += created;
+
         for (int i = 0; i < size; i++)
             _inactiveObjects.Enqueue(Instantiate());
     }
 
-    public void InitPool(bool spawnActive = false) => InitPool(_initialPoolSize, spawnActive);  
+    public void InitPool(Action<T> created, bool spawnActive = false) 
+        => InitPool(_initialPoolSize, created, spawnActive);
 
     public T GetObject()
     {
@@ -62,8 +66,9 @@ public class ObjectPool<T> : IDisposable where T : Component
         _inactiveObjects.Enqueue(object_);
     }
 
-    public void Dispose()
+    public void Deinit(Action<T> created)
     {
+        _objectCreated -= created;
         Objects.Clear();
     }
 
@@ -72,7 +77,7 @@ public class ObjectPool<T> : IDisposable where T : Component
         T object_ = UnityEngine.Object.Instantiate(_object, _poolParent);
         object_.name = $"{_object.name}_{Objects.Count}";
         Objects.Add(object_);
-        ObjectCreated?.Invoke(object_);
+        _objectCreated?.Invoke(object_);
         return object_;
     }
 }
