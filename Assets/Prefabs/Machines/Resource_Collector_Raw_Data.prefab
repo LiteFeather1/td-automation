@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: _timeToCollect
-      value: 17.5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: _speedMultiplierPerNode
@@ -142,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7937275587650164836, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: m_Name
-      value: Resource_Collector_Metal Variant
+      value: Resource_Collector_Raw_Data
       objectReference: {fileID: 0}
     - target: {fileID: 8598162561200036869, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: m_Color.b

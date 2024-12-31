@@ -136,15 +136,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 39a24266a0f51a74dbfc9bb131652c57, type: 2}
-  _name: Peashooter
-  _resourcesCost:
-    _entries:
-    - Key: 100
-      Value: -40
   _sr: {fileID: 828324963780454766}
   _range: {fileID: 6627803679422170471}
   _damage: 3
-  _damageRate: 1.5
+  _damageRate: 1
   _head: {fileID: 8793221537690332159}
   _line: {fileID: 6484567382767351699}
   _firePoint: {fileID: 586065225589052559}

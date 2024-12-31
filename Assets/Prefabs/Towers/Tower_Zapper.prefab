@@ -343,7 +343,7 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: 3714fca976b6fbd40be2be80b7de1dda, type: 2}
   _sr: {fileID: 7138210802647603289}
   _range: {fileID: 7013843987129502161}
-  _damage: 10
+  _damage: 20
   _damageRate: 5
   _head: {fileID: 4763425209474587197}
   _multiplierPerEnemyInRange: 0.25
