@@ -8,7 +8,12 @@ public class TowerZapper : Tower
     protected override void Update()
     {
         if (!EnemyManager.Instance.HasEnemies)
+        {
+            if (_elapsedTime <= _damageRate * .5f)
+                _elapsedTime += Time.deltaTime;
+
             return;
+        }
 
         int enemiesInRange = 0;
         foreach (Enemy enemy in EnemyManager.Instance.Enemies)
