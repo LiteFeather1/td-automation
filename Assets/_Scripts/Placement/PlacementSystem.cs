@@ -178,30 +178,26 @@ public class PlacementSystem : MonoBehaviour
             }
         }
 
-        _buildingToPlace.SR.sortingOrder = 0;
-        Building buildingToAdd = _buildingToPlace;
-
-        Vector3 position;
+        Vector3 position = _buildingToPlace.transform.position;
         Quaternion rotation;
         if (_buildingToPlace is BeltPath)
         {
             _inDirection = _beltPathSystem.OppositeDirection(_outDirection);
-            position = _buildingToPlace.transform.position;
             rotation = Quaternion.Euler(0f, 0f, sr_outDirectionToAngle[_outDirection]);
         }
         else
         {
-            _buildingToPlace.transform.GetPositionAndRotation(out position, out rotation);
+            rotation = _buildingToPlace.transform.rotation;
         }
-
-        InstantiateBuilding(position, rotation);
 
         _tileHighlightRenderer.color = _notPlaceableHighlight;
         _highlightNotPlaceable.enabled = true;
-
         _canPlaceBuilding = false;
 
-        AddBuilding(buildingToAdd);
+        _buildingToPlace.enabled = true;
+        AddBuilding(_buildingToPlace);
+
+        InstantiateBuilding(position, rotation);
     }
 
     public void UnselectBuildingBuilding()
@@ -343,7 +339,7 @@ public class PlacementSystem : MonoBehaviour
             _buildingPrefab, position, rotation, transform
         );
 
-        _buildingToPlace.SR.sortingOrder = 2;
+        _buildingToPlace.enabled = false;
     }
 
 #if UNITY_EDITOR
