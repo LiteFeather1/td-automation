@@ -177,7 +177,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void EnemyReachedPathEnd(Enemy enemy)
     {
-        OnEnemyReachedPathEnd?.Invoke(enemy.Damage);
+        OnEnemyReachedPathEnd?.Invoke(enemy.Damage * enemy.Health.HP / enemy.Health.MaxHP);
         RemoveEnemy(enemy);
     }
 

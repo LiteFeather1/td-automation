@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: _damage
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5784249067436599214, guid: af5d6951fa8e11243b25b85da30b58a5, type: 3}
       propertyPath: <ID>k__BackingField
