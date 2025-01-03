@@ -5,12 +5,19 @@ using TMPro;
 public class UIMainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _credits;
+#if UNITY_WEBGL
+    [SerializeField] private GameObject _quitButton;
+#endif
 
     [SerializeField] private TextMeshProUGUI t_version;
 
     private void Awake()
     {
         t_version.text = Application.version;
+
+#if UNITY_WEBGL != UNITY_EDITOR
+        _quitButton.SetActive(false);
+#endif
     }
 
     public void ButtonNewGame()

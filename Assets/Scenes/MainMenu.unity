@@ -13373,6 +13373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _credits: {fileID: 1366015523}
+  _quitButton: {fileID: 1137497529}
   t_version: {fileID: 1918998172}
 --- !u!1 &700319227
 GameObject:
@@ -13646,6 +13647,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1137497529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 644356805895394185, guid: 94c738fdd03b9e94db04c7d0b18009fb, type: 3}
+  m_PrefabInstance: {fileID: 1602550942}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1309892858
 GameObject:
   m_ObjectHideFlags: 0
