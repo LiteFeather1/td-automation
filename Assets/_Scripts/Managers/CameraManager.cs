@@ -58,7 +58,8 @@ public class CameraManager : MonoBehaviour
     private void ZoomPerformed(InputAction.CallbackContext ctx)
     {
         _camera.orthographicSize = Mathf.Clamp(
-            _camera.orthographicSize - ctx.ReadValue<Vector2>().y * _zSpeed, _zRange.x, _zRange.y
+            _camera.orthographicSize - ctx.ReadValue<Vector2>().y * _zSpeed * Time.deltaTime,
+            _zRange.x, _zRange.y
         );
 
         MoveCamera(Vector2.zero);
