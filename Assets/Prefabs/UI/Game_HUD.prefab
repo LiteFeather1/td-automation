@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 6131065022390680068}
   - component: {fileID: 4830867862635734711}
   m_Layer: 5
-  m_Name: i_Essence
+  m_Name: i_SegFault
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6131065022390680068
 CanvasRenderer:
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 4bfe8ce41ca63424ca944928877a4fea, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 178174906029477062}
   - component: {fileID: 8068017901950986992}
   m_Layer: 5
-  m_Name: i_Metal
+  m_Name: i_Raw_Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,8 +184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &178174906029477062
 CanvasRenderer:
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -761103295, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1007,7 +1007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6691033585152594345}
   m_Layer: 5
-  m_Name: Buiding_Info_Wood
+  m_Name: Buiding_Info_Chip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1395,7 +1395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4318477564954561923}
   m_Layer: 5
-  m_Name: Buiding_Info_Metal
+  m_Name: Buiding_Info_Raw_Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1568,7 +1568,7 @@ GameObject:
   - component: {fileID: 6063351615912481211}
   - component: {fileID: 961351552743276519}
   m_Layer: 5
-  m_Name: t_Essence_Count
+  m_Name: t_SegFault_Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1590,7 +1590,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -16, y: 0}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 64, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &6063351615912481211
@@ -1706,7 +1706,7 @@ GameObject:
   - component: {fileID: 4913480808208052823}
   - component: {fileID: 8840342915611036919}
   m_Layer: 5
-  m_Name: t_Metal_Plate_Count
+  m_Name: t_Processed_Data_Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1728,7 +1728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -16, y: 0}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 64, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &4913480808208052823
@@ -2151,7 +2151,7 @@ GameObject:
   - component: {fileID: 3500006377889181538}
   - component: {fileID: 1180121322254678825}
   m_Layer: 5
-  m_Name: i_Metal_Plate
+  m_Name: i_Processed_Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2173,8 +2173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3500006377889181538
 CanvasRenderer:
@@ -2204,7 +2204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1719173421, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2971,7 +2971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2638591150449714955}
   m_Layer: 5
-  m_Name: Buiding_Info_Metal_Plate
+  m_Name: Buiding_Info_Processed_Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3643,7 +3643,7 @@ GameObject:
   - component: {fileID: 3630027914763708242}
   - component: {fileID: 7940858995414981817}
   m_Layer: 5
-  m_Name: t_Wood_Amount
+  m_Name: t_Chip_Amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3665,7 +3665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -16, y: 0}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 64, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &3630027914763708242
@@ -4444,7 +4444,7 @@ GameObject:
   - component: {fileID: 1135705090932222413}
   - component: {fileID: 1192484904681338287}
   m_Layer: 5
-  m_Name: i_Wood
+  m_Name: i_Chip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4466,8 +4466,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1135705090932222413
 CanvasRenderer:
@@ -4497,7 +4497,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1207890551, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4594,7 +4594,7 @@ GameObject:
   - component: {fileID: 2319276429578358922}
   - component: {fileID: 350685966476420499}
   m_Layer: 5
-  m_Name: t_Metal_Count
+  m_Name: t_Raw_Data_Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4616,7 +4616,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -16, y: 0}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 64, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &2319276429578358922
@@ -4881,7 +4881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4421847127533930193}
   m_Layer: 5
-  m_Name: Buiding_Info_Essence
+  m_Name: Buiding_Info_SegFault
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5439,7 +5439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -16, y: 0}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 64, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5213849832518308577
@@ -5627,7 +5627,7 @@ GameObject:
   - component: {fileID: 6363552020369365876}
   - component: {fileID: 1937191643805114548}
   m_Layer: 5
-  m_Name: i_Wood_Plank
+  m_Name: i_Circuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5649,8 +5649,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6363552020369365876
 CanvasRenderer:
@@ -5680,7 +5680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1222598112, guid: ceeca3e89a060fb43b72bff8a9522f32, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5948,7 +5948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7557499858398252291}
   m_Layer: 5
-  m_Name: Buiding_Info_Wood_Plank
+  m_Name: Buiding_Info_Circuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
