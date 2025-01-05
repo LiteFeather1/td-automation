@@ -224,6 +224,7 @@ public class PlacementSystem : MonoBehaviour
     {
         if (_buildingToPlace != null)
         {
+            Destroy(_buildingToPlace.gameObject);
             UnselectBuildingBuilding();
         }
         else if (r_buildings.TryGetValue(_mousePos, out Building building) && building.CanBeDestroyed)
