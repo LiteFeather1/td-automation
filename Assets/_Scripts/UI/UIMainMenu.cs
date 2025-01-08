@@ -5,9 +5,7 @@ using TMPro;
 public class UIMainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _credits;
-#if UNITY_WEBGL != UNITY_EDITOR
     [SerializeField] private GameObject _quitButton;
-#endif
 
     [SerializeField] private TextMeshProUGUI t_version;
 
@@ -15,7 +13,7 @@ public class UIMainMenu : MonoBehaviour
     {
         t_version.text = Application.version;
 
-#if UNITY_WEBGL != UNITY_EDITOR
+#if UNITY_WEBGL
         _quitButton.SetActive(false);
 #endif
     }
