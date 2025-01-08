@@ -16,8 +16,8 @@ MonoBehaviour:
   _resourcesCost:
     _entries:
     - Key: 300
-      Value: -20
+      Value: -5
     - Key: 400
-      Value: -20
+      Value: -5
     - Key: 500
       Value: -20

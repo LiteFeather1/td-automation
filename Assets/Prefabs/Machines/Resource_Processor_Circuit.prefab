@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 143309904664887199, guid: 228b6141f32a7544eb14f7b291d7ad28, type: 3}
     - target: {fileID: 9122423759337509587, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
       propertyPath: _timeToProcessResource
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9122423759337509587, guid: d2bd992e8db15d447a147207c269ba03, type: 3}
       propertyPath: _processedBehaviourPool
