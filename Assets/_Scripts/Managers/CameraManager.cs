@@ -18,11 +18,18 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Vector2 _min;
     [SerializeField] private Vector2 _max;
 
+    private Vector3 _defaultPosition;
+
     internal void OnEnable()
     {
         InputSystem_Actions.PlayerActions inputs = InputManager.Instance.InputSystem.Player;
         inputs.ScrollWheel.performed += ZoomPerformed;
         inputs.DefaultZoom.performed += DefaultZoom;
+    }
+
+    private void Start()
+    {
+        _defaultPosition = transform.position;
     }
 
     internal void Update()
@@ -68,12 +75,13 @@ public class CameraManager : MonoBehaviour
     private void DefaultZoom(InputAction.CallbackContext _)
     {
         _camera.orthographicSize = _defaultZ;
+        transform.position = _defaultPosition;
     }
 
     private void MoveCamera(Vector2 delta)
     {
         float camSizeY = _camera.orthographicSize;
-        float camSizeX = camSizeY * 16f / 9f;
+        float camSizeX = camSizeY * 16f / 9f; // Fix: this assumes the aspect ratio
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x + delta.x, _min.x + camSizeX, _max.x - camSizeX);
         pos.y = Mathf.Clamp(pos.y + delta.y, _min.y + camSizeY, _max.y - camSizeY);
