@@ -10,13 +10,16 @@ public class CameraManager : MonoBehaviour
     [Header("Z")]
     [SerializeField] private float _defaultZ = 10f;
     [SerializeField] private Vector2 _zRange = new(5f, 15f);
-    [SerializeField] private float _zSpeed;
+    [SerializeField] private Vector2 _zSpeedRange = new(50f, 200f);
+    private float _zSpeed;
 
     [Header("Move")]
-    [SerializeField] private float _keyboardSpeed = 5f;
-    [SerializeField] private float _mouseSpeed = 2f;
+    [SerializeField] private float _keyboardSpeed = 25f;
+    [SerializeField] private Vector2 _mouseSpeedRange = new(5f, 20f);
     [SerializeField] private Vector2 _min;
     [SerializeField] private Vector2 _max;
+
+    private float _mouseSpeed;
 
     private Vector3 _defaultPosition;
 
@@ -30,6 +33,7 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         _defaultPosition = transform.position;
+        SetMouseSensibility(.5f);
     }
 
     internal void Update()
@@ -53,6 +57,12 @@ public class CameraManager : MonoBehaviour
                 / Time.timeScale
             ));
         }
+    }
+
+    public void SetMouseSensibility(float t)
+    {
+        _mouseSpeed = Mathf.Lerp(_mouseSpeedRange.x, _mouseSpeedRange.y, t);
+        _zSpeed = Mathf.Lerp(_zSpeedRange.x, _zSpeedRange.y, t);
     }
 
     internal void OnDisable()

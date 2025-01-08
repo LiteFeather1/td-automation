@@ -65,6 +65,7 @@ public class GameManager : Singleton<GameManager>
 
         _pauseScreen.OnResume.AddListener(Unpause);
         _pauseScreen.OnForfeit.AddListener(Forfeit);
+        _pauseScreen.OnMouseSensibility.AddListener(_cameraManager.SetMouseSensibility);
 
         foreach (UIBuildingButton buildingButton in _gameHUD.UIBuildingButtons)
         {
@@ -163,6 +164,7 @@ public class GameManager : Singleton<GameManager>
 
         _pauseScreen.OnResume.RemoveListener(Unpause);
         _pauseScreen.OnForfeit.RemoveListener(Forfeit);
+        _pauseScreen.OnMouseSensibility.RemoveListener(_cameraManager.SetMouseSensibility);
 
         foreach (UIBuildingButton buildingButton in _gameHUD.UIBuildingButtons)
         {

@@ -139,7 +139,7 @@ public class PlacementSystem : MonoBehaviour
                 OnResourceCollected?.Invoke(node.GetResource());
 
                 if (!node.Depleted)
-                    OnHoverableHovered?.Invoke(_currentHoverable);
+                    OnHoverableHovered?.Invoke(node);
                 else
                     UnhoverHoverable();
             }
