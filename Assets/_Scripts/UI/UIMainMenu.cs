@@ -5,7 +5,7 @@ using TMPro;
 public class UIMainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _credits;
-#if UNITY_WEBGL
+#if UNITY_WEBGL != UNITY_EDITOR
     [SerializeField] private GameObject _quitButton;
 #endif
 
