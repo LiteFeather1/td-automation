@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ZapEffectManager : Singleton<ZapEffectManager>
@@ -20,13 +21,13 @@ public class ZapEffectManager : Singleton<ZapEffectManager>
         _effectPool.Deinit(null);
     }
 
-    public void ZapEffect(Vector2 center, Vector2[] positions)
+    public void ZapEffect(Vector2 center, IList<Vector2> positions)
     {
         StartCoroutine(ZapEffect());
 
         IEnumerator ZapEffect()
         {
-            var length = positions.Length;
+            var length = positions.Count;
             LineRenderer[] lines = new LineRenderer[length];
             for (int i = 0; i < length; i++)
             {
@@ -79,15 +80,7 @@ public class ZapEffectManager : Singleton<ZapEffectManager>
         }
     }
 
-#region Test
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Test();
-        }
-    }
-
+#if UNITY_EDITOR
     [ContextMenu("Test")]
     private void Test()
     {
@@ -100,5 +93,5 @@ public class ZapEffectManager : Singleton<ZapEffectManager>
 
         ZapEffect(transform.position, positions);
     }
-#endregion
+#endif
 }

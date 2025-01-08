@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerZapper : Tower
@@ -34,7 +35,7 @@ public class TowerZapper : Tower
 
         _fireRateElapsedTime %= _damageRate;
 
-        Vector2[] positions = new Vector2[enemiesInRange];
+        List<Vector2> positions = new(enemiesInRange);
         for (int i = 0; i < EnemyManager.Instance.Enemies.Count; i++)
         {
             Enemy enemy = EnemyManager.Instance.Enemies[i];
@@ -42,7 +43,7 @@ public class TowerZapper : Tower
                 continue;
 
             DamageEnemy(enemy);
-            positions[i] = enemy.transform.position;
+            positions.Add(enemy.transform.position);
         }
 
         StopIdle();
