@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FactoryTower : MonoBehaviour
+public class FactoryTower : MonoBehaviour, IHoverable
 {
     private static readonly int sr_midColourID = Shader.PropertyToID("_MiddleColour");
     private static readonly int sr_topInfluenceID = Shader.PropertyToID("_TopInfluence");
@@ -33,6 +33,8 @@ public class FactoryTower : MonoBehaviour
     public Tower[] StarterTowers => _starterTowers;
 
     public IDictionary<ResourceType, int> Resources => r_resources;
+
+    public int Size => (int)_sr.transform.localScale.x;
 
     public void Awake()
     {
@@ -67,6 +69,12 @@ public class FactoryTower : MonoBehaviour
             receiver.OnResourceGot -= OnResourceGot;
         }
     }
+
+    public string GetText() => $"Base HP {_health.HP / _health.MaxHP:P0}";
+
+    public void Hover() { }
+
+    public void Unhover() { }
 
     public int GetResourceAmount(ResourceType type) => r_resources[type];
 

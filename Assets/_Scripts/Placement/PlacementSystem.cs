@@ -345,6 +345,11 @@ public class PlacementSystem : MonoBehaviour
         _buildingToPlace.enabled = false;
     }
 
+    public void AddHoverable(Vector2Int position, IHoverable hoverable)
+    {
+        r_hoverables.Add(position, hoverable);
+    }
+
 #if UNITY_EDITOR
     [ContextMenu("Get Resource Nodes")]
     internal void GetResourceNodes()

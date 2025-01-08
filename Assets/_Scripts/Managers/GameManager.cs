@@ -76,14 +76,31 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    internal void Start()
+    private void Start()
     {
         AddBuildings(_factoryTower.Receivers);
         foreach (Receiver receiver in _factoryTower.Receivers)
         {
             _placementSystem.BeltPathSystem.AddInPort(receiver);
         }
+
         AddBuildings(_factoryTower.StarterTowers);
+
+        int size = _factoryTower.Size;
+        Vector2Int pos = new(
+            (int)(_factoryTower.transform.position.x - 1f),
+            (int)(_factoryTower.transform.position.y - 1f)
+        );
+
+        for (int y = 0; y < size; y++)
+        {
+            Vector2Int offset = new(0, y);
+            for (int x = 0; x < size; x++)
+            {
+                _placementSystem.AddHoverable(pos + offset, _factoryTower);
+                offset.x += 1;
+            }
+        }
 
         _gameHUD.SetWave(_enemyManager.CurrentStage);
         _gameHUD.SetTowerCount(_towerCount = _factoryTower.StarterTowers.Length);
