@@ -132,6 +132,9 @@ public class PlacementSystem : MonoBehaviour
 
     public void LeftClick()
     {
+        if (UIMouseBlocker.MouseBlocked)
+            return;
+
         if (_buildingToPlace == null)
         {
             if (_resourceNodes.TryGetValue(_mousePos, out ResourceNode node))
@@ -139,7 +142,7 @@ public class PlacementSystem : MonoBehaviour
                 OnResourceCollected?.Invoke(node.GetResource());
 
                 if (!node.Depleted)
-                    OnHoverableHovered?.Invoke(node);
+                    OnHoverableHovered?.Invoke(_currentHoverable);
                 else
                     UnhoverHoverable();
             }
@@ -147,7 +150,7 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        if (!_canPlaceBuilding || UIMouseBlocker.MouseBlocked)
+        if (!_canPlaceBuilding)
             return;
 
         _buildingToPlace.Position = _mousePos;
