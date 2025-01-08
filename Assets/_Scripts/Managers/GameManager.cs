@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
         inputs.LMB.performed += PlaceBuilding;
         inputs.RMB.performed += CancelBuilding;
         inputs.Rotate.performed += RotateBuilding;
+        inputs.SelectBuilding.performed += TryGetBuilding;
         inputs.SpeedUp.performed += SpeedUp;
         inputs.SpeedDown.performed += SpeedDown;
 
@@ -132,6 +133,7 @@ public class GameManager : Singleton<GameManager>
         inputs.LMB.performed -= PlaceBuilding;
         inputs.RMB.performed -= CancelBuilding;
         inputs.Rotate.performed -= RotateBuilding;
+        inputs.SelectBuilding.performed -= TryGetBuilding;
         inputs.SpeedUp.performed -= SpeedUp;
         inputs.SpeedDown.performed -= SpeedDown;
 
@@ -199,6 +201,14 @@ public class GameManager : Singleton<GameManager>
     private void RotateBuilding(InputAction.CallbackContext _)
     {
         _placementSystem.RotateBuilding();
+    }
+
+    private void TryGetBuilding(InputAction.CallbackContext _)
+    {
+        if (_placementSystem.TryGetBuilding(out Building building)
+            && _factoryTower.HasEnoughResourceToBuild(building.Data.ResourcesCost)
+        )
+            _placementSystem.SetPlaceable(building);
     }
 
     private void ChangeGameSpeed(float speed)

@@ -100,6 +100,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SelectBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""aafaa449-9203-41fe-afb6-631cab50c64a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""SpeedUp"",
                     ""type"": ""Button"",
                     ""id"": ""44f9898a-ffea-4ea6-b8f6-eec6261425b5"",
@@ -347,6 +356,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f92f80d2-830e-4845-a185-9680229966b4"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse;Touch"",
+                    ""action"": ""SelectBuilding"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1008,6 +1028,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_LMB = m_Player.FindAction("LMB", throwIfNotFound: true);
         m_Player_RMB = m_Player.FindAction("RMB", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
+        m_Player_SelectBuilding = m_Player.FindAction("SelectBuilding", throwIfNotFound: true);
         m_Player_SpeedUp = m_Player.FindAction("SpeedUp", throwIfNotFound: true);
         m_Player_SpeedDown = m_Player.FindAction("SpeedDown", throwIfNotFound: true);
         // UI
@@ -1097,6 +1118,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LMB;
     private readonly InputAction m_Player_RMB;
     private readonly InputAction m_Player_Rotate;
+    private readonly InputAction m_Player_SelectBuilding;
     private readonly InputAction m_Player_SpeedUp;
     private readonly InputAction m_Player_SpeedDown;
     public struct PlayerActions
@@ -1111,6 +1133,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @LMB => m_Wrapper.m_Player_LMB;
         public InputAction @RMB => m_Wrapper.m_Player_RMB;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
+        public InputAction @SelectBuilding => m_Wrapper.m_Player_SelectBuilding;
         public InputAction @SpeedUp => m_Wrapper.m_Player_SpeedUp;
         public InputAction @SpeedDown => m_Wrapper.m_Player_SpeedDown;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1146,6 +1169,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Rotate.started += instance.OnRotate;
             @Rotate.performed += instance.OnRotate;
             @Rotate.canceled += instance.OnRotate;
+            @SelectBuilding.started += instance.OnSelectBuilding;
+            @SelectBuilding.performed += instance.OnSelectBuilding;
+            @SelectBuilding.canceled += instance.OnSelectBuilding;
             @SpeedUp.started += instance.OnSpeedUp;
             @SpeedUp.performed += instance.OnSpeedUp;
             @SpeedUp.canceled += instance.OnSpeedUp;
@@ -1180,6 +1206,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Rotate.started -= instance.OnRotate;
             @Rotate.performed -= instance.OnRotate;
             @Rotate.canceled -= instance.OnRotate;
+            @SelectBuilding.started -= instance.OnSelectBuilding;
+            @SelectBuilding.performed -= instance.OnSelectBuilding;
+            @SelectBuilding.canceled -= instance.OnSelectBuilding;
             @SpeedUp.started -= instance.OnSpeedUp;
             @SpeedUp.performed -= instance.OnSpeedUp;
             @SpeedUp.canceled -= instance.OnSpeedUp;
@@ -1376,6 +1405,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnLMB(InputAction.CallbackContext context);
         void OnRMB(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnSelectBuilding(InputAction.CallbackContext context);
         void OnSpeedUp(InputAction.CallbackContext context);
         void OnSpeedDown(InputAction.CallbackContext context);
     }

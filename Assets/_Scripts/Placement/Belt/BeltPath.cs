@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BeltPath : InPort, IOutPort
 {
-    private static readonly Color sr_fadedColour = new(1f, 1f, 1f, .33f);
+    private static readonly Color sr_fadedColour = new(1f, 1f, 1f, .15f);
 
     [Header("Belt Path")]
     [SerializeField] private SpriteRenderer _arrow;

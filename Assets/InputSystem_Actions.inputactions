@@ -78,6 +78,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectBuilding",
+                    "type": "Button",
+                    "id": "aafaa449-9203-41fe-afb6-631cab50c64a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SpeedUp",
                     "type": "Button",
                     "id": "44f9898a-ffea-4ea6-b8f6-eec6261425b5",
@@ -325,6 +334,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f92f80d2-830e-4845-a185-9680229966b4",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse;Touch",
+                    "action": "SelectBuilding",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

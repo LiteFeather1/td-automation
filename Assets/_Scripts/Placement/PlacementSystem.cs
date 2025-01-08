@@ -292,6 +292,11 @@ public class PlacementSystem : MonoBehaviour
         };
     }
 
+    public bool TryGetBuilding(out Building building)
+    {
+        return r_buildings.TryGetValue(_mousePos, out building);
+    }
+
     public void UnhoverHoverable()
     {
         OnHoverableUnhovered?.Invoke();
