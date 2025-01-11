@@ -65,16 +65,17 @@ public class Portal : MonoBehaviour
         public EnemySpawn[] EnemySpawns => _enemySpawns;
 
         public Enemy GetRandomEnemy() => _enemySpawns[Random.Range(0, _enemySpawns.Length)].Enemy;
+
+        [Serializable]
+        public class EnemySpawn
+        {
+            [SerializeField] private SOObjectPoolEnemy _enemyPool;
+            [SerializeField] private float _spawnTime;
+
+            public Enemy Enemy => _enemyPool.ObjectPool.GetObject();
+
+            public bool CanSpawn(float elapsedTime) => elapsedTime > _spawnTime;
+        }
     }
 
-    [Serializable]
-    public class EnemySpawn
-    {
-        [SerializeField] private float _spawnTime;
-        [SerializeField] private SOObjectPoolEnemy _enemyPool;
-
-        public Enemy Enemy => _enemyPool.ObjectPool.GetObject();
-
-        public bool CanSpawn(float elapsedTime) => elapsedTime > _spawnTime;
-    }
 }
