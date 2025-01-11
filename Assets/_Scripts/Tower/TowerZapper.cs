@@ -35,7 +35,8 @@ public class TowerZapper : Tower
 
         _fireRateElapsedTime %= _damageRate;
 
-        List<Vector2> positions = new(enemiesInRange);
+        Vector2[] positions = new Vector2[enemiesInRange];
+        enemiesInRange = 0;
         for (int i = 0; i < EnemyManager.Instance.Enemies.Count; i++)
         {
             Enemy enemy = EnemyManager.Instance.Enemies[i];
@@ -43,7 +44,8 @@ public class TowerZapper : Tower
                 continue;
 
             DamageEnemy(enemy);
-            positions.Add(enemy.transform.position);
+            positions[enemiesInRange] = enemy.transform.position;
+            enemiesInRange++;
         }
 
         StopIdle();
