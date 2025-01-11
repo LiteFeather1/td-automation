@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391befeb55680a54485d4d43327181c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _placeableData: {fileID: 0}
+  _buildingPrefab: {fileID: 0}
   i_icon: {fileID: 7596742827990384233}
   _button: {fileID: 1530577168136164721}
   i_inputBackground: {fileID: 4035638949637064459}
@@ -333,8 +333,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294888705
-  m_fontColor: {r: 0.003921569, g: 0.8039216, b: 0.99607843, a: 1}
+    rgba: 553569537
+  m_fontColor: {r: 0.003921569, g: 0.8039216, b: 0.99607843, a: 0.1254902}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

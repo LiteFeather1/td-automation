@@ -61,7 +61,16 @@ public class UIBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void SetButtonInteractable(bool interactable)
     {
         _button.interactable = interactable;
-        i_icon.color = interactable ? Color.white : sr_fadedColour;
+        if (interactable)
+        {
+            i_icon.color = Color.white;
+            t_inputName.alpha = 1f;
+        }
+        else
+        {
+            i_icon.color = sr_fadedColour;
+            t_inputName.alpha = .125f;
+        }
     }
 
     private void PressInput(InputAction.CallbackContext _)
