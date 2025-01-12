@@ -1,42 +1,44 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Portal : MonoBehaviour
 {
     [SerializeField] private Path<SegmentBehaviour> _path;
-    [SerializeField] private Stage[] _stages;
+    [FormerlySerializedAs("_stages")]
+    [SerializeField] private Wave[] _waves;
     private int _currentEnemyGroup;
 
     public IPath Path => _path;
 
-    public bool AllGroupsSpawned(int currentStage)
+    public bool AllGroupsSpawned(int currentWave)
     {
-        return GetStage(currentStage).EnemySpawns.Length == _currentEnemyGroup;
+        return GetStage(currentWave).EnemySpawns.Length == _currentEnemyGroup;
     }
 
-    public bool CanSpawn(int currentStage, float elapsedTime)
+    public bool CanSpawn(int currentWave, float elapsedTime)
     {
-        if (AllGroupsSpawned(currentStage))
+        if (AllGroupsSpawned(currentWave))
             return false;
 
-        return GetStage(currentStage).EnemySpawns[_currentEnemyGroup].CanSpawn(elapsedTime);
+        return GetStage(currentWave).EnemySpawns[_currentEnemyGroup].CanSpawn(elapsedTime);
     }
 
-    public Enemy GetEnemy(int currentStage)
+    public Enemy GetEnemy(int currentWave)
     {
-        return GetStage(currentStage).EnemySpawns[_currentEnemyGroup++].Enemy;
+        return GetStage(currentWave).EnemySpawns[_currentEnemyGroup++].Enemy;
     }
 
-    public Enemy GetRandomEnemy(int currentStage)
+    public Enemy GetRandomEnemy(int currentWave)
     {
-        return GetStage(currentStage).GetRandomEnemy();
+        return GetStage(currentWave).GetRandomEnemy();
     }
 
-    private Stage GetStage(int currentStage)
+    private Wave GetStage(int currentWave)
     {
-        int index = Mathf.Clamp(currentStage, 0, _stages.Length - 1);
-        return _stages[index];
+        int index = Mathf.Clamp(currentWave, 0, _waves.Length - 1);
+        return _waves[index];
     }
 
     public void StageEnded()
@@ -58,7 +60,7 @@ public class Portal : MonoBehaviour
 #endif
 
     [Serializable]
-    public class Stage
+    public class Wave
     {
         [SerializeField] private EnemySpawn[] _enemySpawns;
 

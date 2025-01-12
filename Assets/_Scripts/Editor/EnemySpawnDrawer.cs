@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomPropertyDrawer(typeof(Portal.Stage.EnemySpawn))]
+[CustomPropertyDrawer(typeof(Portal.Wave.EnemySpawn))]
 public class EnemySpawnDrawer : PropertyDrawer
 {
     private const float TIME_PERCENT = .1f;
