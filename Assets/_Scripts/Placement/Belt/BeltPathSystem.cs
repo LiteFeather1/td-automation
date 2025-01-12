@@ -38,6 +38,8 @@ public class BeltPathSystem : MonoBehaviour
     private readonly Dictionary<Vector2Int, IInPort> r_inPorts = new();
     private readonly Dictionary<Vector2Int, IOutPort> r_outPorts = new();
 
+    public Dictionary<Vector2Int, IInPort> InPorts => r_inPorts;
+
     internal void Update()
     {
         float deltaTime = Time.deltaTime;

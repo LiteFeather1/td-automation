@@ -14,6 +14,14 @@ public abstract class InPort : Building, IInPort
 
     public ResourceBehaviour Resource => _resource;
 
+    public virtual ResourceType CollectResource()
+    {
+        ResourceType type = _resource.Type;
+        _resource.Deactive();
+        _resource = null;
+        return type;
+    }
+
     public virtual bool CanReceiveResource(ResourceType type)
     {
         return _resource == null;

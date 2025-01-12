@@ -146,6 +146,10 @@ public class PlacementSystem : MonoBehaviour
                 else
                     UnhoverHoverable();
             }
+            else if (_beltPathSystem.InPorts.TryGetValue(_mousePos, out IInPort inPort))
+            {
+                OnResourceCollected?.Invoke(inPort.CollectResource());
+            }
 
             return;
         }

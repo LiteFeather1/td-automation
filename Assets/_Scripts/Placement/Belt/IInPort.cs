@@ -8,6 +8,8 @@ public interface IInPort : IPlaceable
 
 	public ResourceBehaviour Resource { get; }
 
+	public ResourceType CollectResource();
+
 	public bool CanReceiveResource(ResourceType type);
 
 	public void ReceiveResource(ResourceBehaviour resource);

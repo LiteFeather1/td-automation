@@ -24,6 +24,12 @@ public class ResourceProcessor : InPort, IOutPort
             _port.OnDestroyed -= PortDestroyed;
     }
 
+    public override ResourceType CollectResource()
+    {
+        _hasProcessedResource = false;
+        return base.CollectResource();
+    }
+
     public override bool CanReceiveResource(ResourceType type)
         => base.CanReceiveResource(type) && !_hasProcessedResource && type == _resourceType;
 

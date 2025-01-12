@@ -36,15 +36,15 @@ public class SegmentBehaviour : MonoBehaviour, ISegment
             Gizmos.color = Color.white;
             Gizmos.DrawLine(midPoint, _points[i + 1].position);
 
-            DrawPoint(_points[i]);
+            DrawPoint(_points[i], Color.cyan);
         }
 
-        DrawPoint(_points[_points.Length - 1]);
+        DrawPoint(_points[_points.Length - 1], Color.red);
 
-        static void DrawPoint(Transform point)
+        static void DrawPoint(Transform point, Color pointColour)
         {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawSphere(point.position, .333f);
+            Gizmos.color = pointColour;
+            Gizmos.DrawSphere(point.position, .666f);
         }
     }
 #endif

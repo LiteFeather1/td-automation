@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 public class Portal : MonoBehaviour
 {
     [SerializeField] private Path<SegmentBehaviour> _path;
-    [FormerlySerializedAs("_stages")]
     [SerializeField] private Wave[] _waves;
     private int _currentEnemyGroup;
 
