@@ -27,6 +27,7 @@ public class ResourceProcessor : InPort, IOutPort
     public override ResourceType CollectResource()
     {
         _hasProcessedResource = false;
+        _elapsedTime = 0f;
         return base.CollectResource();
     }
 
@@ -54,12 +55,12 @@ public class ResourceProcessor : InPort, IOutPort
             return;
 
         _elapsedTime %= _timeToProcessResource;
-
         _resource.Deactive();
+
+        _hasProcessedResource = true;
         _resource = _processedBehaviourPool.ObjectPool.GetObject();
         _resource.transform.position = transform.position;
         _resource.gameObject.SetActive(true);
-        _hasProcessedResource = true;
 
         void SetFill(float t)
         {

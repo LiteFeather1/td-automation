@@ -39,6 +39,7 @@ public class BeltPathSystem : MonoBehaviour
     private readonly Dictionary<Vector2Int, IOutPort> r_outPorts = new();
 
     public Dictionary<Vector2Int, IInPort> InPorts => r_inPorts;
+    public Dictionary<Vector2Int, IOutPort> OutPorts => r_outPorts;
 
     internal void Update()
     {

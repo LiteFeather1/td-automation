@@ -148,7 +148,16 @@ public class PlacementSystem : MonoBehaviour
             }
             else if (_beltPathSystem.InPorts.TryGetValue(_mousePos, out IInPort inPort))
             {
-                OnResourceCollected?.Invoke(inPort.CollectResource());
+                if (inPort.Resource != null)
+                    OnResourceCollected?.Invoke(inPort.CollectResource());
+            }
+            else if (
+                _beltPathSystem.OutPorts.TryGetValue(_mousePos, out IOutPort outPort)
+                && outPort is ResourceCollector resourceCollector
+            )
+            {
+                if (resourceCollector.HasResource)
+                    OnResourceCollected?.Invoke(resourceCollector.CollectResource());
             }
 
             return;

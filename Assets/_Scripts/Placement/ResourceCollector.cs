@@ -26,12 +26,14 @@ public class ResourceCollector : Building, IOutPort
 
     public Direction OutDirection { get; set; } = Direction.Right;
 
+    public bool HasResource => _resource != null;
+
     public override bool CanBeRotated => true;
     public override bool CanBeDestroyed => true;
 
     private float Range => _range.localScale.x * .5f;
 
-    internal void Update()
+    private void Update()
     {
         if (_resource == null)
         {
@@ -54,6 +56,31 @@ public class ResourceCollector : Building, IOutPort
             _resource.gameObject.SetActive(true);
 
             StartCoroutine(Animation(node.transform.position));
+
+            IEnumerator Animation(Vector3 endPos)
+            {
+                Color colour = _line.startColor;
+                _line.SetPosition(0, transform.position);
+                _line.SetPosition(1, endPos);
+
+                float eTime = 0f;
+                while (eTime < ANIMATION_TIME)
+                {
+                    Set(1f - Helpers.EaseInOutCubic(eTime / ANIMATION_TIME));
+                    eTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                Set(0f);
+
+                void Set(float t)
+                {
+                    colour.a = Mathf.Lerp(0f, .5f, t);
+                    _line.startColor = colour;
+                    _line.endColor = colour;
+                    _line.SetPosition(1, Vector3.Lerp(transform.position, endPos, t));
+                }
+            }
         }
         else if (_port != null && _port.CanReceiveResource(_type))
         {
@@ -62,7 +89,7 @@ public class ResourceCollector : Building, IOutPort
         }
     }
 
-    internal void OnDisable()
+    private void OnDisable()
     {
         foreach (ResourceNode node in r_resourceNodes)
         {
@@ -98,6 +125,14 @@ public class ResourceCollector : Building, IOutPort
     public override void Unhover()
     {
         _range.gameObject.SetActive(false);
+    }
+
+    public ResourceType CollectResource()
+    {
+        ResourceType type = _resource.Type;
+        _resource.Deactive();
+        _resource = null;
+        return type;
     }
 
     public void TryAddNode(ResourceNode node)
@@ -141,30 +176,5 @@ public class ResourceCollector : Building, IOutPort
     {
         _port.OnDestroyed -= PortDestroyed;
         _port = null;
-    }
-
-    private IEnumerator Animation(Vector3 endPos)
-    {
-        Color colour = _line.startColor;
-        _line.SetPosition(0, transform.position);
-        _line.SetPosition(1, endPos);
-
-        float eTime = 0f;
-        while (eTime < ANIMATION_TIME)
-        {
-            Set(1f - Helpers.EaseInOutCubic(eTime / ANIMATION_TIME));
-            eTime += Time.deltaTime;
-            yield return null;
-        }
-
-        Set(0f);
-
-        void Set(float t)
-        {
-            colour.a = Mathf.Lerp(0f, .5f, t);
-            _line.startColor = colour;
-            _line.endColor = colour;
-            _line.SetPosition(1, Vector3.Lerp(transform.position, endPos, t));
-        }
     }
 }
