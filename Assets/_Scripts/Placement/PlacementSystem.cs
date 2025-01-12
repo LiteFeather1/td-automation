@@ -146,19 +146,8 @@ public class PlacementSystem : MonoBehaviour
                 else
                     UnhoverHoverable();
             }
-            else if (_beltPathSystem.InPorts.TryGetValue(_mousePos, out IInPort inPort))
-            {
-                if (inPort.Resource != null)
-                    OnResourceCollected?.Invoke(inPort.CollectResource());
-            }
-            else if (
-                _beltPathSystem.OutPorts.TryGetValue(_mousePos, out IOutPort outPort)
-                && outPort is ResourceCollector resourceCollector
-            )
-            {
-                if (resourceCollector.HasResource)
-                    OnResourceCollected?.Invoke(resourceCollector.CollectResource());
-            }
+            else
+                TryCollectResource();
 
             return;
         }
@@ -245,6 +234,8 @@ public class PlacementSystem : MonoBehaviour
         }
         else if (r_buildings.TryGetValue(_mousePos, out Building building) && building.CanBeDestroyed)
         {
+            TryCollectResource();
+
             r_buildings.Remove(_mousePos);
             r_hoverables.Remove(_mousePos);
 
@@ -320,6 +311,11 @@ public class PlacementSystem : MonoBehaviour
         _currentHoverable = null;
     }
 
+    public void AddHoverable(Vector2Int position, IHoverable hoverable)
+    {
+        r_hoverables.Add(position, hoverable);
+    }
+
     private void ResourceDepleted(ResourceNode node)
     {
         node.OnDepleted -= ResourceDepleted;
@@ -366,9 +362,21 @@ public class PlacementSystem : MonoBehaviour
         _buildingToPlace.enabled = false;
     }
 
-    public void AddHoverable(Vector2Int position, IHoverable hoverable)
+    private void TryCollectResource()
     {
-        r_hoverables.Add(position, hoverable);
+        if (_beltPathSystem.InPorts.TryGetValue(_mousePos, out IInPort inPort))
+        {
+            if (inPort.Resource != null)
+                OnResourceCollected?.Invoke(inPort.CollectResource());
+        }
+        else if (
+            _beltPathSystem.OutPorts.TryGetValue(_mousePos, out IOutPort outPort)
+            && outPort is ResourceCollector resourceCollector
+        )
+        {
+            if (resourceCollector.HasResource)
+                OnResourceCollected?.Invoke(resourceCollector.CollectResource());
+        }
     }
 
 #if UNITY_EDITOR
