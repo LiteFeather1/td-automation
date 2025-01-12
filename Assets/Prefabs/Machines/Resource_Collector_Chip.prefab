@@ -40,18 +40,6 @@ PrefabInstance:
       propertyPath: _resourcesCost._entries.Array.data[0].Value
       value: -5
       objectReference: {fileID: 0}
-    - target: {fileID: 2115170722709735367, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115170722709735367, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.9843137
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115170722709735367, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3330408899659620278, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: m_Color.b
       value: 0.6313726

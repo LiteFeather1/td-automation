@@ -55783,7 +55783,7 @@ Transform:
   m_GameObject: {fileID: 740015672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.05, y: 7.55, z: 0}
+  m_LocalPosition: {x: -32.5, y: 17.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55806,7 +55806,7 @@ MonoBehaviour:
     - {fileID: 1620149945}
     - {fileID: 932215714}
     - {fileID: 1471481709}
-  _stages:
+  _waves:
   - _enemySpawns:
     - _enemyPool: {fileID: 11400000, guid: 2655e7d0a129b63439c45b4359ad5f16, type: 2}
       _spawnTime: 0
@@ -57554,7 +57554,7 @@ Transform:
   m_GameObject: {fileID: 1013822755}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.5, y: 11.5, z: 0}
+  m_LocalPosition: {x: 32.5, y: 21.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57576,7 +57576,7 @@ MonoBehaviour:
     _segments:
     - {fileID: 1287685414}
     - {fileID: 1471481709}
-  _stages:
+  _waves:
   - _enemySpawns:
     - _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
       _spawnTime: 0
@@ -71536,7 +71536,7 @@ Transform:
   m_GameObject: {fileID: 2114138637}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 32.5, z: 0}
+  m_LocalPosition: {x: 1.5, y: 42.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71558,7 +71558,7 @@ MonoBehaviour:
     _segments:
     - {fileID: 1589117359}
     - {fileID: 1471481709}
-  _stages:
+  _waves:
   - _enemySpawns:
     - _enemyPool: {fileID: 11400000, guid: 89475b5b4132b374bb1b13590bf0747a, type: 2}
       _spawnTime: 0
