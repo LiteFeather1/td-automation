@@ -64,9 +64,6 @@ public class PlacementSystem : MonoBehaviour
 
     private void Update()
     {
-        if (UIMouseBlocker.MouseBlocked)
-            return;
-
         Vector3Int worldPos = Vector3Int.RoundToInt(_camera.ScreenToWorldPoint(Input.mousePosition));
         worldPos.z = 0;
         Vector2Int mousePos = (Vector2Int)worldPos;
@@ -186,31 +183,29 @@ public class PlacementSystem : MonoBehaviour
 
         _buildingToPlace.enabled = true;
 
-        Vector3 position = _buildingToPlace.transform.position;
-        Quaternion rotation;
-        if (_buildingToPlace is BeltPath)
-        {
-            _inPort.InDirection = _beltPathSystem.OppositeDirection(_outPort.OutDirection);
-            rotation = Quaternion.Euler(0f, 0f, sr_outDirectionToAngle[_outPort.OutDirection]);
-        }
-        else
-        {
-            rotation = _buildingToPlace.transform.rotation;
-        }
+        _buildingToPlace.transform.GetPositionAndRotation(
+            out Vector3 position, out Quaternion rotation
+        );
 
         AddBuilding(_buildingToPlace);
 
         if (_buildingPrefab != null)
         {
-            IInPort prevInPort = _inPort;
-            IOutPort prevOutPort = _outPort;
+            Direction inDirection = _inPort.InDirection;
+            Direction outDirection = _outPort.OutDirection;
+            if (_buildingToPlace.SR.sprite == _curvedBelt)
+            {
+                inDirection = _beltPathSystem.OppositeDirection(outDirection);
+                rotation = Quaternion.Euler(0f, 0f, sr_outDirectionToAngle[outDirection]);
+            }
+
             InstantiateBuilding(position, rotation);
 
             if (_inPort != null)
-                _inPort.InDirection = prevInPort.InDirection;
+                _inPort.InDirection = inDirection;
 
             if (_outPort != null)
-                _outPort.OutDirection = prevOutPort.OutDirection;
+                _outPort.OutDirection = outDirection;
         }
     }
 

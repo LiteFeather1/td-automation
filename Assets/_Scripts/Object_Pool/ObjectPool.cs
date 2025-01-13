@@ -70,6 +70,7 @@ public class ObjectPool<T> where T : Component
     {
         _objectCreated -= created;
         Objects.Clear();
+        _inactiveObjects.Clear();
     }
 
     private T Instantiate()
