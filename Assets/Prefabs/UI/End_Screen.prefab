@@ -827,11 +827,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 420137153666279039, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Name
-      value: End_Screen_Stat_Metal Plate_Collected
+      value: End_Screen_Stat_Processed_Data_Collected
       objectReference: {fileID: 0}
     - target: {fileID: 801819146652551575, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_text
-      value: 'Metal Plate Collected:'
+      value: 'Processed Data Collected:'
       objectReference: {fileID: 0}
     - target: {fileID: 4404638751997361637, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Pivot.x
@@ -944,11 +944,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 420137153666279039, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Name
-      value: End_Screen_Stat_Metal_Collected
+      value: End_Screen_Stat_Raw_Data_Collected
       objectReference: {fileID: 0}
     - target: {fileID: 801819146652551575, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_text
-      value: 'Metal Collected:'
+      value: 'Raw Data Collected:'
       objectReference: {fileID: 0}
     - target: {fileID: 4404638751997361637, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Pivot.x
@@ -1178,11 +1178,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 420137153666279039, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Name
-      value: End_Screen_Stat_Wood_Collected
+      value: End_Screen_Stat_Chip_Collected
       objectReference: {fileID: 0}
     - target: {fileID: 801819146652551575, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_text
-      value: 'Wood Collected:'
+      value: 'Chip Collected:'
       objectReference: {fileID: 0}
     - target: {fileID: 4404638751997361637, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Pivot.x
@@ -1295,7 +1295,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 420137153666279039, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Name
-      value: End_Screen_Stat_Essence_Collected
+      value: End_Screen_Stat_SefFault_Collected
       objectReference: {fileID: 0}
     - target: {fileID: 801819146652551575, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_text
@@ -1416,11 +1416,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 420137153666279039, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Name
-      value: End_Screen_Stat_Wood_Plank_Collected
+      value: End_Screen_Stat_Circuit_Collected
       objectReference: {fileID: 0}
     - target: {fileID: 801819146652551575, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_text
-      value: 'Wood Plank Collected:'
+      value: 'Circuit Collected:'
       objectReference: {fileID: 0}
     - target: {fileID: 4404638751997361637, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Pivot.x
