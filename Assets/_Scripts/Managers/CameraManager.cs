@@ -53,8 +53,7 @@ public class CameraManager : MonoBehaviour
         {
             MoveCamera(delta * (
                 Helpers.Map(_camera.orthographicSize, _zRange.x, _zRange.y, .25f, 1f)
-                * Time.deltaTime
-                / Time.timeScale
+                * Time.unscaledDeltaTime
             ));
         }
     }
@@ -75,7 +74,7 @@ public class CameraManager : MonoBehaviour
     private void ZoomPerformed(InputAction.CallbackContext ctx)
     {
         _camera.orthographicSize = Mathf.Clamp(
-            _camera.orthographicSize - ctx.ReadValue<Vector2>().y * _zSpeed * Time.deltaTime,
+            _camera.orthographicSize - ctx.ReadValue<Vector2>().y * _zSpeed * Time.unscaledDeltaTime,
             _zRange.x, _zRange.y
         );
 
