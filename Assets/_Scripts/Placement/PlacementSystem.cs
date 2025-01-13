@@ -292,8 +292,12 @@ public class PlacementSystem : MonoBehaviour
             _buildingToPlace.transform.eulerAngles = new(
                 0f, 0f, _buildingToPlace.transform.eulerAngles.z - 90f
             );
-            _inPort.InDirection = RotateDirection(_inPort.InDirection);
-            _outPort.OutDirection = RotateDirection(_outPort.OutDirection);
+
+            if (_inPort != null)
+                _inPort.InDirection = RotateDirection(_inPort.InDirection);
+
+            if (_outPort != null)
+                _outPort.OutDirection = RotateDirection(_outPort.OutDirection);
         }
 
         static Direction RotateDirection(Direction dir) => dir switch
