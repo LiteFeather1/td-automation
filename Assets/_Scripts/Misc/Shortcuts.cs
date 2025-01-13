@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using UnityEngine;
 using UnityEditor;
@@ -10,3 +11,4 @@ public static class ShortCuts
         ScreenCapture.CaptureScreenshot($"{Application.dataPath}/Screenshots/Screenshot_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.png");
     }
 }
+#endif
