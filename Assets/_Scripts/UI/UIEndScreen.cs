@@ -52,7 +52,7 @@ public class UIEndScreen : MonoBehaviour
     public void AddResources(IDictionary<ResourceType, int> resouces)
     {
         foreach (KeyValuePair<ResourceType, int> resource in resouces)
-            AddResource(resource.Key, -resource.Value);
+            AddResource(resource.Key, Mathf.Abs(resource.Value));
     }
 
     public void ButtonExit()

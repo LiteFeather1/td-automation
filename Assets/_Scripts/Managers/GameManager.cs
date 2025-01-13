@@ -56,7 +56,6 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.OnResourceModified += UpdateUIResources;
         _factoryTower.OnResourcesModified += _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.OnResourceAdded += _endScreen.AddResource;
-        _factoryTower.OnResourcesRefundAdded += _endScreen.AddResources;
         _factoryTower.OnDamaged += _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnDied += GameEnded;
 
@@ -162,7 +161,6 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.OnResourceModified -= UpdateUIResources;
         _factoryTower.OnResourcesModified -= _gameHUD.UpdateAmountsAndBuildingButtons;
         _factoryTower.OnResourceAdded -= _endScreen.AddResource;
-        _factoryTower.OnResourcesRefundAdded -= _endScreen.AddResources;
         _factoryTower.OnDamaged -= _gameHUD.UpdatePlayerHealth;
         _factoryTower.Health.OnDied -= GameEnded;
 

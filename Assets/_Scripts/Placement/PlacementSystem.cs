@@ -53,7 +53,7 @@ public class PlacementSystem : MonoBehaviour
 
     public BeltPathSystem BeltPathSystem => _beltPathSystem;
 
-    internal void Start()
+    private void Start()
     {
         foreach (ResourceNode node in _resourceNodes.Values)
         {
@@ -62,8 +62,11 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    internal void FixedUpdate()
+    private void Update()
     {
+        if (UIMouseBlocker.MouseBlocked)
+            return;
+
         Vector3Int worldPos = Vector3Int.RoundToInt(_camera.ScreenToWorldPoint(Input.mousePosition));
         worldPos.z = 0;
         Vector2Int mousePos = (Vector2Int)worldPos;
@@ -100,7 +103,7 @@ public class PlacementSystem : MonoBehaviour
         TryGetHoverable(mousePos);
     }
 
-    internal void OnDisable()
+    private void OnDisable()
     {
         foreach (ResourceNode node in _resourceNodes.Values)
         {

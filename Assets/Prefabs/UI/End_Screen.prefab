@@ -1299,7 +1299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 801819146652551575, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_text
-      value: 'Essence Collected:'
+      value: 'SegFault Collected:'
       objectReference: {fileID: 0}
     - target: {fileID: 4404638751997361637, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_Pivot.x
@@ -1380,6 +1380,10 @@ PrefabInstance:
     - target: {fileID: 4404638751997361637, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5422963066758799697, guid: 3ec3a0f2913e47e4497ae923a7370873, type: 3}
+      propertyPath: m_text
+      value: 00000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
