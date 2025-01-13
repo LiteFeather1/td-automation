@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Game Speed")]
     [SerializeField] private float[] _gameSpeeds = new float[] { .25f, .5f, .75f, 1f, 1.25f, 1.5f, 2f };
-    private int _gameSpeedIndex = 3;
+    private int _gameSpeedIndex;
 
     [Header("Systems")]
     [SerializeField] private PlacementSystem _placementSystem;
@@ -106,7 +106,14 @@ public class GameManager : Singleton<GameManager>
 
         _gameHUD.SetWave(_enemyManager.CurrentStage);
         _gameHUD.SetTowerCount(_towerCount = _factoryTower.StarterTowers.Length);
-        _gameHUD.SetGameSpeed(Time.timeScale);
+
+        float timeScale = Time.timeScale;
+        for (_gameSpeedIndex = 0; _gameSpeedIndex < _gameSpeeds.Length; _gameSpeedIndex++)
+        {
+            if (_gameSpeeds[_gameSpeedIndex] == timeScale)
+                break;
+        }
+        _gameHUD.SetGameSpeed(_gameSpeeds[_gameSpeedIndex]);
 
         _endScreen.Init();
 
