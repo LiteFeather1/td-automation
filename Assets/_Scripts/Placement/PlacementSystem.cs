@@ -36,8 +36,8 @@ public class PlacementSystem : MonoBehaviour
     private bool _canPlaceBuilding;
     private Building _buildingPrefab;
     private Building _buildingToPlace;
-    private Direction _inDirection;
-    private Direction _outDirection;
+    private IInPort _inPort;
+    private IOutPort _outPort;
     private readonly Dictionary<Vector2Int, Building> r_buildings = new();
 
     private readonly Dictionary<Vector2Int, IHoverable> r_hoverables = new();
@@ -91,7 +91,7 @@ public class PlacementSystem : MonoBehaviour
             _buildingToPlace.SR.sprite = _straightBelt;
             _buildingToPlace.SR.flipY = false;
             belt.SetArrowRotation(0f);
-            _outDirection = _beltPathSystem.OppositeDirection(_inDirection);
+            _outPort.OutDirection = _beltPathSystem.OppositeDirection(_inPort.InDirection);
 
             return;
         }
@@ -120,9 +120,6 @@ public class PlacementSystem : MonoBehaviour
             Destroy(_buildingToPlace.gameObject);
 
         InstantiateBuilding((Vector2)_mousePos, Quaternion.identity);
-
-        _inDirection = _buildingToPlace is IInPort inPort ? inPort.InDirection : Direction.None;
-        _outDirection = _buildingToPlace is IOutPort outPort ? outPort.OutDirection : Direction.None;
     }
 
     public void AddBuilding(Building building)
@@ -162,7 +159,6 @@ public class PlacementSystem : MonoBehaviour
 
         if (_buildingToPlace is ResourceCollector collector)
         {
-            collector.OutDirection = _outDirection;
             foreach (ResourceNode  node in _resourceNodes.Values)
             {
                 collector.TryAddNode(node);
@@ -173,16 +169,14 @@ public class PlacementSystem : MonoBehaviour
         }
         else
         {
-            if (_buildingToPlace is IInPort inPort)
+            if (_inPort != null)
             {
-                inPort.InDirection = _inDirection;
-                _beltPathSystem.AddInPort(inPort);
+                _beltPathSystem.AddInPort(_inPort);
             }
 
-            if (_buildingToPlace is IOutPort outPort)
+            if (_outPort != null)
             {
-                outPort.OutDirection = _outDirection;
-                _beltPathSystem.AddOutPort(outPort);
+                _beltPathSystem.AddOutPort(_outPort);
             }
         }
 
@@ -196,8 +190,8 @@ public class PlacementSystem : MonoBehaviour
         Quaternion rotation;
         if (_buildingToPlace is BeltPath)
         {
-            _inDirection = _beltPathSystem.OppositeDirection(_outDirection);
-            rotation = Quaternion.Euler(0f, 0f, sr_outDirectionToAngle[_outDirection]);
+            _inPort.InDirection = _beltPathSystem.OppositeDirection(_outPort.OutDirection);
+            rotation = Quaternion.Euler(0f, 0f, sr_outDirectionToAngle[_outPort.OutDirection]);
         }
         else
         {
@@ -207,7 +201,17 @@ public class PlacementSystem : MonoBehaviour
         AddBuilding(_buildingToPlace);
 
         if (_buildingPrefab != null)
+        {
+            IInPort prevInPort = _inPort;
+            IOutPort prevOutPort = _outPort;
             InstantiateBuilding(position, rotation);
+
+            if (_inPort != null)
+                _inPort.InDirection = prevInPort.InDirection;
+
+            if (_outPort != null)
+                _outPort.OutDirection = prevOutPort.OutDirection;
+        }
     }
 
     public void UnselectBuildingBuilding()
@@ -256,11 +260,11 @@ public class PlacementSystem : MonoBehaviour
         if (_buildingToPlace == null || !_buildingToPlace.CanBeRotated)
             return;
 
-        if (_buildingToPlace is BeltPath beltPath && _beltPathSystem.HasOutPortAt(_mousePos, _inDirection))
+        if (_buildingToPlace is BeltPath beltPath && _beltPathSystem.HasOutPortAt(_mousePos, beltPath.InDirection))
         {
             do
-                _outDirection = RotateDirection(_outDirection);
-            while (_outDirection == _inDirection);
+                _outPort.OutDirection = RotateDirection(_outPort.OutDirection);
+            while (_outPort.OutDirection == beltPath.InDirection);
 
             SpriteRenderer sr = _buildingToPlace.SR;
             float zRot;
@@ -288,8 +292,8 @@ public class PlacementSystem : MonoBehaviour
             _buildingToPlace.transform.eulerAngles = new(
                 0f, 0f, _buildingToPlace.transform.eulerAngles.z - 90f
             );
-            _inDirection = RotateDirection(_inDirection);
-            _outDirection = RotateDirection(_outDirection);
+            _inPort.InDirection = RotateDirection(_inPort.InDirection);
+            _outPort.OutDirection = RotateDirection(_outPort.OutDirection);
         }
 
         static Direction RotateDirection(Direction dir) => dir switch
@@ -361,6 +365,9 @@ public class PlacementSystem : MonoBehaviour
         _buildingToPlace = Instantiate(
             _buildingPrefab, position, rotation, transform
         );
+
+        _inPort = _buildingToPlace as IInPort;
+        _outPort = _buildingToPlace as IOutPort;
 
         _buildingToPlace.enabled = false;
     }
