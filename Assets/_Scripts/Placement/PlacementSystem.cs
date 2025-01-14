@@ -156,7 +156,7 @@ public class PlacementSystem : MonoBehaviour
 
         if (_buildingToPlace is ResourceCollector collector)
         {
-            foreach (ResourceNode  node in _resourceNodes.Values)
+            foreach (ResourceNode node in _resourceNodes.Values)
             {
                 collector.TryAddNode(node);
             }
@@ -167,14 +167,10 @@ public class PlacementSystem : MonoBehaviour
         else
         {
             if (_inPort != null)
-            {
                 _beltPathSystem.AddInPort(_inPort);
-            }
 
             if (_outPort != null)
-            {
                 _beltPathSystem.AddOutPort(_outPort);
-            }
         }
 
         _tileHighlightRenderer.color = _notPlaceableHighlight;
@@ -189,24 +185,24 @@ public class PlacementSystem : MonoBehaviour
 
         AddBuilding(_buildingToPlace);
 
-        if (_buildingPrefab != null)
+        if (_buildingPrefab == null)
+            return;
+
+        Direction inDirection = _inPort != null ? _inPort.InDirection : Direction.None;
+        Direction outDirection = _outPort != null ? _outPort.OutDirection : Direction.None;
+        if (_buildingToPlace.SR.sprite == _curvedBelt)
         {
-            Direction inDirection = _inPort.InDirection;
-            Direction outDirection = _outPort.OutDirection;
-            if (_buildingToPlace.SR.sprite == _curvedBelt)
-            {
-                inDirection = _beltPathSystem.OppositeDirection(outDirection);
-                rotation = Quaternion.Euler(0f, 0f, sr_outDirectionToAngle[outDirection]);
-            }
-
-            InstantiateBuilding(position, rotation);
-
-            if (_inPort != null)
-                _inPort.InDirection = inDirection;
-
-            if (_outPort != null)
-                _outPort.OutDirection = outDirection;
+            inDirection = _beltPathSystem.OppositeDirection(outDirection);
+            rotation = Quaternion.Euler(0f, 0f, sr_outDirectionToAngle[outDirection]);
         }
+
+        InstantiateBuilding(position, rotation);
+
+        if (_inPort != null)
+            _inPort.InDirection = inDirection;
+
+        if (_outPort != null)
+            _outPort.OutDirection = outDirection;
     }
 
     public void UnselectBuildingBuilding()

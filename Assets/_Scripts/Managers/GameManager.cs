@@ -275,9 +275,7 @@ public class GameManager : Singleton<GameManager>
     public void BuildingPlaced(Building building)
     {
         if (building is Tower)
-        {
             _gameHUD.SetTowerCount(++_towerCount);
-        }
 
         _factoryTower.RemoveResources(building.Data.ResourcesCost);
 
@@ -290,9 +288,7 @@ public class GameManager : Singleton<GameManager>
         _factoryTower.BuildingRefund(building.Data.ResourcesCost);
 
         if (building is Tower)
-        {
             _gameHUD.SetTowerCount(--_towerCount);
-        }
     }
 
     private void EnemyKilled()
