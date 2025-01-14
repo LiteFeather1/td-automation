@@ -71659,7 +71659,7 @@ MonoBehaviour:
   - _lullDuration: 120
     _lullSpawnTimeRange: {x: 7.5, y: 12.5}
   - _lullDuration: 60
-    _lullSpawnTimeRange: {x: 5, y: 10}
+    _lullSpawnTimeRange: {x: 5, y: 7.5}
   _portals:
   - {fileID: 740015674}
   - {fileID: 2114138639}
