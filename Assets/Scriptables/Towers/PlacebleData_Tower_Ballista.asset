@@ -16,6 +16,6 @@ MonoBehaviour:
   _resourcesCost:
     _entries:
     - Key: 100
-      Value: -40
+      Value: -45
     - Key: 200
       Value: -25

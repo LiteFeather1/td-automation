@@ -16,7 +16,6 @@ MonoBehaviour:
   _resourcesCost:
     _entries:
     - Key: 100
-      Value: -8
+      Value: -6
     - Key: 200
-      Value: -4
-  _buildingPrefab: {fileID: 3715808530577875309, guid: 1cb8c13c2ab082646a9c2bdc07bacbcb, type: 3}
+      Value: -3

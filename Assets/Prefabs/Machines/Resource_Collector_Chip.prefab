@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: _timeToCollect
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 875487485565298018, guid: e2a4c97bd7014e547906399e0f38da3a, type: 3}
       propertyPath: _speedMultiplierPerNode
